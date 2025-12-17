@@ -9,9 +9,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="/assets/images/favicon.png">
   <style>
+/* ===== GOOGLE FONT ===== */
+body {
+  font-family: 'Montserrat', Arial, sans-serif;
+  margin: 0;
+  line-height: 1.6;
+  color: #ffffff;
+  background-image: url('/assets/images/site-bg.jpg'); /* ana arka plan görseli */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
 /* ===== NAVBAR ===== */
 header {
-  background-color: #000000 !important; /* navbar siyah */
+  background-color: #000000 !important; /* siyah navbar */
   border-bottom: 1px solid #30363d;
 }
 
@@ -26,22 +39,23 @@ header {
 
 .nav-left a,
 .nav-right a {
-  color: #ff0000 !important; /* kırmızı yazı */
+  color: #ff0000 !important; /* kırmızı yazılar */
   font-weight: bold;
   text-decoration: none;
   line-height: 56px;
   white-space: nowrap;
   transition: color 0.3s ease;
+  text-shadow: 0 0 6px #ffffff, 0 0 12px #ffffff, 0 0 18px #ffffff; /* beyaz glow */
 }
 
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 50px; /* menü öğeleri arası boşluk */
+  gap: 50px; /* menü arası boşluk */
 }
 
 .nav-right a:hover {
-  color: #ff4d4d !important; /* hoverda açık kırmızı */
+  color: #ff4d4d !important; /* hover açık kırmızı */
   text-decoration: underline;
 }
 
@@ -50,6 +64,70 @@ header {
   width: auto;
   max-width: 200px;
   display: block;
+}
+
+/* ===== LANDING PAGE ===== */
+body.landing-page .landing-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+body.landing-page .landing-logo {
+  max-width: 340px;
+  width: 80%;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  animation: glow 3.5s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0% { filter: drop-shadow(0 0 6px rgba(255,0,0,0.25)); }
+  50% { filter: drop-shadow(0 0 22px rgba(255,0,0,0.5)); }
+  100% { filter: drop-shadow(0 0 6px rgba(255,0,0,0.25)); }
+}
+
+body.landing-page .logo-link:hover .landing-logo {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 30px rgba(255,0,0,0.7));
+}
+
+body.landing-page .landing-text {
+  color: #ffffff;
+  text-shadow: 0 0 8px rgba(255,255,255,0.4);
+  max-width: 560px;
+  margin-top: 35px;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+/* ===== ANA İÇERİK / SECTIONS ===== */
+main, section, .home-card {
+  background-color: rgba(0,0,0,0.6); /* yazı arkası overlay */
+  padding: 15px;
+  border-radius: 8px;
+}
+
+h1, h2, h3, p, a {
+  color: #ffffff;
+  text-shadow: 0 0 6px rgba(0,0,0,0.5); /* içerik glow */
+}
+
+/* ===== CODE BLOKLARI ===== */
+pre {
+  background-color: #161b22;
+  padding: 15px;
+  overflow-x: auto;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+}
+
+code {
+  color: #e6edf3;
 }
 
 /* ===== RESPONSIVE ===== */
@@ -61,7 +139,22 @@ header {
   }
   .nav-right {
     flex-direction: column;
-    gap: 25px; /* mobilde dikey boşluk daha küçük */
+    gap: 25px;
+  }
+  body.landing-page .landing-logo {
+    width: 60%;
+  }
+  body.landing-page .landing-text {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  body.landing-page .landing-logo {
+    width: 90%;
+  }
+  body.landing-page .landing-text {
+    font-size: 13px;
   }
 }
 
