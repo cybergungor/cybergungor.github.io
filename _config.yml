@@ -1,11 +1,9 @@
 title: CyberGungor
-description: Cyber Security Student | Blue Team & SOC Focused
-author: CyberGungor
+description: Cybersecurity blog focused on Blue Team, SOC, SIEM & EDR
+url: "https://cybergungor.github.io"
 
-theme: minima
+author:
+  name: CyberGungor
+
 markdown: kramdown
-
-permalink: /:title/
-
-plugins:
-  - jekyll-feed
+theme: null
