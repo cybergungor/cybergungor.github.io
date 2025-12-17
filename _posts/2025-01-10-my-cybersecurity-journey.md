@@ -1,8 +1,9 @@
 ---
-title: “My Cybersecurity Journey”
+title: "My Cybersecurity Journey"
 date: 2025-01-10
 categories: [blog]
 tags: [cyber-security, blue-team]
+permalink: /my-cybersecurity-journey/
 ---
 
 In this blog, I will share what I have learned in the field of cybersecurity,
