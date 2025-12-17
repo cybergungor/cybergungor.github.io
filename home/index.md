@@ -37,7 +37,7 @@ title: Home
   <div class="home-card">
     <h2>About</h2>
     <p>
-      Background, focus areas, and the purpose behind CyberGungor.
+      Background, focus areas, and the purpose behind Emirhan Gungoroglu.
     </p>
     <a href="/about/">Learn more →</a>
   </div>
