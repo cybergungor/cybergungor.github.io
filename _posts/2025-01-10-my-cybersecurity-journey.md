@@ -5,6 +5,7 @@ date: 2025-01-10
 categories: [blog]
 tags: [cyber-security, blue-team]
 permalink: /my-cybersecurity-journey/
+theme: minima
 ---
 
 In this blog, I will share what I have learned in the field of cybersecurity,
