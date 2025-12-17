@@ -230,10 +230,18 @@
       margin-top: 12px;
       font-weight: bold;
     }
+    /* ===== LANDING PAGE LAYOUT FIX ===== */
+
+.landing-page main {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
   </style>
 </head>
 
-<body>
+<body class="{% if page.hide_nav %}landing-page{% endif %}">
 
 {% unless page.hide_nav %}
 <header>
