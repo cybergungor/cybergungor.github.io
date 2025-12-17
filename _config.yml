@@ -1,0 +1,11 @@
+title: CyberGungor
+description: Cyber Security Student | Blue Team & SOC Focused
+author: CyberGungor
+
+theme: minima
+markdown: kramdown
+
+permalink: /:title/
+
+plugins:
+  - jekyll-feed
