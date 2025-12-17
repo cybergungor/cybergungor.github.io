@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "My Cybersecurity Journey"
 date: 2025-01-10
 categories: [blog]
