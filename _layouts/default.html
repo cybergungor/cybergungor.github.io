@@ -236,6 +236,16 @@
 
   </style>
 </head>
+<script>
+  (function () {
+    const isLanding = window.location.pathname === "/";
+    const allowed = localStorage.getItem("cg_access") === "true";
+
+    if (!isLanding && !allowed) {
+      window.location.replace("/");
+    }
+  })();
+</script>
 
 <body>
 
