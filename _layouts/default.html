@@ -239,10 +239,11 @@
 
 <body>
 
+{% unless page.hide_nav %}
 <header>
   <nav class="navbar">
     <div class="nav-left">
-      <a href="/">CyberGungor</a>
+      <a href="/home/">CyberGungor</a>
     </div>
 
     <div class="nav-right">
@@ -252,12 +253,14 @@
     </div>
 
     <div class="nav-logo">
-      <a href="/">
+      <a href="/home/">
         <img src="/assets/images/CYBER.png" alt="CyberGungor Logo">
       </a>
     </div>
   </nav>
 </header>
+{% endunless %}
+
 
 <main>
   {{ content }}
