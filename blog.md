@@ -22,9 +22,12 @@ SOC analysis, SIEM & EDR technologies, and lab work.
 <ul>
   {% for post in site.posts %}
     <li>
-      <a href="{{ post.url }}">{{ post.title }}</a><br>
-      <small>{{ post.date | date: "%d %B %Y" }}</small>
-    </li>
+  <strong>
+    <a href="{{ post.url }}">{{ post.title }}</a>
+  </strong><br>
+  <small>{{ post.date | date: "%d %B %Y" }}</small>
+</li>
+
     <br>
   {% endfor %}
 </ul>
