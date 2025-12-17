@@ -4,6 +4,13 @@ title: Blog
 permalink: /blog/
 ---
 
+<p>
+For hands-on technical content, visit the
+<a href="/labs/">Labs & Write-ups</a> section.
+</p>
+
+<hr>
+
 <h1>Blog</h1>
 <p>
 All posts related to cybersecurity, Blue Team operations,
