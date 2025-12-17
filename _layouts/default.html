@@ -70,9 +70,9 @@
     }
 
     .nav-logo img {
-      height: 28px;        /* bar ile uyumlu */
+      height: 28px;
       width: auto;
-      max-width: 200px;    /* yatayda geniş görünüm */
+      max-width: 200px;
       display: block;
     }
 
@@ -127,127 +127,111 @@
       font-size: 14px;
       margin-top: 60px;
     }
+
     /* ===== LANDING PAGE ADVANCED EFFECTS ===== */
-
-.landing-container {
-  min-height: calc(100vh - 56px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.logo-link {
-  display: inline-block;
-  perspective: 800px;
-}
-
-.landing-logo {
-  max-width: 340px;
-  transition: transform 0.4s ease, filter 0.4s ease;
-  animation: glow 3.5s ease-in-out infinite;
-}
-
-/* Parıldama */
-@keyframes glow {
-  0% {
-    filter: drop-shadow(0 0 6px rgba(88,166,255,0.25));
-  }
-  50% {
-    filter: drop-shadow(0 0 22px rgba(88,166,255,0.65));
-  }
-  100% {
-    filter: drop-shadow(0 0 6px rgba(88,166,255,0.25));
-  }
-}
-
-/* Hover animasyonu */
-.logo-link:hover .landing-logo {
-  transform: scale(1.05);
-  filter: drop-shadow(0 0 30px rgba(88,166,255,0.85));
-}
-
-/* Mouse hareketine hafif tepki */
-.logo-link:hover {
-  cursor: pointer;
-}
-
-.landing-text {
-  max-width: 560px;
-  margin-top: 35px;
-  font-size: 16px;
-  color: #8b949e;
-  line-height: 1.7;
-}
-/* ===== HOME PAGE ===== */
-
-.home-hero {
-  max-width: 720px;
-  margin: 0 auto 60px;
-  text-align: center;
-}
-
-.home-hero h1 {
-  font-size: 36px;
-  margin-bottom: 20px;
-}
-
-.home-subtitle {
-  font-size: 16px;
-  color: #8b949e;
-  line-height: 1.7;
-}
-
-.home-sections {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
-}
-
-.home-card {
-  background-color: #161b22;
-  border: 1px solid #30363d;
-  border-radius: 8px;
-  padding: 24px;
-  transition: border-color 0.3s ease;
-}
-
-.home-card:hover {
-  border-color: #58a6ff;
-}
-
-.home-card h2 {
-  margin-top: 0;
-  font-size: 20px;
-}
-
-.home-card p {
-  font-size: 14px;
-  color: #8b949e;
-  line-height: 1.6;
-}
-
-.home-card a {
-  display: inline-block;
-  margin-top: 12px;
-  font-weight: bold;
-}
-
-  </style>
-  <script>
-  (function () {
-    const isLanding = window.location.pathname === "/";
-    const allowed = localStorage.getItem("cg_access") === "true";
-
-    if (!isLanding && !allowed) {
-      window.location.replace("/");
+    .landing-container {
+      min-height: calc(100vh - 56px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
     }
-  })();
-</script>
 
+    .logo-link {
+      display: inline-block;
+      perspective: 800px;
+    }
+
+    .landing-logo {
+      max-width: 340px;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      animation: glow 3.5s ease-in-out infinite;
+    }
+
+    @keyframes glow {
+      0% {
+        filter: drop-shadow(0 0 6px rgba(88,166,255,0.25));
+      }
+      50% {
+        filter: drop-shadow(0 0 22px rgba(88,166,255,0.65));
+      }
+      100% {
+        filter: drop-shadow(0 0 6px rgba(88,166,255,0.25));
+      }
+    }
+
+    .logo-link:hover .landing-logo {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 30px rgba(88,166,255,0.85));
+    }
+
+    .logo-link:hover {
+      cursor: pointer;
+    }
+
+    .landing-text {
+      max-width: 560px;
+      margin-top: 35px;
+      font-size: 16px;
+      color: #8b949e;
+      line-height: 1.7;
+    }
+
+    /* ===== HOME PAGE ===== */
+    .home-hero {
+      max-width: 720px;
+      margin: 0 auto 60px;
+      text-align: center;
+    }
+
+    .home-hero h1 {
+      font-size: 36px;
+      margin-bottom: 20px;
+    }
+
+    .home-subtitle {
+      font-size: 16px;
+      color: #8b949e;
+      line-height: 1.7;
+    }
+
+    .home-sections {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px;
+    }
+
+    .home-card {
+      background-color: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      padding: 24px;
+      transition: border-color 0.3s ease;
+    }
+
+    .home-card:hover {
+      border-color: #58a6ff;
+    }
+
+    .home-card h2 {
+      margin-top: 0;
+      font-size: 20px;
+    }
+
+    .home-card p {
+      font-size: 14px;
+      color: #8b949e;
+      line-height: 1.6;
+    }
+
+    .home-card a {
+      display: inline-block;
+      margin-top: 12px;
+      font-weight: bold;
+    }
+  </style>
 </head>
-
 
 <body>
 
@@ -272,7 +256,6 @@
   </nav>
 </header>
 {% endunless %}
-
 
 <main>
   {{ content }}
