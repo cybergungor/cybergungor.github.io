@@ -2,8 +2,8 @@
 layout: post
 title: "Detecting Web Attacks 2 [Open Redirection] Walkthrough LetsDefend"
 date: 2025-12-17
-categories: labs
-tags: labs
+categories: [lab]
+tags: [siem, blue-team, log-analysis]
 ---
 
 # Detecting Web Attacks 2 [Open Redirection] Walkthrough LetsDefend
