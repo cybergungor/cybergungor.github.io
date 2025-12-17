@@ -1,21 +1,66 @@
 ---
 layout: default
-title: CyberGungor
 hide_nav: true
 ---
 
-<a href="/home/" class="logo-link" onclick="localStorage.setItem('cg_access','true')">
-  <img src="/assets/images/CYBER.png"
-       alt="CyberGungor Logo"
-       class="landing-logo">
-</a>
-
-  <p class="landing-text">
-    Cybersecurity focused platform covering
-    <strong>Blue Team</strong>, <strong>SOC operations</strong>,
-    <strong>SIEM & EDR</strong>.
-    <br><br>
-    Detection logic, lab write-ups, and real-world defensive workflows.
-  </p>
-
+<div class="landing-container">
+  <a href="/home/" class="logo-link">
+    <img src="/assets/images/CYBER.png" alt="CyberGungor Logo" class="landing-logo">
+  </a>
+  <p class="landing-text">Welcome to CyberGungor — Learning. Detecting. Improving.</p>
 </div>
+
+<style>
+.landing-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.logo-link {
+  display: inline-block;
+  perspective: 800px;
+}
+
+.landing-logo {
+  max-width: 340px;
+  width: 80%;
+  transition: transform 0.4s ease, filter 0.4s ease;
+  animation: glow 3.5s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0% { filter: drop-shadow(0 0 6px rgba(88,166,255,0.25)); }
+  50% { filter: drop-shadow(0 0 22px rgba(88,166,255,0.65)); }
+  100% { filter: drop-shadow(0 0 6px rgba(88,166,255,0.25)); }
+}
+
+.logo-link:hover .landing-logo {
+  transform: scale(1.05);
+  filter: drop-shadow(0 0 30px rgba(88,166,255,0.85));
+}
+
+.landing-text {
+  max-width: 560px;
+  margin-top: 35px;
+  font-size: 16px;
+  color: #8b949e;
+  line-height: 1.7;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .landing-logo { width: 60%; }
+  .landing-text { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+  .landing-logo { width: 90%; }
+  .landing-text { font-size: 13px; }
+}
+</style>
