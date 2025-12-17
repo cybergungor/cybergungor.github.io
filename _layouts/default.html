@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="google-site-verification" content="Y-pNuABCLKik-5ZRGWpgJBu4PW_DgCqc2F6f_GabRw8" />
   <meta charset="UTF-8">
   <title>{{ page.title }} | CyberGungor</title>
   <meta name="description" content="{{ page.description | default: site.description }}">
@@ -71,31 +70,6 @@
       color: #58a6ff;
     }
 
-    hr {
-      border: 0;
-      border-top: 1px solid #30363d;
-      margin: 30px 0;
-    }
-
-    pre {
-      background-color: #161b22;
-      padding: 15px;
-      overflow-x: auto;
-      border-radius: 6px;
-      border: 1px solid #30363d;
-    }
-
-    code {
-      color: #e6edf3;
-    }
-
-    img {
-      max-width: 100%;
-      border-radius: 6px;
-      margin: 20px 0;
-      border: 1px solid #30363d;
-    }
-
     footer {
       text-align: center;
       padding: 20px;
@@ -106,13 +80,21 @@
     }
 
     /* ===== LANDING PAGE ===== */
+    .landing-page main {
+      max-width: none;
+      margin: 0;
+      padding: 0;
+    }
+
     .landing-container {
-      min-height: calc(100vh - 56px);
+      min-height: 100vh;
       display: flex;
       flex-direction: column;
-      align-items: center;  /* Yatay ortalama */
-      justify-content: center; /* Dikey ortalama */
+      align-items: center;
+      justify-content: center;
       text-align: center;
+      padding: 20px;
+      box-sizing: border-box;
     }
 
     .logo-link {
@@ -122,6 +104,7 @@
 
     .landing-logo {
       max-width: 340px;
+      width: 80%;
       transition: transform 0.4s ease, filter 0.4s ease;
       animation: glow 3.5s ease-in-out infinite;
     }
@@ -145,4 +128,67 @@
       line-height: 1.7;
     }
 
-    /* Landing sayfası iç*
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .landing-logo {
+        width: 60%;
+      }
+
+      .landing-text {
+        font-size: 14px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .landing-logo {
+        width: 90%;
+      }
+
+      .landing-text {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+
+<body class="{% if page.hide_nav %}landing-page{% endif %}">
+
+{% unless page.hide_nav %}
+<header>
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="/blog/">Blog</a>
+      <a href="/labs/">Labs</a>
+      <a href="/about/">About</a>
+    </div>
+
+    <div class="nav-logo">
+      <a href="/home/">
+        <img src="/assets/images/CYBER.png" alt="CyberGungor Logo">
+      </a>
+    </div>
+  </nav>
+</header>
+{% endunless %}
+
+<main>
+  {% if page.hide_nav %}
+    <!-- Landing ekranı -->
+    <div class="landing-container">
+      <a href="/home/" class="logo-link">
+        <img src="/assets/images/CYBER.png" alt="CyberGungor Logo" class="landing-logo">
+      </a>
+      <p class="landing-text">{{ content }}</p>
+    </div>
+  {% else %}
+    <!-- Normal sayfa içeriği -->
+    {{ content }}
+  {% endif %}
+</main>
+
+<footer>
+  © {{ site.time | date: "%Y" }} CyberGungor — Learning. Detecting. Improving.
+</footer>
+
+</body>
+</html>
