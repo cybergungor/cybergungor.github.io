@@ -27,7 +27,6 @@ SOC analysis, SIEM & EDR technologies, and lab work.
   </strong><br>
   <small>{{ post.date | date: "%d %B %Y" }}</small>
 </li>
-
     <br>
   {% endfor %}
 </ul>
