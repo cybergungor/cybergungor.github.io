@@ -32,41 +32,21 @@
       gap: 20px;
     }
 
-    .nav-left a {
+    .nav-left a, .nav-right a {
       font-weight: bold;
-      font-size: 18px;
+      font-size: 16px;
       text-decoration: none;
       color: #e6edf3;
       line-height: 56px;
       white-space: nowrap;
     }
 
-    .nav-right {
-      display: flex;
-      align-items: center;
-    }
-
     .nav-right a {
-      margin-right: 15px;
-      text-decoration: none;
       color: #58a6ff;
-      font-weight: bold;
-      line-height: 56px;
-      white-space: nowrap;
-    }
-
-    .nav-right a:last-child {
-      margin-right: 0;
     }
 
     .nav-right a:hover {
       text-decoration: underline;
-    }
-
-    /* ===== LOGO ===== */
-    .nav-logo {
-      flex-shrink: 0;
-      margin-left: 20px;
     }
 
     .nav-logo img {
@@ -97,7 +77,6 @@
       margin: 30px 0;
     }
 
-    /* ===== CODE BLOCKS ===== */
     pre {
       background-color: #161b22;
       padding: 15px;
@@ -110,7 +89,6 @@
       color: #e6edf3;
     }
 
-    /* ===== IMAGES ===== */
     img {
       max-width: 100%;
       border-radius: 6px;
@@ -118,7 +96,6 @@
       border: 1px solid #30363d;
     }
 
-    /* ===== FOOTER ===== */
     footer {
       text-align: center;
       padding: 20px;
@@ -128,13 +105,13 @@
       margin-top: 60px;
     }
 
-    /* ===== LANDING PAGE ADVANCED EFFECTS ===== */
+    /* ===== LANDING PAGE ===== */
     .landing-container {
       min-height: calc(100vh - 56px);
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      align-items: center;  /* Yatay ortalama */
+      justify-content: center; /* Dikey ortalama */
       text-align: center;
     }
 
@@ -150,24 +127,14 @@
     }
 
     @keyframes glow {
-      0% {
-        filter: drop-shadow(0 0 6px rgba(88,166,255,0.25));
-      }
-      50% {
-        filter: drop-shadow(0 0 22px rgba(88,166,255,0.65));
-      }
-      100% {
-        filter: drop-shadow(0 0 6px rgba(88,166,255,0.25));
-      }
+      0% { filter: drop-shadow(0 0 6px rgba(88,166,255,0.25)); }
+      50% { filter: drop-shadow(0 0 22px rgba(88,166,255,0.65)); }
+      100% { filter: drop-shadow(0 0 6px rgba(88,166,255,0.25)); }
     }
 
     .logo-link:hover .landing-logo {
       transform: scale(1.05);
       filter: drop-shadow(0 0 30px rgba(88,166,255,0.85));
-    }
-
-    .logo-link:hover {
-      cursor: pointer;
     }
 
     .landing-text {
@@ -178,101 +145,4 @@
       line-height: 1.7;
     }
 
-    /* ===== HOME PAGE ===== */
-    .home-hero {
-      max-width: 720px;
-      margin: 0 auto 60px;
-      text-align: center;
-    }
-
-    .home-hero h1 {
-      font-size: 36px;
-      margin-bottom: 20px;
-    }
-
-    .home-subtitle {
-      font-size: 16px;
-      color: #8b949e;
-      line-height: 1.7;
-    }
-
-    .home-sections {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 24px;
-    }
-
-    .home-card {
-      background-color: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 8px;
-      padding: 24px;
-      transition: border-color 0.3s ease;
-    }
-
-    .home-card:hover {
-      border-color: #58a6ff;
-    }
-
-    .home-card h2 {
-      margin-top: 0;
-      font-size: 20px;
-    }
-
-    .home-card p {
-      font-size: 14px;
-      color: #8b949e;
-      line-height: 1.6;
-    }
-
-    .home-card a {
-      display: inline-block;
-      margin-top: 12px;
-      font-weight: bold;
-    }
-    /* ===== LANDING PAGE LAYOUT FIX ===== */
-
-.landing-page main {
-  max-width: none;
-  margin: 0;
-  padding: 0;
-}
-
-  </style>
-</head>
-
-<body class="{% if page.hide_nav %}landing-page{% endif %}">
-
-{% unless page.hide_nav %}
-<header>
-  <nav class="navbar">
-    <div class="nav-left">
-      <a href="/home/">CyberGungor</a>
-    </div>
-
-    <div class="nav-right">
-      <a href="/blog/">Blog</a>
-      <a href="/labs/">Labs</a>
-      <a href="/about/">About</a>
-    </div>
-
-    <div class="nav-logo">
-      <a href="/home/">
-        <img src="/assets/images/CYBER.png" alt="CyberGungor Logo">
-      </a>
-    </div>
-  </nav>
-</header>
-{% endunless %}
-
-<main>
-  {{ content }}
-</main>
-
-<footer>
-  © {{ site.time | date: "%Y" }} CyberGungor —
-  Learning. Detecting. Improving.
-</footer>
-
-</body>
-</html>
+    /* Landing sayfası iç*
