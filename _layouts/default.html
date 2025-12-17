@@ -4,8 +4,8 @@
   <meta name="google-site-verification" content="Y-pNuABCLKik-5ZRGWpgJBu4PW_DgCqc2F6f_GabRw8" />
   <meta charset="UTF-8">
   <title>{{ page.title }} | CyberGungor</title>
-<meta name="description" content="{{ page.description | default: site.description }}">
-<meta name="author" content="{{ site.author.name }}">
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <meta name="author" content="{{ site.author.name }}">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <style>
@@ -16,70 +16,67 @@
       color: #c9d1d9;
       line-height: 1.6;
     }
-    .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 40px;
-}
 
-.nav-left a {
-  font-weight: bold;
-  font-size: 20px;
-  text-decoration: none;
-  color: #e6edf3;
-}
-
-.nav-right a {
-  margin-right: 15px;
-  text-decoration: none;
-  color: #58a6ff;
-}
-
-.nav-right a:last-child {
-  margin-right: 0;
-}
-
-.nav-logo img {
-  height: 36px;
-}
-
-    pre {
-  background-color: #161b22;
-  padding: 15px;
-  overflow-x: auto;
-  border-radius: 6px;
-  border: 1px solid #30363d;
-}
-
-code {
-  color: #e6edf3;
-}
-    
-img {
-  max-width: 100%;
-  border-radius: 6px;
-  margin: 20px 0;
-  border: 1px solid #30363d;
-}
-
+    /* ===== HEADER / NAVBAR ===== */
     header {
       background-color: #161b22;
-      padding: 20px;
       border-bottom: 1px solid #30363d;
     }
 
-    nav a {
-      color: #58a6ff;
-      margin-right: 15px;
-      text-decoration: none;
-      font-weight: bold;
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      padding: 0 20px;
+      gap: 20px;
     }
 
-    nav a:hover {
+    .nav-left a {
+      font-weight: bold;
+      font-size: 18px;
+      text-decoration: none;
+      color: #e6edf3;
+      line-height: 56px;
+      white-space: nowrap;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-right a {
+      margin-right: 15px;
+      text-decoration: none;
+      color: #58a6ff;
+      font-weight: bold;
+      line-height: 56px;
+      white-space: nowrap;
+    }
+
+    .nav-right a:last-child {
+      margin-right: 0;
+    }
+
+    .nav-right a:hover {
       text-decoration: underline;
     }
 
+    /* ===== LOGO ===== */
+    .nav-logo {
+      flex-shrink: 0;
+      margin-left: 20px;
+    }
+
+    .nav-logo img {
+      height: 28px;        /* bar ile uyumlu */
+      width: auto;
+      max-width: 200px;    /* yatayda geniş görünüm */
+      display: block;
+    }
+
+    /* ===== MAIN CONTENT ===== */
     main {
       max-width: 800px;
       margin: 40px auto;
@@ -100,12 +97,35 @@ img {
       margin: 30px 0;
     }
 
+    /* ===== CODE BLOCKS ===== */
+    pre {
+      background-color: #161b22;
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: 6px;
+      border: 1px solid #30363d;
+    }
+
+    code {
+      color: #e6edf3;
+    }
+
+    /* ===== IMAGES ===== */
+    img {
+      max-width: 100%;
+      border-radius: 6px;
+      margin: 20px 0;
+      border: 1px solid #30363d;
+    }
+
+    /* ===== FOOTER ===== */
     footer {
       text-align: center;
       padding: 20px;
       border-top: 1px solid #30363d;
       color: #8b949e;
       font-size: 14px;
+      margin-top: 60px;
     }
   </style>
 </head>
@@ -113,24 +133,23 @@ img {
 <body>
 
 <header>
-<nav class="navbar">
-  <div class="nav-left">
-    <a href="/">CyberGungor</a>
-  </div>
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="/">CyberGungor</a>
+    </div>
 
-  <div class="nav-right">
-    <a href="/blog/">Blog</a>
-    <a href="/labs/">Labs</a>
-    <a href="/about/">About</a>
-  </div>
+    <div class="nav-right">
+      <a href="/blog/">Blog</a>
+      <a href="/labs/">Labs</a>
+      <a href="/about/">About</a>
+    </div>
 
-  <div class="nav-logo">
-    <a href="/">
-      <img src="/assets/images/CYBER.png" alt="CyberGungor Logo">
-    </a>
-  </div>
-</nav>
-
+    <div class="nav-logo">
+      <a href="/">
+        <img src="/assets/images/CYBER.png" alt="CyberGungor Logo">
+      </a>
+    </div>
+  </nav>
 </header>
 
 <main>
@@ -138,11 +157,8 @@ img {
 </main>
 
 <footer>
-<footer>
   © {{ site.time | date: "%Y" }} CyberGungor —
   Learning. Detecting. Improving.
-</footer>
-
 </footer>
 
 </body>
