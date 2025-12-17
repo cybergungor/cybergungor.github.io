@@ -16,7 +16,34 @@
       color: #c9d1d9;
       line-height: 1.6;
     }
-    
+    .navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 40px;
+}
+
+.nav-left a {
+  font-weight: bold;
+  font-size: 20px;
+  text-decoration: none;
+  color: #e6edf3;
+}
+
+.nav-right a {
+  margin-right: 15px;
+  text-decoration: none;
+  color: #58a6ff;
+}
+
+.nav-right a:last-child {
+  margin-right: 0;
+}
+
+.nav-logo img {
+  height: 36px;
+}
+
     pre {
   background-color: #161b22;
   padding: 15px;
@@ -86,13 +113,24 @@ img {
 <body>
 
 <header>
-  <nav>
-  <a href="/">Home</a>
-  <a href="/blog/">Blog</a>
-  <a href="/labs/">Labs</a>
-  <a href="/about/">About</a>
-  <a href="/tags/">Tags</a>
-  </nav>
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/">CyberGungor</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/blog/">Blog</a>
+    <a href="/labs/">Labs</a>
+    <a href="/about/">About</a>
+  </div>
+
+  <div class="nav-logo">
+    <a href="/">
+      <img src="/assets/images/CYBER.png" alt="CyberGungor Logo">
+    </a>
+  </div>
+</nav>
+
 </header>
 
 <main>
