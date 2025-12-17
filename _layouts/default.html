@@ -9,10 +9,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="/assets/images/favicon.png">
   <style>
-    /* ===== NAVBAR STYLING ===== */
+/* ===== NAVBAR ===== */
 header {
-  background-color: #000000; /* navbar siyah */
-  border-bottom: 1px solid #30363d; /* alt sınır isteğe bağlı */
+  background-color: #000000 !important; /* navbar siyah */
+  border-bottom: 1px solid #30363d;
 }
 
 .navbar {
@@ -26,7 +26,7 @@ header {
 
 .nav-left a,
 .nav-right a {
-  color: #ff0000; /* kırmızı yazı */
+  color: #ff0000 !important; /* kırmızı yazı */
   font-weight: bold;
   text-decoration: none;
   line-height: 56px;
@@ -37,11 +37,11 @@ header {
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 50px; /* menü öğeleri arasındaki boşluk 50px */
+  gap: 50px; /* menü öğeleri arası boşluk */
 }
 
 .nav-right a:hover {
-  color: #ff4d4d; /* hoverda daha açık kırmızı */
+  color: #ff4d4d !important; /* hoverda açık kırmızı */
   text-decoration: underline;
 }
 
@@ -52,6 +52,30 @@ header {
   display: block;
 }
 
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+  .nav-right {
+    flex-direction: column;
+    gap: 25px;
+  }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 10px;
+  }
+  .nav-right {
+    flex-direction: column;
+    gap: 25px;
+  }
+}
 /* ===== RESPONSIVE ===== */
 @media (max-width: 768px) {
   .navbar {
