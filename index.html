@@ -1,4 +1,25 @@
 ---
-layout: home
-title: CyberGungor
+layout: default
+title: Home
 ---
+
+<h1>CyberGungor</h1>
+<p>
+Personal notes, lab work, and technical analyses focused on Cybersecurity,
+Blue Team operations, SOC workflows, and SIEM & EDR technologies.
+</p>
+
+<hr>
+
+<h2>Latest Posts</h2>
+
+<ul>
+  {% for post in site.posts limit:5 %}
+    <li>
+      <a href="{{ post.url }}">{{ post.title }}</a>
+      <small> — {{ post.date | date: "%d %B %Y" }}</small>
+    </li>
+  {% endfor %}
+</ul>
+
+<a href="/blog/">→ View all posts</a>
