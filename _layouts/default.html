@@ -8,6 +8,53 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="icon" type="image/png" href="/assets/images/favicon.png">
   <style>
+    /* ===== GENEL SITE ARKA PLAN ===== */
+body {
+  background-image: url('/assets/images/site-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+  color: #c9d1d9; /* yazılar temel rengi */
+  text-shadow: 0 0 5px rgba(255,255,255,0.4); /* hafif beyaz gölge */
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ===== LANDING SAYFASI ARKA PLAN ===== */
+body.landing-page .landing-container {
+  background-image: url('/assets/images/landing-bg.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+}
+
+/* ===== LANDING TEXT GÖRÜNÜRLÜĞÜ ===== */
+body.landing-page .landing-text {
+  color: #ffffff; /* yazı rengi */
+  text-shadow: 0 0 8px rgba(0,255,0,0.6); /* yeşil gölge */
+  font-size: 16px;
+  max-width: 560px;
+  line-height: 1.7;
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  body.landing-page .landing-text { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+  body.landing-page .landing-text { font-size: 13px; }
+}
+
     /* ===== GENEL ===== */
     body {
       margin: 0;
