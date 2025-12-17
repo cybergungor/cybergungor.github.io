@@ -1,9 +1,9 @@
-title: CyberGungor
+title: Emirhan Gungoroglu
 description: Cybersecurity blog focused on Blue Team, SOC, SIEM & EDR
-url: "https://cybergungor.github.io"
+url: "https://emirhangungoroglu.github.io"
 
 author:
-  name: CyberGungor
+  name: Emirhan
 
 markdown: kramdown
 theme: null
