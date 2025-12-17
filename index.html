@@ -4,22 +4,13 @@ title: Home
 ---
 
 <h1>CyberGungor</h1>
+
 <p>
-Personal notes, lab work, and technical analyses focused on Cybersecurity,
-Blue Team operations, SOC workflows, and SIEM & EDR technologies.
+Cybersecurity notes focused on <strong>Blue Team</strong>, <strong>SOC</strong>,
+<strong>SIEM</strong>, and <strong>EDR</strong>.
 </p>
 
-<hr>
-
-<h2>Latest Posts</h2>
-
-<ul>
-  {% for post in site.posts limit:5 %}
-    <li>
-      <a href="{{ post.url }}">{{ post.title }}</a>
-      <small> — {{ post.date | date: "%d %B %Y" }}</small>
-    </li>
-  {% endfor %}
-</ul>
-
-<a href="/blog/">→ View all posts</a>
+<p>
+<a href="/blog/">Read the blog →</a><br>
+<a href="/labs/">View labs & write-ups →</a>
+</p>
