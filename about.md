@@ -3,6 +3,12 @@ layout: default
 title: About
 permalink: /about/
 ---
+<h3>Skills</h3>
+<div class="badge-container">
+  <span class="tech-badge">Splunk</span>
+  <span class="tech-badge">Wireshark</span>
+  <span class="tech-badge">Linux/Bash</span>
+</div>
 
 ## About Me
 
