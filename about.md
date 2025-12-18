@@ -15,8 +15,9 @@ permalink: /about/
 
   <p>
     I focus on bridging the gap between theoretical knowledge and real-world application. 
-    Currently, I am deep-diving into <strong>SIEM architecture (Splunk)</strong>, <strong>Log Analysis</strong>, 
-    and the <strong>MITRE ATT&CK</strong> framework to build effective detection logic.
+    Currently, I am actively sharpening my skills through <strong>LetsDefend</strong>, 
+    where I investigate real-world simulated cyber attacks, analyze logs, and practice 
+    <strong>Incident Response</strong> in a realistic SOC environment.
   </p>
 
   <hr style="border: 0; border-top: 1px solid var(--border-color); margin: 2rem 0;">
@@ -25,11 +26,13 @@ permalink: /about/
   <p>Tools and technologies I work with everyday:</p>
   
   <div class="badge-container">
+    <span class="tech-badge">LetsDefend (SOC)</span>
     <span class="tech-badge">Splunk Enterprise</span>
-    <span class="tech-badge">SOC Operations</span>
     <span class="tech-badge">Threat Hunting</span>
     <span class="tech-badge">Linux / Bash</span>
     <span class="tech-badge">Wireshark</span>
+    <span class="tech-badge">MITRE ATT&CK</span>
+    <span class="tech-badge">EDR Concepts</span>
   </div>
 
   <br>
@@ -45,8 +48,8 @@ permalink: /about/
       <p>Writing queries and rules to detect anomalies in sea of logs.</p>
     </div>
     <div class="focus-item">
-      <h4>📊 SIEM Architecture</h4>
-      <p>Installing, configuring, and managing Splunk environments for data ingestion.</p>
+      <h4>🚨 Incident Response</h4>
+      <p>Handling alerts and investigating true positives using SOC playbooks.</p>
     </div>
   </div>
 
@@ -64,7 +67,7 @@ permalink: /about/
     I am always open to discussing cybersecurity topics, potential collaborations, or Blue Team roles.
   </p>
   <p>
-    <a href="https://linkedin.com/in/SeninKullaniciAdin" style="color: var(--accent); font-weight: bold;">Connect on LinkedIn &rarr;</a>
+    <a href="https://linkedin.com/in/emirhangungoroglu" style="color: var(--accent); font-weight: bold;">Connect on LinkedIn &rarr;</a>
   </p>
 
 </div>
