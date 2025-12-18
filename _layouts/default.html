@@ -216,6 +216,25 @@
       .navbar { flex-direction: column; gap: 1rem; }
       h1 { font-size: 2rem; }
     }
+    /* ===== ÖZEL SCROLLBAR (KAYDIRMA ÇUBUĞU) ===== */
+/* Chrome, Safari, Edge için */
+::-webkit-scrollbar {
+  width: 8px; /* Çubuğun genişliği */
+}
+
+::-webkit-scrollbar-track {
+  background: #0d1117; /* Arka plan (siteyle aynı renk) */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #30363d; /* Çubuğun kendisi (koyu gri) */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #58a6ff; /* Üzerine gelince senin MAVİ rengin olsun */
+  cursor: grab;
+}
   </style>
 </head>
 
