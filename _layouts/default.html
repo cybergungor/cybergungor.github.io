@@ -5,22 +5,22 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>{% if page.title %}{{ page.title }} | {% endif %}Emirhan Gungoroglu</title>
-  <meta property="og:url" content="emirhangungoroglu.github.io/">
-  <meta property="og:type" content="website">
+  <meta name="description" content="Cybersecurity Portfolio. Blue Team operations, SOC workflows, Splunk, and Detection Engineering knowledge base.">
+  <meta name="author" content="Emirhan Gungoroglu">
   
   <meta property="og:title" content="{% if page.title %}{{ page.title }} | {% endif %}Emirhan Gungoroglu">
-  <meta property="og:description" content="Cybersecurity Portfolio. Blue Team operations, SOC workflows, Splunk, and Detection Engineering knowledge base.">
-  
+  <meta property="og:description" content="Cybersecurity Portfolio. Blue Team operations, SOC workflows, and Detection Engineering.">
   <meta property="og:image" content="https://emirhangungoroglu.github.io/assets/images/CYBER.png">
+  <meta property="og:url" content="https://emirhangungoroglu.github.io{{ page.url }}">
+  <meta property="og:type" content="website">
 
   <meta name="twitter:card" content="summary_large_image">
-  <meta property="twitter:domain" content="emirhangungoroglu.github.io">
-  <meta property="twitter:url" content="https://emirhangungoroglu.github.io/">
+  <meta name="twitter:domain" content="emirhangungoroglu.github.io">
+  <meta name="twitter:url" content="https://emirhangungoroglu.github.io{{ page.url }}">
   <meta name="twitter:title" content="Emirhan Gungoroglu | Blue Team Analyst">
   <meta name="twitter:description" content="Focusing on SOC Operations, SIEM Architecture, and Incident Response.">
   <meta name="twitter:image" content="https://emirhangungoroglu.github.io/assets/images/CYBER.png">
-  <meta name="description" content="{{ page.description | default: site.description }}">
-  <meta name="author" content="Emirhan Gungoroglu">
+
   <link rel="icon" type="image/png" href="/assets/images/favicon.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,52 +28,23 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ===== YETENEK ROZETLERİ (TECH BADGES) ===== */
-.badge-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 10px;
-  margin-bottom: 20px;
-}
-
-.tech-badge {
-  background: rgba(88, 166, 255, 0.1); /* Hafif mavi arka plan */
-  border: 1px solid rgba(88, 166, 255, 0.3); /* İnce mavi çerçeve */
-  color: #58a6ff; /* Neon mavi yazı */
-  padding: 5px 12px;
-  border-radius: 4px;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
-  transition: all 0.3s ease;
-}
-
-.tech-badge:hover {
-  background: rgba(88, 166, 255, 0.25);
-  transform: translateY(-2px);
-  box-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
-}
-    /* ===== AYARLAR & RENKLER ===== */
+    /* ===== GENEL STİLLER ===== */
     :root {
-      --bg-color: #0d1117;        /* Arka plan koyu gri */
-      --card-bg: #161b22;         /* Kart rengi */
-      --border-color: #30363d;    /* Çerçeve rengi */
-      --text-main: #c9d1d9;       /* Yazı rengi */
-      --text-muted: #8b949e;      /* Sönük yazı rengi */
-      --accent: #58a6ff;          /* Mavi Takım Rengi (Neon Mavi) */
-      --code-bg: #1f2428;         /* Kod bloğu arka planı */
+      --bg-color: #0d1117;
+      --card-bg: #161b22;
+      --border-color: #30363d;
+      --text-main: #c9d1d9;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* ===== ANA GÖVDE (GRID EKLENDİ) ===== */
     body {
       background-color: var(--bg-color);
-      /* Siber Izgara Deseni */
       background-image: linear-gradient(rgba(48, 54, 61, 0.2) 1px, transparent 1px),
       linear-gradient(90deg, rgba(48, 54, 61, 0.2) 1px, transparent 1px);
       background-size: 40px 40px;
-      
       color: var(--text-main);
       font-family: 'Inter', sans-serif;
       line-height: 1.7;
@@ -82,32 +53,25 @@
       min-height: 100vh;
     }
 
-    /* ===== MAVİ SEÇİM EFEKTİ ===== */
-    ::selection {
-      background: var(--accent);
-      color: #000;
-    }
-
     a { text-decoration: none; color: inherit; transition: 0.2s; }
-    a:hover { color: var(--accent); }
-
+    
     /* ===== NAVBAR ===== */
     header {
       background-color: rgba(13, 17, 23, 0.95);
       border-bottom: 1px solid var(--border-color);
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
       backdrop-filter: blur(5px);
     }
 
     .navbar {
-      max-width: 1000px;
+      max-width: 1200px;
       margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 1.5rem;
+      padding: 0.8rem 1.5rem;
     }
 
     .logo {
@@ -115,11 +79,18 @@
       font-weight: 700;
       color: var(--accent);
       font-size: 1.1rem;
+      white-space: nowrap;
+    }
+
+    .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
     }
 
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1.5rem;
     }
 
     .nav-links a {
@@ -128,12 +99,100 @@
       color: var(--text-main);
     }
 
-    .nav-links a:hover {
-      color: var(--accent);
-      text-shadow: 0 0 8px rgba(88, 166, 255, 0.4);
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ===== ARAMA KUTUSU (NAVBAR) ===== */
+    .search-container {
+        position: relative;
     }
 
-    /* ===== İÇERİK ALANI ===== */
+    .search-box {
+        background: #0d1117;
+        border: 1px solid var(--border-color);
+        padding: 5px 12px;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        font-family: 'JetBrains Mono', monospace;
+        width: 200px;
+        transition: all 0.3s;
+    }
+
+    .search-box:focus-within {
+        border-color: var(--accent);
+        width: 250px;
+        box-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
+    }
+
+    .search-icon { color: var(--text-muted); font-size: 0.9rem; margin-right: 8px; }
+
+    #global-search-input {
+        background: transparent;
+        border: none;
+        color: #e6edf3;
+        outline: none;
+        width: 100%;
+        font-size: 0.85rem;
+    }
+
+    #search-results {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 300px;
+        background: var(--card-bg);
+        border: 1px solid var(--accent);
+        border-radius: 6px;
+        margin-top: 10px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        max-height: 400px;
+        overflow-y: auto;
+        z-index: 1001;
+    }
+
+    .search-result-item {
+        display: block;
+        padding: 10px 15px;
+        border-bottom: 1px solid var(--border-color);
+        transition: background 0.2s;
+    }
+
+    .search-result-item:hover { background: rgba(88, 166, 255, 0.1); }
+
+    .result-title { display: block; color: #e6edf3; font-weight: 600; font-size: 0.9rem; }
+    
+    .result-meta {
+        font-size: 0.75rem; color: var(--text-muted);
+        font-family: 'JetBrains Mono', monospace; margin-top: 3px;
+    }
+
+    /* ===== BACK TO TOP BUTTON ===== */
+    #backToTop {
+        display: none;
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        z-index: 99;
+        border: 1px solid var(--accent);
+        outline: none;
+        background-color: rgba(13, 17, 23, 0.9);
+        color: var(--accent);
+        cursor: pointer;
+        padding: 10px;
+        border-radius: 6px;
+        transition: all 0.3s;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    #backToTop:hover {
+        background-color: var(--accent);
+        color: #0d1117;
+        box-shadow: 0 0 20px var(--accent);
+        transform: translateY(-5px);
+    }
+
+    /* ===== CONTENT ===== */
     main {
       flex: 1;
       max-width: 900px;
@@ -141,78 +200,17 @@
       margin: 3rem auto;
       padding: 0 1.5rem;
     }
-
-    /* ===== MARKDOWN İÇERİK STİLİ (Blog yazıların için) ===== */
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'JetBrains Mono', monospace;
-      color: #ffffff;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    h1 { font-size: 2.5rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
-    h2 { font-size: 1.8rem; }
-    h3 { font-size: 1.4rem; color: var(--accent); }
-
-    p { margin-bottom: 1.5rem; color: var(--text-main); }
     
-    ul, ol { margin-bottom: 1.5rem; margin-left: 2rem; }
-    li { margin-bottom: 0.5rem; }
+    /* Markdown Styles */
+    h1, h2, h3 { font-family: 'JetBrains Mono', monospace; color: #fff; margin-top: 2rem; margin-bottom: 1rem; }
+    h1 { font-size: 2.2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
+    p { margin-bottom: 1.5rem; color: var(--text-main); }
+    a { color: inherit; } 
+    .content a { color: var(--accent); text-decoration: underline; }
 
-    pre {
-      background-color: var(--card-bg);
-      border: 1px solid var(--border-color);
-      padding: 1.5rem;
-      border-radius: 8px;
-      overflow-x: auto;
-      margin-bottom: 1.5rem;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
-    }
-
-    code {
-      font-family: 'JetBrains Mono', monospace;
-      background-color: rgba(110, 118, 129, 0.4);
-      padding: 0.2rem 0.4rem;
-      border-radius: 4px;
-      font-size: 0.85em;
-      color: #ff7b72;
-    }
-
-    pre code {
-      background-color: transparent;
-      padding: 0;
-      color: var(--text-main);
-    }
-
-    blockquote {
-      border-left: 4px solid var(--accent);
-      padding-left: 1rem;
-      color: var(--text-muted);
-      font-style: italic;
-      margin-bottom: 1.5rem;
-    }
-
-    img {
-      max-width: 100%;
-      border-radius: 8px;
-      border: 1px solid var(--border-color);
-    }
-
-    /* ===== LANDING PAGE OVERRIDE ===== */
-    .landing-body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      text-align: center;
-      background: radial-gradient(circle at center, #161b22 0%, #0d1117 100%);
-    }
-
-    .landing-content {
-      max-width: 600px;
-      padding: 2rem;
-    }
+    pre { background: var(--card-bg); padding: 1.5rem; border-radius: 8px; overflow-x: auto; border: 1px solid var(--border-color); margin-bottom: 1.5rem; }
+    code { font-family: 'JetBrains Mono', monospace; color: var(--text-main); }
+    img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border-color); }
 
     /* ===== FOOTER ===== */
     footer {
@@ -225,98 +223,132 @@
       margin-top: 4rem;
       background: rgba(13, 17, 23, 0.95);
     }
+    
+    .social-links { display: flex; justify-content: center; gap: 1.5rem; margin-top: 1rem; }
+    .social-links a:hover { color: var(--accent); transform: translateY(-3px); }
 
-    .footer-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .social-links {
-      display: flex;
-      gap: 1.5rem;
-      margin-top: 0.5rem;
-    }
-
-    .social-links a {
-      color: var(--text-muted);
-      transition: all 0.3s ease;
-    }
-
-    .social-links a:hover {
-      color: var(--accent);
-      transform: translateY(-3px);
-      filter: drop-shadow(0 0 5px var(--accent));
-    }
-
-    /* ===== RESPONSIVE ===== */
+    /* Mobile */
     @media (max-width: 768px) {
-      .navbar { flex-direction: column; gap: 1rem; }
-      h1 { font-size: 2rem; }
+        .navbar { flex-direction: column; gap: 1rem; align-items: flex-start; }
+        .nav-right { width: 100%; flex-direction: column; align-items: flex-start; gap: 1rem; }
+        .search-box { width: 100%; }
+        .search-box:focus-within { width: 100%; }
+        #search-results { width: 100%; }
     }
-    /* ===== ÖZEL SCROLLBAR (KAYDIRMA ÇUBUĞU) ===== */
-/* Chrome, Safari, Edge için */
-::-webkit-scrollbar {
-  width: 8px; /* Çubuğun genişliği */
-}
-
-::-webkit-scrollbar-track {
-  background: #0d1117; /* Arka plan (siteyle aynı renk) */
-}
-
-::-webkit-scrollbar-thumb {
-  background: #30363d; /* Çubuğun kendisi (koyu gri) */
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #58a6ff; /* Üzerine gelince senin MAVİ rengin olsun */
-  cursor: grab;
-}
   </style>
 </head>
 
-<body class="{% if page.hide_nav %}landing-body{% endif %}">
+<body>
 
-{% unless page.hide_nav %}
   <header>
     <nav class="navbar">
       <a href="/" class="logo">./Emirhan_Gungoroglu</a>
-      <div class="nav-links">
-        <a href="/blog/">Blog</a>
-        <a href="/labs/">Labs</a>
-        <a href="/about/">About</a>
+      
+      <div class="nav-right">
+          <div class="nav-links">
+            <a href="/blog/">Blog</a>
+            <a href="/labs/">Labs</a>
+            <a href="/about/">About</a>
+          </div>
+
+          <div class="search-container">
+              <div class="search-box">
+                  <span class="search-icon">🔍</span>
+                  <input type="text" id="global-search-input" placeholder="grep search..." autocomplete="off">
+              </div>
+              <div id="search-results"></div>
+          </div>
       </div>
     </nav>
   </header>
-{% endunless %}
 
-<main {% if page.hide_nav %}class="landing-content"{% endif %}>
+<main>
   {{ content }}
 </main>
 
-{% unless page.hide_nav %}
-  <footer>
-    <div class="footer-content">
-        <p>&copy; {{ site.time | date: "%Y" }} Emirhan Gungoroglu — Detecting. Defending. Improving.</p>
-        
-        <div class="social-links">
-            <a href="https://github.com/emirhangungoroglu" target="_blank" title="GitHub">
-                <svg height="24" width="24" viewBox="0 0 16 16" fill="currentColor">
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path>
-                </svg>
-            </a>
+<button onclick="topFunction()" id="backToTop" title="Return to Base">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 19V5M5 12l7-7 7 7"/>
+    </svg>
+</button>
 
-            <a href="https://linkedin.com/in/emirhangungoroglu" target="_blank" title="LinkedIn">
-                <svg height="24" width="24" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                </svg>
-            </a>
-        </div>
+<footer>
+    <p>&copy; {{ site.time | date: "%Y" }} Emirhan Gungoroglu — Detecting. Defending. Improving.</p>
+    <div class="social-links">
+        <a href="https://github.com/emirhangungoroglu" target="_blank">GitHub</a>
+        <a href="https://linkedin.com/in/emirhangungoroglu" target="_blank">LinkedIn</a>
     </div>
-  </footer>
-{% endunless %}
+</footer>
+
+<script>
+    // --- 1. SEARCH FUNCTION ---
+    const searchInput = document.getElementById('global-search-input');
+    const resultsContainer = document.getElementById('search-results');
+    let posts = [];
+
+    // Veriyi Çek
+    fetch('/search.json')
+        .then(response => response.json())
+        .then(data => { posts = data; })
+        .catch(error => console.error('Search data not found:', error));
+
+    // Arama Mantığı
+    searchInput.addEventListener('keyup', function() {
+        const query = this.value.toLowerCase();
+        
+        if (query.length === 0) {
+            resultsContainer.style.display = 'none';
+            return;
+        }
+
+        const filteredPosts = posts.filter(post => {
+            return post.title.toLowerCase().includes(query) || 
+                   post.category.toLowerCase().includes(query);
+        });
+
+        if (filteredPosts.length > 0) {
+            resultsContainer.innerHTML = filteredPosts.map(post => `
+                <a href="${post.url}" class="search-result-item">
+                    <span class="result-title">${post.title}</span>
+                    <div class="result-meta">
+                        <span style="color: var(--accent)">[${post.category}]</span> • ${post.date}
+                    </div>
+                </a>
+            `).join('');
+            resultsContainer.style.display = 'block';
+        } else {
+            resultsContainer.innerHTML = `
+                <div class="search-result-item" style="color: var(--text-muted); text-align: center;">
+                    No results found for "${query}"
+                </div>`;
+            resultsContainer.style.display = 'block';
+        }
+    });
+
+    // Dışarı tıklayınca kapat
+    document.addEventListener('click', function(e) {
+        if (!document.querySelector('.search-container').contains(e.target)) {
+            resultsContainer.style.display = 'none';
+        }
+    });
+
+    // --- 2. BACK TO TOP FUNCTION ---
+    let mybutton = document.getElementById("backToTop");
+
+    window.onscroll = function() {scrollFunction()};
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+            mybutton.style.display = "block";
+        } else {
+            mybutton.style.display = "none";
+        }
+    }
+
+    function topFunction() {
+        window.scrollTo({top: 0, behavior: 'smooth'});
+    }
+</script>
 
 </body>
 </html>
