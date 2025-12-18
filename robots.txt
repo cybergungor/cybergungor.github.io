@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://emirhangungoroglu.github.io/sitemap.xml
