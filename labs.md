@@ -7,7 +7,7 @@ categories: [labs]
 
 <div class="feed-container">
     <div class="feed-header">
-        <h1>./labsandwriteup.sh</h1>
+        <h1>./start.sh</h1>
         <p class="terminal-text">>> Initializing Blue Team scenarios and investigation reports...</p>
         
         <div class="search-wrapper">
