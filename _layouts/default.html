@@ -14,6 +14,31 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
+    /* ===== YETENEK ROZETLERİ (TECH BADGES) ===== */
+.badge-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.tech-badge {
+  background: rgba(88, 166, 255, 0.1); /* Hafif mavi arka plan */
+  border: 1px solid rgba(88, 166, 255, 0.3); /* İnce mavi çerçeve */
+  color: #58a6ff; /* Neon mavi yazı */
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.85rem;
+  transition: all 0.3s ease;
+}
+
+.tech-badge:hover {
+  background: rgba(88, 166, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 0 10px rgba(88, 166, 255, 0.2);
+}
     /* ===== AYARLAR & RENKLER ===== */
     :root {
       --bg-color: #0d1117;        /* Arka plan koyu gri */
