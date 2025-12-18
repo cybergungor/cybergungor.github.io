@@ -6,7 +6,7 @@ permalink: /labs/
 
 <div class="feed-container">
     <div class="feed-header">
-        <h1>./start_simulation.sh</h1>
+        <h1>./writeup_and_lab</h1>
         <p class="terminal-text">>> Initializing Blue Team scenarios and investigation reports...</p>
     </div>
 
