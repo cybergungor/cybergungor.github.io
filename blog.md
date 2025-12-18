@@ -6,7 +6,7 @@ permalink: /blog/
 
 <div class="feed-container">
     <div class="feed-header">
-        <h1>/var/log/blog_posts</h1>
+        <h1>Blog</h1>
         <p class="terminal-text">>> Listing all write-ups and security notes...</p>
         
         <div class="search-wrapper">
