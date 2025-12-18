@@ -2,6 +2,7 @@
 layout: default
 title: Labs
 permalink: /labs/
+categories: [labs]
 ---
 
 <div class="feed-container">
