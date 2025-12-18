@@ -171,6 +171,42 @@
         .navbar { flex-direction: column; gap: 1rem; }
         .nav-links { gap: 1.5rem; width: 100%; justify-content: center; }
     }
+    /* ===== UYARI VE NOT KUTULARI ===== */
+    .admonition {
+        padding: 15px;
+        margin-bottom: 20px;
+        border-left: 4px solid;
+        background-color: rgba(22, 27, 34, 0.5); /* Hafif transparan */
+        border-radius: 0 4px 4px 0;
+        font-size: 0.95rem;
+    }
+
+    /* Mavi Kutu (Not / Info) */
+    .info {
+        border-color: #58a6ff;
+        background-color: rgba(88, 166, 255, 0.1);
+    }
+    
+    /* Kırmızı Kutu (Uyarı / Tehlike) */
+    .danger {
+        border-color: #ff5f56;
+        background-color: rgba(255, 95, 86, 0.1);
+    }
+    
+    /* Yeşil Kutu (Başarılı / İpucu) */
+    .success {
+        border-color: #3fb950;
+        background-color: rgba(63, 185, 80, 0.1);
+    }
+    
+    /* Başlık kısmı kalın olsun */
+    .admonition strong {
+        display: block;
+        margin-bottom: 5px;
+        text-transform: uppercase;
+        font-size: 0.8rem;
+        letter-spacing: 1px;
+    }
   </style>
 </head>
 
