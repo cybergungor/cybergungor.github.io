@@ -19,7 +19,7 @@ permalink: /about/
               </div>
               <div class="stat-row">
                   <span class="stat-label">ROLE:</span>
-                  <span class="stat-value" style="color: var(--accent)">Blue Team Analyst</span>
+                  <span class="stat-value" style="color: var(--accent)">Cyber Security Analyst</span>
               </div>
               <div class="stat-row">
                   <span class="stat-label">STATUS:</span>
