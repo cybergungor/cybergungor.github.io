@@ -1,4 +1,4 @@
-# CyberGungor
+# Emirhan Gungoroglu
 
 Cyber Security Student  
 Blue Team | SOC | SIEM | EDR
