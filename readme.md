@@ -50,6 +50,11 @@ This website was engineered with a focus on **performance**, **security**, and *
 
 This repository is structured as a standard Jekyll site. Below is an overview of the key directories and files:
 
+## 📂 Project Structure
+
+This repository is structured as a standard Jekyll site. Below is an overview of the key directories and files:
+
+```bash
 .
 ├── _layouts/          # HTML templates (default.html, post.html)
 ├── _posts/            # Blog posts and technical write-ups (Markdown files)
@@ -67,6 +72,7 @@ This repository is structured as a standard Jekyll site. Below is an overview of
 ├── readme             # This file
 ├── robots.txt         # Instructions for web crawlers (SEO)
 └── tags.md            # Page for browsing posts by tag
+
 🤝 Connect
 I am open to discussions regarding SOC Operations, Detection Engineering, and Blue Team opportunities.
 
