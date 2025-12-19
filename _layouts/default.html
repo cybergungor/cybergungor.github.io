@@ -36,9 +36,11 @@
       --card-bg: #161b22;
       --border-color: #30363d;
       --text-main: #c9d1d9;
+      --text-bright: #f0f6fc;
       --text-muted: #8b949e;
       --accent: #58a6ff;
       --success: #3fb950;
+      --danger: #ff5f56;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -74,36 +76,109 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 1.5rem;
+      padding: 0.8rem 1.5rem;
     }
 
-    .logo {
-      font-family: 'JetBrains Mono', monospace;
-      font-weight: 700;
-      color: var(--accent);
-      font-size: 1.1rem;
-      white-space: nowrap;
-    }
-
-    .nav-links {
+    /* --- LOGO (TERMINAL STİLİ) --- */
+    .logo-container {
       display: flex;
-      gap: 2rem;
+      align-items: center;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.95rem;
     }
 
-    .nav-links a {
-      font-size: 0.95rem;
-      font-weight: 500;
-      color: var(--text-main);
+    .logo-prompt {
+      color: var(--success); /* root@... kısmı yeşil */
+      margin-right: 8px;
+      font-weight: bold;
+    }
+
+    .logo-text {
+      color: var(--accent); /* İsim mavi */
+      font-weight: 700;
       position: relative;
     }
 
-    .nav-links a:hover { color: var(--accent); }
+    /* Yanıp Sönen İmleç */
+    .logo-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 15px;
+      background-color: var(--text-muted);
+      animation: blink-cursor 1s step-end infinite;
+      vertical-align: middle;
+      margin-left: 2px;
+    }
+
+    @keyframes blink-cursor {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    /* --- NAVBAR LINKLERİ (Split Layout) --- */
+    .nav-wrapper {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+    }
+
+    /* Grup 1: Simülasyon Araçları */
+    .tools-group {
+        display: flex;
+        gap: 10px;
+        padding-right: 20px;
+        border-right: 1px solid var(--border-color);
+    }
+
+    .tool-link {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        font-weight: bold;
+        padding: 4px 10px;
+        border-radius: 4px;
+        border: 1px solid transparent;
+        transition: all 0.2s;
+    }
+
+    .t-alert { 
+        color: var(--danger); 
+        background: rgba(255, 95, 86, 0.1); 
+        border-color: rgba(255, 95, 86, 0.2);
+    }
+    .t-alert:hover { background: var(--danger); color: #0d1117; }
+
+    .t-log { 
+        color: var(--success); 
+        background: rgba(63, 185, 80, 0.1); 
+        border-color: rgba(63, 185, 80, 0.2);
+    }
+    .t-log:hover { background: var(--success); color: #0d1117; }
+
+
+    /* Grup 2: Sayfalar */
+    .pages-group {
+        display: flex;
+        gap: 20px;
+    }
+
+    .page-link {
+        font-size: 0.95rem;
+        font-weight: 500;
+        color: var(--text-bright);
+        opacity: 0.8;
+        position: relative;
+    }
+
+    .page-link:hover { 
+        color: var(--accent); 
+        opacity: 1;
+    }
     
-    .nav-links a::after {
+    .page-link::after {
         content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0;
         background-color: var(--accent); transition: width 0.3s;
     }
-    .nav-links a:hover::after { width: 100%; }
+    .page-link:hover::after { width: 100%; }
 
     /* ===== BACK TO TOP ===== */
     #backToTop {
@@ -169,44 +244,21 @@
     /* Mobile */
     @media (max-width: 768px) {
         .navbar { flex-direction: column; gap: 1rem; }
-        .nav-links { gap: 1.5rem; width: 100%; justify-content: center; }
-    }
-    /* ===== UYARI VE NOT KUTULARI (Admonitions) ===== */
-    .admonition {
-        padding: 15px;
-        margin-bottom: 20px;
-        border-left: 4px solid;
-        background-color: rgba(22, 27, 34, 0.5); /* Hafif transparan */
-        border-radius: 0 4px 4px 0;
-        font-size: 0.95rem;
+        .nav-wrapper { flex-direction: column; gap: 1rem; width: 100%; }
+        .tools-group { padding-right: 0; border-right: none; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; width: 100%; justify-content: center; }
+        .pages-group { width: 100%; justify-content: center; gap: 1.5rem; }
+        .logo-container { margin-bottom: 5px; }
     }
 
-    /* Mavi Kutu (Not / Info) */
-    .info {
-        border-color: #58a6ff;
-        background-color: rgba(88, 166, 255, 0.1);
+    /* ===== UYARI VE NOT KUTULARI (Admonitions) ===== */
+    .admonition {
+        padding: 15px; margin-bottom: 20px; border-left: 4px solid;
+        background-color: rgba(22, 27, 34, 0.5); border-radius: 0 4px 4px 0; font-size: 0.95rem;
     }
-    
-    /* Kırmızı Kutu (Uyarı / Tehlike) */
-    .danger {
-        border-color: #ff5f56;
-        background-color: rgba(255, 95, 86, 0.1);
-    }
-    
-    /* Yeşil Kutu (Başarılı / İpucu) */
-    .success {
-        border-color: #3fb950;
-        background-color: rgba(63, 185, 80, 0.1);
-    }
-    
-    /* Başlık kısmı kalın olsun */
-    .admonition strong {
-        display: block;
-        margin-bottom: 5px;
-        text-transform: uppercase;
-        font-size: 0.8rem;
-        letter-spacing: 1px;
-    }
+    .info { border-color: #58a6ff; background-color: rgba(88, 166, 255, 0.1); }
+    .danger { border-color: #ff5f56; background-color: rgba(255, 95, 86, 0.1); }
+    .success { border-color: #3fb950; background-color: rgba(63, 185, 80, 0.1); }
+    .admonition strong { display: block; margin-bottom: 5px; text-transform: uppercase; font-size: 0.8rem; letter-spacing: 1px; }
   </style>
 </head>
 
@@ -215,13 +267,23 @@
   {% unless page.hide_nav %}
   <header>
     <nav class="navbar">
-      <a href="/" class="logo">./Emirhan_Gungoroglu</a>
-      <div class="nav-links">
-        <a href="/alerts/" style="color: #ff5f56; font-weight: bold;">Live_Alerts</a>
-        <a href="/logs/" style="color: #3fb950; font-weight: bold;">Log_Search</a>
-        <a href="/blog/">Blog</a>
-        <a href="/labs/">Labs</a>
-        <a href="/about/">About</a>
+      <a href="/" class="logo-container">
+        <span class="logo-prompt">root@portfolio:~$</span>
+        <span class="logo-text">./Emirhan_Gungoroglu</span>
+        <span class="logo-cursor"></span>
+      </a>
+
+      <div class="nav-wrapper">
+         <div class="tools-group">
+            <a href="/alerts/" class="tool-link t-alert">● Live_Alerts</a>
+            <a href="/logs/" class="tool-link t-log">● Log_Search</a>
+         </div>
+
+         <div class="pages-group">
+            <a href="/blog/" class="page-link">Blog</a>
+            <a href="/labs/" class="page-link">Labs</a>
+            <a href="/about/" class="page-link">About</a>
+         </div>
       </div>
     </nav>
   </header>
