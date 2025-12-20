@@ -4,7 +4,11 @@ title: Labs
 permalink: /labs/
 categories: [labs]
 ---
-
+<div style="text-align: center; margin-top: 50px;">
+    <a href="/labs/station/" style="background: #238636; color: white; padding: 15px 30px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+        🚀 ENTER CYBER RANGE TERMINAL
+    </a>
+</div>
 <div class="feed-container">
     <div class="feed-header">
         <h1>./start.sh</h1>
