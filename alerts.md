@@ -5,256 +5,226 @@ permalink: /alerts/
 ---
 
 <style>
-    /* Full Page & Theme Overrides */
     main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; background: #010409; }
     .soc-wrapper { display: flex; flex-direction: column; height: calc(100vh - 60px); color: #e6edf3; font-family: 'Inter', sans-serif; }
 
-    /* --- INITIAL DISCLAIMER MODAL --- */
-    .disclaimer-modal {
-        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(1, 4, 9, 0.96); z-index: 10000;
-        display: none; align-items: center; justify-content: center; backdrop-filter: blur(15px);
-    }
-    .disclaimer-box { 
-        background: #0d1117; border: 1px solid #30363d; width: 750px; 
-        border-radius: 12px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.5);
-        animation: slideUp 0.4s ease-out;
-    }
+    /* --- INITIAL DISCLAIMER --- */
+    .disclaimer-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(1, 4, 9, 0.96); z-index: 10000; display: none; align-items: center; justify-content: center; backdrop-filter: blur(15px); }
+    .disclaimer-box { background: #0d1117; border: 1px solid #30363d; width: 750px; border-radius: 12px; overflow: hidden; animation: slideUp 0.4s ease-out; }
     .disclaimer-header { background: #161b22; color: #58a6ff; padding: 20px; font-family: 'JetBrains Mono'; font-weight: bold; text-align: center; border-bottom: 1px solid #30363d; }
-    .disclaimer-body { padding: 30px; display: flex; gap: 30px; line-height: 1.6; }
-    .v-divider { width: 1px; background: #30363d; }
-    .lang-section h3 { font-size: 0.8rem; color: #58a6ff; margin-bottom: 12px; font-family: 'JetBrains Mono'; border-bottom: 1px solid #30363d; padding-bottom: 5px; }
-    .lang-section p { font-size: 0.85rem; color: #8b949e; }
-    .btn-ack { width: 100%; padding: 18px; background: #238636; color: #fff; border: none; font-weight: bold; cursor: pointer; font-family: 'JetBrains Mono'; transition: 0.2s; }
-    .btn-ack:hover { background: #2ea043; }
+    .btn-ack { width: 100%; padding: 18px; background: #238636; color: #fff; border: none; font-weight: bold; cursor: pointer; font-family: 'JetBrains Mono'; }
 
-    /* --- TOP NAV & FILTER BAR --- */
+    /* --- FILTER BAR --- */
     .soc-top-bar { background: #0d1117; padding: 15px 25px; border-bottom: 1px solid #30363d; display: flex; justify-content: space-between; align-items: center; }
-    .filter-group { display: flex; gap: 10px; align-items: center; }
-    .btn-filter { 
-        background: #161b22; border: 1px solid #30363d; color: #8b949e; 
-        padding: 6px 15px; border-radius: 4px; font-size: 0.75rem; cursor: pointer; 
-        font-family: 'JetBrains Mono'; transition: 0.2s;
-    }
+    .filter-group { display: flex; gap: 10px; }
+    .btn-filter { background: #161b22; border: 1px solid #30363d; color: #8b949e; padding: 6px 15px; border-radius: 4px; font-size: 0.75rem; cursor: pointer; font-family: 'JetBrains Mono'; transition: 0.2s; }
     .btn-filter.active { background: #58a6ff; color: #0d1117; border-color: #58a6ff; font-weight: bold; }
-    .btn-filter:hover:not(.active) { border-color: #58a6ff; color: #58a6ff; }
 
-    /* --- TABLE DESIGN --- */
+    /* --- TABLE --- */
     .queue-container { flex: 1; padding: 25px; overflow-y: auto; }
-    .incident-table { width: 100%; border-collapse: collapse; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; overflow: hidden; }
+    .incident-table { width: 100%; border-collapse: collapse; background: #0d1117; border: 1px solid #30363d; border-radius: 6px; }
     .incident-table th { background: #161b22; text-align: left; padding: 12px 15px; font-size: 0.7rem; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; }
     .incident-table td { padding: 15px; border-bottom: 1px solid #21262d; font-size: 0.85rem; }
-    .incident-table tr:hover { background: #121d2f; cursor: pointer; }
+    .alert-row:hover { background: #121d2f; cursor: pointer; }
 
-    /* Severity & Status Badges */
-    .sev { padding: 3px 8px; border-radius: 3px; font-size: 0.65rem; font-weight: bold; border: 1px solid transparent; }
-    .sev-critical { color: #f85149; border-color: rgba(248, 81, 73, 0.4); background: rgba(248, 81, 73, 0.1); }
-    .sev-high { color: #d29922; border-color: rgba(210, 153, 34, 0.4); background: rgba(210, 153, 34, 0.1); }
-    .status-badge { font-family: 'JetBrains Mono'; font-size: 0.7rem; font-weight: bold; }
-    .status-open { color: #f85149; }
-    .status-closed { color: #3fb950; }
-
-    /* --- INVESTIGATION SIDE PANEL --- */
-    .investigation-panel {
-        position: fixed; top: 0; right: -500px; width: 480px; height: 100vh;
-        background: #0d1117; border-left: 1px solid #30363d; box-shadow: -15px 0 40px rgba(0,0,0,0.6);
-        transition: right 0.4s cubic-bezier(0.05, 0.7, 0.1, 1); z-index: 9000;
-        display: flex; flex-direction: column;
-    }
+    /* --- PANEL & MODALS --- */
+    .side-panel { position: fixed; top: 0; right: -600px; width: 550px; height: 100vh; background: #0d1117; border-left: 1px solid #30363d; transition: 0.4s; z-index: 9000; display: flex; flex-direction: column; box-shadow: -20px 0 50px rgba(0,0,0,0.7); }
     .panel-active { right: 0; }
-    .panel-header { padding: 20px; background: #161b22; border-bottom: 1px solid #30363d; display: flex; justify-content: space-between; align-items: center; }
+    .panel-header { padding: 20px; background: #161b22; border-bottom: 1px solid #30363d; display: flex; justify-content: space-between; }
     .panel-body { padding: 25px; flex: 1; overflow-y: auto; }
-    .playbook-card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 20px; margin-bottom: 25px; }
-    .playbook-card h4 { margin: 0 0 15px 0; font-size: 0.75rem; color: #58a6ff; text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #30363d; padding-bottom: 8px; }
     
-    .artifact-label { display: block; font-size: 0.7rem; color: #8b949e; margin-bottom: 5px; text-transform: uppercase; }
-    .artifact-input {
-        width: 100%; background: #010409; border: 1px solid #30363d; color: #e6edf3;
-        padding: 12px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; border-radius: 4px; margin-bottom: 15px;
-    }
-    .artifact-input:focus { border-color: #58a6ff; outline: none; box-shadow: 0 0 8px rgba(88, 166, 255, 0.2); }
+    .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; }
+    .card h4 { margin: 0 0 10px 0; font-size: 0.75rem; color: #58a6ff; text-transform: uppercase; border-bottom: 1px solid #30363d; padding-bottom: 5px; }
+    
+    .artifact-input { width: 100%; background: #010409; border: 1px solid #30363d; color: #e6edf3; padding: 10px; font-family: 'JetBrains Mono'; font-size: 0.8rem; border-radius: 4px; margin-bottom: 10px; }
+    .threat-info { font-size: 0.8rem; color: #8b949e; line-height: 1.5; background: rgba(88, 166, 255, 0.05); padding: 12px; border-left: 3px solid #58a6ff; margin-bottom: 15px; }
 
-    .panel-footer { padding: 20px; background: #0d1117; border-top: 1px solid #30363d; display: flex; gap: 10px; }
-    .btn-panel { flex: 1; padding: 12px; border-radius: 4px; font-weight: bold; cursor: pointer; font-family: 'JetBrains Mono'; font-size: 0.75rem; border: none; transition: 0.2s; }
-    .btn-escalate { background: #d29922; color: #0d1117; }
-    .btn-resolve { background: #238636; color: #fff; }
-    .btn-resolve:hover { background: #2ea043; }
-    .btn-escalate:hover { background: #e3a92b; }
+    /* Report Styles */
+    .report-badge { padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; margin-bottom: 10px; display: inline-block; }
+    .tp { background: rgba(248, 81, 73, 0.1); color: #f85149; border: 1px solid #f85149; }
+    .fp { background: rgba(88, 166, 255, 0.1); color: #58a6ff; border: 1px solid #58a6ff; }
+
+    .btn-resolve { background: #238636; color: white; width: 100%; padding: 12px; border: none; border-radius: 4px; font-weight: bold; cursor: pointer; }
+    .select-field { background: #010409; color: white; border: 1px solid #30363d; padding: 10px; width: 100%; border-radius: 4px; margin-bottom: 15px; }
 
     @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 </style>
 
 <div id="welcomeModal" class="disclaimer-modal">
     <div class="disclaimer-box">
-        <div class="disclaimer-header">INCIDENT RESPONSE TERMINAL // MISSION BRIEFING</div>
+        <div class="disclaimer-header">SENTINEL GUARD // OPERATIONAL INTERFACE v5.1</div>
         <div class="disclaimer-body">
-            <div class="lang-section">
-                <h3>[TR] VAKA YÖNETİMİ</h3>
-                <p>Aktif alarmları analiz etmek için <strong>Analyze</strong> butonuna basın. Delilleri toplamak için <strong>Logs</strong> sayfasını kullanın.</p>
-                <p style="font-size:0.75rem; color:#d29922;">*İşveren Notu: Bu panel vaka döngüsünü (Triage, Analysis, Resolution) simüle eder.</p>
+            <div style="flex:1;">
+                <h3>[TR] VAKA ANALİZİ</h3>
+                <p>Aktif alarmları inceleyin, delilleri toplayın ve "True Positive" veya "False Positive" kararı vererek resmi raporunuzu oluşturun.</p>
             </div>
-            <div class="v-divider"></div>
-            <div class="lang-section">
+            <div style="width:1px; background:#30363d; margin:0 20px;"></div>
+            <div style="flex:1;">
                 <h3>[EN] INCIDENT LIFECYCLE</h3>
-                <p>Monitor live alerts, perform triage, and extract forensic evidence. Use the <strong>Logs</strong> tab to verify artifacts.</p>
-                <p style="font-size:0.75rem; color:#d29922;">*Recruiter Note: This dashboard demonstrates full incident lifecycle management skills.</p>
+                <p>Execute playbooks, determine verdict (TP/FP), and generate professional IR reports to demonstrate SOC expertise.</p>
             </div>
         </div>
-        <button class="btn-ack" onclick="closeModal('welcomeModal')">ACCESS MONITORING QUEUE</button>
+        <button class="btn-ack" onclick="closeModal('welcomeModal')">START SESSION</button>
     </div>
 </div>
 
 <div class="soc-wrapper">
     <div class="soc-top-bar">
         <div class="filter-group">
-            <button class="btn-filter active" id="filter-all" onclick="filterQueue('all')">ALL ALERTS</button>
-            <button class="btn-filter" id="filter-open" onclick="filterQueue('open')">OPEN (3)</button>
-            <button class="btn-filter" id="filter-closed" onclick="filterQueue('closed')">CLOSED (0)</button>
+            <button class="btn-filter active" id="filter-open" onclick="switchTab('open')">OPEN ALERTS (<span id="count-open">3</span>)</button>
+            <button class="btn-filter" id="filter-closed" onclick="switchTab('closed')">CLOSED ARCHIVE (<span id="count-closed">0</span>)</button>
         </div>
-        <div style="font-family:'JetBrains Mono'; font-size:0.75rem; color:#8b949e;">
-            ANALYST_STATUS: <span style="color:#3fb950">● ONLINE</span>
-        </div>
+        <div style="font-family:'JetBrains Mono'; font-size:0.75rem; color:#8b949e;">ANALYST: <span style="color:#58a6ff">L1_PRIMARY</span></div>
     </div>
 
     <div class="queue-container">
         <table class="incident-table">
             <thead>
                 <tr>
-                    <th width="120">ID</th>
-                    <th>Tactics & Techniques</th>
-                    <th width="150">Severity</th>
-                    <th width="150">Status</th>
+                    <th width="120">Case ID</th>
+                    <th>Tactical Description</th>
+                    <th width="120">Severity</th>
+                    <th width="120">Verdict</th>
                     <th width="120">Action</th>
                 </tr>
             </thead>
-            <tbody id="alertQueueBody">
-                <tr class="alert-row open" id="row-1" onclick="inspectCase(1)">
-                    <td class="mono">#SOC-5092</td>
-                    <td><strong>Host-Based Ransomware Activity</strong> <span style="color:#8b949e; font-size:0.7rem;">(T1486) // Financial_Srv_01</span></td>
-                    <td><span class="sev sev-critical">CRITICAL</span></td>
-                    <td class="status-badge status-open" id="stat-1">● OPEN</td>
-                    <td><button class="btn-filter" style="width:100%">ANALYZE</button></td>
-                </tr>
-                <tr class="alert-row open" id="row-2" onclick="inspectCase(2)">
-                    <td class="mono">#SOC-1022</td>
-                    <td><strong>Privileged Account Bruteforce</strong> <span style="color:#8b949e; font-size:0.7rem;">(T1110) // Domain_Controller</span></td>
-                    <td><span class="sev sev-high">HIGH</span></td>
-                    <td class="status-badge status-open" id="stat-2">● OPEN</td>
-                    <td><button class="btn-filter" style="width:100%">ANALYZE</button></td>
-                </tr>
-                <tr class="alert-row open" id="row-3" onclick="inspectCase(3)">
-                    <td class="mono">#SOC-883</td>
-                    <td><strong>Advanced SQL Injection Attempt</strong> <span style="color:#8b949e; font-size:0.7rem;">(T1190) // Web_Prod_Server</span></td>
-                    <td><span class="sev sev-high">HIGH</span></td>
-                    <td class="status-badge status-open" id="stat-3">● OPEN</td>
-                    <td><button class="btn-filter" style="width:100%">ANALYZE</button></td>
-                </tr>
-            </tbody>
+            <tbody id="alertQueue"></tbody>
         </table>
     </div>
 </div>
 
-<div id="sidePanel" class="investigation-panel">
+<div id="sidePanel" class="side-panel">
     <div class="panel-header">
         <div style="font-family:'JetBrains Mono'; font-size:0.85rem; font-weight:bold;">
-            INVESTIGATION: <span id="panelId" style="color:#58a6ff;">#SOC-0000</span>
+            <span id="panelMode">INVESTIGATION</span>: <span id="panelId" style="color:#58a6ff;">#SOC-0000</span>
         </div>
         <span style="cursor:pointer; font-size:1.5rem;" onclick="closePanel()">×</span>
     </div>
 
-    <div class="panel-body">
-        <div class="playbook-card">
-            <h4>Playbook: Artifact Verification</h4>
-            <p style="font-size:0.75rem; color:#8b949e; margin-bottom:15px;">Cross-reference telemetry in the <a href="/logs/" target="_blank" style="color:#58a6ff;">SIEM Log Analytics</a> panel to verify the following indicators.</p>
-            <div id="artifactFields">
-                </div>
+    <div class="panel-body" id="panelContent">
         </div>
 
-        <div class="playbook-card">
-            <h4>Disposition & Notes</h4>
-            <label class="artifact-label">Executive Summary</label>
-            <textarea class="artifact-input" style="height:100px; resize:none;" placeholder="Describe the threat, impact, and your mitigation steps..."></textarea>
+    <div id="panelFooter" style="padding:20px; border-top:1px solid #30363d; background:#0d1117;">
         </div>
-    </div>
-
-    <div class="panel-footer">
-        <button class="btn-panel btn-escalate" onclick="processAction('Escalated to SOC Tier-2')">ESCALATE L2</button>
-        <button class="btn-panel btn-resolve" onclick="validateCase()">RESOLVE CASE</button>
-    </div>
 </div>
 
 <script>
     const caseData = {
-        1: { id: "#SOC-5092", q: [{l: "Malicious Process Name:", a: "tasksche.exe"}, {l: "Target Destination IP:", a: "10.20.5.100"}], status: 'open' },
-        2: { id: "#SOC-1022", q: [{l: "Target Username:", a: "adm_emir"}, {l: "Attacker Source IP:", a: "192.168.1.150"}], status: 'open' },
-        3: { id: "#SOC-883", q: [{l: "SQLi Tool Agent:", a: "sqlmap/1.4.7"}, {l: "Database Targeted:", a: "information_schema"}], status: 'open' }
+        1: { id: "#SOC-5092", title: "Ransomware Pattern Detected", sev: "CRITICAL", status: "open", verdict: "-", root_cause: "Triggered by Sysmon Event 11. Large scale file modifications with high entropy extensions (.locky) detected in Finance share.", q: [{l: "Malicious Process:", a: "tasksche.exe"}, {l: "C2 IP Address:", a: "10.20.5.100"}], report: "" },
+        2: { id: "#SOC-1022", title: "Domain Admin Bruteforce", sev: "HIGH", status: "open", verdict: "-", root_cause: "Event ID 4625 spike. Multiple failed login attempts detected against 'adm_emir' from a non-standard workstation.", q: [{l: "Target User:", a: "adm_emir"}, {l: "Attacker IP:", a: "192.168.1.150"}], report: "" },
+        3: { id: "#SOC-883", title: "SQL Injection Exploit Attempt", sev: "HIGH", status: "open", verdict: "-", root_cause: "WAF signature match for UNION-based SQLi. Payload targets 'information_schema' to extract database structure.", q: [{l: "Tool Detected:", a: "sqlmap/1.4.7"}, {l: "Target Schema:", a: "information_schema"}], report: "" }
     };
 
-    let activeCaseId = null;
+    let currentTab = 'open';
 
-    function inspectCase(id) {
-        if(caseData[id].status === 'closed') return;
-        activeCaseId = id;
-        const data = caseData[id];
-        document.getElementById('panelId').innerText = data.id;
-        const container = document.getElementById('artifactFields');
-        container.innerHTML = data.q.map((item, i) => `
-            <label class="artifact-label">${item.l}</label>
-            <input type="text" class="artifact-input" id="ans-${i}" placeholder="Extract from logs..." autocomplete="off">
-        `).join('');
+    function renderTable() {
+        const body = document.getElementById('alertQueue');
+        body.innerHTML = "";
+        Object.entries(caseData).forEach(([key, c]) => {
+            if(c.status !== currentTab) return;
+            body.innerHTML += `
+                <tr class="alert-row" onclick="viewCase(${key})">
+                    <td style="font-family:'JetBrains Mono'; color:#58a6ff;">${c.id}</td>
+                    <td><strong>${c.title}</strong></td>
+                    <td><span style="color:${c.sev==='CRITICAL'?'#f85149':'#d29922'}">${c.sev}</span></td>
+                    <td><span class="report-badge ${c.verdict==='True Positive'?'tp':'fp'}">${c.verdict}</span></td>
+                    <td><button class="btn-filter" style="width:100%">${c.status==='open'?'ANALYZE':'VIEW REPORT'}</button></td>
+                </tr>
+            `;
+        });
+        updateCounts();
+    }
+
+    function viewCase(key) {
+        const c = caseData[key];
+        const content = document.getElementById('panelContent');
+        const footer = document.getElementById('panelFooter');
+        document.getElementById('panelId').innerText = c.id;
+
+        if(c.status === 'open') {
+            document.getElementById('panelMode').innerText = "ANALYSIS";
+            content.innerHTML = `
+                <div class="card">
+                    <h4>Threat Intel / Root Cause</h4>
+                    <div class="threat-info">${c.root_cause}</div>
+                </div>
+                <div class="card">
+                    <h4>Artifact Collection</h4>
+                    ${c.q.map((q, i) => `<label style="font-size:0.7rem; color:#8b949e;">${q.l}</label><input type="text" class="artifact-input" id="ans-${i}" autocomplete="off">`).join('')}
+                </div>
+                <div class="card">
+                    <h4>Official Verdict</h4>
+                    <select class="select-field" id="verdictSelect">
+                        <option value="True Positive">True Positive (Confirmed Threat)</option>
+                        <option value="False Positive">False Positive (Benign Activity)</option>
+                    </select>
+                    <label style="font-size:0.7rem; color:#8b949e;">Final Analyst Notes</label>
+                    <textarea class="artifact-input" id="finalNotes" style="height:80px; resize:none;"></textarea>
+                </div>
+            `;
+            footer.innerHTML = `<button class="btn-resolve" onclick="resolveCase(${key})">EXECUTE DISPOSITION & CLOSE CASE</button>`;
+        } else {
+            document.getElementById('panelMode').innerText = "ARCHIVED REPORT";
+            content.innerHTML = `
+                <div class="card" style="border-left: 4px solid ${c.verdict==='True Positive'?'#f85149':'#58a6ff'}">
+                    <div class="report-badge ${c.verdict==='True Positive'?'tp':'fp'}">${c.verdict}</div>
+                    <h3 style="margin:10px 0;">Incident Closing Report</h3>
+                    <p style="font-size:0.8rem; color:#8b949e;"><strong>Resolution Date:</strong> ${new Date().toLocaleDateString()}</p>
+                    <hr style="border:0; border-top:1px solid #30363d; margin:15px 0;">
+                    <div style="font-size:0.85rem; line-height:1.6;">
+                        <strong>Executive Summary:</strong><br>
+                        ${c.report}<br><br>
+                        <strong>Root Cause:</strong><br>${c.root_cause}
+                    </div>
+                </div>
+            `;
+            footer.innerHTML = `<button class="btn-filter" style="width:100%" onclick="closePanel()">CLOSE VIEW</button>`;
+        }
         document.getElementById('sidePanel').classList.add('panel-active');
     }
 
-    function validateCase() {
-        const data = caseData[activeCaseId];
-        let isValid = true;
-        data.q.forEach((item, i) => {
-            if(document.getElementById(`ans-${i}`).value.trim().toLowerCase() !== item.a.toLowerCase()) {
-                isValid = false;
-                document.getElementById(`ans-${i}`).style.borderColor = "#f85149";
-            } else {
-                document.getElementById(`ans-${i}`).style.borderColor = "#238636";
-            }
+    function resolveCase(key) {
+        const c = caseData[key];
+        let valid = true;
+        c.q.forEach((q, i) => {
+            if(document.getElementById(`ans-${i}`).value.trim().toLowerCase() !== q.a.toLowerCase()) valid = false;
         });
 
-        if(isValid) {
-            caseData[activeCaseId].status = 'closed';
-            document.getElementById(`row-${activeCaseId}`).classList.remove('open');
-            document.getElementById(`row-${activeCaseId}`).classList.add('closed');
-            document.getElementById(`stat-${activeCaseId}`).innerText = "✔ CLOSED";
-            document.getElementById(`stat-${activeCaseId}`).className = "status-badge status-closed";
-            updateFilterCounts();
-            closePanel();
-        } else {
-            alert("Validation Failed: The artifacts provided do not match the forensic logs.");
+        if(!valid) {
+            alert("Analysis Error: Provided artifacts do not match forensic logs. Re-examine the telemetry.");
+            return;
         }
-    }
 
-    function filterQueue(type) {
-        document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
-        document.getElementById(`filter-${type}`).classList.add('active');
+        const notes = document.getElementById('finalNotes').value;
+        const verdict = document.getElementById('verdictSelect').value;
         
-        const rows = document.querySelectorAll('.alert-row');
-        rows.forEach(row => {
-            if(type === 'all') row.style.display = 'table-row';
-            else if(type === 'open') row.style.display = row.classList.contains('open') ? 'table-row' : 'none';
-            else if(type === 'closed') row.style.display = row.classList.contains('closed') ? 'table-row' : 'none';
-        });
+        caseData[key].status = 'closed';
+        caseData[key].verdict = verdict;
+        caseData[key].report = notes || "No specific analyst notes provided. Threat mitigated according to standard playbook.";
+        
+        renderTable();
+        closePanel();
     }
 
-    function updateFilterCounts() {
-        const open = Object.values(caseData).filter(c => c.status === 'open').length;
-        const closed = Object.values(caseData).filter(c => c.status === 'closed').length;
-        document.getElementById('filter-open').innerText = `OPEN (${open})`;
-        document.getElementById('filter-closed').innerText = `CLOSED (${closed})`;
+    function switchTab(tab) {
+        currentTab = tab;
+        document.getElementById('filter-open').classList.toggle('active', tab==='open');
+        document.getElementById('filter-closed').classList.toggle('active', tab==='closed');
+        renderTable();
+    }
+
+    function updateCounts() {
+        const o = Object.values(caseData).filter(c => c.status === 'open').length;
+        const cl = Object.values(caseData).filter(c => c.status === 'closed').length;
+        document.getElementById('count-open').innerText = o;
+        document.getElementById('count-closed').innerText = cl;
     }
 
     function closePanel() { document.getElementById('sidePanel').classList.remove('panel-active'); }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-    function processAction(m) { alert("Incident Lifecycle Action: " + m); closePanel(); }
 
     window.onload = () => {
         document.getElementById('welcomeModal').style.display = 'flex';
-        updateFilterCounts();
+        renderTable();
     };
 </script>
