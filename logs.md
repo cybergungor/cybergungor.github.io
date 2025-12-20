@@ -5,7 +5,6 @@ permalink: /logs/
 ---
 
 <style>
-    /* SIEM Deep Dark Theme */
     main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; background: #010409; }
     header, .navbar { max-width: 100% !important; border-bottom: 1px solid #30363d; }
 
@@ -29,61 +28,68 @@ permalink: /logs/
         font-weight: bold; cursor: pointer; font-family: 'JetBrains Mono'; transition: 0.2s;
     }
     .btn-ack:hover { background: #2ea043; }
-    .btn-ack:active { transform: scale(0.98); }
 
-    /* --- SEARCH BAR --- */
+    /* --- SEARCH BAR (SPLUNK DARK) --- */
     .siem-header { background: #0d1117; padding: 15px 25px; border-bottom: 1px solid #30363d; display: flex; align-items: center; }
     .search-input-group { flex: 1; display: flex; background: #010409; border: 1px solid #30363d; border-radius: 6px; overflow: hidden; }
     .prompt-label { background: #161b22; color: #58a6ff; padding: 10px 18px; font-family: 'JetBrains Mono'; font-size: 0.8rem; border-right: 1px solid #30363d; }
     #searchInput { background: transparent; border: none; color: #e6edf3; padding: 10px 15px; width: 100%; font-family: 'JetBrains Mono'; font-size: 0.85rem; outline: none; }
-    .btn-search { background: #238636; border: none; color: #fff; padding: 0 25px; cursor: pointer; transition: 0.2s; }
-    .btn-search:hover { background: #2ea043; }
+    .btn-search { background: #238636; border: none; color: #fff; padding: 0 25px; cursor: pointer; transition: 0.2s; font-weight: bold; }
 
     /* --- LAYOUT --- */
     .siem-layout { display: flex; flex: 1; overflow: hidden; }
-    .siem-sidebar { width: 260px; background: #0d1117; border-right: 1px solid #30363d; padding: 20px; overflow-y: auto; }
-    .sidebar-title { font-size: 0.7rem; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px; border-bottom: 1px solid #21262d; padding-bottom: 5px; }
     
-    .field-link { display: flex; justify-content: space-between; font-size: 0.75rem; padding: 8px 10px; color: #58a6ff; cursor: pointer; border-radius: 4px; transition: 0.2s; }
-    .field-link:hover { background: rgba(88, 166, 255, 0.1); color: #fff; }
+    /* --- REALISTIC SIDEBAR (FIELDS) --- */
+    .siem-sidebar { width: 280px; background: #0d1117; border-right: 1px solid #30363d; padding: 15px; overflow-y: auto; }
+    .sidebar-section { margin-bottom: 25px; }
+    .sidebar-title { font-size: 0.7rem; color: #8b949e; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; font-weight: bold; }
+    
+    .field-group { margin-bottom: 8px; }
+    .field-name { 
+        display: flex; justify-content: space-between; font-size: 0.75rem; 
+        padding: 6px 8px; color: #e6edf3; cursor: pointer; border-radius: 4px; 
+    }
+    .field-name:hover { background: rgba(255, 255, 255, 0.05); }
+    .field-name.active { color: #58a6ff; font-weight: bold; }
 
+    /* Field Value List (Popup style within sidebar) */
+    .field-values { 
+        display: none; background: #161b22; margin: 4px 0 10px 10px; 
+        border-radius: 4px; padding: 5px; border: 1px solid #30363d;
+    }
+    .value-item { 
+        display: flex; justify-content: space-between; font-size: 0.7rem; 
+        padding: 4px 8px; color: #8b949e; cursor: pointer; border-radius: 3px;
+    }
+    .value-item:hover { background: #21262d; color: #58a6ff; }
+    .val-count { font-family: 'JetBrains Mono'; color: #3fb950; font-size: 0.65rem; }
+
+    /* --- LOG RESULTS --- */
     .siem-results { flex: 1; background: #010409; display: flex; flex-direction: column; overflow: hidden; }
     .results-info { background: #0d1117; padding: 10px 25px; border-bottom: 1px solid #30363d; font-size: 0.75rem; color: #8b949e; display: flex; justify-content: space-between; }
-    
     .table-container { overflow-y: auto; flex: 1; }
     .log-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; table-layout: fixed; }
     .log-table th { background: #161b22; color: #8b949e; text-align: left; padding: 12px; position: sticky; top: 0; border-bottom: 1px solid #30363d; z-index: 10; }
     .log-table td { padding: 10px 12px; border-bottom: 1px solid #21262d; font-family: 'JetBrains Mono', monospace; color: #c9d1d9; vertical-align: top; }
     .log-table tr:hover { background: rgba(88, 166, 255, 0.04); cursor: pointer; }
 
-    /* Popover Info Row */
-    .info-row { background: #0d1117 !important; color: #8b949e; font-size: 0.7rem; display: none; }
-    .info-content { padding: 15px; border-left: 3px solid #58a6ff; }
-
     /* Badges */
     .lvl { font-weight: bold; font-size: 0.65rem; border: 1px solid; border-radius: 3px; padding: 2px 6px; margin-right: 8px; }
-    .lvl-critical { color: #f85149; border-color: rgba(248,81,73,0.4); }
-    .lvl-warn { color: #d29922; border-color: rgba(210,153,34,0.4); }
-    .lvl-info { color: #58a6ff; border-color: rgba(88,166,255,0.4); }
+    .lvl-critical { color: #f85149; border-color: rgba(248, 81, 73, 0.4); }
+    .lvl-warn { color: #d29922; border-color: rgba(210, 153, 34, 0.4); }
+    .lvl-info { color: #58a6ff; border-color: rgba(88, 166, 255, 0.4); }
 
-    /* --- SURROUNDING MODAL --- */
+    /* Surrounding Modal */
     .modal-surround { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(8px); }
-    .modal-content { background: #0d1117; border: 1px solid #30363d; width: 90%; height: 85%; border-radius: 12px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.8); }
+    .modal-content { background: #0d1117; border: 1px solid #30363d; width: 90%; height: 85%; border-radius: 12px; display: flex; flex-direction: column; overflow: hidden; }
     .modal-header { padding: 15px 25px; background: #161b22; border-bottom: 1px solid #30363d; display: flex; justify-content: space-between; align-items: center; }
-    .modal-body { flex: 1; overflow-y: auto; padding: 25px; font-family: 'JetBrains Mono'; font-size: 0.75rem; line-height: 1.8; color: #8b949e; }
-    .active-log { background: rgba(88, 166, 255, 0.08); color: #fff; border-left: 4px solid #58a6ff; padding-left: 15px; }
-
-    /* Modern Close Button (Bottom Right) */
-    .surround-footer { padding: 15px 25px; background: #0d1117; border-top: 1px solid #30363d; display: flex; justify-content: flex-end; }
-    .btn-close-modal { 
-        background: #30363d; color: #fff; border: none; padding: 10px 25px; 
-        border-radius: 4px; font-family: 'JetBrains Mono'; font-weight: bold; cursor: pointer; transition: 0.2s;
-    }
+    .btn-close-modal { background: #30363d; color: #fff; border: none; padding: 8px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; }
     .btn-close-modal:hover { background: #f85149; }
-    .btn-close-modal:active { transform: scale(0.95); }
+
+    .active-log { background: rgba(88, 166, 255, 0.08); color: #fff; border-left: 4px solid #58a6ff; padding-left: 15px; }
+    .hl-id { color: #f85149; font-weight: bold; }
 
     @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    .hl-id { color: #f85149; font-weight: bold; }
 </style>
 
 <div id="welcomeModal" class="disclaimer-modal">
@@ -91,16 +97,16 @@ permalink: /logs/
         <div class="disclaimer-header">SENTINELGUARD LOG ANALYTICS v4.2</div>
         <div class="disclaimer-body">
             <div class="lang-section">
-                <h3>[TR] ANALİZ REHBERİ</h3>
-                <p>Loglara tıklayarak teknik detayları görebilir, yan paneldeki alanlara basarak hızlı filtreleme yapabilirsiniz.</p>
+                <h3>[TR] DİNAMİK ANALİZ</h3>
+                <p>Sol taraftaki alanlara (User, Host vb.) tıklayarak veri özetlerini görebilir ve aramanızı otomatik olarak daraltabilirsiniz.</p>
             </div>
             <div class="v-divider"></div>
             <div class="lang-section">
-                <h3>[EN] ANALYSIS GUIDE</h3>
-                <p>Click on logs for insights, use sidebar fields for filtering, and use the 🔍 icon for correlation analysis.</p>
+                <h3>[EN] DYNAMIC ANALYSIS</h3>
+                <p>Click on sidebar fields to reveal value summaries and apply filters to your current search query instantly.</p>
             </div>
         </div>
-        <button class="btn-ack" onclick="closeModal('welcomeModal')">INITIALIZE TERMINAL</button>
+        <button class="btn-ack" onclick="closeModal('welcomeModal')">START INVESTIGATION</button>
     </div>
 </div>
 
@@ -108,29 +114,42 @@ permalink: /logs/
     <div class="siem-header">
         <div class="search-input-group">
             <div class="prompt-label">index=security | search</div>
-            <input type="text" id="searchInput" placeholder="Enter keywords or filter criteria..." onkeyup="filterLogs()">
+            <input type="text" id="searchInput" placeholder="Search by artifacts or use sidebar filters..." onkeyup="handleKeyUp(event)">
             <button class="btn-search" onclick="filterLogs()">SEARCH</button>
         </div>
     </div>
 
     <div class="siem-layout">
-        <div class="siem-sidebar">
-            <h4 class="sidebar-title">Quick Filters</h4>
-            <div class="field-link" onclick="applyFieldFilter('EventID=4625')">EventID=4625 <span class="field-count">Failed</span></div>
-            <div class="field-link" onclick="applyFieldFilter('EventID=4624')">EventID=4624 <span class="field-count">Success</span></div>
-            <div class="field-link" onclick="applyFieldFilter('adm_emir')">User=adm_emir <span class="field-count">Admin</span></div>
-            <div class="field-link" onclick="applyFieldFilter('DENY')">Action=DENY <span class="field-count">Block</span></div>
-            <div class="field-link" onclick="applyFieldFilter('sqlmap')">Agent=sqlmap <span class="field-count">Attack</span></div>
-            
-            <h4 class="sidebar-title" style="margin-top:25px;">Systems</h4>
-            <div class="field-link" onclick="applyFieldFilter('DC-01')">host=DC-01</div>
-            <div class="field-link" onclick="applyFieldFilter('FW-HQ')">host=FW-HQ</div>
+        <div class="siem-sidebar" id="sidebarFields">
+            <div class="sidebar-section">
+                <div class="sidebar-title">Selected Fields</div>
+                <div class="field-group">
+                    <div class="field-name" onclick="toggleField('host')"><span>> host</span><span class="field-count">6</span></div>
+                    <div class="field-values" id="vals-host"></div>
+                </div>
+            </div>
+
+            <div class="sidebar-section">
+                <div class="sidebar-title">Interesting Fields</div>
+                <div class="field-group">
+                    <div class="field-name" onclick="toggleField('User')"><span>> User</span><span class="field-count">8</span></div>
+                    <div class="field-values" id="vals-User"></div>
+                </div>
+                <div class="field-group">
+                    <div class="field-name" onclick="toggleField('EventID')"><span>> EventID</span><span class="field-count">12</span></div>
+                    <div class="field-values" id="vals-EventID"></div>
+                </div>
+                <div class="field-group">
+                    <div class="field-name" onclick="toggleField('Action')"><span>> Action</span><span class="field-count">2</span></div>
+                    <div class="field-values" id="vals-Action"></div>
+                </div>
+            </div>
         </div>
 
         <div class="siem-results">
             <div class="results-info">
-                <span id="resultCount">Syncing telemetry...</span>
-                <span>Forensic View: Active</span>
+                <span id="resultCount">Indexing...</span>
+                <span>Real-time Stream: Active</span>
             </div>
             <div class="table-container">
                 <table class="log-table">
@@ -138,8 +157,8 @@ permalink: /logs/
                         <tr>
                             <th width="40">#</th>
                             <th width="170">_time</th>
-                            <th width="140">host</th>
-                            <th>_raw (Click for Insight)</th>
+                            <th width="120">host</th>
+                            <th>_raw</th>
                         </tr>
                     </thead>
                     <tbody id="logsBody"></tbody>
@@ -152,17 +171,20 @@ permalink: /logs/
 <div id="surroundModal" class="modal-surround">
     <div class="modal-content">
         <div class="modal-header">
-            <span>FORENSIC CONTEXT: Surrounding Events (-5s / +5s)</span>
+            <span style="font-family:'JetBrains Mono'; color:#58a6ff; font-weight:bold;">SURROUNDING EVENTS (-5s / +5s)</span>
+            <button class="btn-close-modal" onclick="closeSurround()">✕</button>
         </div>
-        <div class="modal-body" id="surroundBody"></div>
-        <div class="surround-footer">
-            <button class="btn-close-modal" onclick="closeSurround()">CLOSE SOURCE VIEW</button>
-        </div>
+        <div id="surroundBody" style="flex:1; overflow-y:auto; padding:25px; font-family:'JetBrains Mono'; font-size:0.75rem; line-height:1.8; color:#8b949e;"></div>
     </div>
 </div>
 
 <script>
-    const users = ["adm_emir", "svc_sql", "system", "jdoe", "msmith", "root"];
+    const config = {
+        hosts: ["DC-01", "SQL-SRV-PROD", "FINANCE-PC", "WEB-CLUSTER-01", "MAIL-GATEWAY", "FIREWALL-HQ"],
+        users: ["adm_emir", "svc_sql", "system", "jdoe", "msmith", "root", "apache"],
+        eventIds: ["4624", "4625", "4688", "11", "3", "4720"]
+    };
+    
     let allLogs = [];
 
     function rand(min, max) { return Math.floor(Math.random() * (max - min + 1)) + min; }
@@ -171,52 +193,93 @@ permalink: /logs/
         for(let i=0; i<400; i++) {
             let d = new Date(); d.setSeconds(d.getSeconds() - (i * 20));
             const ip = `${rand(10,192)}.${rand(0,255)}.${rand(0,255)}.${rand(2,254)}`;
-            const rawTemplates = [
-                `EventID=${rand(1000,9000)} SourceIP=${ip} User=${users[rand(0,5)]} Action=Allow`,
-                `SecurityLog: Logon Failure Account=${users[rand(0,5)]} IP=${ip} Reason=BadPassword`,
-                `Firewall: DENY TCP ${ip} -> 10.0.0.5 Port=${rand(80,443)}`,
-                `WebServer: ${ip} - GET /index.html 200`
-            ];
-            allLogs.push({ time: d.toISOString().replace('T', ' ').substring(0, 19), lvl: i % 15 === 0 ? "WARN" : "INFO", host: "HOST-"+rand(1,5), raw: rawTemplates[rand(0,3)], info: "Baseline activity detected. No immediate action required." });
-        }
+            const host = config.hosts[rand(0,5)];
+            const user = config.users[rand(0,6)];
+            const eid = config.eventIds[rand(0,5)];
+            const action = rand(0,1) ? 'Allow' : 'Deny';
 
-        // Evidence Logs
-        const evidence = [
-            { lvl: "CRITICAL", host: "FINANCE-SRV-01", raw: "#SOC-5092 | Malware: Ransomware | Process: tasksche.exe | Encrypting: Budget.xlsx.locky | Target: 10.20.5.100", info: "ALERT: Host-based ransomware pattern detected. Unusually high entropy detected in file write operations." },
-            { lvl: "WARN", host: "DC-01", raw: "#SOC-1022 | Bruteforce Detection | Account: adm_emir | FailureCode: 0xc000006d | SourceIP: 192.168.1.150", info: "SUSPICIOUS: Repeated failed login attempts against a Domain Admin account. Originating from internal workstation." },
-            { lvl: "ERROR", host: "WEB-SRV-PROD", raw: "#SOC-883 | SQLi Injection | src: 172.16.45.10 | payload: 'UNION SELECT' | Agent: sqlmap/1.4.7", info: "EXPLOIT: External IP attempting SQL injection via web application parameters. WAF rules triggered." }
-        ];
-        evidence.forEach(e => {
-            let d = new Date(); d.setMinutes(d.getMinutes() - rand(10, 50));
-            allLogs.push({ time: d.toISOString().replace('T', ' ').substring(0, 19), lvl: e.lvl, host: e.host, raw: e.raw, info: e.info });
-        });
+            const raw = `EventID=${eid} SourceIP=${ip} User=${user} Action=${action} host=${host} Port=${rand(22,65535)}`;
+            allLogs.push({ time: d.toISOString().replace('T', ' ').substring(0, 19), lvl: rand(0,10) > 8 ? "WARN" : "INFO", host: host, raw: raw, user: user, eid: eid, action: action });
+        }
+        
+        // Inject Cases
+        allLogs.push({ time: "2025-12-20 10:15:22", lvl: "CRITICAL", host: "FINANCE-SRV-01", raw: "#SOC-5092 | Malware: Ransomware | Process: tasksche.exe | Encrypting: Budget.xlsx.locky | Target: 10.20.5.100", user: "system", eid: "11", action: "Deny" });
+        allLogs.push({ time: "2025-12-20 11:20:45", lvl: "WARN", host: "DC-01", raw: "#SOC-1022 | Bruteforce Account: adm_emir | FailureCode: 0xc000006d | SourceIP: 192.168.1.150", user: "adm_emir", eid: "4625", action: "Deny" });
         allLogs.sort((a,b) => new Date(b.time) - new Date(a.time));
     }
 
     function render(data) {
-        const body = document.getElementById('logsBody');
-        body.innerHTML = data.map((l, i) => `
-            <tr onclick="toggleInfo(${i})">
-                <td style="color:#8b949e; cursor:pointer;" onclick="event.stopPropagation(); showSurround(${i})">🔍</td>
+        document.getElementById('logsBody').innerHTML = data.map((l, i) => `
+            <tr>
+                <td style="color:#8b949e; cursor:pointer; text-align:center;" onclick="showSurround(${i})">🔍</td>
                 <td style="color:#8b949e">${l.time}</td>
                 <td style="color:#d29922">${l.host}</td>
                 <td><span class="lvl lvl-${l.lvl.toLowerCase()}">${l.lvl}</span> ${l.raw.replace(/(#SOC-\d+|tasksche|locky|sqlmap)/gi, '<span class="hl-id">$1</span>')}</td>
             </tr>
-            <tr id="info-${i}" class="info-row"><td colspan="4"><div class="info-content"><strong>Analyst Insight:</strong> ${l.info}</div></td></tr>
         `).join('');
-        document.getElementById('resultCount').innerText = `${data.length} events indexed`;
+        document.getElementById('resultCount').innerText = `${data.length} events matching query`;
     }
 
-    function toggleInfo(i) {
-        const row = document.getElementById(`info-${i}`);
-        row.style.display = (row.style.display === 'table-row') ? 'none' : 'table-row';
+    // --- DYNAMIC SIDEBAR LOGIC ---
+    function toggleField(fieldName) {
+        const panel = document.getElementById(`vals-${fieldName}`);
+        const isVisible = panel.style.display === 'block';
+        
+        // Close all first
+        document.querySelectorAll('.field-values').forEach(p => p.style.display = 'none');
+        
+        if (!isVisible) {
+            panel.style.display = 'block';
+            calculateFieldStats(fieldName);
+        }
     }
 
-    function applyFieldFilter(val) {
-        document.getElementById('searchInput').value = val;
+    function calculateFieldStats(fieldName) {
+        const stats = {};
+        const logs = document.getElementById('searchInput').value ? allLogs.filter(l => l.raw.includes(document.getElementById('searchInput').value)) : allLogs;
+        
+        logs.forEach(l => {
+            let val;
+            if(fieldName === 'host') val = l.host;
+            else if(fieldName === 'User') val = l.user;
+            else if(fieldName === 'EventID') val = l.eid;
+            else if(fieldName === 'Action') val = l.action;
+            
+            stats[val] = (stats[val] || 0) + 1;
+        });
+
+        const panel = document.getElementById(`vals-${fieldName}`);
+        panel.innerHTML = Object.entries(stats)
+            .sort((a,b) => b[1] - a[1])
+            .slice(0, 5)
+            .map(([val, count]) => `
+                <div class="value-item" onclick="applyFilter('${fieldName}', '${val}')">
+                    <span>${val}</span>
+                    <span class="val-count">${count}</span>
+                </div>
+            `).join('');
+    }
+
+    function applyFilter(key, val) {
+        const searchInput = document.getElementById('searchInput');
+        searchInput.value = `${key}="${val}"`;
         filterLogs();
     }
 
+    function filterLogs() {
+        const v = document.getElementById('searchInput').value.toLowerCase().replace(/"/g, '').split('=');
+        let filtered;
+        if(v.length === 2) {
+            const key = v[0].trim();
+            const val = v[1].trim();
+            filtered = allLogs.filter(l => (l[key] && l[key].toLowerCase() === val) || l.raw.toLowerCase().includes(val));
+        } else {
+            filtered = allLogs.filter(l => l.raw.toLowerCase().includes(v[0]));
+        }
+        render(filtered);
+    }
+
+    function handleKeyUp(e) { if(e.key === 'Enter') filterLogs(); }
     function showSurround(index) {
         const body = document.getElementById('surroundBody');
         body.innerHTML = "";
@@ -228,12 +291,6 @@ permalink: /logs/
         }
         document.getElementById('surroundModal').style.display = 'flex';
     }
-
-    function filterLogs() {
-        const v = document.getElementById('searchInput').value.toLowerCase();
-        render(allLogs.filter(l => l.raw.toLowerCase().includes(v) || l.host.toLowerCase().includes(v)));
-    }
-
     function closeSurround() { document.getElementById('surroundModal').style.display = 'none'; }
     function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
