@@ -1,8 +1,9 @@
 ---
-layout: page
+layout: post
 title: "GungorLAB: Expert SOC Investigation Suite"
+date: 2025-12-21
 categories: [labs]
-permalink: /labs/documentation/
+tags: [siem, blue-team, labs, log-analysis]
 ---
 
 # GungorLAB: Advanced SOC Investigation & Response Suite
