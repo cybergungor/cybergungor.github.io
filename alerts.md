@@ -14,25 +14,32 @@ permalink: /alerts/
     .disclaimer-header { background: #161b22; color: #58a6ff; padding: 20px; font-family: 'JetBrains Mono'; font-weight: bold; text-align: center; border-bottom: 1px solid #30363d; }
     .disclaimer-body { padding: 30px; display: flex; gap: 30px; line-height: 1.6; }
     .v-divider { width: 1px; background: #30363d; }
-    .lang-section h3 { font-size: 0.8rem; color: #58a6ff; margin-bottom: 12px; font-family: 'JetBrains Mono'; }
+    .lang-section { flex: 1; display: flex; flex-direction: column; gap: 10px; }
+    .lang-section h3 { font-size: 0.8rem; color: #58a6ff; margin-bottom: 5px; font-family: 'JetBrains Mono'; border-bottom: 1px solid #333; padding-bottom: 5px; }
+    .lang-section p { font-size: 0.85rem; color: #8b949e; margin: 0; }
     .btn-ack { width: 100%; padding: 18px; background: #238636; color: #fff; border: none; font-weight: bold; cursor: pointer; font-family: 'JetBrains Mono'; transition: 0.2s; }
 
-    /* --- TOAST & MENTOR --- */
+    /* --- TOAST & MENTOR (DÜZELTİLDİ) --- */
     #toast-container { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); z-index: 11000; display: flex; flex-direction: column; align-items: center; gap: 8px; }
-    #toast { background: #161b22; border: 1px solid #58a6ff; color: #fff; padding: 12px 25px; border-radius: 8px; font-family: 'JetBrains Mono'; font-size: 0.8rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: none; border-left: 4px solid #58a6ff; text-align: center; }
+    #toast { background: #161b22; border: 1px solid #58a6ff; color: #fff; padding: 12px 25px; border-radius: 8px; font-family: 'JetBrains Mono'; font-size: 0.8rem; box-shadow: 0 10px 30px rgba(0,0,0,0.5); display: none; border-left: 4px solid #58a6ff; }
+    .mentor-content-block { display: block; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px; }
     #mentor-btn { background: #f85149; color: #fff; font-size: 0.65rem; padding: 5px 12px; border-radius: 20px; cursor: pointer; display: none; font-weight: bold; border: none; animation: pulse 1.5s infinite; }
 
-    /* --- SIDE PANEL & TABLES --- */
+    /* --- QUEUE & TAB SYSTEM --- */
     .soc-top-bar { background: #0d1117; padding: 15px 25px; border-bottom: 1px solid #30363d; display: flex; justify-content: space-between; align-items: center; }
     .btn-filter { background: #161b22; border: 1px solid #30363d; color: #8b949e; padding: 8px 18px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; transition: 0.2s; }
-    .btn-filter.active { background: #58a6ff; color: #0d1117; font-weight: bold; border-color: #58a6ff; }
+    .btn-filter.active { background: #58a6ff !important; color: #0d1117 !important; font-weight: bold; border-color: #58a6ff; }
+    
     .incident-table { width: 100%; border-collapse: collapse; background: #0d1117; }
     .incident-table th { background: #161b22; text-align: left; padding: 15px; font-size: 0.7rem; color: #8b949e; text-transform: uppercase; }
     .incident-table td { padding: 15px; border-bottom: 1px solid #21262d; font-size: 0.85rem; }
+
+    /* --- SIDE PANEL --- */
     .side-panel { position: fixed; top: 0; right: -650px; width: 550px; height: 100vh; background: #0d1117; border-left: 1px solid #30363d; transition: 0.4s cubic-bezier(0.05, 0.7, 0.1, 1); z-index: 9000; display: flex; flex-direction: column; }
     .panel-active { right: 0; box-shadow: -20px 0 80px rgba(0,0,0,0.8); }
     .card { background: #161b22; border: 1px solid #30363d; border-radius: 8px; padding: 15px; margin-bottom: 20px; }
     .artifact-input { width: 100%; background: #010409; border: 1px solid #30363d; color: #e6edf3; padding: 10px; font-size: 0.85rem; border-radius: 4px; margin-top: 5px; }
+
     .badge { padding: 4px 8px; border-radius: 4px; font-size: 0.7rem; font-weight: bold; }
     .badge-tp { background: rgba(248, 81, 73, 0.1); color: #f85149; border: 1px solid #f85149; }
     .badge-fp { background: rgba(88, 166, 255, 0.1); color: #58a6ff; border: 1px solid #58a6ff; }
@@ -48,12 +55,14 @@ permalink: /alerts/
         <div class="disclaimer-body">
             <div class="lang-section">
                 <h3>[TR] VAKA MÜDAHALE</h3>
-                <p>Alarmları analiz edin, TP/FP kararı verin ve L2 yükseltme süreçlerini yönetin. Yanlış kararlar mentor tarafından denetlenir.</p>
+                <p>Alarmları analiz edin, TP/FP kararı verin ve L2 yükseltme süreçlerini yönetin.</p>
+                <p>Hatalı kararlar mentor sistemi tarafından denetlenmektedir.</p>
             </div>
             <div class="v-divider"></div>
             <div class="lang-section">
                 <h3>[EN] INCIDENT RESPONSE</h3>
-                <p>Analyze alerts, determine verdict, and manage L2 escalation. Wrong decisions are audited by the system mentor.</p>
+                <p>Analyze alerts, determine TP/FP verdicts, and manage L2 escalations.</p>
+                <p>Decisions are audited by the proactive analyst mentor.</p>
             </div>
         </div>
         <button class="btn-ack" onclick="closeModal('welcomeModal')">AUTHORIZE SESSION</button>
@@ -67,8 +76,8 @@ permalink: /alerts/
 
 <div id="mentorModal" class="disclaimer-modal" style="z-index: 12000;">
     <div class="disclaimer-box" style="width: 650px;">
-        <div class="disclaimer-header">ANALYST MENTOR // ROOT CAUSE</div>
-        <div class="disclaimer-body" id="mentorBody" style="color: #8b949e; font-size: 0.9rem;"></div>
+        <div class="disclaimer-header">ANALYST MENTOR // ROOT CAUSE ERROR</div>
+        <div class="disclaimer-body" id="mentorBody" style="color: #8b949e; font-size: 0.9rem; flex-direction: column;"></div>
         <button class="btn-ack" onclick="closeModal('mentorModal')">I UNDERSTAND / ANLADIM</button>
     </div>
 </div>
@@ -79,7 +88,7 @@ permalink: /alerts/
             <button class="btn-filter active" id="tab-open-btn" onclick="switchTab('open')">ACTIVE QUEUE (<span id="count-open">3</span>)</button>
             <button class="btn-filter" id="tab-closed-btn" onclick="switchTab('closed')">CLOSED ARCHIVE (<span id="count-closed">3</span>)</button>
         </div>
-        <div style="font-family:'JetBrains Mono'; font-size:0.7rem; color:#8b949e;">STATUS: <span style="color:#3fb950">AUTHORIZED</span></div>
+        <div style="font-family:'JetBrains Mono'; font-size:0.7rem; color:#8b949e;">SG-TERM-01 // STATUS: <span style="color:#3fb950">AUTHORIZED</span></div>
     </div>
 
     <div class="queue-container" style="flex:1; overflow-y:auto;">
@@ -94,7 +103,7 @@ permalink: /alerts/
 
 <div id="sidePanel" class="side-panel">
     <div class="disclaimer-header" style="display:flex; justify-content:space-between; align-items:center;">
-        <span id="pID">#SOC-0000</span>
+        <span id="pID" style="font-family:'JetBrains Mono'; color:#58a6ff;">#SOC-0000</span>
         <span onclick="closePanel()" style="cursor:pointer; font-size:24px;">×</span>
     </div>
     <div style="padding:25px; flex:1; overflow-y:auto;" id="pBody"></div>
@@ -107,15 +116,15 @@ permalink: /alerts/
         2: { id: "#SOC-1022", title: "Privileged Account Bruteforce", sev: "HIGH", status: "open", verdict: "Pending", q: [{l: "Target Account:", a: "adm_emir"}, {l: "Source IP:", a: "192.168.1.150"}] },
         3: { id: "#SOC-883", title: "SQLi Attempt: Web-Prod", sev: "HIGH", status: "open", verdict: "Pending", q: [{l: "Tool Agent:", a: "sqlmap/1.4.7"}, {l: "Target Schema:", a: "information_schema"}] },
         
-        101: { id: "#SOC-2201", title: "PS Remote Exfiltration", sev: "HIGH", status: "closed", verdict: "True Positive", report: "Confirmed data theft attempt." },
-        102: { id: "#SOC-2188", title: "MFA Push Fatigue", sev: "MEDIUM", status: "closed", verdict: "True Positive", report: "User spammed with MFA requests." },
-        103: { id: "#SOC-2015", title: "Internal Port Scan", sev: "LOW", status: "closed", verdict: "False Positive", report: "Authorized scan confirmed." }
+        101: { id: "#SOC-2201", title: "PS Remote Exfiltration", sev: "HIGH", status: "closed", verdict: "True Positive", report: "[EN] Confirmed data theft via PS. [TR] PowerShell üzerinden veri sızıntısı doğrulandı." },
+        102: { id: "#SOC-2188", title: "MFA Push Fatigue", sev: "MEDIUM", status: "closed", verdict: "True Positive", report: "[EN] Account compromise via MFA spam. [TR] MFA spamı üzerinden hesap ele geçirme." },
+        103: { id: "#SOC-2015", title: "Scheduled Scan", sev: "LOW", status: "closed", verdict: "False Positive", report: "[EN] Verified internal Nessus scan. [TR] Nessus zafiyet taraması doğrulandı." }
     };
 
     const mentorDocs = {
-        art: "<h3>Artifact Mismatch / Kanıt Hatası</h3><p>[EN] Artifacts do not match SIEM logs. [TR] Girdiğiniz kanıtlar SIEM loglarıyla eşleşmiyor.</p>",
-        auth: "<h3>Authority Error / Yetki Hatası</h3><p>[EN] Critical alerts must be escalated to L2. [TR] Kritik alarmlar L2'ye devredilmelidir.</p>",
-        logic: "<h3>Logic Conflict / Mantık Hatası</h3><p>[EN] Malicious patterns cannot be True Positive. [TR] Zararlı örüntülere False Positive denilemez.</p>"
+        art: "<div class='mentor-content-block'><strong>[EN] Artifact Mismatch:</strong> The artifacts provided do not match the SIEM logs. Double check /logs.</div><div class='mentor-content-block'><strong>[TR] Kanıt Hatası:</strong> Girdiğiniz veriler SIEM loglarıyla uyuşmuyor. Lütfen kopyalarken tam eşleştiğinden emin olun.</div>",
+        auth: "<div class='mentor-content-block'><strong>[EN] Authority Error:</strong> Ransomware cases cannot be resolved by L1. Escalation to L2 is mandatory.</div><div class='mentor-content-block'><strong>[TR] Yetki Hatası:</strong> Ransomware vakaları L1 tarafından kapatılamaz. Mutlaka Escalate edilmelidir.</div>",
+        logic: "<div class='mentor-content-block'><strong>[EN] Logic Conflict:</strong> Confirmed malicious patterns cannot be False Positive.</div><div class='mentor-content-block'><strong>[TR] Mantık Hatası:</strong> Doğrulanmış saldırı örüntüleri False Positive olarak işaretlenemez.</div>"
     };
 
     let activeTab = 'open';
@@ -147,6 +156,14 @@ permalink: /alerts/
         updateStats();
     }
 
+    function switchTab(t) {
+        activeTab = t;
+        // SEKME BUTONLARININ SENKRONİZASYONU (FIXED)
+        document.getElementById('tab-open-btn').classList.toggle('active', t === 'open');
+        document.getElementById('tab-closed-btn').classList.toggle('active', t === 'closed');
+        renderTable();
+    }
+
     function openCase(k) {
         const c = cases[k];
         const b = document.getElementById('pBody');
@@ -154,9 +171,9 @@ permalink: /alerts/
         document.getElementById('pID').innerText = c.id;
         if(c.status === 'open') {
             b.innerHTML = `<div class="card"><h4>Verification / Doğrulama</h4>${c.q.map((q,i)=>`<label style="font-size:0.7rem; color:#8b949e;">${q.l}</label><input class="artifact-input" id="ans-${i}">`).join('')}</div><div class="card"><h4>Verdict / Karar</h4><select class="artifact-input" id="vSel"><option value="True Positive">True Positive</option><option value="False Positive">False Positive</option></select></div>`;
-            f.innerHTML = `<button class="btn-footer" style="background:#d29922" onclick="doEsc(${k})">ESCALATE L2</button><button class="btn-footer" style="background:#238636; color:white;" onclick="doRes(${k})">RESOLVE</button>`;
+            f.innerHTML = `<button class="btn-footer" style="background:#d29922; color:#000" onclick="doEsc(${k})">ESCALATE L2</button><button class="btn-footer" style="background:#238636; color:white;" onclick="doRes(${k})">RESOLVE</button>`;
         } else {
-            b.innerHTML = `<div class="card"><h4>Report / Rapor</h4><p>${c.report}</p></div>`;
+            b.innerHTML = `<div class="card"><h4>Report / Rapor</h4><p style="font-size:0.9rem; line-height:1.6;">${c.report}</p><p>Verdict: <span class="badge ${c.verdict==='True Positive'?'badge-tp':(c.verdict==='False Positive'?'badge-fp':'badge-esc')}">${c.verdict}</span></p></div>`;
             f.innerHTML = `<button class="btn-footer" style="background:#30363d; color:white; grid-column:span 2;" onclick="closePanel()">CLOSE</button>`;
         }
         document.getElementById('sidePanel').classList.add('panel-active');
@@ -173,24 +190,24 @@ permalink: /alerts/
     }
 
     function doRes(k) {
-        if(!checkValid(k)) { showToast("ARTIFACT MISMATCH / KANIT HATASI!", "art"); return; }
-        if(k == 1) { showToast("AUTHORITY ERROR / YETKİ HATASI!", "auth"); return; }
+        if(!checkValid(k)) { showToast("ARTIFACT MISMATCH!", "art"); return; }
+        if(k == 1) { showToast("AUTHORITY ERROR!", "auth"); return; }
         const v = document.getElementById('vSel').value;
-        if(v === "False Positive") { showToast("LOGIC ERROR / MANTIK HATASI!", "logic"); return; }
+        if(v === "False Positive") { showToast("LOGIC ERROR!", "logic"); return; }
         cases[k].status = 'closed'; cases[k].verdict = v;
-        cases[k].report = "Resolved / Çözüldü.";
-        showToast("Case Resolved / Vaka Kapatıldı."); renderTable(); closePanel();
+        cases[k].report = "[EN] Incident resolved via playbook. [TR] Vaka standart prosedürle çözüldü.";
+        showToast("Case Resolved."); renderTable(); closePanel();
     }
 
     function doEsc(k) {
-        if(!checkValid(k)) { showToast("ESC FAILED / DOĞRULAMA HATASI!", "art"); return; }
+        if(!checkValid(k)) { showToast("ESC FAILED!", "art"); return; }
         const v = document.getElementById('vSel').value;
-        if(v === "False Positive") { showToast("LOGIC ERROR / MANTIK HATASI!", "logic"); return; }
+        if(v === "False Positive") { showToast("LOGIC ERROR!", "logic"); return; }
         cases[k].status = 'closed'; cases[k].verdict = "Escalated";
-        showToast("Escalated to L2 / L2'ye Aktarıldı."); renderTable(); closePanel();
+        cases[k].report = "[EN] Escalated to L2 for deep review. [TR] Derinlemesine analiz için L2'ye aktarıldı.";
+        showToast("Escalated to L2."); renderTable(); closePanel();
     }
 
-    function switchTab(t) { activeTab = t; renderTable(); }
     function updateStats() { 
         document.getElementById('count-open').innerText = Object.values(cases).filter(c => c.status === 'open').length;
         document.getElementById('count-closed').innerText = Object.values(cases).filter(c => c.status === 'closed').length;
