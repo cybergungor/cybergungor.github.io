@@ -2,7 +2,7 @@
 layout: post
 title: "Building a Pro-Grade SOC Simulation: A Mission to Educate"
 date: 2025-12-20
-categories: [labs]
+categories: [blog]
 tags: [siem, blue-team, incident-response, education]
 ---
 
