@@ -1,6 +1,7 @@
 ---
 layout: page
 title: "GungorLAB: Expert SOC Investigation Suite"
+categories: [labs]
 permalink: /labs/documentation/
 ---
 
