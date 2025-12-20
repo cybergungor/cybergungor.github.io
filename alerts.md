@@ -1,87 +1,102 @@
 ---
 layout: default
-title: SOAR - Interactive Investigation
+title: SOAR - Interactive Incident Response
 permalink: /alerts/
 ---
 
 <style>
     main { max-width: 98% !important; margin: 0 auto !important; }
     .soar-container { padding: 20px; font-family: 'Inter', sans-serif; }
-    .dashboard-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px; }
+    
+    /* Dashboard Header */
+    .dashboard-header { 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        margin-bottom: 30px; 
+        border-bottom: 1px solid var(--border-color); 
+        padding-bottom: 20px; 
+    }
     .score-card { background: var(--card-bg); border: 1px solid var(--border-color); padding: 15px 25px; border-radius: 8px; text-align: center; }
-    .score-number { font-size: 2rem; font-weight: bold; color: var(--success); display: block; }
+    .score-number { font-size: 2rem; font-weight: bold; color: var(--success); display: block; font-family: 'JetBrains Mono', monospace; }
     
-    .soar-table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 8px; overflow: hidden; }
-    .soar-table th { background: #1c2128; padding: 15px; text-align: left; color: var(--text-muted); font-size: 0.8rem; text-transform: uppercase; }
-    .soar-table td { padding: 15px; border-bottom: 1px solid var(--border-color); }
-    .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; }
-    .status-new { background: rgba(255, 95, 86, 0.2); color: #ff5f56; }
-    .status-solved { background: rgba(63, 185, 80, 0.2); color: #3fb950; border: 1px solid #3fb950; }
+    /* Table Styling */
+    .soar-table { width: 100%; border-collapse: collapse; background: var(--card-bg); border-radius: 8px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.3); }
+    .soar-table th { background: #1c2128; padding: 15px; text-align: left; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+    .soar-table td { padding: 15px; border-bottom: 1px solid var(--border-color); font-size: 0.9rem; }
+    
+    /* Badges */
+    .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; }
+    .status-open { background: rgba(255, 95, 86, 0.1); color: #ff5f56; border: 1px solid rgba(255, 95, 86, 0.3); }
+    .status-solved { background: rgba(63, 185, 80, 0.1); color: #3fb950; border: 1px solid #3fb950; }
+    .mitre-tag { font-family: 'JetBrains Mono', monospace; font-size: 0.7rem; color: var(--accent); background: rgba(88, 166, 255, 0.1); padding: 2px 6px; border-radius: 4px; }
 
-    /* Modal Stilleri */
-    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); display: none; justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(5px); }
-    .modal-content { background: #0d1117; border: 1px solid var(--accent); width: 90%; max-width: 600px; border-radius: 12px; padding: 30px; position: relative; }
-    .modal-header h2 { margin-top: 0; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
-    .close-btn { position: absolute; top: 20px; right: 20px; color: var(--text-muted); cursor: pointer; font-size: 1.5rem; }
+    /* Modal Styling */
+    .modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: none; justify-content: center; align-items: center; z-index: 9999; backdrop-filter: blur(8px); }
+    .modal-content { background: #0d1117; border: 1px solid var(--accent); width: 95%; max-width: 650px; border-radius: 12px; padding: 35px; position: relative; box-shadow: 0 0 40px rgba(88, 166, 255, 0.2); }
+    .modal-header h2 { margin-top: 0; color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 1.2rem; }
+    .close-btn { position: absolute; top: 20px; right: 20px; color: var(--text-muted); cursor: pointer; font-size: 1.8rem; transition: 0.3s; }
+    .close-btn:hover { color: #fff; }
     
-    .instruction { background: rgba(88, 166, 255, 0.1); border-left: 4px solid var(--accent); padding: 15px; margin: 20px 0; font-size: 0.9rem; }
-    .question-box { margin-bottom: 20px; }
-    .question-box label { display: block; margin-bottom: 8px; font-weight: bold; font-size: 0.85rem; color: var(--text-main); }
-    .ans-input { width: 100%; background: #161b22; border: 1px solid #30363d; color: white; padding: 12px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; }
-    .ans-input:focus { border-color: var(--accent); outline: none; }
+    .playbook-instruction { background: rgba(88, 166, 255, 0.05); border-left: 4px solid var(--accent); padding: 15px; margin: 20px 0; font-size: 0.85rem; color: var(--text-main); line-height: 1.6; }
+    .question-box { margin-bottom: 25px; }
+    .question-box label { display: block; margin-bottom: 10px; font-weight: 600; font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; }
+    .ans-input { width: 100%; background: #161b22; border: 1px solid #30363d; color: white; padding: 12px; border-radius: 6px; font-family: 'JetBrains Mono', monospace; transition: 0.3s; }
+    .ans-input:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 10px rgba(88, 166, 255, 0.1); }
     
-    .btn-submit { width: 100%; padding: 12px; background: var(--accent); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-    .btn-submit:hover { opacity: 0.8; transform: translateY(-2px); }
+    .btn-submit { width: 100%; padding: 14px; background: var(--accent); color: white; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-family: 'JetBrains Mono', monospace; letter-spacing: 1px; }
+    .btn-submit:hover { filter: brightness(1.2); transform: translateY(-2px); }
     
-    .success-msg { color: var(--success); text-align: center; margin-top: 15px; display: none; font-weight: bold; }
-    .error-msg { color: #ff5f56; text-align: center; margin-top: 15px; display: none; font-size: 0.85rem; }
+    .msg-feedback { text-align: center; margin-top: 20px; font-weight: bold; display: none; font-size: 0.9rem; padding: 10px; border-radius: 4px; }
+    .success { color: var(--success); background: rgba(63, 185, 80, 0.1); border: 1px solid var(--success); }
+    .error { color: var(--danger); background: rgba(255, 95, 86, 0.1); border: 1px solid var(--danger); }
 
-    .case-resolved-row { opacity: 0.6; background: rgba(63, 185, 80, 0.05) !important; }
+    .case-resolved-row { opacity: 0.5; filter: grayscale(0.5); pointer-events: none; }
 </style>
 
 <div class="soar-container">
     <div class="dashboard-header">
         <div>
-            <h1>Security Operations Center <span class="status-badge status-new" style="margin-left: 10px;">LIVE RESPONSE</span></h1>
-            <p style="color: var(--text-muted);">Mevcut alarmları analiz edin ve Playbook adımlarını tamamlayın.</p>
+            <h1>Security Operations Center <span class="status-badge status-open" style="margin-left: 10px; animation: pulse 2s infinite;">Operational</span></h1>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">Investigate active security threats and execute incident playbooks.</p>
         </div>
         <div class="score-card">
             <span class="score-number" id="globalScore">0 / 3</span>
-            <span style="font-size: 0.7rem; color: var(--text-muted);">VAKA ÇÖZÜLDÜ</span>
+            <span style="font-size: 0.65rem; color: var(--text-muted); font-weight: bold; letter-spacing: 1px;">CASES RESOLVED</span>
         </div>
     </div>
 
     <table class="soar-table">
         <thead>
             <tr>
-                <th>Vaka ID</th>
-                <th>Olay Adı</th>
-                <th>Kritiklik</th>
-                <th>Durum</th>
-                <th>İnceleme</th>
+                <th>Case ID</th>
+                <th>Incident Taxonomy</th>
+                <th>Severity</th>
+                <th>Status</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody id="caseTableBody">
             <tr id="row-1">
                 <td class="mono">#SOC-5092</td>
-                <td><strong>Ransomware Execution Attempt</strong></td>
+                <td><strong>Host-Based Ransomware Activity</strong> <span class="mitre-tag">T1486</span></td>
                 <td><span class="badge critical">CRITICAL</span></td>
-                <td><span id="stat-1" class="status-badge status-new">AÇIK</span></td>
-                <td><button class="btn-view" onclick="openPlaybook(1)">PLAYBOOK'U AÇ</button></td>
+                <td><span id="stat-1" class="status-badge status-open">Open</span></td>
+                <td><button class="btn-view" onclick="openPlaybook(1)">EXECUTE PLAYBOOK</button></td>
             </tr>
             <tr id="row-2">
                 <td class="mono">#SOC-1022</td>
-                <td><strong>Brute Force Attack - Domain Admin</strong></td>
+                <td><strong>Domain Admin Brute Force</strong> <span class="mitre-tag">T1110</span></td>
                 <td><span class="badge high">HIGH</span></td>
-                <td><span id="stat-2" class="status-badge status-new">AÇIK</span></td>
-                <td><button class="btn-view" onclick="openPlaybook(2)">PLAYBOOK'U AÇ</button></td>
+                <td><span id="stat-2" class="status-badge status-open">Open</span></td>
+                <td><button class="btn-view" onclick="openPlaybook(2)">EXECUTE PLAYBOOK</button></td>
             </tr>
             <tr id="row-3">
                 <td class="mono">#SOC-883</td>
-                <td><strong>SQL Injection Detected (Web)</strong></td>
+                <td><strong>Blind SQL Injection Attempt</strong> <span class="mitre-tag">T1190</span></td>
                 <td><span class="badge high">HIGH</span></td>
-                <td><span id="stat-3" class="status-badge status-new">AÇIK</span></td>
-                <td><button class="btn-view" onclick="openPlaybook(3)">PLAYBOOK'U AÇ</button></td>
+                <td><span id="stat-3" class="status-badge status-open">Open</span></td>
+                <td><button class="btn-view" onclick="openPlaybook(3)">EXECUTE PLAYBOOK</button></td>
             </tr>
         </tbody>
     </table>
@@ -91,46 +106,49 @@ permalink: /alerts/
     <div class="modal-content">
         <span class="close-btn" onclick="closeModal()">&times;</span>
         <div class="modal-header">
-            <h2 id="modalTitle">VAKA ANALİZİ</h2>
+            <h2 id="modalTitle">INCIDENT INVESTIGATION</h2>
         </div>
         
-        <div class="instruction">
-            <strong>Nasıl Çözülür?</strong><br>
-            <a href="/logs/" target="_blank" style="color: var(--accent); font-weight: bold;">Log Search</a> sayfasını açın. Bu vakayla ilgili (ID, Host veya Olay Adı) araması yapın. Logların içindeki gizli bilgileri bulup buraya yazın.
+        <div class="playbook-instruction">
+            <strong>Investigation Steps:</strong><br>
+            Navigate to the <a href="/logs/" target="_blank" style="color: var(--accent); text-decoration: underline;">Log Search</a> dashboard. Filter logs using the Case ID or relevant Hostnames. Identify forensic artifacts to validate the findings.
         </div>
 
         <div id="questionsArea"></div>
         
-        <div id="errorMsg" class="error-msg">❌ Yanıtlar hatalı! Lütfen logları daha dikkatli inceleyin.</div>
-        <div id="successMsg" class="success-msg">✔️ Başarılı! Tehdit bertaraf edildi ve vaka kapatıldı.</div>
+        <div id="feedbackMsg" class="msg-feedback"></div>
         
-        <div style="margin-top: 20px;">
-            <button class="btn-submit" id="submitBtn" onclick="validateAnswers()">ANALİZİ TAMAMLA</button>
+        <div style="margin-top: 25px;">
+            <button class="btn-submit" id="submitBtn" onclick="validateAnswers()">COMPLETE ANALYSIS</button>
         </div>
     </div>
 </div>
 
 <script>
+    // --- INCIDENT SCENARIOS (PROFESSIONAL TELEMETRY) ---
     const cases = {
         1: {
-            title: "Ransomware Analizi (#5092)",
+            title: "Playbook: Ransomware Analysis (T1486)",
             questions: [
-                { label: "Saldırıda kullanılan zararlı Process (İşlem) adı nedir?", ans: "tasksche.exe" },
-                { label: "Saldırganın şifrelemeye çalıştığı hedef IP adresi nedir?", ans: "10.20.5.100" }
+                { label: "Identify the file extension appended by the encryption process:", ans: ".locky" },
+                { label: "Detected File Entropy value (e.g., 7.92):", ans: "7.92" },
+                { label: "Target IP Address found in SMB telemetry:", ans: "10.20.5.100" }
             ]
         },
         2: {
-            title: "Brute Force Analizi (#1022)",
+            title: "Playbook: Brute Force Investigation (T1110)",
             questions: [
-                { label: "Saldırıya uğrayan kullanıcı adı (AccountName) nedir?", ans: "adm_emir" },
-                { label: "Saldırganın kaynak (Source) IP adresi nedir?", ans: "192.168.1.150" }
+                { label: "NTLM FailureReason code (e.g., 0xc000...):", ans: "0xc000006d" },
+                { label: "Identify the targeted Domain Admin account:", ans: "adm_emir" },
+                { label: "Windows LogonType detected in Event ID 4625:", ans: "3" }
             ]
         },
         3: {
-            title: "SQL Injection Analizi (#883)",
+            title: "Playbook: SQL Injection Drill-Down (T1190)",
             questions: [
-                { label: "Saldırganın kullandığı aracın (User-Agent) adı nedir?", ans: "sqlmap/1.4.7" },
-                { label: "Saldırıya maruz kalan PHP dosyasının adı nedir?", ans: "products.php" }
+                { label: "Extract the User-Agent string used by the attacker:", ans: "sqlmap/1.4.7" },
+                { label: "Database schema targeted in the UNION SELECT payload:", ans: "information_schema" },
+                { label: "HTTP Response Code returned by the server:", ans: "200" }
             ]
         }
     };
@@ -147,12 +165,11 @@ permalink: /alerts/
         qArea.innerHTML = c.questions.map((q, i) => `
             <div class="question-box">
                 <label>${q.label}</label>
-                <input type="text" class="ans-input" id="ans-${i}" placeholder="Logdan bulduğunuz cevabı yazın...">
+                <input type="text" class="ans-input" id="ans-${i}" placeholder="Enter artifact value from logs...">
             </div>
         `).join('');
 
-        document.getElementById('errorMsg').style.display = 'none';
-        document.getElementById('successMsg').style.display = 'none';
+        document.getElementById('feedbackMsg').style.display = 'none';
         document.getElementById('submitBtn').style.display = 'block';
         document.getElementById('playbookModal').style.display = 'flex';
     }
@@ -171,15 +188,16 @@ permalink: /alerts/
             }
         });
 
+        const feedback = document.getElementById('feedbackMsg');
         if (allCorrect) {
-            document.getElementById('successMsg').style.display = 'block';
-            document.getElementById('errorMsg').style.display = 'none';
+            feedback.innerText = "VERIFIED: Threat mitigated and evidence validated. Closing case...";
+            feedback.className = "msg-feedback success";
+            feedback.style.display = 'block';
             document.getElementById('submitBtn').style.display = 'none';
             
-            // Satırı Güncelle
             setTimeout(() => {
                 document.getElementById(`row-${activeCaseId}`).classList.add('case-resolved-row');
-                document.getElementById(`stat-${activeCaseId}`).innerText = "ÇÖZÜLDÜ";
+                document.getElementById(`stat-${activeCaseId}`).innerText = "Resolved";
                 document.getElementById(`stat-${activeCaseId}`).className = "status-badge status-solved";
                 if(!cases[activeCaseId].alreadySolved) {
                     solvedCount++;
@@ -187,9 +205,11 @@ permalink: /alerts/
                 }
                 document.getElementById('globalScore').innerText = `${solvedCount} / 3`;
                 closeModal();
-            }, 1500);
+            }, 2000);
         } else {
-            document.getElementById('errorMsg').style.display = 'block';
+            feedback.innerText = "VALIDATION FAILED: Inconsistent forensic data. Re-examine logs.";
+            feedback.className = "msg-feedback error";
+            feedback.style.display = 'block';
         }
     }
 
