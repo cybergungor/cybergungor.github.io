@@ -1,6 +1,6 @@
 ---
 layout: default
-title: SentinelGuard - Log Analytics
+title: SentinelGuard - Log Analytics & Forensics
 permalink: /logs/
 ---
 
@@ -9,17 +9,11 @@ permalink: /logs/
     main { max-width: 100% !important; margin: 0 !important; padding: 0 !important; background: #010409; }
     header, .navbar { max-width: 100% !important; border-bottom: 1px solid #30363d; }
 
-    .siem-shell {
-        font-family: 'Inter', -apple-system, sans-serif;
-        color: #e6edf3;
-        display: flex;
-        flex-direction: column;
-        height: calc(100vh - 60px);
-    }
+    .siem-shell { font-family: 'Inter', sans-serif; color: #e6edf3; display: flex; flex-direction: column; height: calc(100vh - 60px); }
 
-    /* --- BILGILENDIRME MODALI (DISCLAIMER) --- */
+    /* --- INITIAL DISCLAIMER MODAL --- */
     .disclaimer-modal {
-        position: fixed; top:0; left:0; width:100%; height:100%;
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         background: rgba(1, 4, 9, 0.98); z-index: 10000;
         display: flex; align-items: center; justify-content: center;
         backdrop-filter: blur(12px);
@@ -43,37 +37,42 @@ permalink: /logs/
         border: none; font-weight: bold; cursor: pointer; font-family: 'JetBrains Mono';
     }
 
-    /* --- SEARCH & HEADER --- */
-    .siem-header { background: #0d1117; padding: 15px 25px; border-bottom: 1px solid #30363d; display: flex; align-items: center; }
-    .search-container { flex: 1; display: flex; background: #161b22; border: 1px solid #30363d; border-radius: 4px; align-items: center; }
-    .terminal-prompt { background: #21262d; color: #58a6ff; padding: 10px 15px; font-family: 'JetBrains Mono'; font-size: 0.8rem; border-right: 1px solid #30363d; white-space: nowrap; }
-    #searchInput { background: transparent; border: none; color: #e6edf3; padding: 10px 15px; width: 100%; font-family: 'JetBrains Mono'; font-size: 0.85rem; }
-    .btn-run { background: #238636; border: none; color: #fff; padding: 0 20px; height: 40px; cursor: pointer; font-weight: bold; }
+    /* --- SEARCH AREA --- */
+    .siem-header { background: #0d1117; padding: 12px 20px; border-bottom: 1px solid #30363d; display: flex; align-items: center; gap: 10px; }
+    .search-box { flex: 1; display: flex; background: #161b22; border: 1px solid #30363d; border-radius: 4px; overflow: hidden; }
+    .term-prompt { background: #21262d; color: #58a6ff; padding: 8px 12px; font-family: 'JetBrains Mono'; font-size: 0.75rem; border-right: 1px solid #30363d; }
+    #searchInput { background: transparent; border: none; color: #e6edf3; padding: 8px 12px; width: 100%; font-family: 'JetBrains Mono'; font-size: 0.8rem; outline: none; }
+    .btn-run { background: #238636; border: none; color: #fff; padding: 0 15px; cursor: pointer; font-weight: bold; font-size: 0.75rem; }
 
-    /* --- LAYOUT --- */
-    .timeline-strip { background: #0d1117; height: 40px; border-bottom: 1px solid #30363d; display: flex; align-items: flex-end; padding: 0 25px; gap: 2px; }
+    /* --- TABLE DESIGN --- */
     .siem-main { display: flex; flex: 1; overflow: hidden; }
-    .siem-aside { width: 260px; background: #0d1117; border-right: 1px solid #30363d; padding: 20px; }
-    .aside-section h3 { font-size: 0.7rem; color: #8b949e; text-transform: uppercase; margin-bottom: 15px; border-bottom: 1px solid #21262d; }
-    .field-item { display: flex; justify-content: space-between; font-size: 0.75rem; padding: 6px 0; color: #58a6ff; cursor: pointer; }
+    .siem-content { flex: 1; background: #010409; display: flex; flex-direction: column; }
+    .table-scroll { overflow-y: auto; flex: 1; }
     
-    .siem-content { flex: 1; background: #010409; display: flex; flex-direction: column; overflow: hidden; }
-    .results-toolbar { background: #0d1117; padding: 10px 25px; border-bottom: 1px solid #30363d; font-size: 0.75rem; color: #8b949e; display: flex; justify-content: space-between; }
-    .table-wrapper { overflow-y: auto; flex: 1; }
-    .log-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
-    .log-table th { background: #161b22; color: #8b949e; padding: 10px 15px; text-align: left; position: sticky; top: 0; border-bottom: 1px solid #30363d; }
-    .log-table td { padding: 10px 15px; border-bottom: 1px solid #21262d; font-family: 'JetBrains Mono'; color: #c9d1d9; }
-    .log-table tr:hover { background: rgba(88, 166, 255, 0.05); cursor: pointer; }
+    .log-table { width: 100%; border-collapse: collapse; font-size: 0.75rem; table-layout: fixed; }
+    .log-table th { background: #161b22; color: #8b949e; text-align: left; padding: 10px; position: sticky; top: 0; border-bottom: 1px solid #30363d; z-index: 10; }
+    .log-table td { padding: 8px 10px; border-bottom: 1px solid #21262d; vertical-align: top; font-family: 'JetBrains Mono', monospace; word-wrap: break-word; }
+    .log-table tr:hover { background: rgba(88, 166, 255, 0.03); }
 
-    .lvl { font-weight: bold; font-size: 0.65rem; border-radius: 2px; padding: 2px 5px; }
-    .lvl-critical { color: #f85149; border: 1px solid rgba(248, 81, 73, 0.4); }
-    .lvl-warn { color: #d29922; border: 1px solid rgba(210, 153, 34, 0.4); }
-    .lvl-info { color: #58a6ff; border: 1px solid rgba(88, 166, 255, 0.4); }
-    .highlight-red { color: #f85149; font-weight: bold; }
+    /* Action Icons */
+    .btn-drill { color: #8b949e; cursor: pointer; margin-right: 10px; transition: 0.2s; }
+    .btn-drill:hover { color: #58a6ff; }
 
-    /* Inspector Modal */
-    .inspector-modal { position: fixed; top:0; left:0; width:100%; height:100%; background: rgba(1, 4, 9, 0.85); z-index: 9000; display: none; align-items: center; justify-content: center; }
-    .inspector-content { background: #0d1117; border: 1px solid #58a6ff; width: 800px; border-radius: 8px; padding: 30px; box-shadow: 0 0 40px rgba(88, 166, 255, 0.2); }
+    /* Status Badges */
+    .lvl { font-weight: bold; padding: 1px 4px; border-radius: 2px; font-size: 0.6rem; border: 1px solid transparent; }
+    .lvl-critical { color: #f85149; border-color: rgba(248,81,73,0.3); background: rgba(248,81,73,0.05); }
+    .lvl-warn { color: #d29922; border-color: rgba(210,153,34,0.3); background: rgba(210,153,34,0.05); }
+    .lvl-info { color: #58a6ff; border-color: rgba(88,166,255,0.3); background: rgba(88,166,255,0.05); }
+
+    /* --- SPLUNK-STYLE MODAL (SURROUNDING EVENTS) --- */
+    .surround-modal { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(1,4,9,0.9); z-index: 9999; display: none; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
+    .surround-content { background: #0d1117; border: 1px solid #30363d; width: 90%; height: 80%; border-radius: 8px; display: flex; flex-direction: column; box-shadow: 0 20px 60px rgba(0,0,0,0.7); }
+    .surround-header { padding: 15px 20px; background: #161b22; border-bottom: 1px solid #30363d; display: flex; justify-content: space-between; }
+    .surround-body { flex: 1; overflow-y: auto; padding: 20px; font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: #8b949e; line-height: 1.6; }
+    .event-focus { background: rgba(88, 166, 255, 0.1); color: #e6edf3; border-left: 3px solid #58a6ff; padding-left: 10px; margin: 10px 0; }
+    
+    .hl-red { color: #f85149; font-weight: bold; }
+    .hl-blue { color: #58a6ff; }
 </style>
 
 <div id="welcomeModal" class="disclaimer-modal">
@@ -100,43 +99,24 @@ permalink: /logs/
 
 <div class="siem-shell">
     <div class="siem-header">
-        <div class="search-container">
-            <div class="terminal-prompt">index=main | search</div>
-            <input type="text" id="searchInput" placeholder="Search by Case ID (#SOC-5092), IP, or process..." onkeyup="filterLogs()">
-            <button class="btn-run" onclick="filterLogs()">RUN QUERY</button>
+        <div class="search-box">
+            <div class="term-prompt">index=security | search</div>
+            <input type="text" id="searchInput" placeholder="Search by CaseID (#SOC-5092), IP, or Hash..." onkeyup="filterLogs()">
+            <button class="btn-run" onclick="filterLogs()">SEARCH</button>
         </div>
     </div>
 
-    <div class="timeline-strip" id="timeline"></div>
-
     <div class="siem-main">
-        <div class="siem-aside">
-            <div class="aside-section">
-                <h3>Selected Fields</h3>
-                <div class="field-item">host <span class="field-count">10</span></div>
-                <div class="field-item">source_ip <span class="field-count">142</span></div>
-            </div>
-            <div class="aside-section" style="margin-top: 30px;">
-                <h3>Interesting Fields</h3>
-                <div class="field-item">event_code <span class="field-count">4688</span></div>
-                <div class="field-item">user_account <span class="field-count">8</span></div>
-                <div class="field-item">mitre_id <span class="field-count">3</span></div>
-            </div>
-        </div>
-
         <div class="siem-content">
-            <div class="results-toolbar">
-                <span id="resultCount">Querying...</span>
-                <span>Real-time Forensic Stream</span>
-            </div>
-            <div class="table-wrapper">
+            <div class="table-scroll">
                 <table class="log-table">
                     <thead>
                         <tr>
-                            <th width="180">Timestamp</th>
-                            <th width="80">Level</th>
-                            <th width="140">Host</th>
-                            <th>Raw Telemetry Stream</th>
+                            <th width="40"></th>
+                            <th width="160">_time</th>
+                            <th width="80">severity</th>
+                            <th width="140">host</th>
+                            <th>_raw (Event Data)</th>
                         </tr>
                     </thead>
                     <tbody id="logsBody"></tbody>
@@ -146,66 +126,77 @@ permalink: /logs/
     </div>
 </div>
 
-<div id="inspectorModal" class="inspector-modal">
-    <div class="inspector-content">
-        <h2 style="color:#58a6ff; font-family:'JetBrains Mono'; font-size:1rem; margin:0;">EVENT INSPECTOR</h2>
-        <hr style="border:0; border-top:1px solid #30363d; margin:20px 0;">
-        <div id="insBody" style="font-family:'JetBrains Mono'; font-size:0.85rem; color:#c9d1d9; line-height:1.6;"></div>
-        <button class="btn-ack" style="margin-top:30px;" onclick="closeModal('inspectorModal')">CLOSE INSPECTOR</button>
+<div id="surroundModal" class="surround-modal">
+    <div class="surround-content">
+        <div class="surround-header">
+            <div style="font-size: 0.8rem; font-weight: bold; color: #58a6ff;">SOURCE VIEW: Surrounding Events (-5s / +5s)</div>
+            <span style="cursor:pointer" onclick="closeSurround()">✕</span>
+        </div>
+        <div class="surround-body" id="surroundBody"></div>
+        <div style="padding: 15px; border-top: 1px solid #30363d; text-align: right;">
+            <button class="btn-run" style="background:#30363d" onclick="closeSurround()">CLOSE</button>
+        </div>
     </div>
 </div>
 
 <script>
-    const hosts = ["FINANCE-SRV-01", "DC-01", "WEB-SRV-PROD", "FILE-SRV-02", "FW-PERIMETER"];
-    const levels = ["INFO", "INFO", "WARN", "ERROR"];
+    const hosts = ["DC-01", "FINANCE-SRV-01", "WEB-SRV-PROD", "FW-PERIMETER", "MAIL-GATEWAY"];
+    const users = ["adm_emir", "svc_sql", "system", "jdoe", "anonymous"];
     
-    let logs = [
-        { time: "2025-12-20 10:15:22", level: "CRITICAL", host: "FINANCE-SRV-01", msg: "#SOC-5092 | SysmonID=11 | Image=tasksche.exe | Target=D:\\Data\\Budget.xlsx.locky | Entropy=7.92 | TargetIP=10.20.5.100" },
-        { time: "2025-12-20 11:20:45", level: "WARN", host: "DC-01", msg: "#SOC-1022 | WinEventID=4625 | Account=adm_emir | Reason=0xc000006d | SourceIP=192.168.1.150 | Type=3" },
-        { time: "2025-12-20 09:05:12", level: "ERROR", host: "WEB-SRV-PROD", msg: "#SOC-883 | ApacheLog | src=172.16.45.10 | payload='products.php?id=1 UNION SELECT' | agent=sqlmap/1.4.7" }
+    let mainLogs = [
+        { time: "2025-12-20 10:15:22", lvl: "CRITICAL", host: "FINANCE-SRV-01", raw: "#SOC-5092 | EventID=11 | Image=tasksche.exe | Target=D:\\Data\\Budget.xlsx.locky | Entropy=7.92 | DestIP=10.20.5.100 | User=svc_backup" },
+        { time: "2025-12-20 11:20:45", lvl: "WARN", host: "DC-01", raw: "#SOC-1022 | EventID=4625 | Status=0xc000006d | SubStatus=0xc0000064 | Account=adm_emir | SourceIP=192.168.1.150 | Type=3" },
+        { time: "2025-12-20 09:05:12", lvl: "ERROR", host: "WEB-SRV-PROD", raw: "#SOC-883 | src=172.16.45.10 | uri='/products.php?id=1' | payload='UNION SELECT table_name' | agent='sqlmap/1.4.7' | code=200" }
     ];
 
     function generate() {
-        for(let i=0; i<250; i++) {
-            let d = new Date(); d.setSeconds(d.getSeconds() - (i * 20));
-            logs.push({
+        for(let i=0; i<300; i++) {
+            let d = new Date(); d.setSeconds(d.getSeconds() - (i * 15));
+            mainLogs.push({
                 time: d.toISOString().replace('T', ' ').substring(0, 19),
-                level: levels[Math.floor(Math.random()*levels.length)],
+                lvl: i % 15 === 0 ? "WARN" : "INFO",
                 host: hosts[Math.floor(Math.random()*hosts.length)],
-                msg: `EventID=${Math.floor(Math.random()*9000)} SourceIP=192.168.1.${Math.floor(Math.random()*255)} Action=Allow User=svc_system`
+                raw: `EventID=${Math.floor(Math.random()*8999)+1000} SourceIP=192.168.1.${Math.floor(Math.random()*253)+2} User=${users[Math.floor(Math.random()*users.length)]} Action=${Math.random()>0.5?'Allowed':'Blocked'} proto=TCP port=${Math.floor(Math.random()*65000)+1024}`
             });
         }
-        logs.sort((a,b) => new Date(b.time) - new Date(a.time));
+        mainLogs.sort((a,b) => new Date(b.time) - new Date(a.time));
     }
 
     function render(data) {
         document.getElementById('logsBody').innerHTML = data.map((l, i) => `
-            <tr onclick="inspect(${i})">
+            <tr>
+                <td><span class="btn-drill" onclick="showSurround(${i})">🔍</span></td>
                 <td style="color:#8b949e">${l.time}</td>
-                <td><span class="lvl lvl-${l.level.toLowerCase()}">${l.level}</span></td>
+                <td><span class="lvl lvl-${l.lvl.toLowerCase()}">${l.lvl}</span></td>
                 <td style="color:#d29922">${l.host}</td>
-                <td style="color:#8b949e">${l.msg.replace(/(#SOC-\d+|sqlmap|tasksche|locky)/gi, '<span class="highlight-red">$1</span>')}</td>
+                <td style="color:#c9d1d9">${l.raw.replace(/(#SOC-\d+|tasksche|locky|sqlmap|0xc000006d)/gi, '<span class="hl-red">$1</span>')}</td>
             </tr>
         `).join('');
-        document.getElementById('resultCount').innerText = `${data.length} events indexed`;
     }
 
+    function showSurround(index) {
+        const body = document.getElementById('surroundBody');
+        body.innerHTML = "";
+        const start = Math.max(0, index - 5);
+        const end = Math.min(mainLogs.length - 1, index + 5);
+        for(let i=end; i>=start; i--) {
+            const l = mainLogs[i];
+            body.innerHTML += `<div class="timeline-item ${i === index ? 'event-focus' : ''}">[${l.time}] host=${l.host} lvl=${l.lvl} msg="${l.raw}"</div>`;
+        }
+        document.getElementById('surroundModal').style.display = 'flex';
+    }
+
+    function closeSurround() { document.getElementById('surroundModal').style.display = 'none'; }
+    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+    
     function filterLogs() {
         const v = document.getElementById('searchInput').value.toLowerCase();
-        render(logs.filter(l => l.msg.toLowerCase().includes(v) || l.host.toLowerCase().includes(v)));
+        render(mainLogs.filter(l => l.raw.toLowerCase().includes(v) || l.host.toLowerCase().includes(v)));
     }
-
-    function inspect(i) {
-        const l = logs[i];
-        document.getElementById('insBody').innerHTML = `<strong>TIMESTAMP:</strong> ${l.time}<br><strong>HOST:</strong> ${l.host}<br><br><strong>PAYLOAD:</strong><br><div style="background:#010409; padding:15px; border:1px solid #30363d; color:#3fb950;">${l.msg}</div>`;
-        document.getElementById('inspectorModal').style.display = 'flex';
-    }
-
-    function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
     window.onload = () => {
-        generate(); render(logs);
-        const timeline = document.getElementById('timeline');
-        for(let i=0; i<100; i++) timeline.innerHTML += `<div style="height:${Math.random()*30+5}px; width:4px; background:#238636; opacity:0.6;"></div>`;
+        document.getElementById('welcomeModal').style.display = 'flex';
+        generate();
+        render(mainLogs);
     };
 </script>
