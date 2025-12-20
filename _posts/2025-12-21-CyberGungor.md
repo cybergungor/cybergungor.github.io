@@ -2,6 +2,7 @@
 layout: post
 title: "GungorLAB: Expert SOC Investigation Suite"
 date: 2025-12-21
+permalink: /labs
 categories: [labs]
 tags: [siem, blue-team, labs, log-analysis]
 ---
