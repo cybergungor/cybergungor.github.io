@@ -61,7 +61,7 @@ permalink: /labs/station/
         </div>
         <div id="range-icon" class="hidden" onclick="openWindow('selection-window')" style="text-align:center; cursor:pointer; pointer-events: auto;">
             <img src="https://cdn-icons-png.flaticon.com/512/906/906343.png" width="45">
-            <span style="display:block; font-size:10px; color:#fff; margin-top:5px;">CyberRange.exe</span>
+            <span style="display:block; font-size:10px; color:#fff; margin-top:5px;">CyberGungor.exe</span>
         </div>
     </div>
 
