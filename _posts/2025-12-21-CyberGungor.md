@@ -1,10 +1,10 @@
 ---
 layout: post
-title: "GungorLAB: Expert SOC Investigation Suite"
-date: 2025-12-21
-permalink: /labs
+title: "CyberGungor LAB: Professional SOC Investigation Suite"
+date: 2025-12-20
 categories: [labs]
-tags: [siem, blue-team, labs, log-analysis]
+tags: [documentation, blue-team, gungorlab]
+description: "Professional SOC Investigation & Response Suite"
 ---
 
 # GungorLAB: Advanced SOC Investigation & Response Suite
