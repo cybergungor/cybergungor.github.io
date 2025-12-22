@@ -11,11 +11,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* ===== TACTICAL HUD DEĞİŞKENLERİ ===== */
+    /* --- HUD DEĞİŞKENLERİ --- */
     :root {
       --bg-dark: #08090a;
-      --nav-glass: rgba(8, 9, 10, 0.85);
-      --cyber-cyan: #00f2ff; /* Senin İmza Rengin */
+      --nav-glass: rgba(8, 9, 10, 0.9);
+      --cyber-cyan: #00f2ff;
       --cyber-border: rgba(0, 242, 255, 0.15);
       --success-green: #3fb950;
       --alert-red: #ff5f56;
@@ -32,10 +32,10 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /* --- GÜÇLENDİRİLMİŞ ÜST NAVBAR (TACTICAL HUD) --- */
+    /* --- ÜST NAVBAR (HUD) --- */
     header.tactical-hud {
       background: var(--nav-glass);
-      backdrop-filter: blur(15px); /* Arka plan bulanıklığı */
+      backdrop-filter: blur(15px);
       border-bottom: 1px solid var(--cyber-border);
       position: sticky;
       top: 0;
@@ -52,7 +52,7 @@
       height: 75px;
     }
 
-    /* Sol: Terminal Logo */
+    /* Terminal Logo */
     .logo-container {
       display: flex;
       align-items: center;
@@ -61,22 +61,21 @@
       text-decoration: none;
     }
     .logo-prompt { color: var(--success-green); font-weight: bold; margin-right: 6px; }
-    .logo-text { color: #fff; font-weight: 700; letter-spacing: -0.5px; }
+    .logo-text { color: #fff; font-weight: 700; }
     .logo-cursor { width: 8px; height: 16px; background: var(--cyber-cyan); margin-left: 5px; animation: blink 1s step-end infinite; }
     @keyframes blink { 50% { opacity: 0; } }
 
-    /* Orta: Canlı Sistem Verileri */
+    /* Orta: Sistem Verileri */
     .nav-monitor {
         font-family: 'JetBrains Mono';
         font-size: 10px;
         color: #8b949e;
         display: flex; gap: 20px;
         text-transform: uppercase;
-        letter-spacing: 1px;
     }
-    .monitor-item span { color: var(--cyber-cyan); text-shadow: 0 0 5px var(--cyber-cyan); }
+    .monitor-item span { color: var(--cyber-cyan); }
 
-    /* Sağ: Navigasyon ve Butonlar */
+    /* Sağ: Linkler ve Butonlar */
     .nav-wrapper { display: flex; align-items: center; gap: 2.5rem; }
     .pages-group { display: flex; gap: 1.5rem; }
     .page-link {
@@ -93,7 +92,6 @@
 
     /* Aksiyon Butonları */
     .tools-group { display: flex; gap: 12px; border-left: 1px solid var(--cyber-border); padding-left: 20px; }
-    
     .tactical-btn {
         font-family: 'JetBrains Mono';
         font-size: 10px;
@@ -107,31 +105,29 @@
         border-radius: 4px;
         transition: 0.3s;
     }
-    .tactical-btn:hover { background: var(--cyber-cyan); color: #000; box-shadow: 0 0 20px rgba(0, 242, 255, 0.4); }
+    .tactical-btn:hover { background: var(--cyber-cyan); color: #000; }
     
     .led { width: 6px; height: 6px; border-radius: 50%; }
-    .led-red { background: var(--alert-red); box-shadow: 0 0 10px var(--alert-red); animation: heartbeat 2s infinite; }
-    .led-green { background: var(--success-green); box-shadow: 0 0 10px var(--success-green); }
-    @keyframes heartbeat { 0% { opacity: 1; } 50% { opacity: 0.2; } 100% { opacity: 1; } }
+    .led-red { background: var(--alert-red); animation: pulseRed 2s infinite; }
+    .led-green { background: var(--success-green); }
+    @keyframes pulseRed { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-    /* Navbar Altı Tarama Çizgisi */
-    .nav-scanner-line {
-        position: absolute; bottom: -1px; left: 0;
-        width: 100%; height: 1px;
-        background: linear-gradient(to right, transparent, var(--cyber-cyan), transparent);
-        animation: navScan 5s linear infinite;
-    }
-    @keyframes navScan { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-
-    /* İçerik Alanı */
+    /* İÇERİK ALANI */
     main { max-width: 950px; margin: 3rem auto; padding: 0 1.5rem; flex: 1; }
+
+    /* FOOTER */
+    footer {
+        text-align: center; padding: 4rem 0;
+        color: #8b949e; font-family: 'JetBrains Mono';
+        border-top: 1px solid var(--cyber-border);
+    }
   </style>
 </head>
 
 <body>
 
   {% unless page.hide_nav %}
-  <header class="tactical-header">
+  <header class="tactical-hud">
     <nav class="navbar">
       <a href="/" class="logo-container">
         <span class="logo-prompt">root@portfolio:~$</span>
@@ -139,7 +135,7 @@
         <span class="logo-cursor"></span>
       </a>
 
-      <div class="nav-monitor hide-mobile">
+      <div class="nav-monitor">
           <div class="monitor-item">VPN: <span>ENCRYPTED</span></div>
           <div class="monitor-item">THREAT_LEVEL: <span>LOW</span></div>
       </div>
@@ -161,7 +157,6 @@
           </div>
       </div>
     </nav>
-    <div class="nav-scanner-line"></div>
   </header>
   {% endunless %}
 
@@ -169,11 +164,8 @@
     {{ content }}
   </main>
 
-  <footer style="text-align: center; padding: 4rem 0; color: #8b949e; font-family: 'JetBrains Mono'; border-top: 1px solid var(--cyber-border);">
-      <div style="background: rgba(63, 185, 80, 0.1); display: inline-block; padding: 5px 15px; border-radius: 20px; color: var(--success-green); font-size: 12px; font-weight: bold;">
-          ● SYSTEM: OPERATIONAL
-      </div>
-      <p style="margin-top: 1.5rem">&copy; {{ site.time | date: "%Y" }} Emirhan Gungoroglu — Detecting. Defending. Improving.</p>
+  <footer>
+      <p>&copy; {{ site.time | date: "%Y" }} Emirhan Gungoroglu — Detecting. Defending. Improving.</p>
   </footer>
 
 </body>
