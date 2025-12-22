@@ -1,0 +1,166 @@
+---
+layout: null
+permalink: /admin/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Portal Login | Secure Gateway</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050608; 
+            --surface: #0d1117; 
+            --border: #30363d;
+            --accent: #58a6ff;
+            --text: #c9d1d9;
+            --error: #f85149;
+            --alert-glow: rgba(248, 81, 73, 0.25);
+        }
+
+        body, html { margin: 0; padding: 0; height: 100%; background: var(--bg); font-family: 'Inter', sans-serif; color: var(--text); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+
+        /* Arka Plan Grid Dokusu */
+        body::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 30px 30px; z-index: 1; pointer-events: none;
+        }
+
+        .panel-container {
+            width: 100%; max-width: 420px; background: var(--surface);
+            border: 1px solid var(--border); padding: 45px; border-radius: 4px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.8);
+            position: relative; z-index: 10;
+        }
+
+        /* --- LOGIN PANEL --- */
+        #login-panel .brand { font-family: 'JetBrains Mono'; color: var(--accent); font-size: 0.75rem; margin-bottom: 20px; display: block; letter-spacing: 2px; opacity: 0.8; }
+        #login-panel h1 { font-size: 1.5rem; color: #ffffff; margin-bottom: 8px; font-weight: 600; letter-spacing: -0.5px; }
+        #login-panel p.sub { font-size: 0.85rem; color: #8b949e; margin-bottom: 35px; }
+
+        .input-group { margin-bottom: 25px; }
+        label { display: block; font-size: 0.7rem; margin-bottom: 10px; color: #8b949e; font-weight: 600; text-transform: uppercase; font-family: 'JetBrains Mono'; letter-spacing: 1px; }
+        
+        input {
+            width: 100%; padding: 14px; background: #010409; border: 1px solid var(--border);
+            color: #fff; border-radius: 4px; outline: none; box-sizing: border-box; font-family: 'JetBrains Mono'; transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        input:focus { border-color: var(--accent); background: #0d1117; }
+
+        .btn-login {
+            width: 100%; padding: 14px; background: var(--accent); border: none;
+            color: #050608; font-weight: 700; border-radius: 4px; cursor: pointer;
+            font-size: 0.9rem; transition: 0.2s; font-family: 'JetBrains Mono'; margin-top: 10px;
+        }
+        .btn-login:hover { filter: brightness(1.1); transform: translateY(-1px); }
+
+        /* --- ANALYSIS PANEL (PRO LOOK) --- */
+        #analysis-panel { 
+            display: none; max-width: 850px; border: none; padding: 50px;
+            background: linear-gradient(145deg, #0d1117 0%, #050608 100%);
+            box-shadow: 0 0 40px rgba(0,0,0,0.9), inset 0 0 100px rgba(248, 81, 73, 0.05);
+            border: 1px solid rgba(248, 81, 73, 0.2);
+        }
+
+        /* Köşelerdeki Alert Işıkları */
+        #analysis-panel::after {
+            content: ''; position: absolute; top: 0; right: 0; width: 200px; height: 200px;
+            background: radial-gradient(circle, var(--alert-glow) 0%, transparent 70%);
+            pointer-events: none; z-index: -1;
+        }
+
+        .report-header { border-bottom: 1px solid rgba(248, 81, 73, 0.2); padding-bottom: 25px; margin-bottom: 35px; }
+        .report-header h2 { color: var(--error); font-family: 'JetBrains Mono'; font-size: 1.1rem; margin: 0; font-weight: 700; letter-spacing: 1px; }
+        
+        .log-area { background: #010409; padding: 25px; border-radius: 4px; font-family: 'JetBrains Mono'; font-size: 13px; line-height: 1.8; margin-bottom: 35px; border: 1px solid var(--border); }
+        .log-line { color: #8b949e; margin-bottom: 4px; }
+        .log-line span.time { color: var(--accent); font-weight: 500; }
+        .log-line b { color: var(--error); }
+
+        .deception-info h3 { font-family: 'JetBrains Mono'; font-size: 1rem; color: var(--accent); margin-bottom: 15px; text-transform: uppercase; }
+        .deception-info p { font-size: 0.95rem; color: #c9d1d9; line-height: 1.8; margin: 0; }
+
+        .back-btn {
+            display: inline-block; margin-top: 40px; padding: 12px 30px;
+            border: 1px solid var(--accent); color: var(--accent);
+            text-decoration: none; font-size: 0.8rem; font-family: 'JetBrains Mono';
+            font-weight: 600; border-radius: 4px; transition: 0.3s;
+        }
+        .back-btn:hover { background: var(--accent); color: #050608; }
+    </style>
+</head>
+<body>
+
+    <div id="login-panel" class="panel-container">
+        <span class="brand">SYSTEM_ACCESS_NODE_01</span>
+        <h1>Management Portal</h1>
+        <p class="sub">Identity verification required for secure uplink.</p>
+        
+        <div class="input-group">
+            <label>Uername</label>
+            <input type="text" id="user-input" spellcheck="false">
+        </div>
+        <div class="input-group">
+            <label>Security Key</label>
+            <input type="password" id="pass-input">
+        </div>
+        
+        <button class="btn-login" onclick="startAnalysis()">AUTHENTICATE</button>
+    </div>
+
+    <div id="analysis-panel" class="panel-container">
+        <div class="report-header">
+            <h2>[INCIDENT_REPORT] CRITICAL_PROTOCOL_VIOLATION</h2>
+        </div>
+
+        <div class="log-area" id="log-content"></div>
+
+        <div class="deception-info">
+            <h3>[ANALYSIS] ALDATMA TEKNOLOJİSİ (HONEYPOT)</h3>
+            <p>
+                Bu portal, kurumsal siber güvenlik altyapılarında uygulanan <strong>"Active Defense"</strong> stratejilerinin bir parçasıdır. 
+                Sistemimiz tarafından "Unauthorized Discovery" olarak sınıflandırılan bu deneme, izole edilmiş Honeypot segmentine yönlendirilmiştir.
+                <br><br>
+                Bu çalışma, siber tehdit aktörlerinin davranışlarını analiz etmek amacıyla tasarlanmış profesyonel bir siber güvenlik laboratuvarı deneyidir.
+            </p>
+            <a href="/" class="back-btn">cd /home/root</a>
+        </div>
+    </div>
+
+    <script>
+        function startAnalysis() {
+            const login = document.getElementById('login-panel');
+            const analysis = document.getElementById('analysis-panel');
+            const logContent = document.getElementById('log-content');
+            const user = document.getElementById('user-input').value || "ANONYMOUS";
+
+            login.style.display = 'none';
+            analysis.style.display = 'block';
+
+            const logs = [
+                `> [INFO] Initializing forensic capture for node: ${user}`,
+                `> [WARN] Security key validation failed. Analyzing fingerprint...`,
+                `> [SOC] <b>THREAT DETECTED.</b> Initiating active countermeasure...`,
+                `> [INFO] Metadata correlation complete. Rerouting to quarantine.`,
+                `> [STATUS] Session isolated. Incident logged as #4902-ALPHA.`
+            ];
+
+            let i = 0;
+            function typeLog() {
+                if (i < logs.length) {
+                    const line = document.createElement('div');
+                    line.className = 'log-line';
+                    line.innerHTML = `<span class="time">[${new Date().toLocaleTimeString()}]</span> ${logs[i]}`;
+                    logContent.appendChild(line);
+                    i++;
+                    setTimeout(typeLog, 750);
+                }
+            }
+            typeLog();
+        }
+    </script>
+</body>
+</html>
