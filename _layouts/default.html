@@ -5,13 +5,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>{% if page.title %}{{ page.title }} | {% endif %}Emirhan Gungoroglu</title>
+  <meta name="description" content="Cybersecurity Portfolio. Blue Team operations, SOC workflows, Splunk, and Detection Engineering knowledge base.">
+  <meta name="author" content="Emirhan Gungoroglu">
   
+  <meta property="og:title" content="{% if page.title %}{{ page.title }} | {% endif %}Emirhan Gungoroglu">
+  <meta property="og:description" content="Cybersecurity Portfolio focusing on SOC Operations and Incident Response.">
+  <meta property="og:image" content="https://emirhangungoroglu.github.io/assets/images/CYBER.png">
+  <meta property="og:url" content="https://emirhangungoroglu.github.io{{ page.url }}">
+  <meta property="og:type" content="website">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Emirhan Gungoroglu | Blue Team Analyst">
+  <meta name="twitter:image" content="https://emirhangungoroglu.github.io/assets/images/CYBER.png">
+
+  <link rel="shortcut icon" href="/assets/images/favicon.png" type="image/png">
+  <link rel="icon" href="/assets/images/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/favicon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    /* --- HUD DEĞİŞKENLERİ --- */
     :root {
       --bg-dark: #08090a;
       --nav-glass: rgba(8, 9, 10, 0.9);
@@ -32,13 +47,13 @@
       font-family: 'Inter', sans-serif;
     }
 
-    /* --- ÜST NAVBAR (HUD) --- */
+    /* TACTICAL HUD NAVBAR */
     header.tactical-hud {
       background: var(--nav-glass);
       backdrop-filter: blur(15px);
       border-bottom: 1px solid var(--cyber-border);
-      position: sticky;
-      top: 0;
+      position: fixed;
+      top: 0; width: 100%;
       z-index: 10000;
     }
 
@@ -50,14 +65,12 @@
       align-items: center;
       padding: 0 1.5rem;
       height: 75px;
+      position: relative;
     }
 
-    /* Terminal Logo */
     .logo-container {
-      display: flex;
-      align-items: center;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.9rem;
+      display: flex; align-items: center;
+      font-family: 'JetBrains Mono', monospace; font-size: 0.9rem;
       text-decoration: none;
     }
     .logo-prompt { color: var(--success-green); font-weight: bold; margin-right: 6px; }
@@ -65,61 +78,50 @@
     .logo-cursor { width: 8px; height: 16px; background: var(--cyber-cyan); margin-left: 5px; animation: blink 1s step-end infinite; }
     @keyframes blink { 50% { opacity: 0; } }
 
-    /* Orta: Sistem Verileri */
-    .nav-monitor {
-        font-family: 'JetBrains Mono';
-        font-size: 10px;
-        color: #8b949e;
-        display: flex; gap: 20px;
-        text-transform: uppercase;
-    }
-    .monitor-item span { color: var(--cyber-cyan); }
+    .nav-monitor { font-family: 'JetBrains Mono'; font-size: 10px; color: #8b949e; display: flex; gap: 20px; text-transform: uppercase; }
+    .monitor-item span { color: var(--cyber-cyan); text-shadow: 0 0 5px var(--cyber-cyan); }
 
-    /* Sağ: Linkler ve Butonlar */
     .nav-wrapper { display: flex; align-items: center; gap: 2.5rem; }
     .pages-group { display: flex; gap: 1.5rem; }
     .page-link {
-        text-decoration: none;
-        color: #fff;
-        font-size: 0.8rem;
-        font-weight: 800;
-        text-transform: uppercase;
-        letter-spacing: 1.5px;
-        opacity: 0.6;
-        transition: 0.3s;
+        text-decoration: none; color: #fff; font-size: 0.8rem;
+        font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px;
+        opacity: 0.6; transition: 0.3s;
     }
     .page-link:hover { opacity: 1; color: var(--cyber-cyan); text-shadow: 0 0 10px var(--cyber-cyan); }
 
-    /* Aksiyon Butonları */
     .tools-group { display: flex; gap: 12px; border-left: 1px solid var(--cyber-border); padding-left: 20px; }
     .tactical-btn {
-        font-family: 'JetBrains Mono';
-        font-size: 10px;
-        font-weight: bold;
-        padding: 8px 14px;
-        border: 1px solid var(--cyber-border);
-        background: rgba(0, 242, 255, 0.05);
-        color: #fff;
-        text-decoration: none;
-        display: flex; align-items: center; gap: 8px;
-        border-radius: 4px;
-        transition: 0.3s;
+        font-family: 'JetBrains Mono'; font-size: 10px; font-weight: bold;
+        padding: 8px 14px; border: 1px solid var(--cyber-border);
+        background: rgba(0, 242, 255, 0.05); color: #fff;
+        text-decoration: none; display: flex; align-items: center; gap: 8px;
+        border-radius: 4px; transition: 0.3s;
     }
-    .tactical-btn:hover { background: var(--cyber-cyan); color: #000; }
+    .tactical-btn:hover { background: var(--cyber-cyan); color: #000; box-shadow: 0 0 15px var(--cyber-cyan); }
     
     .led { width: 6px; height: 6px; border-radius: 50%; }
-    .led-red { background: var(--alert-red); animation: pulseRed 2s infinite; }
+    .led-red { background: var(--alert-red); box-shadow: 0 0 10px var(--alert-red); animation: pulseRed 2s infinite; }
     .led-green { background: var(--success-green); }
-    @keyframes pulseRed { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
 
-    /* İÇERİK ALANI */
-    main { max-width: 950px; margin: 3rem auto; padding: 0 1.5rem; flex: 1; }
+    /* LAZER TARAYICI */
+    .nav-laser-scanner {
+        position: absolute; bottom: -1px; left: 0;
+        width: 100%; height: 1.5px;
+        background: linear-gradient(90deg, transparent 0%, rgba(0, 242, 255, 0) 20%, var(--cyber-cyan) 50%, rgba(0, 242, 255, 0) 80%, transparent 100%);
+        box-shadow: 0 0 12px var(--cyber-cyan);
+        z-index: 10001;
+        animation: laserTravel 4s linear infinite;
+        pointer-events: none;
+    }
+    @keyframes laserTravel { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
 
-    /* FOOTER */
-    footer {
-        text-align: center; padding: 4rem 0;
-        color: #8b949e; font-family: 'JetBrains Mono';
-        border-top: 1px solid var(--cyber-border);
+    main { max-width: 950px; margin: 0 auto; padding: 110px 1.5rem 3rem 1.5rem; flex: 1; }
+
+    footer { text-align: center; padding: 4rem 0; border-top: 1px solid var(--cyber-border); color: #8b949e; font-family: 'JetBrains Mono'; }
+
+    @media (max-width: 900px) {
+        .nav-monitor, .tools-group { display: none; }
     }
   </style>
 </head>
@@ -137,7 +139,7 @@
 
       <div class="nav-monitor">
           <div class="monitor-item">VPN: <span>ENCRYPTED</span></div>
-          <div class="monitor-item">THREAT_LEVEL: <span>LOW</span></div>
+          <div class="monitor-item">THREAT: <span>LOW</span></div>
       </div>
 
       <div class="nav-wrapper">
@@ -146,16 +148,12 @@
             <a href="/labs/" class="page-link">Labs</a>
             <a href="/about/" class="page-link">About</a>
           </div>
-
           <div class="tools-group">
-            <a href="/alerts/" class="tactical-btn">
-                <span class="led led-red"></span> LIVE_ALERTS
-            </a>
-            <a href="/logs/" class="tactical-btn">
-                <span class="led led-green"></span> LOG_SEARCH
-            </a>
+            <a href="/alerts/" class="tactical-btn"><span class="led led-red"></span> LIVE_ALERTS</a>
+            <a href="/logs/" class="tactical-btn"><span class="led led-green"></span> LOG_SEARCH</a>
           </div>
       </div>
+      <div class="nav-laser-scanner"></div>
     </nav>
   </header>
   {% endunless %}
