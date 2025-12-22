@@ -3,66 +3,188 @@ layout: default
 title: "Live Global Threat Map"
 permalink: /livemap/
 ---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <style>
+        /* --- TACTICAL UI DESIGN --- */
+        :root {
+            --bg-dark: #050608;
+            --surface: #0d1117;
+            --border: #30363d;
+            --accent-blue: #58a6ff;
+            --accent-green: #3fb950;
+            --text-muted: #8b949e;
+        }
 
-<div class="threat-intelligence-portal" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
-    
-    <div class="ops-header" style="border-bottom: 1px solid #30363d; padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: center;">
-        <div>
-            <h1 style="font-family: 'JetBrains Mono', monospace; color: #ffffff; font-size: 1.5rem; margin: 0;">[CTI_DASHBOARD]</h1>
-            <p style="color: #8b949e; font-size: 0.8rem; margin: 5px 0 0; text-transform: uppercase; letter-spacing: 1px;">Cyberthreat Real-Time Monitoring System</p>
-        </div>
-        <div class="status-indicator" style="display: flex; align-items: center; gap: 10px; font-family: 'JetBrains Mono'; font-size: 0.75rem; color: #3fb950;">
-            <span class="pulse"></span>
-            LIVE FEED: ACTIVE
-        </div>
-    </div>
+        .dashboard-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: 'JetBrains Mono', 'Inter', monospace;
+            background: var(--bg-dark);
+            color: #c9d1d9;
+        }
 
-    <div class="map-container" style="background: #0d1117; border: 1px solid #30363d; border-radius: 4px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); min-height: 650px; position: relative;">
-        
-        <div id="loader" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #58a6ff; font-family: 'JetBrains Mono';">
-            ESTABLISHING SECURE UPLINK...
-        </div>
+        /* Header Section */
+        .ops-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 25px;
+            margin-bottom: 30px;
+        }
 
+        .ops-title h1 {
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .ops-title p {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin: 5px 0 0;
+            text-transform: uppercase;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.7rem;
+            color: var(--accent-green);
+        }
+
+        /* Map Container */
+        .map-frame {
+            background: #000;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            height: 700px;
+            position: relative;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        /* Language & Info Section */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .content-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 25px;
+            border-radius: 4px;
+        }
+
+        .content-box h3 {
+            font-size: 0.9rem;
+            color: var(--accent-blue);
+            margin-top: 0;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .content-box p {
+            font-size: 0.85rem;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Privacy & Ethics Note */
+        .privacy-label {
+            grid-column: span 2;
+            font-size: 0.7rem;
+            color: #484f58;
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+            margin-top: 10px;
+        }
+
+        /* Animation */
+        .pulse-dot {
+            width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-green);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .info-grid { grid-template-columns: 1fr; }
+            .map-frame { height: 500px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="dashboard-wrapper">
+    <header class="ops-header">
+        <div class="ops-title">
+            <h1>[CTI_DASHBOARD_v4.0]</h1>
+            <p>Global Cyberthreat Intelligence Feed</p>
+        </div>
+        <div class="status-badge">
+            <div class="pulse-dot"></div>
+            SYSTEM_UP_LINK: STABLE
+        </div>
+    </header>
+
+    <div class="map-frame">
         <iframe 
-            id="threatMap"
-            width="100%" 
-            height="650" 
-            src="https://cybermap.kaspersky.com/en/widget/dynamic/dark" 
-            frameborder="0"
-            scrolling="no"
-            style="display: block; position: relative; z-index: 2;"
-            onload="document.getElementById('loader').style.display='none';">
+            src="https://threatmap.checkpoint.com/" 
+            title="Cyber Threat Map"
+            loading="lazy">
         </iframe>
     </div>
 
-    <div class="analysis-footer" style="margin-top: 40px; display: grid; grid-template-columns: 2fr 1fr; gap: 30px;">
-        <div class="report-box" style="background: rgba(255,255,255,0.02); border: 1px solid #30363d; padding: 25px;">
-            <h3 style="font-family: 'JetBrains Mono'; color: #58a6ff; font-size: 1rem; margin-top: 0;">[ANALYSIS_NOTE]</h3>
-            <p style="font-size: 0.9rem; color: #8b949e; line-height: 1.6;">
-                Bu terminal, küresel siber tehdit verilerini anlık olarak görselleştirmektedir. İzlenen metrikler arasında IDS (Intrusion Detection), OAS (On-Access Scan) ve Botnet aktiviteleri bulunmaktadır. Bu veriler, tehdit ortamındaki (Threat Landscape) değişimleri anlamlandırmak için kullanılır.
+    <div class="info-grid">
+        <div class="content-box">
+            <h3>[ANALİZ_NOTU]</h3>
+            <p>
+                Bu dashboard, dünya genelindeki siber saldırı trendlerini görselleştirmek için kurulmuştur. 
+                Sektörel bazda yoğunlaşan tehditlerin (Finans, Sağlık, Kamu) anlık değişimlerini izlemek ve 
+                Mavi Takım (Blue Team) stratejilerini bu verilere göre şekillendirmek amacıyla sitemizde yer almaktadır.
             </p>
         </div>
-        
-        <div class="metrics-box" style="background: rgba(255,255,255,0.02); border: 1px solid #30363d; padding: 25px; font-family: 'JetBrains Mono';">
-            <h3 style="color: #f85149; font-size: 0.8rem; margin-top: 0; text-transform: uppercase;">System Metrics</h3>
-            <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.75rem; color: #c9d1d9;">
-                <li style="margin-bottom: 8px;">> UPLINK: <span style="color: #3fb950;">ENCRYPTED</span></li>
-                <li style="margin-bottom: 8px;">> FEED_TYPE: DYNAMIC_JSON</li>
-                <li>> LATENCY: < 150MS</li>
-            </ul>
+
+        <div class="content-box">
+            <h3>[ANALYSIS_NOTE]</h3>
+            <p>
+                This dashboard is established to visualize global cyberattack trends. It is integrated into 
+                this portal to monitor real-time shifts in sector-specific threats and to shape 
+                Blue Team strategies based on live telemetry data.
+            </p>
+        </div>
+
+        <div class="privacy-label">
+            > [ETHICS_STMT]: Bu bir eğitim simülasyonudur. Ziyaretçi IP adresleri veya telemetri verileri kesinlikle kayıt altına alınmamaktadır.
+            <br>
+            > [NOTICE]: If map is not loading, please disable Ad-Blockers or Ghostery extensions.
         </div>
     </div>
 </div>
 
-<style>
-.pulse {
-    width: 10px; height: 10px; background: #3fb950; border-radius: 50%;
-    display: inline-block; box-shadow: 0 0 10px #3fb950;
-    animation: pulse-animation 2s infinite;
-}
-@keyframes pulse-animation {
-    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.7); }
-    70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(63, 185, 80, 0); }
-    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(63, 185, 80, 0); }
-}
-</style>
+</body>
+</html>
