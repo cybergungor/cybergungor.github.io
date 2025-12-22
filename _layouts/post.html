@@ -4,118 +4,112 @@ layout: default
 
 <div class="post-log-bg">
     <div class="log-col"><div class="moving-stream s1">
-        <span>[ACCESS] NODE_READ_SESSION_START</span>
-        <span>[INFO] Decrypting incident_report_{{ page.date | date: "%Y%m%d" }}</span>
-        <span>[STATUS] Rendering Markdown blocks...</span>
-        <span>[ACCESS] NODE_READ_SESSION_START</span>
+        <span>[SYSTEM] Reading log entry...</span>
+        <span>[STATUS] Content rendered in static mode.</span>
     </div></div>
     <div class="log-col hide-mobile"><div class="moving-stream s2">
-        <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x44 0x41 0x54 0x41</span>
-        <span>INTEGRITY_CHECK: PASSED</span>
-        <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x44 0x41 0x54 0x41</span>
+        <span>0x52 0x45 0x50 0x4F 0x52 0x54</span>
+        <span>NO_STICKY_ELEMENTS_DETECTED</span>
     </div></div>
 </div>
 
-<div class="tactical-post-container">
-    <div class="post-inner-wrapper">
-        <header class="post-header-tactical">
-            <div class="header-meta">
-                <span class="report-badge">INCIDENT_REPORT // {{ page.categories | first | upcase }}</span>
-                <span class="report-date">{{ page.date | date: "%d %b %Y" }}</span>
-            </div>
-            <div class="report-command">
-                <span class="user-prompt">root@cyberlab:~/reports$</span> 
-                <span class="command-text">cat {{ page.title | slugify }}.log</span>
-            </div>
-            <h1 class="report-title">{{ page.title }}</h1>
-        </header>
+<div class="post-container-simple">
+    <header class="simple-header">
+        <div class="meta-info">
+            {{ page.date | date: "%d %b %Y" }} // {{ page.categories | first | upcase }}
+        </div>
+        <h1 class="plain-white-title">{{ page.title }}</h1>
+        <div class="terminal-path">root@cyberlab:~/reports/{{ page.title | slugify }}.txt</div>
+    </header>
 
-        <article class="report-body">
-            {{ content }}
-        </article>
+    <article class="report-content">
+        {{ content }}
+    </article>
 
-        <footer class="report-footer">
-            <div class="footer-divider">/* --- END OF LOG FILE --- */</div>
-            <a href="/blog/" class="back-link">&larr; DB_BACK_TO_LIST</a>
-        </footer>
-    </div>
+    <footer class="simple-footer">
+        <a href="/blog/" class="back-link">/ BACK_TO_DATABASE /</a>
+    </footer>
 </div>
 
 <style>
-/* --- CORE INTEGRATION --- */
+/* --- TEMEL RENKLER --- */
 :root {
-    --cyber-bg: #08090a;
-    --cyber-card: rgba(17, 18, 20, 0.98);
-    --cyber-blue: #00f2ff;
-    --cyber-border: rgba(0, 242, 255, 0.15);
+    --bg: #08090a;
+    --accent: #00f2ff;
+    --border: rgba(255, 255, 255, 0.1);
 }
 
-/* Sayfa arka planını zorla siyah yapıyoruz */
-body { background-color: var(--cyber-bg) !important; margin: 0; padding: 0; color: #c9d1d9; }
-
-/* --- 2. ÇAKIŞMA ÇÖZÜMÜ (KRİTİK ALAN) --- */
-.tactical-post-container {
-    display: block !important;
-    position: relative !important;
-    width: 100% !important;
-    /* Navbar yüksekliğini kompanse etmek için devasa boşluk */
-    padding-top: 140px !important; 
-    padding-bottom: 50px !important;
-    box-sizing: border-box !important;
+body { 
+    background-color: var(--bg) !important; 
+    color: #c9d1d9; 
+    margin: 0; 
+    line-height: 1.6;
 }
 
-.post-inner-wrapper {
+/* --- ANA KONTEYNER (Üstten güvenli boşluk) --- */
+.post-container-simple {
     max-width: 850px;
     margin: 0 auto;
-    padding: 0 20px;
+    /* Üstteki navbar'ın altına gelmesi için pay bırakıyoruz */
+    padding: 100px 20px 50px 20px; 
 }
 
-/* --- BAŞLIK ALANI --- */
-.post-header-tactical {
-    margin-bottom: 30px;
-    border-bottom: 1px solid var(--cyber-border);
-    padding-bottom: 20px;
+/* --- BAŞLIK STİLİ (Sade Beyaz) --- */
+.simple-header {
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.5rem;
 }
-.header-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.report-badge { background: rgba(0, 242, 255, 0.1); color: var(--cyber-blue); padding: 5px 12px; border-radius: 4px; font-size: 10px; font-weight: bold; letter-spacing: 1px; }
-.report-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8b949e; }
-.report-command { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; margin-bottom: 15px; }
-.user-prompt { color: #3fb950; }
-.report-title { font-size: 3rem; color: #fff; font-weight: 800; margin: 0; line-height: 1.1; }
 
-/* --- İÇERİK GÖVDESİ --- */
-.report-body {
-    background: var(--cyber-card);
-    border: 1px solid var(--cyber-border);
-    border-radius: 12px;
-    padding: 40px;
+.plain-white-title {
+    color: #ffffff !important; /* Tam beyaz düz yazı */
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800;
+    margin: 10px 0;
+    letter-spacing: -1px;
+}
+
+.meta-info { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8b949e; opacity: 0.7; }
+.terminal-path { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #3fb950; opacity: 0.8; }
+
+/* --- İÇERİK ALANI --- */
+.report-content {
+    background: rgba(17, 18, 20, 0.5); /* Çok hafif şeffaf arka plan */
+    border-radius: 8px;
+    font-size: 1.1rem;
     line-height: 1.8;
-    font-size: 1.05rem;
-    backdrop-filter: blur(10px);
 }
-/* İçerik içi stil düzenleme */
-.report-body h2 { color: #fff; border-left: 3px solid var(--cyber-blue); padding-left: 15px; margin-top: 35px; }
-.report-body pre { background: #0d1117 !important; padding: 20px; border-radius: 8px; border: 1px solid var(--cyber-border); overflow-x: auto; }
-.report-body code { color: var(--cyber-blue); }
 
-/* --- BACKGROUND LOGS --- */
+/* Makale içi temel stiller */
+.report-content h2 { color: #fff; margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
+.report-content p { margin-bottom: 1.5rem; }
+.report-content pre { background: #0d1117 !important; padding: 15px; border-radius: 6px; border: 1px solid var(--border); overflow-x: auto; }
+.report-content code { color: var(--accent); background: rgba(0, 242, 255, 0.05); padding: 2px 5px; border-radius: 3px; }
+
+/* --- ARKA PLAN LOGLARI --- */
 .post-log-bg {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     display: flex; justify-content: space-around; opacity: 0.05;
-    z-index: 0; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    z-index: -1; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px;
 }
-.moving-stream { display: flex; flex-direction: column; animation: scrollLog 40s linear infinite; }
-.moving-stream span { padding: 15px 0; color: var(--cyber-blue); }
+.moving-stream { display: flex; flex-direction: column; animation: scrollLog 50s linear infinite; }
+.moving-stream span { padding: 15px 0; color: var(--accent); }
 @keyframes scrollLog { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
 
 /* --- FOOTER --- */
-.report-footer { margin-top: 40px; text-align: center; }
-.footer-divider { font-family: 'JetBrains Mono'; color: #8b949e; opacity: 0.5; font-size: 0.8rem; margin-bottom: 20px; }
-.back-link { display: inline-block; color: var(--cyber-blue); border: 1px solid var(--cyber-blue); padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 4px; }
+.simple-footer { margin-top: 4rem; text-align: center; }
+.back-link { 
+    color: #8b949e; 
+    text-decoration: none; 
+    font-family: 'JetBrains Mono'; 
+    font-weight: bold; 
+    font-size: 0.9rem;
+    transition: 0.3s;
+}
+.back-link:hover { color: var(--accent); }
 
 @media (max-width: 768px) {
-    .tactical-post-container { padding-top: 100px !important; }
-    .report-title { font-size: 2rem; }
-    .report-body { padding: 20px; }
+    .post-container-simple { padding-top: 80px; }
+    .plain-white-title { font-size: 2.2rem; }
 }
 </style>
