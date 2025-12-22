@@ -1,12 +1,13 @@
 ---
-layout: default
-title: "Cyber Intel Center"
+layout: null
 permalink: /news/
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyber Intelligence Center | News Feed</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -15,106 +16,185 @@ permalink: /news/
             --border: #30363d;
             --accent: #58a6ff;
             --alert: #f85149;
+            --text-main: #c9d1d9;
             --text-muted: #8b949e;
         }
 
-        .news-container {
-            max-width: 1000px;
-            margin: 40px auto;
-            padding: 0 20px;
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--text-main);
             font-family: 'Inter', sans-serif;
-            color: #c9d1d9;
+            min-height: 100vh;
         }
 
-        /* Header Section */
+        /* Arka Plan Grid Dokusu */
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 40px 40px; z-index: -1; pointer-events: none;
+        }
+
+        .news-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Navbar Geri Dönüş */
+        .nav-back {
+            margin-bottom: 40px;
+        }
+        .nav-back a {
+            color: var(--accent);
+            text-decoration: none;
+            font-family: 'JetBrains Mono';
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .nav-back a:hover { text-decoration: underline; }
+
+        /* Header */
         .news-header {
             border-bottom: 1px solid var(--border);
             padding-bottom: 30px;
-            margin-bottom: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+            margin-bottom: 50px;
         }
-
         .news-header h1 {
             font-family: 'JetBrains Mono';
-            font-size: 1.8rem;
+            font-size: 2rem;
             color: #ffffff;
             margin: 0;
             letter-spacing: -1px;
         }
-
         .news-header p {
             color: var(--text-muted);
             font-size: 0.85rem;
-            margin: 5px 0 0;
+            margin: 8px 0 0;
             text-transform: uppercase;
-        }
-
-        .live-status {
-            color: #3fb950;
-            font-family: 'JetBrains Mono';
-            font-size: 0.75rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            letter-spacing: 1px;
         }
 
         /* News Cards */
         .news-card {
             background: var(--surface);
             border: 1px solid var(--border);
-            padding: 25px;
-            margin-bottom: 25px;
+            padding: 30px;
+            margin-bottom: 30px;
             border-radius: 4px;
             transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
         }
-
         .news-card:hover {
             border-color: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         }
 
-        .news-tag {
+        .tag {
             font-family: 'JetBrains Mono';
             font-size: 10px;
             font-weight: bold;
-            padding: 3px 8px;
-            background: rgba(88, 166, 255, 0.1);
-            color: var(--accent);
-            border: 1px solid var(--accent);
+            padding: 4px 10px;
             border-radius: 2px;
             margin-bottom: 15px;
             display: inline-block;
+            text-transform: uppercase;
         }
-
-        .news-tag.alert {
-            background: rgba(248, 81, 73, 0.1);
-            color: var(--alert);
-            border-color: var(--alert);
-        }
+        .tag-alert { background: rgba(248, 81, 73, 0.1); color: var(--alert); border: 1px solid var(--alert); }
+        .tag-intel { background: rgba(88, 166, 255, 0.1); color: var(--accent); border: 1px solid var(--accent); }
 
         .news-card h2 {
-            font-size: 1.25rem;
-            color: #fff;
-            margin: 0 0 12px 0;
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin: 0 0 15px 0;
             line-height: 1.3;
         }
 
-        .news-meta {
+        .meta {
+            font-family: 'JetBrains Mono';
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 20px;
             display: flex;
             gap: 20px;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-family: 'JetBrains Mono';
+        }
+        .meta b { color: var(--accent); }
+
+        .content {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #b1b8c0;
         }
 
-        .news-meta span b { color: var(--accent); }
+        /* Footer */
+        .news-footer {
+            margin-top: 80px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            padding-top: 30px;
+            font-family: 'JetBrains Mono';
+            font-size: 0.7rem;
+            color: #484f58;
+        }
 
-        .news-content {
-            margin-top: 15px;
-            font-size: 0.95rem;
-            line-height: 1
+        @media (max-width: 600px) {
+            .news-header h1 { font-size: 1.5rem; }
+            .news-card { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="news-container">
+    <nav class="nav-back">
+        <a href="/">← cd .. /root_directory</a>
+    </nav>
+
+    <header class="news-header">
+        <h1>[INTEL_CENTER]</h1>
+        <p>Küresel Siber Tehdit İstihbarat Akışı // Live Telemetry</p>
+    </header>
+
+    <article class="news-card">
+        <span class="tag tag-alert">CRITICAL_VULNERABILITY</span>
+        <h2>Enterprise Gateway Servislerinde Kritik Uzaktan Kod Yürütme (RCE) Açığı</h2>
+        <div class="meta">
+            <span><b>DATE:</b> 23 DEC 2025</span>
+            <span><b>SOURCE:</b> CISA_NET</span>
+        </div>
+        <p class="content">Siber güvenlik araştırmacıları, dünya genelinde yaygın olarak kullanılan kurumsal VPN ve gateway çözümlerinde kritik seviyede bir RCE açığı tespit etti. Açığın aktif olarak sömürüldüğü bildiriliyor.</p>
+    </article>
+
+    <article class="news-card">
+        <span class="tag tag-intel">THREAT_INTEL</span>
+        <h2>Ransomware Operasyonlarında Yeni Metodoloji: "Double Extortion" Artışta</h2>
+        <div class="meta">
+            <span><b>DATE:</b> 22 DEC 2025</span>
+            <span><b>SOURCE:</b> OSINT_FEED</span>
+        </div>
+        <p class="content">Tehdit aktörleri, sadece verileri şifrelemekle kalmayıp aynı zamanda sızdırılan verileri yayınlamakla tehdit ederek baskıyı artırıyor. Finans sektörü birincil hedef konumunda.</p>
+    </article>
+
+    <article class="news-card">
+        <span class="tag tag-intel">DATA_BREACH</span>
+        <h2>Havacılık Sektöründe Tedarik Zinciri Saldırısı Analizi</h2>
+        <div class="meta">
+            <span><b>DATE:</b> 21 DEC 2025</span>
+            <span><b>SOURCE:</b> SOC_LABS</span>
+        </div>
+        <p class="content">Üçüncü taraf bir yazılım sağlayıcısı üzerinden gerçekleştirilen sızıntı, havayolu şirketlerinin müşteri sadakat programlarını etkiledi. Analiz süreci devam ediyor.</p>
+    </article>
+
+    <footer class="news-footer">
+        > [DATA_POLICY]: Bu sayfa siber güvenlik farkındalığı için tasarlanmış bir simülasyon aracıdır. 
+        <br>
+        > Ziyaretçi IP veya session verileri hiçbir şekilde kayıt altına alınmaz.
+    </footer>
+</div>
+
+</body>
+</html>
