@@ -4,6 +4,36 @@ title: Home
 permalink: /home/
 ---
 
+<div class="log-bg left-logs">
+    <div class="log-content">
+        12.22.2025 23:01:45 [INFO] Connection established from 192.168.1.45 <br>
+        12.22.2025 23:01:46 [WARN] Unauthorized access attempt on PORT 22 <br>
+        12.22.2025 23:01:48 [DEBUG] SIEM Correlation Engine: Rule_08 fired <br>
+        12.22.2025 23:01:50 [INFO] User Emirhan_G session initialized <br>
+        12.22.2025 23:01:52 [INFO] Firewall: Outbound traffic permitted to 8.8.8.8 <br>
+        12.22.2025 23:01:55 [ALERT] Potential Brute Force detected on Endpoint_01 <br>
+        12.22.2025 23:01:58 [INFO] Heartbeat signal received from SOC_Sensor_A <br>
+        12.22.2025 23:01:45 [INFO] Connection established from 192.168.1.45 <br>
+        12.22.2025 23:01:46 [WARN] Unauthorized access attempt on PORT 22 <br>
+        12.22.2025 23:01:50 [INFO] User Emirhan_G session initialized <br>
+    </div>
+</div>
+
+<div class="log-bg right-logs">
+    <div class="log-content delay">
+        SRC_IP: 10.0.0.12 -> DST_IP: 10.0.0.254 [TCP/443] <br>
+        STATUS: 200 OK | PAYLOAD_SIZE: 1245 bytes <br>
+        THREAD_ID: 0x8F2A | PRIORITY: HIGH <br>
+        MITRE_ATTACK: T1059.001 (PowerShell Execution) <br>
+        LOG_SOURCE: WinEventLog:Security <br>
+        ACTION: ALLOW | POLICY: Default_Drop_Rule <br>
+        HASH: 5e884898da28047151d0e56f8dc6292773603d <br>
+        SRC_IP: 10.0.0.12 -> DST_IP: 10.0.0.254 [TCP/443] <br>
+        STATUS: 200 OK | PAYLOAD_SIZE: 1245 bytes <br>
+        LOG_SOURCE: WinEventLog:Security <br>
+    </div>
+</div>
+
 <div class="dashboard-wrapper">
     <div class="dashboard-header">
         <div class="lang-en">
@@ -25,8 +55,8 @@ permalink: /home/
             <span class="metric-value status-low">LOW</span>
         </div>
         <div class="metric-item">
-            <span class="metric-label">STATUS:</span>
-            <span class="metric-value">OPERATIONAL</span>
+            <span class="metric-label">NETWORK:</span>
+            <span class="metric-value">SECURE</span>
         </div>
         <div class="metric-item">
             <span class="metric-label">SESSION:</span>
@@ -71,31 +101,51 @@ permalink: /home/
 </div>
 
 <style>
-/* --- DASHBOARD WRAPPER (CENTERED & CONSTRAINED) --- */
+/* --- LOG STREAM BACKGROUND (NEW) --- */
+.log-bg {
+    position: fixed;
+    top: 0;
+    width: 250px;
+    height: 100vh;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    line-height: 2;
+    color: rgba(88, 166, 255, 0.08); /* Çok silik mavi - göz yormaz */
+    overflow: hidden;
+    pointer-events: none;
+    z-index: -1; /* En arka plana atar */
+}
+
+.left-logs { left: 20px; }
+.right-logs { right: 20px; text-align: right; }
+
+.log-content {
+    display: flex;
+    flex-direction: column;
+    animation: scrollLogs 45s linear infinite;
+}
+
+.log-content.delay {
+    animation-duration: 60s; /* Sağ taraf farklı hızda aksın ki yapay durmasın */
+}
+
+@keyframes scrollLogs {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+}
+
+/* --- DASHBOARD WRAPPER --- */
 .dashboard-wrapper { 
-    max-width: 1000px; /* Çok genişlemeyi önler */
-    margin: 0 auto; /* Sayfayı ortalar */
-    padding: 0 20px;
-    animation: fadeIn 0.8s ease-out;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 40px;
+    position: relative;
+    z-index: 2; /* Logların üzerinde durmasını sağlar */
 }
 
-/* --- ADVANCED BACKGROUND --- */
-body {
-    background-color: #0d1117;
-    background-image: 
-        linear-gradient(rgba(88, 166, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(88, 166, 255, 0.03) 1px, transparent 1px),
-        radial-gradient(circle at 0% 0%, rgba(88, 166, 255, 0.06) 0%, transparent 40%),
-        radial-gradient(circle at 100% 100%, rgba(88, 166, 255, 0.06) 0%, transparent 40%);
-    background-size: 50px 50px, 50px 50px, 100% 100%, 100% 100%;
-    animation: backgroundScroll 100s linear infinite;
-}
-
-@keyframes backgroundScroll { from { background-position: 0 0; } to { background-position: 0 1000px; } }
-
-/* --- HERO SECTION --- */
+/* --- HERO & TYPEWRITER --- */
 .dashboard-header { padding: 3rem 0 2rem 0; }
-.main-title { font-size: clamp(2.5rem, 5vw, 3.8rem); color: #f0f6fc; font-weight: 800; letter-spacing: -2px; line-height: 1; margin: 1rem 0; }
+.main-title { font-size: clamp(2.5rem, 6vw, 4rem); color: #f0f6fc; font-weight: 800; letter-spacing: -2.5px; margin: 0.5rem 0; }
 
 .typewriter-text {
     font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 1.1rem;
@@ -107,50 +157,47 @@ body {
 
 /* --- METRICS BAR --- */
 .metrics-bar {
-    display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 2.5rem;
-    padding: 12px 20px; background: rgba(22, 27, 34, 0.7);
-    border: 1px solid var(--border-color); border-radius: 12px;
+    display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 3rem;
+    padding: 12px 25px; background: rgba(22, 27, 34, 0.6);
+    border: 1px solid var(--border-color); border-radius: 16px;
     font-family: 'JetBrains Mono', monospace; font-size: 11px;
+    backdrop-filter: blur(10px);
 }
 .metric-value { color: var(--text-bright); font-weight: bold; }
 .status-low { color: #3fb950; text-shadow: 0 0 5px rgba(63, 185, 80, 0.5); }
 
-/* --- BENTO CONTAINER (SYMMETRIC) --- */
-.bento-container { 
-    display: grid; 
-    grid-template-columns: repeat(6, 1fr); /* 6 sütunlu hassas yapı */
-    gap: 24px; /* Kartlar arası boşluk artırıldı */
-}
-
+/* --- BENTO GRID --- */
+.bento-container { display: grid; grid-template-columns: 1.8fr 1fr; gap: 24px; }
 .bento-card {
-    background: #161b22; border: 1px solid var(--border-color);
-    border-radius: 20px; padding: 28px; text-decoration: none !important;
+    background: rgba(22, 27, 34, 0.8);
+    backdrop-filter: blur(8px);
+    border: 1px solid #30363d;
+    border-radius: 28px;
+    padding: 32px;
+    transition: 0.4s ease;
+    text-decoration: none !important;
     display: flex; flex-direction: column; justify-content: space-between;
-    transition: all 0.4s ease; min-height: 240px;
+    min-height: 220px;
 }
-
-/* Kart Genişlik Ayarları */
-.blog-module { grid-column: span 3; grid-row: span 2; } /* Sol büyük kart */
-.labs-module { grid-column: span 3; } /* Sağ üst */
-.about-module { grid-column: span 3; } /* Sağ alt */
+.blog-module { grid-row: span 2; }
 
 .bento-card:hover {
-    transform: translateY(-6px); border-color: var(--accent);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.4), 0 0 15px rgba(88,166,255,0.1);
+    border-color: var(--accent);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.4), 0 0 20px rgba(88, 166, 255, 0.1);
+    transform: translateY(-5px);
 }
 
-.card-icon { font-size: 1.8rem; margin-bottom: 0.8rem; }
-.tag { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 10px; text-transform: uppercase; letter-spacing: 1.5px; font-weight: bold; }
-.bento-card h2 { color: #fff; font-size: 1.6rem; margin: 10px 0; border: none; padding: 0; }
-.bento-card p { color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; }
-.card-footer { font-size: 12px; font-weight: bold; color: var(--text-bright); opacity: 0.4; margin-top: 15px; }
+.card-icon { font-size: 2rem; margin-bottom: 1rem; }
+.tag { font-family: 'JetBrains Mono', monospace; color: var(--accent); font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
+.bento-card h2 { color: #f0f6fc; font-size: 1.8rem; margin: 10px 0; border: none; padding: 0; }
+.bento-card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; margin: 0; }
+.card-footer { font-size: 12px; font-weight: bold; color: var(--text-bright); opacity: 0.4; margin-top: 20px; }
 .bento-card:hover .card-footer { opacity: 1; }
 
-/* Responsive */
 @media (max-width: 850px) {
     .bento-container { grid-template-columns: 1fr; }
-    .blog-module, .labs-module, .about-module { grid-column: span 1; }
-    .metrics-bar { flex-direction: column; }
+    .blog-module { grid-row: span 1; }
+    .log-bg { display: none; } /* Mobilde karmaşayı önlemek için logları gizliyoruz */
 }
 </style>
 
