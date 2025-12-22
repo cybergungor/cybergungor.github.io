@@ -2,127 +2,95 @@
 layout: default
 ---
 
-<div class="infinite-log-bg">
+<div class="post-log-bg">
     <div class="log-col"><div class="moving-stream s1">
-        <span>[SYSTEM] Opening incident_report_{{ page.date | date: "%Y%m%d" }}.log</span>
-        <span>[INFO] Decrypting content using tactical_key_01...</span>
-        <span>[STATUS] Rendering data blocks: OK</span>
-        <span>[SYSTEM] Opening incident_report_{{ page.date | date: "%Y%m%d" }}.log</span>
+        <span>[READING_MODE] Loading entry ID: {{ page.date | date: "%Y%m%d" }}</span>
+        <span>[DECRYPT] AES-256 success</span>
+        <span>[STATUS] Rendering data blocks...</span>
     </div></div>
     <div class="log-col hide-mobile"><div class="moving-stream s2">
-        <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x44 0x41 0x54 0x41</span>
+        <span>0x52 0x45 0x50 0x4F 0x52 0x54_FILE_ACTIVE</span>
         <span>INTEGRITY_CHECK: 100% SUCCESS</span>
-        <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x44 0x41 0x54 0x41</span>
     </div></div>
 </div>
 
-<div class="tactical-report-container">
-    
-    <header class="report-header-static">
-        <div class="report-meta">
-            <span class="meta-tag">{{ page.categories | first | upcase }}</span>
-            <span class="meta-date">{{ page.date | date: "%d %B %Y" }}</span>
+<div class="post-container-stable">
+    <header class="post-header-simple">
+        <div class="meta-data">
+            <span class="tag-blue">{{ page.categories | first | upcase }}</span> // {{ page.date | date: "%d %B %Y" }}
         </div>
-        <h1 class="report-main-title">{{ page.title }}</h1>
-        <div class="report-path">
-            <span class="path-prompt">root@cyberlab:~$</span> cat /home/emirhan/reports/{{ page.title | slugify }}.txt
-        </div>
+        <h1 class="white-title-plain">{{ page.title }}</h1>
+        <div class="terminal-footer-line">root@cyberlab:~$ cat /reports/{{ page.title | slugify }}.log</div>
     </header>
 
-    <article class="report-article-body">
+    <article class="report-body-clean">
         {{ content }}
     </article>
 
-    <footer class="report-footer-simple">
-        <div class="divider-line">/* END_OF_DATA_STREAM */</div>
-        <a href="/blog/" class="return-btn">/ BACK_TO_DATABASE /</a>
+    <footer class="report-back-footer">
+        <a href="/blog/" class="back-link-tactical">/ BACK_TO_DATABASE /</a>
     </footer>
 </div>
 
 <style>
-/* --- CORE STYLES --- */
+/* --- STABLE POST STYLES --- */
 :root {
-    --cyber-bg: #08090a;
-    --cyber-blue: #00f2ff;
-    --cyber-border: rgba(255, 255, 255, 0.08);
+    --bg-main: #08090a;
+    --accent-blue: #00f2ff;
+    --border-dim: rgba(255, 255, 255, 0.08);
 }
 
-/* Arka planı ve genel rengi zorla uygula */
-body { 
-    background-color: var(--cyber-bg) !important; 
-    color: #c9d1d9; 
-    margin: 0; 
-    padding: 0; 
-    font-family: 'Inter', sans-serif;
-}
-
-/* --- KONTEYNER: NAVBAR ÇAKIŞMASINI ÖNLEYEN KRİTİK ALAN --- */
-.tactical-report-container {
+/* İçeriği Navbarın Altına İten Alan */
+.post-container-stable {
     max-width: 850px;
     margin: 0 auto;
-    /* Navbar'ın yüksekliği kadar üstten boşluk (Zorunlu) */
-    padding-top: 130px !important; 
-    padding-bottom: 60px;
-    padding-left: 20px;
-    padding-right: 20px;
+    padding: 120px 20px 60px 20px !important; /* Navbar çakışmasını önler */
 }
 
-/* --- BAŞLIK ALANI (SADE BEYAZ) --- */
-.report-header-static {
-    margin-bottom: 2.5rem;
-    border-bottom: 1px solid var(--cyber-border);
-    padding-bottom: 1.5rem;
+/* Sade Beyaz Başlık */
+.post-header-simple {
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-dim);
+    padding-bottom: 1rem;
 }
 
-.report-main-title {
-    color: #ffffff !important; /* Saf Beyaz */
-    font-size: clamp(2rem, 5vw, 3.2rem);
+.white-title-plain {
+    color: #ffffff !important;
+    font-size: clamp(2rem, 5vw, 3rem);
     font-weight: 800;
     margin: 10px 0;
     letter-spacing: -1.5px;
     line-height: 1.1;
 }
 
-.report-meta { display: flex; gap: 15px; align-items: center; margin-bottom: 8px; }
-.meta-tag { color: var(--cyber-blue); font-family: 'JetBrains Mono'; font-size: 11px; font-weight: bold; }
-.meta-date { color: #8b949e; font-family: 'JetBrains Mono'; font-size: 11px; }
-.report-path { font-family: 'JetBrains Mono'; font-size: 0.85rem; color: #8b949e; opacity: 0.8; }
-.path-prompt { color: #3fb950; }
+.meta-data { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8b949e; }
+.tag-blue { color: var(--accent-blue); }
+.terminal-footer-line { font-family: 'JetBrains Mono'; font-size: 13px; color: #3fb950; opacity: 0.8; }
 
-/* --- İÇERİK ALANI --- */
-.report-article-body {
-    background: rgba(17, 18, 20, 0.4);
-    border-radius: 12px;
+/* İçerik Kutusu */
+.report-body-clean {
     line-height: 1.8;
     font-size: 1.05rem;
+    color: #c9d1d9;
 }
 
-/* İçerik içi stil düzenlemeleri */
-.report-article-body h2 { color: #fff; margin-top: 2.5rem; border-bottom: 1px solid var(--cyber-border); padding-bottom: 8px; }
-.report-article-body h3 { color: #fff; margin-top: 1.8rem; }
-.report-article-body p { margin-bottom: 1.5rem; }
-.report-article-body pre { background: #0d1117 !important; padding: 18px; border-radius: 8px; border: 1px solid var(--cyber-border); overflow-x: auto; margin: 20px 0; }
-.report-article-body code { color: var(--cyber-blue); background: rgba(0, 242, 255, 0.05); padding: 2px 5px; border-radius: 4px; }
-.report-article-body img { max-width: 100%; border-radius: 8px; border: 1px solid var(--cyber-border); margin: 15px 0; }
+.report-body-clean h2 { color: #fff; margin-top: 2rem; border-bottom: 1px solid var(--border-dim); padding-bottom: 5px; }
+.report-body-clean pre { background: #0d1117 !important; border: 1px solid var(--border-dim); border-radius: 8px; padding: 15px; overflow-x: auto; }
+.report-body-clean code { color: var(--accent-blue); background: rgba(0, 242, 255, 0.05); padding: 2px 4px; border-radius: 4px; }
 
-/* --- ARKA PLAN LOGLARI --- */
+/* Background Logs */
 .post-log-bg {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     display: flex; justify-content: space-around; opacity: 0.05;
-    z-index: -1; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    z-index: -1; pointer-events: none; font-family: 'JetBrains Mono'; font-size: 10px;
 }
-.moving-stream { display: flex; flex-direction: column; animation: scrollLog 45s linear infinite; }
-.moving-stream span { padding: 15px 0; color: var(--cyber-blue); }
-@keyframes scrollLog { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
+.moving-stream { display: flex; flex-direction: column; animation: scrollDown 45s linear infinite; }
+.moving-stream span { padding: 15px 0; color: var(--accent-blue); }
+@keyframes scrollDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
 
-/* --- FOOTER --- */
-.report-footer-simple { margin-top: 4rem; text-align: center; }
-.divider-line { font-family: 'JetBrains Mono'; color: #8b949e; opacity: 0.3; margin-bottom: 1.5rem; }
-.return-btn { color: #8b949e; text-decoration: none; font-family: 'JetBrains Mono'; font-weight: bold; transition: 0.3s; }
-.return-btn:hover { color: var(--cyber-blue); }
+.report-back-footer { margin-top: 3rem; text-align: center; }
+.back-link-tactical { color: #8b949e; text-decoration: none; font-family: 'JetBrains Mono'; font-weight: bold; }
+.back-link-tactical:hover { color: var(--accent-blue); }
 
-@media (max-width: 768px) {
-    .tactical-report-container { padding-top: 100px !important; }
-    .report-main-title { font-size: 2.2rem; }
-}
+@media (max-width: 768px) { .post-container-stable { padding-top: 100px !important; } }
 </style>
