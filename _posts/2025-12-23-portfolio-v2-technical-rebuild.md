@@ -15,10 +15,9 @@ tags: [website, blue-team, updates, rebuild]
 
 <br>
 
-# 🟢 [LOG_ENTRY: 2025.12.23] 
 ## Sistem Modernizasyonu v2.0 Başlatıldı
 
-Bu rapor, **CyberGungor** portfolyosunun son bir hafta içerisindeki teknolojik evrimini belgelemektedir. Statik bir yapıdan, yaşayan bir **Mavi Takım Operasyon Merkezi** arayüzüne geçiş süreci aşağıda parça parça detaylandırılmıştır.
+Bu rapor, bu sitenin son bir hafta içerisindeki teknolojik evrimini belgelemektedir. Statik bir yapıdan, yaşayan bir **Mavi Takım Operasyon Merkezi** arayüzüne geçiş süreci aşağıda parça parça detaylandırılmıştır.
 
 <br><br>
 <hr style="border: 0; border-top: 2px solid var(--cyber-border); margin: 40px 0;">
@@ -75,10 +74,9 @@ Görünmeyen kısımlardaki teknik hatalar giderildi.
 
 <br>
 
-# 🔵 [LOG_ENTRY: 2025.12.23] 
 ## System Modernization v2.0 Initiated
 
-This report documents the technological evolution of the **CyberGungor** portfolio over the last week. The transition from a static blog to a living **Blue Team Operations Center** interface is detailed below in sections.
+This report documents the technological evolution of the **Emirhan Gungoroglu Website** portfolio over the last week. The transition from a static blog to a living **Blue Team Operations Center** interface is detailed below in sections.
 
 <br><br>
 <hr style="border: 0; border-top: 2px solid var(--cyber-border); margin: 40px 0;">
