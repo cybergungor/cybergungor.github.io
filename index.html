@@ -11,22 +11,24 @@ permalink: /
             <span>[INIT] KERNEL_LOAD_SUCCESS</span>
             <span>[LOAD] TACTICAL_ASSETS_DECRYPTED</span>
             <span>[AUTH] STANDBY_FOR_OPERATOR</span>
+            <span>[SYS] CHECKING_INTEGRITY... OK</span>
         </div></div>
         <div class="log-column hide-mobile"><div class="stream s2">
             <span>0x41 0x43 0x43 0x45 0x53 0x53</span>
             <span>GATEWAY_STATUS: OPERATIONAL</span>
+            <span>Network_Traffic: NORMAL</span>
             <span>0x41 0x43 0x43 0x45 0x53 0x53</span>
         </div></div>
     </div>
 
-    <div class="grid-floor-3d"></div>
-    <div class="vignette-overlay"></div>
+    <div class="horizon-glow"></div> <div class="grid-floor-3d-boosted"></div>
+    <div class="vignette-soft"></div>
 
     <div class="gateway-core">
         <div class="logo-area">
             <a href="/home/" class="logo-link">
                 <img src="/assets/images/CYBER.png?v=2" alt="CyberGungor Logo" class="main-logo">
-                <div class="laser-scanner"></div>
+                <div class="laser-scanner-bright"></div>
             </a>
         </div>
 
@@ -37,7 +39,7 @@ permalink: /
             </div>
             <p class="tagline">Welcome — Learning. Detecting. Improving.</p>
             
-            <a href="/home/" class="access-btn">
+            <a href="/home/" class="access-btn-glow">
                 <span class="btn-text">INITIATE ACCESS</span>
             </a>
         </div>
@@ -45,96 +47,82 @@ permalink: /
 </div>
 
 <style>
-/* --- GLOBAL OVERRIDE (Dış Konteynerleri Sıfırlar) --- */
-html, body { 
-    height: 100% !important; width: 100% !important;
-    margin: 0 !important; padding: 0 !important;
-    overflow: hidden !important; background: #050608 !important;
-}
+/* --- GLOBAL RESET --- */
+:root { --neon-cyan: #00f2ff; --bg-dark: #050608; }
+html, body { height: 100% !important; width: 100% !important; margin: 0 !important; padding: 0 !important; overflow: hidden !important; background: var(--bg-dark) !important; }
 
-/* --- ANA KONTEYNER (Ekranın Tamamına Hükmeder) --- */
+/* --- ANA KONTEYNER (FIXED CENTERED) --- */
 .master-gateway-fixed {
-    position: fixed !important; /* Diğer konteynerleri baypas eder */
-    top: 0 !important; left: 0 !important;
-    width: 100vw !important; height: 100vh !important;
-    display: flex !important;
-    align-items: center !important; /* Dikeyde ortalar */
-    justify-content: center !important; /* Yatayda ortalar */
-    background: #050608;
-    z-index: 9999; /* Her şeyin en üstünde */
+    position: fixed !important; top: 0 !important; left: 0 !important; width: 100vw !important; height: 100vh !important;
+    display: flex !important; align-items: center !important; justify-content: center !important;
+    background: var(--bg-dark); z-index: 9999;
 }
 
-/* --- MERKEZİ PANEL --- */
-.gateway-core {
-    position: relative;
-    z-index: 100;
-    text-align: center;
-    width: 100%;
-    max-width: 500px; /* Genişliği sınırlayarak merkezi korur */
-    margin: 0 auto !important;
+/* --- YENİ GÜÇLÜ 3D IZGARA --- */
+.grid-floor-3d-boosted {
+    position: absolute; bottom: -20%; left: -10%; right: -10%; width: 120%; height: 80%;
+    background-image: 
+        linear-gradient(var(--neon-cyan) 2px, transparent 2px), /* Çizgiler kalınlaştırıldı */
+        linear-gradient(90deg, var(--neon-cyan) 2px, transparent 2px);
+    background-size: 80px 80px; /* Kareler büyütüldü */
+    transform: perspective(500px) rotateX(60deg); /* Perspektif açısı artırıldı */
+    animation: floorFlowBoost 15s linear infinite;
+    opacity: 0.35; /* Opaklık ciddi oranda artırıldı (Vibe burada!) */
+    z-index: 2;
+    /* Ufukta daha yumuşak kaybolması için maske ayarlandı */
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 10%, transparent 95%);
+}
+@keyframes floorFlowBoost { 0% { background-position: 0 0; } 100% { background-position: 0 80px; } }
+
+/* --- YENİ UFUK ÇİZGİSİ PARLAMASI --- */
+.horizon-glow {
+    position: absolute; top: 45%; left: 0; width: 100%; height: 2px;
+    background: var(--neon-cyan);
+    box-shadow: 0 0 100px 30px var(--neon-cyan); /* Büyük, yumuşak bir parlama */
+    opacity: 0.15; z-index: 3;
 }
 
-.main-logo { 
-    max-width: 320px; width: 90%; 
-    filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.2));
+/* --- YUMUŞATILMIŞ VIGNETTE --- */
+.vignette-soft {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    /* Merkez daha geniş, kenarlar daha yumuşak karanlık */
+    background: radial-gradient(circle, transparent 40%, var(--bg-dark) 100%);
+    z-index: 4; pointer-events: none;
 }
 
-.laser-scanner {
-    position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-    background: #00f2ff; box-shadow: 0 0 15px #00f2ff;
-    animation: scanMove 4s ease-in-out infinite;
+/* --- MERKEZİ İÇERİK --- */
+.gateway-core { position: relative; z-index: 100; text-align: center; width: 100%; max-width: 500px; }
+.main-logo { max-width: 340px; width: 90%; filter: drop-shadow(0 0 25px rgba(0, 242, 255, 0.4)); }
+.laser-scanner-bright {
+    position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+    background: var(--neon-cyan); box-shadow: 0 0 25px var(--neon-cyan), 0 0 10px #fff;
+    animation: scanMove 3s ease-in-out infinite; opacity: 0.8;
 }
 @keyframes scanMove { 0%, 100% { top: 0%; opacity: 0; } 50% { top: 100%; opacity: 1; } }
 
-/* --- 3D IZGARA (TAM EKRAN) --- */
-.grid-floor-3d {
-    position: absolute; bottom: -10%; left: 0; right: 0;
-    height: 80%; width: 100%;
-    background-image: 
-        linear-gradient(rgba(0, 242, 255, 0.1) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 242, 255, 0.1) 1px, transparent 1px);
-    background-size: 60px 60px;
-    transform: perspective(600px) rotateX(65deg);
-    animation: floorFlow 20s linear infinite;
-    opacity: 0.15; z-index: 2;
-    mask-image: linear-gradient(to top, black, transparent 80%);
-}
-@keyframes floorFlow { 0% { background-position: 0 0; } 100% { background-position: 0 60px; } }
+/* --- BUTON VE DURUM --- */
+.status-box { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 25px 0 15px; }
+.pulse-dot { width: 10px; height: 10px; background: #3fb950; border-radius: 50%; box-shadow: 0 0 10px #3fb950; animation: pulse 1.5s infinite; }
+@keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.4); } 100% { opacity: 1; transform: scale(1); } }
+.status-msg { font-family: 'JetBrains Mono'; color: #8b949e; font-size: 0.9rem; letter-spacing: 1px; }
+.ready-txt { color: #3fb950; text-shadow: 0 0 15px #3fb950; font-weight: bold; }
+.tagline { color: #fff; opacity: 0.6; margin-bottom: 35px; font-size: 1rem; }
 
-.vignette-overlay {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, transparent 20%, #050608 90%);
-    z-index: 3; pointer-events: none;
+.access-btn-glow {
+    display: inline-block; padding: 18px 60px;
+    border: 2px solid var(--neon-cyan); color: var(--neon-cyan);
+    font-family: 'JetBrains Mono'; font-weight: 800; letter-spacing: 4px;
+    text-decoration: none; transition: 0.3s;
+    background: rgba(0, 242, 255, 0.08);
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+    backdrop-filter: blur(5px);
 }
+.access-btn-glow:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 60px rgba(0, 242, 255, 0.6); }
 
-/* --- BUTTON & STATUS --- */
-.status-box { display: flex; align-items: center; justify-content: center; gap: 10px; margin: 20px 0 10px; }
-.pulse-dot { width: 8px; height: 8px; background: #3fb950; border-radius: 50%; animation: pulse 1.5s infinite; }
-@keyframes pulse { 0% { opacity: 1; transform: scale(1); } 50% { opacity: 0.5; transform: scale(1.2); } 100% { opacity: 1; transform: scale(1); } }
-.status-msg { font-family: 'JetBrains Mono'; color: #8b949e; font-size: 0.8rem; }
-.ready-txt { color: #3fb950; text-shadow: 0 0 8px #3fb950; }
-.tagline { color: #fff; opacity: 0.4; margin-bottom: 30px; font-size: 0.9rem; }
-
-.access-btn {
-    display: inline-block; padding: 15px 50px;
-    border: 1px solid #00f2ff; color: #00f2ff;
-    font-family: 'JetBrains Mono'; font-weight: bold; letter-spacing: 4px;
-    text-decoration: none; transition: 0.4s;
-    background: rgba(0, 242, 255, 0.05);
-}
-.access-btn:hover { background: #00f2ff; color: #000; box-shadow: 0 0 40px rgba(0, 242, 255, 0.5); }
-
-/* --- BACKGROUND LOGS --- */
-.background-logs {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    display: flex; justify-content: space-between; padding: 0 5%;
-    opacity: 0.05; z-index: 1; pointer-events: none;
-}
-.stream { display: flex; flex-direction: column; animation: logScroll 40s linear infinite; }
-.stream span { padding: 10px 0; font-family: 'JetBrains Mono'; font-size: 10px; color: #00f2ff; }
+/* --- LOGLAR --- */
+.background-logs { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: flex; justify-content: space-between; padding: 0 3%; opacity: 0.08; z-index: 1; pointer-events: none; }
+.stream { display: flex; flex-direction: column; animation: logScroll 30s linear infinite; }
+.stream span { padding: 12px 0; font-family: 'JetBrains Mono'; font-size: 11px; color: var(--neon-cyan); text-shadow: 0 0 5px var(--neon-cyan); }
 @keyframes logScroll { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
-
-@media (max-width: 768px) {
-    .main-logo { max-width: 240px; }
-}
+@media (max-width: 768px) { .main-logo { max-width: 260px; } }
 </style>
