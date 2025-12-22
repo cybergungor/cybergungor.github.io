@@ -5,20 +5,15 @@ layout: default
 <div class="post-log-bg">
     <div class="log-col"><div class="moving-stream s1">
         <span>[READING_MODE] Loading entry ID: {{ page.date | date: "%Y%m%d" }}_X7</span>
-        <span>[DECRYPT] Content decrypted successfully using AES-256</span>
-        <span>[SYSTEM] Displaying data block...</span>
-        <span>[READING_MODE] Loading entry ID: {{ page.date | date: "%Y%m%d" }}_X7</span>
+        <span>[DECRYPT] AES-256 success</span>
     </div></div>
     <div class="log-col hide-mobile"><div class="moving-stream s2">
-        <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x56 0x49 0x45 0x57</span>
-        <span>ACCESS_LOG: User IP recorded</span>
-        <span>SESSION_STATUS: ACTIVE | MODE: READ_ONLY</span>
         <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x56 0x49 0x45 0x57</span>
     </div></div>
 </div>
 
-<header class="tactical-header-fixed">
-    <div class="header-inner">
+<div class="tactical-post-wrapper">
+    <header class="post-report-header">
         <div class="header-meta">
             <span class="status-badge">INCIDENT_REPORT // {{ page.categories | first | upcase }}</span>
             <span class="meta-date">{{ page.date | date: "%d %b %Y" }}</span>
@@ -26,13 +21,8 @@ layout: default
         <div class="command-line-small">
             <span class="prompt">root@cyberlab:~/reports$</span> cat {{ page.title | downcase | replace: ' ', '_' }}.log
         </div>
-    </div>
-</header>
-
-<div class="tactical-post-wrapper">
-    <div class="post-title-section">
         <h1 class="post-main-title">{{ page.title }}</h1>
-    </div>
+    </header>
 
     <article class="post-content-body">
         {{ content }}
@@ -45,7 +35,7 @@ layout: default
 </div>
 
 <style>
-/* --- CORE COLORS --- */
+/* --- TACTICAL POST STYLES --- */
 :root {
     --bg: #08090a;
     --card-bg: rgba(17, 18, 20, 0.95);
@@ -55,57 +45,38 @@ layout: default
 
 body { background-color: var(--bg) !important; color: #c9d1d9; margin: 0; }
 
-/* --- 2. FIXED HEADER & BLUR EFFECT (Çözüm Burası) --- */
-.tactical-header-fixed {
-    position: sticky;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1000;
-    /* Buzlu cam efekti: Arkadan geçen yazıları flulaştırır */
-    background: rgba(8, 9, 10, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    /* Üstten ve alttan boşluk (Safe Zone) */
-    padding: 20px 0;
+/* --- ÇAKIŞMAYI ÖNLEYEN KRİTİK AYAR --- */
+.tactical-post-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    /* Üstteki yeşil navbarın yüksekliği kadar (yaklaşık 80px-100px) boşluk bırakıyoruz */
+    padding: 100px 20px 4rem 20px; 
+    position: relative;
+    z-index: 2;
+}
+
+/* Post başlık alanı artık sticky değil, sayfa ile akar ama yerini korur */
+.post-report-header {
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
     border-bottom: 1px solid var(--border);
 }
 
-.header-inner {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-/* --- LOG BACKGROUND --- */
-.post-log-bg {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    display: flex; justify-content: space-around; opacity: 0.05;
-    z-index: -1; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px;
-}
-.moving-stream { display: flex; flex-direction: column; animation: scrollDown infinite linear; }
-.moving-stream span { padding: 12px 0; color: var(--accent); }
-@keyframes scrollDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
-.s1 { animation-duration: 40s; } .s2 { animation-duration: 60s; }
-
-/* --- CONTENT WRAPPER --- */
-.tactical-post-wrapper {
-    max-width: 900px;
-    margin: 0 auto 4rem auto;
-    padding: 0 20px;
-}
-
-.post-title-section { margin-top: 2rem; margin-bottom: 2rem; }
-.post-main-title { 
-    font-size: 3rem; font-weight: 800; color: #fff; margin: 0; 
-    text-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
-}
-
+.header-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
 .status-badge { background: rgba(0, 242, 255, 0.1); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: bold; }
 .meta-date { font-family: 'JetBrains Mono'; font-size: 11px; color: #8b949e; }
-.prompt { color: #3fb950; margin-right: 8px; }
 
-/* --- ARTICLE BODY --- */
+.post-main-title { 
+    font-size: clamp(2rem, 5vw, 3.2rem); 
+    font-weight: 800; color: #fff; margin: 15px 0 0 0; 
+    line-height: 1.1;
+    text-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+}
+
+.prompt { color: #3fb950; margin-right: 8px; }
+.command-line-small { font-family: 'JetBrains Mono'; font-size: 0.85rem; color: #8b949e; opacity: 0.8; }
+
+/* --- İÇERİK KUTUSU --- */
 .post-content-body {
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -115,21 +86,27 @@ body { background-color: var(--bg) !important; color: #c9d1d9; margin: 0; }
     line-height: 1.8;
 }
 
-.post-content-body h2 { color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 2rem; }
-.post-content-body pre { background: #0d1117 !important; padding: 15px; border-radius: 8px; border: 1px solid var(--border); overflow-x: auto; }
+.post-content-body h2 { color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 2.5rem; }
+.post-content-body pre { background: #0d1117 !important; padding: 20px; border-radius: 12px; border: 1px solid var(--border); overflow-x: auto; }
 .post-content-body code { color: var(--accent); background: rgba(0, 242, 255, 0.05); padding: 2px 5px; border-radius: 4px; }
+
+/* --- BACKGROUND LOGS --- */
+.post-log-bg {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    display: flex; justify-content: space-around; opacity: 0.05;
+    z-index: -1; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+}
+.moving-stream { display: flex; flex-direction: column; animation: scrollDown 40s infinite linear; }
+.moving-stream span { padding: 12px 0; color: var(--accent); }
+@keyframes scrollDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
 
 /* --- FOOTER --- */
 .post-footer { margin-top: 3rem; text-align: center; }
 .terminal-separator { font-family: 'JetBrains Mono'; color: #8b949e; opacity: 0.4; margin-bottom: 1.5rem; }
-.back-btn {
-    display: inline-block; padding: 10px 20px; border: 1px solid var(--accent);
-    border-radius: 8px; color: var(--accent); text-decoration: none; font-family: 'JetBrains Mono';
-}
-.back-btn:hover { background: rgba(0, 242, 255, 0.1); box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
+.back-btn { display: inline-block; padding: 10px 20px; border: 1px solid var(--accent); border-radius: 8px; color: var(--accent); text-decoration: none; font-family: 'JetBrains Mono'; font-weight: bold; }
 
 @media (max-width: 768px) {
-    .post-main-title { font-size: 2rem; }
-    .post-content-body { padding: 20px; }
+    .tactical-post-wrapper { padding-top: 80px; }
+    .post-content-body { padding: 25px; }
 }
 </style>
