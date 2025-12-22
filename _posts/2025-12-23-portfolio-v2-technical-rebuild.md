@@ -23,43 +23,49 @@ Bu rapor, bu sitenin son bir hafta içerisindeki teknolojik evrimini belgelemekt
 <hr style="border: 0; border-top: 2px solid var(--cyber-border); margin: 40px 0;">
 <br><br>
 
-### 📡 FAZ 1: Giriş ve Derinlik (The Gateway)
+1: Giriş ve Derinlik (The Gateway)
 Giriş ekranı, sistemin "ilk temas" noktasıdır.
 
 * **3D Izgara Sistemi:** Arka plana, siber uzayı temsil eden <span style="color: var(--cyber-cyan); font-weight: bold;">Hareketli 3D Izgara (Grid)</span> eklendi.
+
 * **Merkezi Hizalama:** Tüm içerik, "Nuclear Option" tekniğiyle ekranın tam merkezine <span style="color: #fff; font-weight: bold;">(Absolute Centering)</span> kilitlendi.
+
 * **Lazer Tarayıcı:** Logo üzerine, kimlik doğrulamasını temsil eden <span style="color: var(--cyber-cyan);">Dinamik Lazer Çizgisi</span> entegre edildi.
 
 <br><br>
 <hr style="border: 0; border-top: 1px dashed var(--cyber-border); margin: 40px 0;">
 <br><br>
 
-### 🛡️ FAZ 2: Tactical HUD (Navigasyon)
+2: Tactical HUD (Navigasyon)
 Menü yapısı, bir operatörün ihtiyaç duyacağı **HUD** konseptine dönüştürüldü.
 
 * **Buzlu Cam (Glassmorphism):** Navbar, arkasındaki akışı gösteren <span style="color: var(--cyber-cyan);">Blur (Bulanıklık)</span> efektiyle modernize edildi.
+
 * **Sistem Monitörleri:** Navigasyonun merkezine gerçek zamanlı veri hissi veren göstergeler eklendi:
     > `VPN: ENCRYPTED // THREAT_LEVEL: LOW // LOC: IST`
+
 * **LED Durum Işıkları:** Kritik butonlara, sistemin aktif olduğunu simgeleyen <span style="color: var(--alert-red); font-weight: bold;">Yanıp Sönen Pulse LED'ler</span> eklendi.
 
 <br><br>
 <hr style="border: 0; border-top: 1px dashed var(--cyber-border); margin: 40px 0;">
 <br><br>
 
-### 👤 FAZ 3: Operatör Kimliği (About Page)
+3: Operatör Kimliği (About Page)
 Kişisel sayfa, bir biyografiden çok bir **"Personel Dosyası"** hiyerarşisine kavuşturuldu.
 
 * **Cyber Signature:** İsim başlığı, sönük bir "About /" ön eki ve <span style="color: #fff; text-shadow: 0 0 15px var(--cyber-cyan); font-weight: 900;">Parlayan Neon Bir İmza</span> ile değiştirildi.
+
 * **Karakteristik Tipografi:** Raporların okunabilirliğini artırmak için <span style="color: var(--success-green);">JetBrains Mono</span> font ailesi tüm teknik alanlara yayıldı.
 
 <br><br>
 <hr style="border: 0; border-top: 1px dashed var(--cyber-border); margin: 40px 0;">
 <br><br>
 
-### ⚙️ FAZ 4: Varlık Yönetimi (Assets)
+4: Varlık Yönetimi (Assets)
 Görünmeyen kısımlardaki teknik hatalar giderildi.
 
 * **Asset Restoration:** Tarayıcı sekmesindeki <span style="color: var(--cyber-cyan);">Favicon</span> ve sosyal medya paylaşımlarında çıkan kapak görselleri geri yüklendi.
+
 * **Sosyal Entegrasyon:** GitHub ve LinkedIn bağlantıları, neon hover efektli orijinal ikonlarıyla **Footer** alanına sabitlendi.
 
 <br><br>
@@ -82,43 +88,50 @@ This report documents the technological evolution of the **Emirhan Gungoroglu We
 <hr style="border: 0; border-top: 2px solid var(--cyber-border); margin: 40px 0;">
 <br><br>
 
-### 📡 PHASE 1: The Gateway
+1: The Gateway
 The landing page is the "initial contact" point.
 
 * **3D Grid System:** A moving <span style="color: var(--cyber-cyan); font-weight: bold;">Cyber Grid</span> representing cyberspace was added to the background.
+
 * **Centralized Focus:** Content is locked to the exact center <span style="color: #fff; font-weight: bold;">(Absolute Centering)</span> of the screen on all devices.
+
 * **Laser Scanner:** A <span style="color: var(--cyber-cyan);">Dynamic Laser Animation</span> was integrated over the logo.
 
 <br><br>
 <hr style="border: 0; border-top: 1px dashed var(--cyber-border); margin: 40px 0;">
 <br><br>
 
-### 🛡️ PHASE 2: Tactical HUD (Navigation)
+2: Tactical HUD (Navigation)
+
 The menu was transformed into a **Heads-Up Display (HUD)** concept.
 
 * **Glassmorphism:** The navbar was modernized with a <span style="color: var(--cyber-cyan);">Blur</span> effect showing the background flow.
+
 * **System Monitors:** Indicators providing a real-time data feel were added to the center of the navigation:
     > `VPN: ENCRYPTED // THREAT_LEVEL: LOW // LOC: IST`
+
 * **LED Status Lights:** <span style="color: var(--alert-red); font-weight: bold;">Pulsing LEDs</span> were added to critical buttons to symbolize system activity.
 
 <br><br>
 <hr style="border: 0; border-top: 1px dashed var(--cyber-border); margin: 40px 0;">
 <br><br>
 
-### 👤 PHASE 3: Operator Identity (About Page)
+3: Operator Identity (About Page)
 The about page now follows a **"Personnel File"** hierarchy.
 
 * **Cyber Signature:** The header was replaced with a faint "About /" prefix and a <span style="color: #fff; text-shadow: 0 0 15px var(--cyber-cyan); font-weight: 900;">Glowing Neon Signature</span>.
+
 * **Typography:** The <span style="color: var(--success-green);">JetBrains Mono</span> font family was spread across all technical areas.
 
 <br><br>
 <hr style="border: 0; border-top: 1px dashed var(--cyber-border); margin: 40px 0;">
 <br><br>
 
-### ⚙️ PHASE 4: Asset Management
+4: Asset Management
 Invisible technical errors have been resolved.
 
 * **Asset Restoration:** The <span style="color: var(--cyber-cyan);">Favicon</span> and social media cover images were restored.
+
 * **Social Integration:** GitHub and LinkedIn links were pinned to the **Footer** with neon hover effects.
 
 <br><br>
