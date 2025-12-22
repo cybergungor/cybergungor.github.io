@@ -5,183 +5,161 @@ permalink: /home/
 ---
 
 <div class="infinite-log-bg">
-    <div class="log-col"><div class="moving-stream s1">
-        <span>[INFO] Connection established: 192.168.1.45</span>
-        <span>[WARN] Unauthorized access PORT 22</span>
-        <span>[DEBUG] SIEM Correlation: Rule_08 fired</span>
-        <span>[ALERT] Brute Force detected: Endpoint_01</span>
-        <span>SRC: 10.0.0.12 -> DST: 10.0.0.254 [TCP/443]</span>
-        <span>MITRE: T1059.001 (PowerShell Execution)</span>
-        <span>LOG_SOURCE: WinEventLog:Security</span>
-        <span>LOC: 41.0082° N, 28.9784° E (Istanbul)</span>
-        <span>[INFO] Connection established: 192.168.1.45</span>
-        <span>[WARN] Unauthorized access PORT 22</span>
-        <span>[DEBUG] SIEM Correlation: Rule_08 fired</span>
-        <span>[ALERT] Brute Force detected: Endpoint_01</span>
-        <span>SRC: 10.0.0.12 -> DST: 10.0.0.254 [TCP/443]</span>
-        <span>MITRE: T1059.001 (PowerShell Execution)</span>
-        <span>LOG_SOURCE: WinEventLog:Security</span>
-        <span>LOC: 41.0082° N, 28.9784° E (Istanbul)</span>
+    <div class="log-col"><div class="loop-stream s1">
+        <span>0xDE 0xAD 0xBE 0xEF // SYSTEM_INIT_SUCCESS</span>
+        <span>TRACERT -> 192.168.100.22 [OK]</span>
+        <span>MITRE_T1059: Powershell_Detected</span>
+        <span>SIEM_ALARM: High_Entropy_detected</span>
+        <span>0xDE 0xAD 0xBE 0xEF // SYSTEM_INIT_SUCCESS</span>
+        <span>TRACERT -> 192.168.100.22 [OK]</span>
     </div></div>
-
-    <div class="log-col"><div class="moving-stream s2">
-        <span>INDICATOR: Malicious HASH detected (MD5)</span>
-        <span>RULE_09: Brute Force Attempt [PORT_22]</span>
-        <span>[INFO] System Kernel updated (v6.1.0)</span>
-        <span>ISP: TurkNet Communication Services</span>
-        <span>[SUCCESS] Auth: User Emirhan_G logged in</span>
-        <span>0x45 0x6E 0x6D 0x69 0x72 0x68 0x61 0x6E</span>
-        <span>ENCRYPTION: AES-256-GCM | MODE: CBC</span>
-        <span>STATUS: ACTIVE_INVESTIGATION</span>
-        <span>INDICATOR: Malicious HASH detected (MD5)</span>
-        <span>RULE_09: Brute Force Attempt [PORT_22]</span>
-        <span>[INFO] System Kernel updated (v6.1.0)</span>
-        <span>ISP: TurkNet Communication Services</span>
-        <span>[SUCCESS] Auth: User Emirhan_G logged in</span>
-        <span>0x45 0x6E 0x6D 0x69 0x72 0x68 0x61 0x6E</span>
-        <span>ENCRYPTION: AES-256-GCM | MODE: CBC</span>
-        <span>STATUS: ACTIVE_INVESTIGATION</span>
-    </div></div>
-
-    <div class="log-col hide-mobile"><div class="moving-stream s3">
-        <span>[DEBUG] CPU_TEMP: 42°C | FAN: 2100rpm</span>
-        <span>[INFO] Heartbeat signal from SOC_Sensor_A</span>
-        <span>NETWORK_STATUS: SECURE | THREAT_LEVEL: LOW</span>
-        <span>ASN: AS12735 | TZ: Europe/Istanbul</span>
-        <span>[INFO] Firewall: Outbound traffic permitted</span>
-        <span>INDICATOR: Suspicious LDAP query detected</span>
-        <span>0x53 0x4F 0x43 0x5F 0x41 0x6E 0x61 0x6C</span>
-        <span>MITRE: T1562.001 (Impair Defenses)</span>
-        <span>[DEBUG] CPU_TEMP: 42°C | FAN: 2100rpm</span>
-        <span>[INFO] Heartbeat signal from SOC_Sensor_A</span>
-        <span>NETWORK_STATUS: SECURE | THREAT_LEVEL: LOW</span>
-        <span>ASN: AS12735 | TZ: Europe/Istanbul</span>
-        <span>[INFO] Firewall: Outbound traffic permitted</span>
-        <span>INDICATOR: Suspicious LDAP query detected</span>
-        <span>0x53 0x4F 0x43 0x5F 0x41 0x6E 0x61 0x6C</span>
-        <span>MITRE: T1562.001 (Impair Defenses)</span>
+    <div class="log-col hide-mobile"><div class="loop-stream s2">
+        <span>LAT: 41.008 // LON: 28.978 // ISTANBUL_NODE</span>
+        <span>EDR_VERSION: 2.5.4-STABLE</span>
+        <span>MEM_DUMP: Process_08F2 complete</span>
+        <span>LAT: 41.008 // LON: 28.978 // ISTANBUL_NODE</span>
     </div></div>
 </div>
 
 <div class="dashboard-wrapper">
     <div class="dashboard-header">
         <div class="lang-en">
-            <span class="status-badge"><span class="pulse-dot"></span> Available for Projects</span>
-            <h1 class="main-title">Emirhan Gungoroglu</h1>
-            <p class="typewriter-text">./detecting_threats --mode=active</p>
+            <span class="status-badge">Available for Projects</span>
+            <h1 class="main-title">EMIRHAN GUNGOROGLU</h1>
+            <div class="command-line">
+                <span class="prompt">guest@cyberlab:~$</span>
+                <span class="typewriter-text">whoami --roles --status</span>
+            </div>
         </div>
         <div class="lang-tr" style="display: none;">
-            <span class="status-badge"><span class="pulse-dot"></span> Projelere Açık</span>
-            <h1 class="main-title">Emirhan Güngöroğlu</h1>
-            <p class="typewriter-text">./tehdit_tespiti --mod=aktif</p>
+            <span class="status-badge">Projelere Açık</span>
+            <h1 class="main-title">EMİRHAN GÜNGÖROĞLU</h1>
+            <div class="command-line">
+                <span class="prompt">misafir@siberlab:~$</span>
+                <span class="typewriter-text">kimim_ben --roller --durum</span>
+            </div>
         </div>
     </div>
 
-    <div class="metrics-bar">
-        <div class="metric-item"><span class="metric-label">THREAT_LEVEL:</span> <span class="metric-value status-low">LOW</span></div>
-        <div class="metric-item"><span class="metric-label">NETWORK:</span> <span class="metric-value">SECURE</span></div>
-        <div class="metric-item"><span class="metric-label">SESSION:</span> <span class="metric-value" id="session-id">LOADING...</span></div>
+    <div class="metrics-row">
+        <div class="m-card">
+            <label>THREAT LEVEL</label>
+            <div class="val low-glow">LOW_DETECTION</div>
+        </div>
+        <div class="m-card">
+            <label>DEFENSE_STATUS</label>
+            <div class="val">ACTIVE_SHIELD</div>
+        </div>
+        <div class="m-card">
+            <label>SESSION_ID</label>
+            <div class="val" id="session-id">LOADING...</div>
+        </div>
     </div>
 
-    <div class="bento-container">
-        <a href="/blog/" class="bento-card blog-module">
-            <div class="card-content">
-                <div class="card-icon">📝</div>
-                <span class="tag">Knowledge Base</span>
-                <h2>Blog</h2>
-                <div class="lang-en"><p>In-depth technical write-ups on SOC operations, SIEM rules, and detection engineering.</p></div>
-                <div class="lang-tr" style="display: none;"><p>SOC operasyonları, SIEM kuralları ve tespit mühendisliği üzerine yazılar.</p></div>
+    <div class="bento-grid">
+        <a href="/blog/" class="bento-card blog-mod">
+            <div class="card-inner">
+                <span class="index">01</span>
+                <div class="icon">📁</div>
+                <h2>Blog / Write-ups</h2>
+                <p>Technical investigations and SOC analysis reports.</p>
+                <div class="btn-text">ACCESS_DATA &rarr;</div>
             </div>
-            <div class="card-footer">Explore Articles &rarr;</div>
         </a>
 
-        <a href="/labs/" class="bento-card">
-            <div class="card-content">
-                <div class="card-icon">🛡️</div>
-                <span class="tag">Practical</span>
-                <h2>Labs</h2>
-                <div class="lang-en"><p>Interactive security scenarios and simulation walkthroughs.</p></div>
-                <div class="lang-tr" style="display: none;"><p>Etkileşimli güvenlik senaryoları ve simülasyon çözümleri.</p></div>
+        <a href="/labs/" class="bento-card lab-mod">
+            <div class="card-inner">
+                <span class="index">02</span>
+                <div class="icon">🔬</div>
+                <h2>Labs / Range</h2>
+                <p>Live simulations and malware analysis results.</p>
+                <div class="btn-text">INIT_SIM &rarr;</div>
             </div>
-            <div class="card-footer">Launch Station &rarr;</div>
         </a>
 
-        <a href="/about/" class="bento-card">
-            <div class="card-content">
-                <div class="card-icon">👤</div>
-                <span class="tag">Identity</span>
-                <h2>About</h2>
-                <div class="lang-en"><p>Blue Team enthusiast documenting a cybersecurity journey.</p></div>
-                <div class="lang-tr" style="display: none;"><p>Siber güvenlik yolculuğunu belgeleyen Blue Team meraklısı.</p></div>
+        <a href="/about/" class="bento-card about-mod">
+            <div class="card-inner">
+                <span class="index">03</span>
+                <div class="icon">👤</div>
+                <h2>About / Operator</h2>
+                <p>Background and mission of Gungoroglu.</p>
+                <div class="btn-text">READ_BIO &rarr;</div>
             </div>
-            <div class="card-footer">Meet Operator &rarr;</div>
         </a>
     </div>
 </div>
 
 <style>
-/* --- LOG BACKGROUND FIX --- */
+/* --- PREMIUM THEME COLORS --- */
+:root {
+    --bg-main: #0a0b10; /* Derin siyah-lacivert */
+    --accent: #ccff00; /* Cyber Lime (Fark yaratan renk) */
+    --accent-dim: rgba(204, 255, 0, 0.2);
+    --text-primary: #ffffff;
+    --text-dim: #8b949e;
+}
+
+body {
+    background-color: var(--bg-main);
+    /* Noise texture ekliyoruz */
+    background-image: url('https://grainy-gradients.vercel.app/noise.svg');
+    background-attachment: fixed;
+    color: var(--text-primary);
+}
+
+/* --- LOGS (Çok daha silik ve estetik) --- */
 .infinite-log-bg {
-    position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
-    display: flex; justify-content: space-around;
-    opacity: 0.12; pointer-events: none; z-index: -1;
-    overflow: hidden; background: #0d1117;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; justify-content: space-between; opacity: 0.04;
+    z-index: -1; font-family: 'JetBrains Mono', monospace; font-size: 11px;
 }
-.log-col { flex: 1; display: flex; flex-direction: column; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #58a6ff; }
+.loop-stream { display: flex; flex-direction: column; animation: scrollDown 40s linear infinite; }
+@keyframes scrollDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
 
-/* TÜM kolonları hareket ettiren ortak sınıf */
-.moving-stream { display: flex; flex-direction: column; animation: scrollDown infinite linear; }
-.moving-stream span { padding: 12px 0; white-space: nowrap; }
+/* --- HEADER --- */
+.dashboard-wrapper { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+.main-title { 
+    font-family: 'Space Grotesk', sans-serif; /* Fütüristik font */
+    font-size: 4.5rem; font-weight: 800; letter-spacing: -4px; 
+    text-transform: uppercase; margin: 10px 0;
+}
+.command-line { display: flex; gap: 10px; font-family: 'JetBrains Mono'; font-size: 1.1rem; color: var(--accent); }
 
-/* Hız ayarları (Hepsini scrollDown'a bağladık) */
-.s1 { animation-duration: 30s; } 
-.s2 { animation-duration: 45s; } 
-.s3 { animation-duration: 35s; }
+/* --- METRICS --- */
+.metrics-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 3rem 0; }
+.m-card { 
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.05); 
+    padding: 15px; border-radius: 8px; text-align: left;
+}
+.m-card label { font-size: 9px; color: var(--text-dim); letter-spacing: 2px; }
+.m-card .val { font-family: 'JetBrains Mono'; font-size: 13px; color: var(--text-primary); font-weight: bold; }
+.low-glow { color: var(--accent) !important; text-shadow: 0 0 10px var(--accent-dim); }
 
-@keyframes scrollDown { 
-    0% { transform: translateY(-50%); } 
-    100% { transform: translateY(0); } 
+/* --- BENTO CARDS --- */
+.bento-grid { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; }
+.bento-card { 
+    background: rgba(255,255,255,0.02); 
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 20px; padding: 40px; text-decoration: none !important;
+    position: relative; overflow: hidden; transition: 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    backdrop-filter: blur(10px);
+}
+.blog-mod { grid-row: span 2; }
+
+.bento-card:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: var(--accent);
+    transform: scale(1.02);
 }
 
-/* --- DASHBOARD STYLES --- */
-.dashboard-wrapper { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; position: relative; z-index: 2; }
+.index { position: absolute; top: 30px; right: 30px; font-size: 4rem; opacity: 0.03; font-weight: 900; }
+.icon { font-size: 2rem; margin-bottom: 20px; }
+.bento-card h2 { font-family: 'Space Grotesk'; font-size: 2rem; margin-bottom: 10px; color: #fff; }
+.btn-text { margin-top: 30px; font-size: 11px; font-weight: bold; color: var(--accent); letter-spacing: 2px; }
 
-/* Typewriter Effect */
-.main-title { font-size: clamp(2.5rem, 7vw, 4rem); color: #fff; font-weight: 800; letter-spacing: -2.5px; margin: 0.5rem 0; }
-.typewriter-text {
-    font-family: 'JetBrains Mono', monospace; color: #58a6ff; font-size: 1.2rem;
-    border-right: 3px solid #58a6ff; width: fit-content; white-space: nowrap; overflow: hidden;
-    animation: typing 4s steps(30, end) infinite, blink 0.8s step-end infinite;
-}
-@keyframes typing { 0%, 10% { width: 0 } 50%, 90% { width: 100% } 100% { width: 0 } }
-@keyframes blink { 50% { border-color: transparent } }
-
-/* Status Badge */
-.status-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(63, 185, 80, 0.1); color: #3fb950; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: bold; }
-.pulse-dot { width: 8px; height: 8px; background: #3fb950; border-radius: 50%; animation: pulse 2s infinite; }
-@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
-
-/* Metrics & Bento */
-.metrics-bar { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 3rem; padding: 15px 25px; background: rgba(22, 27, 34, 0.8); border: 1px solid #30363d; border-radius: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; backdrop-filter: blur(8px); }
-.metric-value { color: #f0f6fc; font-weight: bold; }
-.status-low { color: #3fb950; text-shadow: 0 0 5px rgba(63, 185, 80, 0.5); }
-
-.bento-container { display: grid; grid-template-columns: 1.8fr 1fr; gap: 24px; }
-.bento-card { background: rgba(22, 27, 34, 0.9); border: 1px solid #30363d; border-radius: 24px; padding: 32px; text-decoration: none !important; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; transition: 0.4s; }
-.bento-card:hover { border-color: #58a6ff; transform: translateY(-8px); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
-.blog-module { grid-row: span 2; }
-.tag { font-family: 'JetBrains Mono', monospace; color: #58a6ff; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
-.bento-card h2 { color: #fff; font-size: 1.8rem; margin: 10px 0; border: none; padding: 0; }
-.card-footer { margin-top: 20px; color: #fff; font-size: 13px; opacity: 0.4; font-weight: bold; }
-
-@media (max-width: 850px) {
-    .bento-container { grid-template-columns: 1fr; }
-    .blog-module { grid-row: span 1; }
-    .hide-mobile { display: none; }
-}
+@media (max-width: 850px) { .bento-grid { grid-template-columns: 1fr; } .main-title { font-size: 2.5rem; } }
 </style>
 
 <script>
-    document.getElementById('session-id').innerText = Math.random().toString(36).substring(2, 10).toUpperCase();
+    document.getElementById('session-id').innerText = Math.random().toString(36).substring(2, 12).toUpperCase();
 </script>
