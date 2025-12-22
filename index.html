@@ -37,7 +37,6 @@ title: Welcome
             <p class="welcome-subtext">Welcome — Learning. Detecting. Improving.</p>
             
             <a href="/home/" class="initiate-portal-btn">
-                <span class="btn-glitch-layer"></span>
                 <span class="btn-main-text">INITIATE ACCESS</span>
             </a>
         </div>
@@ -45,17 +44,18 @@ title: Welcome
 </div>
 
 <style>
-/* --- TEMEL AYARLAR --- */
 :root {
     --gateway-bg: #050608;
     --cyber-cyan: #00f2ff;
     --ready-green: #3fb950;
 }
 
-/* Sayfanın kesilmesini ve footer çakışmasını önler */
+/* Sayfanın tam ekran olmasını ve kaymamasını sağlar */
 html, body { 
     height: 100% !important; 
+    width: 100% !important;
     margin: 0 !important; 
+    padding: 0 !important;
     overflow: hidden !important; 
     background: var(--gateway-bg);
 }
@@ -64,16 +64,16 @@ html, body {
     height: 100vh;
     width: 100vw;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: center; /* Dikeyde ortalar */
+    justify-content: center; /* Yatayda ortalar - Hata buradaydı */
     position: relative;
     background: var(--gateway-bg);
 }
 
-/* --- 3D PERSPEKTİF IZGARA (Boşluğu dolduran kısım) --- */
+/* --- 3D IZGARA --- */
 .grid-floor-3d {
     position: absolute;
-    bottom: -15%; left: -50%; right: -50%;
+    bottom: -15%; left: 0; right: 0;
     height: 80%;
     background-image: 
         linear-gradient(var(--cyber-cyan) 1px, transparent 1px),
@@ -87,33 +87,25 @@ html, body {
 }
 @keyframes floorFlow { 0% { background-position: 0 0; } 100% { background-position: 0 60px; } }
 
-/* Kenar Karartma (Merkeze odak sağlar) */
 .vignette-overlay {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle, transparent 30%, var(--gateway-bg) 90%);
+    background: radial-gradient(circle, transparent 30%, var(--gateway-bg) 95%);
     z-index: 3; pointer-events: none;
 }
 
-/* --- ARKA PLAN LOGLARI --- */
-.background-logs {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    display: flex; justify-content: space-between; padding: 0 5%;
-    opacity: 0.07; z-index: 1; pointer-events: none;
+/* --- MERKEZİ PANEL --- */
+.gateway-center { 
+    position: relative; 
+    z-index: 10; 
+    text-align: center;
+    width: 100%; /* Tam genişlikte merkeze odaklanır */
 }
-.stream { display: flex; flex-direction: column; animation: scrollDown 40s linear infinite; }
-.stream span { padding: 15px 0; font-family: 'JetBrains Mono'; font-size: 11px; color: var(--cyber-cyan); }
-@keyframes scrollDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
 
-/* --- MERKEZİ İÇERİK --- */
-.gateway-center { position: relative; z-index: 10; text-align: center; }
-
-.logo-container { position: relative; margin-bottom: 2.5rem; }
+.logo-container { position: relative; display: inline-block; margin-bottom: 2.5rem; }
 .hero-logo { 
-    max-width: 320px; width: 85%; 
+    max-width: 340px; width: 90%; 
     filter: drop-shadow(0 0 20px rgba(0, 242, 255, 0.2)); 
-    transition: transform 0.4s ease;
 }
-.hero-logo:hover { transform: scale(1.05); }
 
 .scanner-bar {
     position: absolute; top: 0; left: 0; width: 100%; height: 2px;
@@ -122,14 +114,13 @@ html, body {
 }
 @keyframes laserScan { 0%, 100% { top: 0%; opacity: 0; } 50% { top: 100%; opacity: 1; } }
 
-/* DURUM VE BUTON */
 .status-indicator { display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; }
-.pulse-dot { width: 8px; height: 8px; background: var(--ready-green); border-radius: 50%; animation: pulse 1.5s infinite; }
-@keyframes pulse { 0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(63, 185, 80, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(63, 185, 80, 0); } 100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(63, 185, 80, 0); } }
+.pulse-dot { width: 8px; height: 8px; background: var(--ready-green); border-radius: 50%; animation: dotPulse 1.5s infinite; }
+@keyframes dotPulse { 0% { transform: scale(0.95); opacity: 1; } 70% { transform: scale(1.5); opacity: 0; } 100% { transform: scale(0.95); opacity: 0; } }
 
 .status-text { font-family: 'JetBrains Mono'; color: #8b949e; font-size: 0.8rem; letter-spacing: 1px; }
 .ready-glow { color: var(--ready-green); text-shadow: 0 0 8px var(--ready-green); }
-.welcome-subtext { color: #fff; opacity: 0.5; margin-bottom: 2rem; font-size: 0.9rem; }
+.welcome-subtext { color: #fff; opacity: 0.4; margin-bottom: 2.5rem; font-size: 0.9rem; }
 
 .initiate-portal-btn {
     display: inline-block; padding: 15px 50px;
@@ -140,11 +131,21 @@ html, body {
 }
 .initiate-portal-btn:hover {
     background: var(--cyber-cyan); color: #000;
-    box-shadow: 0 0 40px rgba(0, 242, 255, 0.4);
+    box-shadow: 0 0 40px rgba(0, 242, 255, 0.5);
 }
 
+/* LOGLAR (SADECE ESTETİK İÇİN) */
+.background-logs {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; justify-content: space-between; padding: 0 4%;
+    opacity: 0.05; z-index: 1; pointer-events: none;
+}
+.stream { display: flex; flex-direction: column; animation: logScroll 40s linear infinite; }
+.stream span { padding: 10px 0; font-family: 'JetBrains Mono'; font-size: 10px; color: var(--cyber-cyan); }
+@keyframes logScroll { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
+
 @media (max-width: 768px) {
-    .hero-logo { max-width: 240px; }
-    .grid-floor-3d { height: 50%; bottom: 0; }
+    .hero-logo { max-width: 260px; }
+    .gateway-center { padding: 0 20px; }
 }
 </style>
