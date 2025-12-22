@@ -4,118 +4,118 @@ layout: default
 
 <div class="post-log-bg">
     <div class="log-col"><div class="moving-stream s1">
-        <span>[READING_MODE] Loading entry ID: {{ page.date | date: "%Y%m%d" }}_X7</span>
-        <span>[DECRYPT] AES-256 success</span>
-        <span>[STATUS] Displaying data block...</span>
-        <span>[READING_MODE] Loading entry ID: {{ page.date | date: "%Y%m%d" }}_X7</span>
+        <span>[ACCESS] NODE_READ_SESSION_START</span>
+        <span>[INFO] Decrypting incident_report_{{ page.date | date: "%Y%m%d" }}</span>
+        <span>[STATUS] Rendering Markdown blocks...</span>
+        <span>[ACCESS] NODE_READ_SESSION_START</span>
     </div></div>
     <div class="log-col hide-mobile"><div class="moving-stream s2">
-        <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x56 0x49 0x45 0x57</span>
-        <span>ACCESS_LOG: User IP recorded</span>
-        <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x56 0x49 0x45 0x57</span>
+        <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x44 0x41 0x54 0x41</span>
+        <span>INTEGRITY_CHECK: PASSED</span>
+        <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x44 0x41 0x54 0x41</span>
     </div></div>
 </div>
 
-<div class="tactical-post-wrapper">
-    <header class="post-report-header">
-        <div class="header-meta">
-            <span class="status-badge">INCIDENT_REPORT // {{ page.categories | first | upcase }}</span>
-            <span class="meta-date">{{ page.date | date: "%d %b %Y" }}</span>
-        </div>
-        <div class="command-line-small">
-            <span class="prompt">root@cyberlab:~/reports$</span> cat {{ page.title | downcase | replace: ' ', '_' }}.log
-        </div>
-        <h1 class="post-main-title">{{ page.title }}</h1>
-    </header>
+<div class="tactical-post-container">
+    <div class="post-inner-wrapper">
+        <header class="post-header-tactical">
+            <div class="header-meta">
+                <span class="report-badge">INCIDENT_REPORT // {{ page.categories | first | upcase }}</span>
+                <span class="report-date">{{ page.date | date: "%d %b %Y" }}</span>
+            </div>
+            <div class="report-command">
+                <span class="user-prompt">root@cyberlab:~/reports$</span> 
+                <span class="command-text">cat {{ page.title | slugify }}.log</span>
+            </div>
+            <h1 class="report-title">{{ page.title }}</h1>
+        </header>
 
-    <article class="post-content-body">
-        {{ content }}
-    </article>
+        <article class="report-body">
+            {{ content }}
+        </article>
 
-    <footer class="post-footer">
-        <div class="terminal-separator">--- END OF LOG FILE ---</div>
-        <a href="/blog/" class="back-btn">&larr; RETURN_TO_DATABASE</a>
-    </footer>
+        <footer class="report-footer">
+            <div class="footer-divider">/* --- END OF LOG FILE --- */</div>
+            <a href="/blog/" class="back-link">&larr; DB_BACK_TO_LIST</a>
+        </footer>
+    </div>
 </div>
 
 <style>
-/* --- TACTICAL CORE --- */
+/* --- CORE INTEGRATION --- */
 :root {
-    --bg: #08090a;
-    --card-bg: rgba(17, 18, 20, 0.95);
-    --accent: #00f2ff;
-    --border: rgba(255, 255, 255, 0.08);
+    --cyber-bg: #08090a;
+    --cyber-card: rgba(17, 18, 20, 0.98);
+    --cyber-blue: #00f2ff;
+    --cyber-border: rgba(0, 242, 255, 0.15);
 }
 
-body { background-color: var(--bg) !important; color: #c9d1d9; margin: 0; }
+/* Sayfa arka planını zorla siyah yapıyoruz */
+body { background-color: var(--cyber-bg) !important; margin: 0; padding: 0; color: #c9d1d9; }
 
-/* --- ÇAKIŞMAYI ÖNLEYEN KRİTİK AYAR --- */
-.tactical-post-wrapper {
-    max-width: 900px;
+/* --- 2. ÇAKIŞMA ÇÖZÜMÜ (KRİTİK ALAN) --- */
+.tactical-post-container {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    /* Navbar yüksekliğini kompanse etmek için devasa boşluk */
+    padding-top: 140px !important; 
+    padding-bottom: 50px !important;
+    box-sizing: border-box !important;
+}
+
+.post-inner-wrapper {
+    max-width: 850px;
     margin: 0 auto;
-    /* Navbar yüksekliği + Güvenli alan (Yaklaşık 120px) */
-    padding-top: 130px; 
-    padding-bottom: 4rem;
-    padding-left: 20px;
-    padding-right: 20px;
-    position: relative;
-    z-index: 2;
+    padding: 0 20px;
 }
 
-/* --- BAŞLIK ALANI (Artık Navbarın Altında Kalmaz) --- */
-.post-report-header {
-    margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border);
+/* --- BAŞLIK ALANI --- */
+.post-header-tactical {
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--cyber-border);
+    padding-bottom: 20px;
 }
-
-.header-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
-.status-badge { background: rgba(0, 242, 255, 0.1); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: bold; }
-.meta-date { font-family: 'JetBrains Mono'; font-size: 11px; color: #8b949e; }
-
-.post-main-title { 
-    font-size: clamp(2.2rem, 5vw, 3.5rem); 
-    font-weight: 800; color: #fff; margin: 15px 0 0 0; 
-    line-height: 1.1;
-    text-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
-}
-
-.command-line-small { font-family: 'JetBrains Mono'; font-size: 0.85rem; color: #8b949e; opacity: 0.7; }
-.prompt { color: #3fb950; margin-right: 8px; }
+.header-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.report-badge { background: rgba(0, 242, 255, 0.1); color: var(--cyber-blue); padding: 5px 12px; border-radius: 4px; font-size: 10px; font-weight: bold; letter-spacing: 1px; }
+.report-date { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8b949e; }
+.report-command { font-family: 'JetBrains Mono', monospace; font-size: 0.9rem; margin-bottom: 15px; }
+.user-prompt { color: #3fb950; }
+.report-title { font-size: 3rem; color: #fff; font-weight: 800; margin: 0; line-height: 1.1; }
 
 /* --- İÇERİK GÖVDESİ --- */
-.post-content-body {
-    background: var(--card-bg);
-    border: 1px solid var(--border);
-    border-radius: 20px;
-    padding: 45px;
-    backdrop-filter: blur(10px);
+.report-body {
+    background: var(--cyber-card);
+    border: 1px solid var(--cyber-border);
+    border-radius: 12px;
+    padding: 40px;
     line-height: 1.8;
+    font-size: 1.05rem;
+    backdrop-filter: blur(10px);
 }
+/* İçerik içi stil düzenleme */
+.report-body h2 { color: #fff; border-left: 3px solid var(--cyber-blue); padding-left: 15px; margin-top: 35px; }
+.report-body pre { background: #0d1117 !important; padding: 20px; border-radius: 8px; border: 1px solid var(--cyber-border); overflow-x: auto; }
+.report-body code { color: var(--cyber-blue); }
 
-.post-content-body h2 { color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 2.5rem; }
-.post-content-body p { margin-bottom: 1.5rem; }
-.post-content-body code { color: var(--accent); background: rgba(0, 242, 255, 0.05); padding: 2px 5px; border-radius: 4px; }
-.post-content-body pre { background: #0d1117 !important; padding: 20px; border-radius: 12px; border: 1px solid var(--border); overflow-x: auto; margin: 20px 0; }
-
-/* --- LOG BACKGROUND --- */
+/* --- BACKGROUND LOGS --- */
 .post-log-bg {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     display: flex; justify-content: space-around; opacity: 0.05;
-    z-index: -1; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+    z-index: 0; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px;
 }
-.moving-stream { display: flex; flex-direction: column; animation: scrollDown 45s infinite linear; }
-.moving-stream span { padding: 12px 0; color: var(--accent); }
-@keyframes scrollDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
+.moving-stream { display: flex; flex-direction: column; animation: scrollLog 40s linear infinite; }
+.moving-stream span { padding: 15px 0; color: var(--cyber-blue); }
+@keyframes scrollLog { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
 
 /* --- FOOTER --- */
-.post-footer { margin-top: 3rem; text-align: center; }
-.terminal-separator { font-family: 'JetBrains Mono'; color: #8b949e; opacity: 0.4; margin-bottom: 1.5rem; }
-.back-btn { display: inline-block; padding: 10px 25px; border: 1px solid var(--accent); border-radius: 8px; color: var(--accent); text-decoration: none; font-family: 'JetBrains Mono'; font-weight: bold; transition: 0.3s; }
-.back-btn:hover { background: rgba(0, 242, 255, 0.1); box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
+.report-footer { margin-top: 40px; text-align: center; }
+.footer-divider { font-family: 'JetBrains Mono'; color: #8b949e; opacity: 0.5; font-size: 0.8rem; margin-bottom: 20px; }
+.back-link { display: inline-block; color: var(--cyber-blue); border: 1px solid var(--cyber-blue); padding: 10px 20px; text-decoration: none; font-weight: bold; border-radius: 4px; }
 
 @media (max-width: 768px) {
-    .tactical-post-wrapper { padding-top: 100px; }
-    .post-content-body { padding: 25px; }
+    .tactical-post-container { padding-top: 100px !important; }
+    .report-title { font-size: 2rem; }
+    .report-body { padding: 20px; }
 }
 </style>
