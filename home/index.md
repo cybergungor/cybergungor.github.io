@@ -4,33 +4,66 @@ title: Home
 permalink: /home/
 ---
 
-<div class="log-bg left-logs">
-    <div class="log-content">
-        12.22.2025 23:01:45 [INFO] Connection established from 192.168.1.45 <br>
-        12.22.2025 23:01:46 [WARN] Unauthorized access attempt on PORT 22 <br>
-        12.22.2025 23:01:48 [DEBUG] SIEM Correlation Engine: Rule_08 fired <br>
-        12.22.2025 23:01:50 [INFO] User Emirhan_G session initialized <br>
-        12.22.2025 23:01:52 [INFO] Firewall: Outbound traffic permitted to 8.8.8.8 <br>
-        12.22.2025 23:01:55 [ALERT] Potential Brute Force detected on Endpoint_01 <br>
-        12.22.2025 23:01:58 [INFO] Heartbeat signal received from SOC_Sensor_A <br>
-        12.22.2025 23:01:45 [INFO] Connection established from 192.168.1.45 <br>
-        12.22.2025 23:01:46 [WARN] Unauthorized access attempt on PORT 22 <br>
-        12.22.2025 23:01:50 [INFO] User Emirhan_G session initialized <br>
+<div class="log-background-grid">
+    <div class="log-column">
+        <div class="log-stream">
+            SRC: 192.168.1.105 -> DST: 8.8.8.8 [UDP/53] <br>
+            SRC: 10.0.2.15 -> DST: 10.0.2.2 [TCP/443] <br>
+            PACKET_SIZE: 1500 bytes | TTL: 64 <br>
+            PROTO: ICMP | TYPE: ECHO_REQUEST <br>
+            SRC: 172.16.0.5 -> DST: 172.16.0.1 [TCP/22] <br>
+            SRC: 192.168.1.105 -> DST: 8.8.8.8 [UDP/53] <br>
+            SRC: 10.0.2.15 -> DST: 10.0.2.2 [TCP/443] <br>
+            PACKET_SIZE: 1500 bytes | TTL: 64 <br>
+        </div>
     </div>
-</div>
-
-<div class="log-bg right-logs">
-    <div class="log-content delay">
-        SRC_IP: 10.0.0.12 -> DST_IP: 10.0.0.254 [TCP/443] <br>
-        STATUS: 200 OK | PAYLOAD_SIZE: 1245 bytes <br>
-        THREAD_ID: 0x8F2A | PRIORITY: HIGH <br>
-        MITRE_ATTACK: T1059.001 (PowerShell Execution) <br>
-        LOG_SOURCE: WinEventLog:Security <br>
-        ACTION: ALLOW | POLICY: Default_Drop_Rule <br>
-        HASH: 5e884898da28047151d0e56f8dc6292773603d <br>
-        SRC_IP: 10.0.0.12 -> DST_IP: 10.0.0.254 [TCP/443] <br>
-        STATUS: 200 OK | PAYLOAD_SIZE: 1245 bytes <br>
-        LOG_SOURCE: WinEventLog:Security <br>
+    <div class="log-column hide-mobile">
+        <div class="log-stream delay-1">
+            [INFO] System Kernel updated (v6.1.0) <br>
+            [SUCCESS] Auth: User Emirhan_G logged in <br>
+            [DEBUG] CPU_TEMP: 42°C | FAN_SPEED: 2100rpm <br>
+            [WARN] Disk space reaching threshold (85%) <br>
+            [INFO] Service: Nginx restarted successfully <br>
+            [INFO] System Kernel updated (v6.1.0) <br>
+            [SUCCESS] Auth: User Emirhan_G logged in <br>
+            [DEBUG] CPU_TEMP: 42°C | FAN_SPEED: 2100rpm <br>
+        </div>
+    </div>
+    <div class="log-column">
+        <div class="log-stream delay-2">
+            MITRE: T1059.001 (PowerShell Execution) <br>
+            THREAT_INTEL: IP 45.33.22.11 blacklisted <br>
+            INDICATOR: Malicious HASH detected (MD5) <br>
+            POLICY: Blocked traffic from RU/CN regions <br>
+            ALERT: Suspicious LDAP query detected <br>
+            MITRE: T1059.001 (PowerShell Execution) <br>
+            THREAT_INTEL: IP 45.33.22.11 blacklisted <br>
+            INDICATOR: Malicious HASH detected (MD5) <br>
+        </div>
+    </div>
+    <div class="log-column hide-mobile">
+        <div class="log-stream delay-3">
+            LOC: 41.0082° N, 28.9784° E (Istanbul) <br>
+            ISP: TurkNet Communication Services <br>
+            ASN: AS12735 | TZ: Europe/Istanbul <br>
+            REGION: TR-34 | OS: Linux_x86_64 <br>
+            BROWSER: Mozilla/5.0 (BlueTeam_Analyst) <br>
+            LOC: 41.0082° N, 28.9784° E (Istanbul) <br>
+            ISP: TurkNet Communication Services <br>
+            ASN: AS12735 | TZ: Europe/Istanbul <br>
+        </div>
+    </div>
+    <div class="log-column">
+        <div class="log-stream delay-4">
+            RULE_09: Brute Force Attempt [PORT_22] <br>
+            LOG_SOURCE: WinEventLog:Security <br>
+            ACTION: DROPPED | BY: Cisco_ASA_FW <br>
+            CORRELATION_ID: 0x99F2B81A <br>
+            STATUS: ACTIVE_INVESTIGATION <br>
+            RULE_09: Brute Force Attempt [PORT_22] <br>
+            LOG_SOURCE: WinEventLog:Security <br>
+            ACTION: DROPPED | BY: Cisco_ASA_FW <br>
+        </div>
     </div>
 </div>
 
@@ -101,33 +134,39 @@ permalink: /home/
 </div>
 
 <style>
-/* --- LOG STREAM BACKGROUND (NEW) --- */
-.log-bg {
+/* --- FULL SCREEN LOG BACKGROUND --- */
+.log-background-grid {
     position: fixed;
-    top: 0;
-    width: 250px;
-    height: 100vh;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2%;
+    opacity: 0.08; /* İstediğin o silik mavi ton */
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.log-column {
+    flex: 1;
     font-family: 'JetBrains Mono', monospace;
     font-size: 9px;
-    line-height: 2;
-    color: rgba(88, 166, 255, 0.08); /* Çok silik mavi - göz yormaz */
-    overflow: hidden;
-    pointer-events: none;
-    z-index: -1; /* En arka plana atar */
+    line-height: 2.5;
+    color: var(--accent);
+    padding: 0 10px;
 }
 
-.left-logs { left: 20px; }
-.right-logs { right: 20px; text-align: right; }
-
-.log-content {
+.log-stream {
     display: flex;
     flex-direction: column;
-    animation: scrollLogs 45s linear infinite;
+    animation: scrollLogs 50s linear infinite;
 }
 
-.log-content.delay {
-    animation-duration: 60s; /* Sağ taraf farklı hızda aksın ki yapay durmasın */
-}
+/* Farklı hızlar ve gecikmelerle doğallık sağlıyoruz */
+.delay-1 { animation-duration: 70s; }
+.delay-2 { animation-duration: 60s; animation-delay: 2s; }
+.delay-3 { animation-duration: 80s; animation-delay: 5s; }
+.delay-4 { animation-duration: 55s; animation-delay: 1s; }
 
 @keyframes scrollLogs {
     0% { transform: translateY(0); }
@@ -140,7 +179,7 @@ permalink: /home/
     margin: 0 auto;
     padding: 0 40px;
     position: relative;
-    z-index: 2; /* Logların üzerinde durmasını sağlar */
+    z-index: 2;
 }
 
 /* --- HERO & TYPEWRITER --- */
@@ -197,7 +236,7 @@ permalink: /home/
 @media (max-width: 850px) {
     .bento-container { grid-template-columns: 1fr; }
     .blog-module { grid-row: span 1; }
-    .log-bg { display: none; } /* Mobilde karmaşayı önlemek için logları gizliyoruz */
+    .hide-mobile { display: none; }
 }
 </style>
 
