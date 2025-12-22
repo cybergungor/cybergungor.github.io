@@ -2,89 +2,108 @@
 layout: default
 ---
 
-<div class="post-log-bg">
+<div class="infinite-log-bg">
     <div class="log-col"><div class="moving-stream s1">
-        <span>[SYSTEM] Reading log entry...</span>
-        <span>[STATUS] Content rendered in static mode.</span>
+        <span>[SYSTEM] Opening incident_report_{{ page.date | date: "%Y%m%d" }}.log</span>
+        <span>[INFO] Decrypting content using tactical_key_01...</span>
+        <span>[STATUS] Rendering data blocks: OK</span>
+        <span>[SYSTEM] Opening incident_report_{{ page.date | date: "%Y%m%d" }}.log</span>
     </div></div>
     <div class="log-col hide-mobile"><div class="moving-stream s2">
-        <span>0x52 0x45 0x50 0x4F 0x52 0x54</span>
-        <span>NO_STICKY_ELEMENTS_DETECTED</span>
+        <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x44 0x41 0x54 0x41</span>
+        <span>INTEGRITY_CHECK: 100% SUCCESS</span>
+        <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x44 0x41 0x54 0x41</span>
     </div></div>
 </div>
 
-<div class="post-container-simple">
-    <header class="simple-header">
-        <div class="meta-info">
-            {{ page.date | date: "%d %b %Y" }} // {{ page.categories | first | upcase }}
+<div class="tactical-report-container">
+    
+    <header class="report-header-static">
+        <div class="report-meta">
+            <span class="meta-tag">{{ page.categories | first | upcase }}</span>
+            <span class="meta-date">{{ page.date | date: "%d %B %Y" }}</span>
         </div>
-        <h1 class="plain-white-title">{{ page.title }}</h1>
-        <div class="terminal-path">root@cyberlab:~/reports/{{ page.title | slugify }}.txt</div>
+        <h1 class="report-main-title">{{ page.title }}</h1>
+        <div class="report-path">
+            <span class="path-prompt">root@cyberlab:~$</span> cat /home/emirhan/reports/{{ page.title | slugify }}.txt
+        </div>
     </header>
 
-    <article class="report-content">
+    <article class="report-article-body">
         {{ content }}
     </article>
 
-    <footer class="simple-footer">
-        <a href="/blog/" class="back-link">/ BACK_TO_DATABASE /</a>
+    <footer class="report-footer-simple">
+        <div class="divider-line">/* END_OF_DATA_STREAM */</div>
+        <a href="/blog/" class="return-btn">/ BACK_TO_DATABASE /</a>
     </footer>
 </div>
 
 <style>
-/* --- TEMEL RENKLER --- */
+/* --- CORE STYLES --- */
 :root {
-    --bg: #08090a;
-    --accent: #00f2ff;
-    --border: rgba(255, 255, 255, 0.1);
+    --cyber-bg: #08090a;
+    --cyber-blue: #00f2ff;
+    --cyber-border: rgba(255, 255, 255, 0.08);
 }
 
+/* Arka planı ve genel rengi zorla uygula */
 body { 
-    background-color: var(--bg) !important; 
+    background-color: var(--cyber-bg) !important; 
     color: #c9d1d9; 
     margin: 0; 
-    line-height: 1.6;
+    padding: 0; 
+    font-family: 'Inter', sans-serif;
 }
 
-/* --- ANA KONTEYNER (Üstten güvenli boşluk) --- */
-.post-container-simple {
+/* --- KONTEYNER: NAVBAR ÇAKIŞMASINI ÖNLEYEN KRİTİK ALAN --- */
+.tactical-report-container {
     max-width: 850px;
     margin: 0 auto;
-    /* Üstteki navbar'ın altına gelmesi için pay bırakıyoruz */
-    padding: 100px 20px 50px 20px; 
+    /* Navbar'ın yüksekliği kadar üstten boşluk (Zorunlu) */
+    padding-top: 130px !important; 
+    padding-bottom: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
-/* --- BAŞLIK STİLİ (Sade Beyaz) --- */
-.simple-header {
+/* --- BAŞLIK ALANI (SADE BEYAZ) --- */
+.report-header-static {
     margin-bottom: 2.5rem;
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--cyber-border);
     padding-bottom: 1.5rem;
 }
 
-.plain-white-title {
-    color: #ffffff !important; /* Tam beyaz düz yazı */
-    font-size: clamp(2rem, 5vw, 3.5rem);
+.report-main-title {
+    color: #ffffff !important; /* Saf Beyaz */
+    font-size: clamp(2rem, 5vw, 3.2rem);
     font-weight: 800;
     margin: 10px 0;
-    letter-spacing: -1px;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
 }
 
-.meta-info { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: #8b949e; opacity: 0.7; }
-.terminal-path { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: #3fb950; opacity: 0.8; }
+.report-meta { display: flex; gap: 15px; align-items: center; margin-bottom: 8px; }
+.meta-tag { color: var(--cyber-blue); font-family: 'JetBrains Mono'; font-size: 11px; font-weight: bold; }
+.meta-date { color: #8b949e; font-family: 'JetBrains Mono'; font-size: 11px; }
+.report-path { font-family: 'JetBrains Mono'; font-size: 0.85rem; color: #8b949e; opacity: 0.8; }
+.path-prompt { color: #3fb950; }
 
 /* --- İÇERİK ALANI --- */
-.report-content {
-    background: rgba(17, 18, 20, 0.5); /* Çok hafif şeffaf arka plan */
-    border-radius: 8px;
-    font-size: 1.1rem;
+.report-article-body {
+    background: rgba(17, 18, 20, 0.4);
+    border-radius: 12px;
     line-height: 1.8;
+    font-size: 1.05rem;
 }
 
-/* Makale içi temel stiller */
-.report-content h2 { color: #fff; margin-top: 2rem; border-bottom: 1px solid var(--border); padding-bottom: 5px; }
-.report-content p { margin-bottom: 1.5rem; }
-.report-content pre { background: #0d1117 !important; padding: 15px; border-radius: 6px; border: 1px solid var(--border); overflow-x: auto; }
-.report-content code { color: var(--accent); background: rgba(0, 242, 255, 0.05); padding: 2px 5px; border-radius: 3px; }
+/* İçerik içi stil düzenlemeleri */
+.report-article-body h2 { color: #fff; margin-top: 2.5rem; border-bottom: 1px solid var(--cyber-border); padding-bottom: 8px; }
+.report-article-body h3 { color: #fff; margin-top: 1.8rem; }
+.report-article-body p { margin-bottom: 1.5rem; }
+.report-article-body pre { background: #0d1117 !important; padding: 18px; border-radius: 8px; border: 1px solid var(--cyber-border); overflow-x: auto; margin: 20px 0; }
+.report-article-body code { color: var(--cyber-blue); background: rgba(0, 242, 255, 0.05); padding: 2px 5px; border-radius: 4px; }
+.report-article-body img { max-width: 100%; border-radius: 8px; border: 1px solid var(--cyber-border); margin: 15px 0; }
 
 /* --- ARKA PLAN LOGLARI --- */
 .post-log-bg {
@@ -92,24 +111,18 @@ body {
     display: flex; justify-content: space-around; opacity: 0.05;
     z-index: -1; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px;
 }
-.moving-stream { display: flex; flex-direction: column; animation: scrollLog 50s linear infinite; }
-.moving-stream span { padding: 15px 0; color: var(--accent); }
+.moving-stream { display: flex; flex-direction: column; animation: scrollLog 45s linear infinite; }
+.moving-stream span { padding: 15px 0; color: var(--cyber-blue); }
 @keyframes scrollLog { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
 
 /* --- FOOTER --- */
-.simple-footer { margin-top: 4rem; text-align: center; }
-.back-link { 
-    color: #8b949e; 
-    text-decoration: none; 
-    font-family: 'JetBrains Mono'; 
-    font-weight: bold; 
-    font-size: 0.9rem;
-    transition: 0.3s;
-}
-.back-link:hover { color: var(--accent); }
+.report-footer-simple { margin-top: 4rem; text-align: center; }
+.divider-line { font-family: 'JetBrains Mono'; color: #8b949e; opacity: 0.3; margin-bottom: 1.5rem; }
+.return-btn { color: #8b949e; text-decoration: none; font-family: 'JetBrains Mono'; font-weight: bold; transition: 0.3s; }
+.return-btn:hover { color: var(--cyber-blue); }
 
 @media (max-width: 768px) {
-    .post-container-simple { padding-top: 80px; }
-    .plain-white-title { font-size: 2.2rem; }
+    .tactical-report-container { padding-top: 100px !important; }
+    .report-main-title { font-size: 2.2rem; }
 }
 </style>
