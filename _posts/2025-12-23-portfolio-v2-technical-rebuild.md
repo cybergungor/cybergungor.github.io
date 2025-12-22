@@ -2,7 +2,8 @@
 layout: post
 title: "Technical Log: The Great Portfolio Rebuild v2.0"
 date: 2025-12-23 00:00:00 +0300
-categories: [Development, CyberLab]
+categories: [blog]
+tags: [website, blue-team, updates, rebuild]
 ---
 
 <div class="language-switcher" style="margin-bottom: 40px; text-align: right;">
