@@ -5,72 +5,77 @@ date: 2025-12-23 00:00:00 +0300
 categories: [blog]
 tags: [website, blue-team, updates, rebuild]
 ---
+Haklısın Emirhan, önceki taslak görsel olarak çok yoğun ve karışık duruyordu. Bir siber güvenlik portfolyosunda "Log" veya "Changelog" (Değişim Günlüğü) mantığı, bilginin temiz, okunabilir ve profesyonel bir hiyerarşide sunulmasını gerektirir.
 
-<div class="language-switcher" style="margin-bottom: 40px; text-align: right;">
-    <button onclick="switchLang('tr')" id="btn-tr" class="tactical-btn" style="padding: 6px 20px; cursor: pointer; border: 1px solid var(--cyber-cyan);">TÜRKÇE</button>
-    <button onclick="switchLang('en')" id="btn-en" class="tactical-btn" style="padding: 6px 20px; cursor: pointer; border: 1px solid var(--cyber-cyan); opacity: 0.5;">ENGLISH</button>
+Yazıyı tamamen baştan, bir "Sistem Güncelleme Raporu" ciddiyetinde, teknik detayları ezmeden ama profesyonelliği ön plana çıkaracak şekilde düzenledim. Bu sürümde her şey daha geniş, ferah ve "premium" duracak.
+
+📄 2025-12-23-cyberlab-v2-update.md
+Markdown
+
+---
+layout: post
+title: "System Update: CyberLab v2.0 - Tactical HUD & Identity Reconstruction"
+date: 2025-12-23 01:00:00 +0300
+categories: [Updates, SOC-Analyst]
+---
+
+<div class="language-switcher" style="margin-bottom: 50px; text-align: center; border-bottom: 1px solid var(--cyber-border); padding-bottom: 20px;">
+    <button onclick="switchLang('tr')" id="btn-tr" class="tactical-btn" style="padding: 8px 25px; cursor: pointer; border: 1px solid var(--cyber-cyan); font-family: 'JetBrains Mono';">TÜRKÇE</button>
+    <button onclick="switchLang('en')" id="btn-en" class="tactical-btn" style="padding: 8px 25px; cursor: pointer; border: 1px solid var(--cyber-cyan); opacity: 0.5; font-family: 'JetBrains Mono';">ENGLISH</button>
 </div>
 
 <div id="content-tr" class="lang-content">
 
-# [LOG] Portfolyo Altyapı ve Arayüz Modernizasyonu
+## [REPORT] Operasyonel Revizyon: Versiyon 2.0 Yayında
 
-Son bir haftadır, kişisel siber güvenlik portfolyom üzerinde kapsamlı bir "Redesign" süreci yürüttüm. Bir siber güvenlik öğrencisi olarak hedefim, sıradan bir web sitesi yerine bir **Mavi Takım (Blue Team)** operatörünün terminalini andıran, yüksek performanslı bir platform oluşturmaktı.
+Bu hafta, dijital kimliğimi temsil eden **CyberLab** projesinde köklü bir altyapı ve arayüz değişimine gittim. Bir siber güvenlik öğrencisi olarak sadece bir web sitesi değil, bir **SOC (Security Operations Center)** operatörünün ihtiyaç duyacağı görsel disiplini yansıtan bir terminal inşa etmeyi hedefledim.
 
-## 🛠 Neler Değişti? (Haftalık Değişim Günlüğü)
+---
 
-### 1. Giriş Portalı ve Mekansal Derinlik
-Ana sayfa (Landing Page), ziyaretçinin ilk karşılaştığı "güvenlik kapısı" olarak yeniden tasarlandı:
-* **3D Grid Teknolojisi:** Perspektif açısı ayarlanmış, sonsuza uzanan hareketli bir ızgara sistemiyle siber uzay atmosferi sağlandı.
-* **Merkezi Odak (Forced Centering):** İçeriği ekranın tam merkezine kilitleyen "Nuclear Option" CSS entegrasyonuyla tüm cihazlarda mükemmel hizalama sağlandı.
-* **Lazer Tarayıcı:** Logonun üzerinden geçen dinamik lazer çizgisiyle "Kimlik Tarama" görsel teması tamamlandı.
+### 🛡️ Faz 1: Giriş Katmanı (The Gateway)
+Ziyaretçinin ilk karşılaştığı alan, sistemin "güven seviyesini" belirleyen en kritik noktadır.
+* **3D Izgara (Grid) Entegrasyonu:** Perspektif derinliğine sahip hareketli zemin ızgarası ile statik tasarımlardan uzaklaşıp dinamik bir siber uzay atmosferi oluşturuldu.
+* **Merkezi Odak Teknolojisi:** İçeriği ekranın tam merkezine (X ve Y ekseni) sabitleyen gelişmiş CSS mimarisiyle, cihaz bağımsız mükemmel simetri sağlandı.
+* **Lazer Kimlik Taraması:** Logo üzerine eklenen neon lazer çizgisi, sistemin sürekli aktif ve "tarama modunda" olduğunu simgeliyor.
 
-### 2. Tactical HUD (Navigasyon Paneli)
-Üst bar, sadece linklerden oluşan bir yapıdan çıkıp bir "HUD" (Heads-Up Display) paneline dönüştürüldü:
-* **Glassmorphism:** Arka planı bulanıklaştıran şeffaf cam efektiyle modern bir görünüm sağlandı.
-* **Sistem Monitörü:** Navbar'ın ortasına `VPN: ENCRYPTED`, `THREAT_LEVEL: LOW` gibi HUD verileri eklenerek siber güvenlik teması güçlendirildi.
-* **Durum LED'leri:** `LIVE_ALERTS` ve `LOG_SEARCH` gibi butonlara, sistemin aktif olduğunu simgeleyen yanıp sönen interaktif LED ışıkları eklendi.
+### 📡 Faz 2: Tactical HUD & Navigasyon
+Geleneksel menü yapıları terk edilerek, modern bir kontrol paneli (Heads-Up Display) kurgulandı:
+* **Glassmorphism:** Navbar arkasındaki bulanıklık (blur) efektiyle arayüze derinlik ve teknolojik bir şıklık katıldı.
+* **HUD Monitor Detayları:** Navbar üzerine `VPN`, `THREAT_LEVEL` ve `LOC` gibi canlı veri alanları eklenerek "Operasyonel Durum" farkındalığı artırıldı.
+* **Interaktif LED'ler:** `LIVE_ALERTS` ve `LOG_SEARCH` butonları, yanıp sönen aktif LED ışıklarıyla "tıklanabilir" birer sistem modülüne dönüştürüldü.
 
-### 3. Hakkımda Sayfası ve Kimlik Tasarımı
-About sayfası artık bir biyografiden çok bir "Operatör Personel Dosyası" niteliğinde:
-* **Neon Cyber İmza:** İsim kısmına özel neon gölgeleme ve alt çizgi efekti eklenerek görsel hiyerarşi artırıldı.
-* **Gelişmiş Tipografi:** Tüm site boyunca profesyonel siber güvenlik raporlarında kullanılan monospaced fontlar optimize edildi.
-
-### 4. Varlık Yönetimi ve SEO
-* **Asset Restoration:** Favicon (tarayıcı ikonu) ve meta verileri (OG:Image) güncellenerek sitenin sosyal medyadaki profesyonel görünümü düzeltildi.
-* **Sosyal Entegrasyon:** GitHub ve LinkedIn bağlantıları, neon hover efektli orijinal ikonlarıyla footer alanına (Operational Status barının yanına) sabitlendi.
+### 👤 Faz 3: Kimlik (About) & Görsel İmzalar
+Kişisel marka değerini artırmak adına "About" sayfası bir CV'den çok bir **"Operatör Dosyası"** haline getirildi:
+* **Neon Signature:** İsim kısmına eklenen neon parlamalı büyük imza tasarımı, siber güvenlik dünyasındaki benzersiz kimliği temsil ediyor.
+* **Varlık Restorasyonu:** Kaybolan Favicon ve meta veriler (SEO) geri yüklenerek sitemin sosyal medya ve tarayıcı üzerindeki profesyonel görünümü %100 oranında kurtarıldı.
 
 ---
 </div>
 
 <div id="content-en" class="lang-content" style="display: none;">
 
-# [LOG] Portfolio Infrastructure and UI Modernization
+## [REPORT] Operational Revision: Version 2.0 is Live
 
-For the past week, I have carried out a comprehensive "Redesign" process on my personal cybersecurity portfolio. As a cybersecurity student, my goal was to create a high-performance platform that resembles a **Blue Team** operator's terminal rather than an ordinary website.
+This week, I underwent a fundamental infrastructure and interface change in the **CyberLab** project, which represents my digital identity. As a cybersecurity student, I aimed to build not just a website, but a terminal that reflects the visual discipline a **SOC (Security Operations Center)** operator would need.
 
-## 🛠 What's Changed? (Weekly Change Log)
+---
 
-### 1. Entry Portal and Spatial Depth
-The Landing Page was redesigned as the "security gateway" the visitor first encounters:
-* **3D Grid Technology:** A moving grid system with an adjusted perspective angle extending to infinity was provided to create a cyberspace atmosphere.
-* **Central Focus (Forced Centering):** Perfect alignment was achieved on all devices with the "Nuclear Option" CSS integration that locks the content exactly in the center of the screen.
-* **Laser Scanner:** The visual theme of "Identity Scanning" was completed with a dynamic laser line passing over the logo.
+### 🛡️ Phase 1: The Gateway
+The first area a visitor encounters is the most critical point that determines the "confidence level" of the system.
+* **3D Grid Integration:** Moving away from static designs, a dynamic cyberspace atmosphere was created with a moving ground grid with perspective depth.
+* **Central Focus Technology:** Perfect symmetry independent of the device was achieved with an advanced CSS architecture that fixes the content exactly in the center of the screen (X and Y axes).
+* **Laser Identity Scanning:** The neon laser line added over the logo symbolizes that the system is constantly active and in "scanning mode."
 
-### 2. Tactical HUD (Navigation Panel)
-The top bar was transformed from a structure consisting only of links into a "HUD" (Heads-Up Display) panel:
-* **Glassmorphism:** A modern look was achieved with a transparent glass effect that blurs the background.
-* **System Monitor:** HUD data such as `VPN: ENCRYPTED` and `THREAT_LEVEL: LOW` were added to the center of the navbar to strengthen the cybersecurity theme.
-* **Status LEDs:** Interactive pulsing LED lights symbolizing the system's activity were added to buttons like `LIVE_ALERTS` and `LOG_SEARCH`.
+### 📡 Phase 2: Tactical HUD & Navigation
+Traditional menu structures were abandoned and a modern control panel (Heads-Up Display) was designed:
+* **Glassmorphism:** Depth and technological elegance were added to the interface with a blur effect behind the navbar.
+* **HUD Monitor Details:** "Operational Status" awareness was increased by adding live data fields such as `VPN`, `THREAT_LEVEL`, and `LOC` to the navbar.
+* **Interactive LEDs:** `LIVE_ALERTS` and `LOG_SEARCH` buttons were transformed into clickable system modules with blinking active LED lights.
 
-### 3. About Page and Identity Design
-The About page is now more of an "Operator Personnel File" than a biography:
-* **Neon Cyber Signature:** Visual hierarchy was increased by adding special neon shading and underline effects to the name section.
-* **Advanced Typography:** Monospaced fonts used in professional cybersecurity reports were optimized throughout the site.
-
-### 4. Asset Management and SEO
-* **Asset Restoration:** Favicon (browser icon) and metadata (OG:Image) were updated to fix the site's professional appearance on social media.
-* **Social Integration:** GitHub and LinkedIn links were pinned to the footer (next to the Operational Status bar) with original icons featuring neon hover effects.
+### 👤 Phase 3: Identity (About) & Visual Signatures
+In order to increase personal brand value, the "About" page has been turned into an **"Operator Personnel File"** rather than a biography:
+* **Neon Signature:** The large neon-glowing signature design added to the name section represents a unique identity in the cybersecurity world.
+* **Asset Restoration:** The missing Favicon and metadata (SEO) were restored, and the professional appearance of my site on social media and browsers was 100% recovered.
 
 ---
 </div>
@@ -91,3 +96,9 @@ function switchLang(lang) {
     }
 }
 </script>
+
+<style>
+.lang-content { animation: fadeIn 1s ease-in-out; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.tactical-btn:hover { background: var(--cyber-cyan); color: #000; box-shadow: 0 0 20px var(--cyber-cyan); }
+</style>
