@@ -1,0 +1,120 @@
+---
+layout: default
+title: "Cyber Intel Center"
+permalink: /news/
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050608;
+            --surface: #0d1117;
+            --border: #30363d;
+            --accent: #58a6ff;
+            --alert: #f85149;
+            --text-muted: #8b949e;
+        }
+
+        .news-container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 0 20px;
+            font-family: 'Inter', sans-serif;
+            color: #c9d1d9;
+        }
+
+        /* Header Section */
+        .news-header {
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .news-header h1 {
+            font-family: 'JetBrains Mono';
+            font-size: 1.8rem;
+            color: #ffffff;
+            margin: 0;
+            letter-spacing: -1px;
+        }
+
+        .news-header p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin: 5px 0 0;
+            text-transform: uppercase;
+        }
+
+        .live-status {
+            color: #3fb950;
+            font-family: 'JetBrains Mono';
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* News Cards */
+        .news-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 4px;
+            transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .news-tag {
+            font-family: 'JetBrains Mono';
+            font-size: 10px;
+            font-weight: bold;
+            padding: 3px 8px;
+            background: rgba(88, 166, 255, 0.1);
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 2px;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .news-tag.alert {
+            background: rgba(248, 81, 73, 0.1);
+            color: var(--alert);
+            border-color: var(--alert);
+        }
+
+        .news-card h2 {
+            font-size: 1.25rem;
+            color: #fff;
+            margin: 0 0 12px 0;
+            line-height: 1.3;
+        }
+
+        .news-meta {
+            display: flex;
+            gap: 20px;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono';
+        }
+
+        .news-meta span b { color: var(--accent); }
+
+        .news-content {
+            margin-top: 15px;
+            font-size: 0.95rem;
+            line-height: 1
