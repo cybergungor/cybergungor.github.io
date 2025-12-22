@@ -5,25 +5,26 @@ permalink: /home/
 ---
 
 <div class="infinite-log-bg">
-    <div class="log-col"><div class="loop-stream s1">
-        <span>[INFO] Connection established from 192.168.1.45</span>
-        <span>[WARN] Unauthorized access attempt on PORT 22</span>
-        <span>[DEBUG] SIEM Correlation Engine: Rule_08 fired</span>
-        <span>[ALERT] Potential Brute Force detected on Endpoint_01</span>
+    <div class="log-col"><div class="moving-stream s1">
+        <span>[INFO] Connection established: 192.168.1.45</span>
+        <span>[WARN] Unauthorized access PORT 22</span>
+        <span>[DEBUG] SIEM Correlation: Rule_08 fired</span>
+        <span>[ALERT] Brute Force detected: Endpoint_01</span>
         <span>SRC: 10.0.0.12 -> DST: 10.0.0.254 [TCP/443]</span>
         <span>MITRE: T1059.001 (PowerShell Execution)</span>
         <span>LOG_SOURCE: WinEventLog:Security</span>
         <span>LOC: 41.0082° N, 28.9784° E (Istanbul)</span>
-        <span>[INFO] Connection established from 192.168.1.45</span>
-        <span>[WARN] Unauthorized access attempt on PORT 22</span>
-        <span>[DEBUG] SIEM Correlation Engine: Rule_08 fired</span>
-        <span>[ALERT] Potential Brute Force detected on Endpoint_01</span>
+        <span>[INFO] Connection established: 192.168.1.45</span>
+        <span>[WARN] Unauthorized access PORT 22</span>
+        <span>[DEBUG] SIEM Correlation: Rule_08 fired</span>
+        <span>[ALERT] Brute Force detected: Endpoint_01</span>
         <span>SRC: 10.0.0.12 -> DST: 10.0.0.254 [TCP/443]</span>
         <span>MITRE: T1059.001 (PowerShell Execution)</span>
         <span>LOG_SOURCE: WinEventLog:Security</span>
         <span>LOC: 41.0082° N, 28.9784° E (Istanbul)</span>
     </div></div>
-    <div class="log-col"><div class="stream s2">
+
+    <div class="log-col"><div class="moving-stream s2">
         <span>INDICATOR: Malicious HASH detected (MD5)</span>
         <span>RULE_09: Brute Force Attempt [PORT_22]</span>
         <span>[INFO] System Kernel updated (v6.1.0)</span>
@@ -41,7 +42,8 @@ permalink: /home/
         <span>ENCRYPTION: AES-256-GCM | MODE: CBC</span>
         <span>STATUS: ACTIVE_INVESTIGATION</span>
     </div></div>
-    <div class="log-col hide-mobile"><div class="stream s3">
+
+    <div class="log-col hide-mobile"><div class="moving-stream s3">
         <span>[DEBUG] CPU_TEMP: 42°C | FAN: 2100rpm</span>
         <span>[INFO] Heartbeat signal from SOC_Sensor_A</span>
         <span>NETWORK_STATUS: SECURE | THREAT_LEVEL: LOW</span>
@@ -87,7 +89,7 @@ permalink: /home/
                 <div class="card-icon">📝</div>
                 <span class="tag">Knowledge Base</span>
                 <h2>Blog</h2>
-                <div class="lang-en"><p>In-depth write-ups on SOC operations, SIEM rules, and detection engineering.</p></div>
+                <div class="lang-en"><p>In-depth technical write-ups on SOC operations, SIEM rules, and detection engineering.</p></div>
                 <div class="lang-tr" style="display: none;"><p>SOC operasyonları, SIEM kuralları ve tespit mühendisliği üzerine yazılar.</p></div>
             </div>
             <div class="card-footer">Explore Articles &rarr;</div>
@@ -118,7 +120,7 @@ permalink: /home/
 </div>
 
 <style>
-/* --- 1. INFINITE LOG BACKGROUND (FIXED & FULL) --- */
+/* --- LOG BACKGROUND FIX --- */
 .infinite-log-bg {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
@@ -127,12 +129,22 @@ permalink: /home/
     overflow: hidden; background: #0d1117;
 }
 .log-col { flex: 1; display: flex; flex-direction: column; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: #58a6ff; }
-.loop-stream { display: flex; flex-direction: column; animation: scrollDown infinite linear; }
-.loop-stream span { padding: 12px 0; white-space: nowrap; }
-.s1 { animation-duration: 35s; } .s2 { animation-duration: 50s; } .s3 { animation-duration: 40s; }
-@keyframes scrollDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
 
-/* --- 2. DASHBOARD LAYOUT & WRAPPER --- */
+/* TÜM kolonları hareket ettiren ortak sınıf */
+.moving-stream { display: flex; flex-direction: column; animation: scrollDown infinite linear; }
+.moving-stream span { padding: 12px 0; white-space: nowrap; }
+
+/* Hız ayarları (Hepsini scrollDown'a bağladık) */
+.s1 { animation-duration: 30s; } 
+.s2 { animation-duration: 45s; } 
+.s3 { animation-duration: 35s; }
+
+@keyframes scrollDown { 
+    0% { transform: translateY(-50%); } 
+    100% { transform: translateY(0); } 
+}
+
+/* --- DASHBOARD STYLES --- */
 .dashboard-wrapper { max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; position: relative; z-index: 2; }
 
 /* Typewriter Effect */
@@ -150,22 +162,18 @@ permalink: /home/
 .pulse-dot { width: 8px; height: 8px; background: #3fb950; border-radius: 50%; animation: pulse 2s infinite; }
 @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
 
-/* --- 3. METRICS BAR --- */
+/* Metrics & Bento */
 .metrics-bar { display: flex; justify-content: space-between; gap: 1rem; margin-bottom: 3rem; padding: 15px 25px; background: rgba(22, 27, 34, 0.8); border: 1px solid #30363d; border-radius: 12px; font-family: 'JetBrains Mono', monospace; font-size: 11px; backdrop-filter: blur(8px); }
 .metric-value { color: #f0f6fc; font-weight: bold; }
 .status-low { color: #3fb950; text-shadow: 0 0 5px rgba(63, 185, 80, 0.5); }
 
-/* --- 4. BENTO CONTAINER (TABLE STYLE) --- */
 .bento-container { display: grid; grid-template-columns: 1.8fr 1fr; gap: 24px; }
 .bento-card { background: rgba(22, 27, 34, 0.9); border: 1px solid #30363d; border-radius: 24px; padding: 32px; text-decoration: none !important; display: flex; flex-direction: column; justify-content: space-between; min-height: 220px; transition: 0.4s; }
 .bento-card:hover { border-color: #58a6ff; transform: translateY(-8px); box-shadow: 0 10px 40px rgba(0,0,0,0.5); }
 .blog-module { grid-row: span 2; }
-.card-icon { font-size: 2rem; margin-bottom: 1rem; }
 .tag { font-family: 'JetBrains Mono', monospace; color: #58a6ff; font-size: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 800; }
 .bento-card h2 { color: #fff; font-size: 1.8rem; margin: 10px 0; border: none; padding: 0; }
-.bento-card p { color: #8b949e; font-size: 0.95rem; line-height: 1.5; }
 .card-footer { margin-top: 20px; color: #fff; font-size: 13px; opacity: 0.4; font-weight: bold; }
-.bento-card:hover .card-footer { opacity: 1; }
 
 @media (max-width: 850px) {
     .bento-container { grid-template-columns: 1fr; }
