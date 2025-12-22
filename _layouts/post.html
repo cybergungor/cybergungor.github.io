@@ -6,8 +6,12 @@ layout: default
     <div class="log-col"><div class="moving-stream s1">
         <span>[READING_MODE] Loading entry ID: {{ page.date | date: "%Y%m%d" }}_X7</span>
         <span>[DECRYPT] AES-256 success</span>
+        <span>[STATUS] Displaying data block...</span>
+        <span>[READING_MODE] Loading entry ID: {{ page.date | date: "%Y%m%d" }}_X7</span>
     </div></div>
     <div class="log-col hide-mobile"><div class="moving-stream s2">
+        <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x56 0x49 0x45 0x57</span>
+        <span>ACCESS_LOG: User IP recorded</span>
         <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x56 0x49 0x45 0x57</span>
     </div></div>
 </div>
@@ -35,7 +39,7 @@ layout: default
 </div>
 
 <style>
-/* --- TACTICAL POST STYLES --- */
+/* --- TACTICAL CORE --- */
 :root {
     --bg: #08090a;
     --card-bg: rgba(17, 18, 20, 0.95);
@@ -49,13 +53,16 @@ body { background-color: var(--bg) !important; color: #c9d1d9; margin: 0; }
 .tactical-post-wrapper {
     max-width: 900px;
     margin: 0 auto;
-    /* Üstteki yeşil navbarın yüksekliği kadar (yaklaşık 80px-100px) boşluk bırakıyoruz */
-    padding: 100px 20px 4rem 20px; 
+    /* Navbar yüksekliği + Güvenli alan (Yaklaşık 120px) */
+    padding-top: 130px; 
+    padding-bottom: 4rem;
+    padding-left: 20px;
+    padding-right: 20px;
     position: relative;
     z-index: 2;
 }
 
-/* Post başlık alanı artık sticky değil, sayfa ile akar ama yerini korur */
+/* --- BAŞLIK ALANI (Artık Navbarın Altında Kalmaz) --- */
 .post-report-header {
     margin-bottom: 2.5rem;
     padding-bottom: 1.5rem;
@@ -67,46 +74,48 @@ body { background-color: var(--bg) !important; color: #c9d1d9; margin: 0; }
 .meta-date { font-family: 'JetBrains Mono'; font-size: 11px; color: #8b949e; }
 
 .post-main-title { 
-    font-size: clamp(2rem, 5vw, 3.2rem); 
+    font-size: clamp(2.2rem, 5vw, 3.5rem); 
     font-weight: 800; color: #fff; margin: 15px 0 0 0; 
     line-height: 1.1;
-    text-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+    text-shadow: 0 0 20px rgba(0, 242, 255, 0.15);
 }
 
+.command-line-small { font-family: 'JetBrains Mono'; font-size: 0.85rem; color: #8b949e; opacity: 0.7; }
 .prompt { color: #3fb950; margin-right: 8px; }
-.command-line-small { font-family: 'JetBrains Mono'; font-size: 0.85rem; color: #8b949e; opacity: 0.8; }
 
-/* --- İÇERİK KUTUSU --- */
+/* --- İÇERİK GÖVDESİ --- */
 .post-content-body {
     background: var(--card-bg);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 40px;
+    border-radius: 20px;
+    padding: 45px;
     backdrop-filter: blur(10px);
     line-height: 1.8;
 }
 
 .post-content-body h2 { color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 2.5rem; }
-.post-content-body pre { background: #0d1117 !important; padding: 20px; border-radius: 12px; border: 1px solid var(--border); overflow-x: auto; }
+.post-content-body p { margin-bottom: 1.5rem; }
 .post-content-body code { color: var(--accent); background: rgba(0, 242, 255, 0.05); padding: 2px 5px; border-radius: 4px; }
+.post-content-body pre { background: #0d1117 !important; padding: 20px; border-radius: 12px; border: 1px solid var(--border); overflow-x: auto; margin: 20px 0; }
 
-/* --- BACKGROUND LOGS --- */
+/* --- LOG BACKGROUND --- */
 .post-log-bg {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     display: flex; justify-content: space-around; opacity: 0.05;
     z-index: -1; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px;
 }
-.moving-stream { display: flex; flex-direction: column; animation: scrollDown 40s infinite linear; }
+.moving-stream { display: flex; flex-direction: column; animation: scrollDown 45s infinite linear; }
 .moving-stream span { padding: 12px 0; color: var(--accent); }
 @keyframes scrollDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
 
 /* --- FOOTER --- */
 .post-footer { margin-top: 3rem; text-align: center; }
 .terminal-separator { font-family: 'JetBrains Mono'; color: #8b949e; opacity: 0.4; margin-bottom: 1.5rem; }
-.back-btn { display: inline-block; padding: 10px 20px; border: 1px solid var(--accent); border-radius: 8px; color: var(--accent); text-decoration: none; font-family: 'JetBrains Mono'; font-weight: bold; }
+.back-btn { display: inline-block; padding: 10px 25px; border: 1px solid var(--accent); border-radius: 8px; color: var(--accent); text-decoration: none; font-family: 'JetBrains Mono'; font-weight: bold; transition: 0.3s; }
+.back-btn:hover { background: rgba(0, 242, 255, 0.1); box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
 
 @media (max-width: 768px) {
-    .tactical-post-wrapper { padding-top: 80px; }
+    .tactical-post-wrapper { padding-top: 100px; }
     .post-content-body { padding: 25px; }
 }
 </style>
