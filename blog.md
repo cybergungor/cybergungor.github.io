@@ -4,13 +4,31 @@ title: Blog
 permalink: /blog/
 ---
 
+<div class="infinite-log-bg">
+    <div class="log-col"><div class="moving-stream s1">
+        <span>[DB_QUERY] SELECT * FROM security_logs</span>
+        <span>[ANALYSIS] Pattern matching: T1059.001</span>
+        <span>[STATUS] Indexing new write-ups...</span>
+        <span>[INFO] Database connection: STABLE</span>
+        <span>[DB_QUERY] SELECT * FROM security_logs</span>
+        <span>[ANALYSIS] Pattern matching: T1059.001</span>
+    </div></div>
+    <div class="log-col hide-mobile"><div class="moving-stream s2">
+        <span>0x42 0x4C 0x4F 0x47 0x5F 0x44 0x41 0x54 0x41</span>
+        <span>FETCHING_METADATA: SUCCESS</span>
+        <span>PARSING_MARKDOWN_FILES...</span>
+        <span>0x42 0x4C 0x4F 0x47 0x5F 0x44 0x41 0x54 0x41</span>
+    </div></div>
+</div>
+
 <div class="feed-container">
     <div class="feed-header">
-        <h1>Blog</h1>
+        <span class="status-badge">Knowledge Base</span>
+        <h1 class="page-title">Blog / Investigations</h1>
         <p class="terminal-text">>> Listing all write-ups and security notes...</p>
         
         <div class="search-wrapper">
-            <span class="prompt">root@blog:~$ grep -i</span>
+            <span class="prompt">root@cyberlab:~/blog$ grep -i</span>
             <input type="text" id="searchInput" placeholder='"search_term"' autocomplete="off">
         </div>
     </div>
@@ -20,13 +38,16 @@ permalink: /blog/
             {% if post.categories contains 'blog' or post.tags contains 'blog' %}
             <a href="{{ post.url }}" class="post-item" data-title="{{ post.title | downcase }}">
                 <div class="post-meta">
+                    <span class="post-tag">#{{ post.categories | first | upcase }}</span>
                     <span class="post-date">{{ post.date | date: "%d %b %Y" }}</span>
-                    <span class="post-tag">Write-up</span>
                 </div>
-                <h3 class="post-title">{{ post.title }}</h3>
+                <div class="post-content">
+                    <h3 class="post-title">{{ post.title }}</h3>
+                    <p class="post-excerpt">{{ post.excerpt | strip_html | truncatewords: 15 }}</p>
+                </div>
                 <div class="post-arrow">
-                    <span>READ_LOG</span>
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <span>ANALYZE</span>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <path d="M5 12h14M12 5l7 7-7 7"/>
                     </svg>
                 </div>
@@ -35,8 +56,8 @@ permalink: /blog/
         {% endfor %}
     </div>
     
-    <div id="noResults" style="display: none; text-align: center; color: var(--text-muted); margin-top: 2rem;">
-        <p>>> Error: Pattern not found in logs.</p>
+    <div id="noResults" class="error-msg" style="display: none;">
+        <p>>> Error: Pattern not found in local database.</p>
     </div>
 </div>
 
@@ -49,8 +70,6 @@ permalink: /blog/
 
         for (let i = 0; i < items.length; i++) {
             let title = items[i].getAttribute('data-title');
-            
-            // Eğer başlık aranan kelimeyi içeriyorsa göster, yoksa gizle
             if (title.indexOf(filter) > -1) {
                 items[i].style.display = "flex";
                 hasResults = true;
@@ -58,146 +77,88 @@ permalink: /blog/
                 items[i].style.display = "none";
             }
         }
-        
-        // Hiç sonuç yoksa uyarı mesajını göster
         document.getElementById('noResults').style.display = hasResults ? "none" : "block";
     });
 </script>
 
 <style>
-/* ===== BLOG AKIŞ TASARIMI & ARAMA ===== */
-.feed-container {
-    max-width: 800px;
-    margin: 0 auto;
+/* --- CORE INTEGRATION --- */
+:root {
+    --bg: #08090a;
+    --card-bg: rgba(17, 18, 20, 0.9);
+    --accent: #00f2ff;
+    --border: rgba(255, 255, 255, 0.06);
 }
 
-.feed-header {
-    margin-bottom: 2rem;
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 1rem;
+body { background-color: var(--bg); color: #c9d1d9; font-family: 'Inter', sans-serif; }
+
+/* --- LOG BACKGROUND (Birebir Home ile aynı) --- */
+.infinite-log-bg {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    display: flex; justify-content: space-around; opacity: 0.07;
+    z-index: -1; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+}
+.moving-stream { display: flex; flex-direction: column; animation: scrollDown infinite linear; }
+.moving-stream span { padding: 12px 0; color: var(--accent); }
+@keyframes scrollDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
+.s1 { animation-duration: 35s; } .s2 { animation-duration: 50s; }
+
+/* --- FEED CONTAINER --- */
+.feed-container { max-width: 950px; margin: 0 auto; padding: 3rem 1.5rem; }
+
+.page-title { 
+    font-size: 2.8rem; font-weight: 800; letter-spacing: -1.5px; color: #fff; margin: 10px 0; 
+    text-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
 }
 
-.terminal-text {
-    color: var(--accent);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.9rem;
-    margin-top: 0.5rem;
-    margin-bottom: 1.5rem;
-}
+.terminal-text { color: var(--accent); font-family: 'JetBrains Mono'; font-size: 0.85rem; opacity: 0.8; margin-bottom: 2rem; }
 
-/* Arama Kutusu Stili */
+/* --- SEARCH WRAPPER --- */
 .search-wrapper {
-    display: flex;
-    align-items: center;
-    background: #0d1117; /* Arka planla aynı */
-    border: 1px solid var(--border-color);
-    padding: 10px 15px;
-    border-radius: 6px;
-    font-family: 'JetBrains Mono', monospace;
-    margin-top: 1rem;
-    transition: border-color 0.3s;
+    display: flex; align-items: center; background: rgba(0,0,0,0.3);
+    border: 1px solid var(--border); padding: 12px 20px; border-radius: 12px;
+    font-family: 'JetBrains Mono', monospace; margin-bottom: 3rem; backdrop-filter: blur(5px);
 }
+.search-wrapper:focus-within { border-color: var(--accent); box-shadow: 0 0 15px rgba(0, 242, 255, 0.1); }
+.prompt { color: #3fb950; margin-right: 12px; font-size: 0.9rem; }
+#searchInput { background: transparent; border: none; color: #fff; width: 100%; outline: none; font-size: 0.95rem; }
 
-.search-wrapper:focus-within {
-    border-color: var(--accent);
-    box-shadow: 0 0 10px rgba(88, 166, 255, 0.1);
-}
-
-.prompt {
-    color: #3fb950; /* Yeşil terminal promptu */
-    margin-right: 10px;
-    font-weight: bold;
-    font-size: 0.9rem;
-    white-space: nowrap;
-}
-
-#searchInput {
-    background: transparent;
-    border: none;
-    color: #e6edf3;
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.95rem;
-    width: 100%;
-    outline: none;
-}
-
-#searchInput::placeholder {
-    color: var(--text-muted);
-    opacity: 0.5;
-}
-
-/* Liste Elemanları (Mevcut Tasarımın Aynısı) */
-.post-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
+/* --- POST ITEMS (Tactical Design) --- */
+.post-list { display: flex; flex-direction: column; gap: 12px; }
 
 .post-item {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background: var(--card-bg);
-    border: 1px solid var(--border-color);
-    padding: 1.5rem;
-    border-radius: 8px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    position: relative;
-    overflow: hidden;
-    text-decoration: none;
+    display: flex; align-items: center; background: var(--card-bg);
+    border: 1px solid var(--border); padding: 20px 30px; border-radius: 16px;
+    text-decoration: none; transition: 0.3s cubic-bezier(0.2, 0, 0, 1);
+    backdrop-filter: blur(10px);
 }
 
 .post-item:hover {
-    transform: translateX(10px);
-    border-color: var(--accent);
-    box-shadow: -5px 0 15px -5px rgba(88, 166, 255, 0.2);
+    transform: translateX(10px); border-color: var(--accent);
+    background: rgba(22, 24, 28, 0.95); box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
-
-.post-item::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 3px;
-    background: var(--accent);
-    opacity: 0;
-    transition: opacity 0.3s;
-}
-
-.post-item:hover::before { opacity: 1; }
 
 .post-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    min-width: 120px;
-    border-right: 1px solid var(--border-color);
-    margin-right: 1.5rem;
-    padding-right: 1.5rem;
+    display: flex; flex-direction: column; gap: 4px; min-width: 140px;
+    border-right: 1px solid var(--border); margin-right: 25px; padding-right: 20px;
 }
+.post-date { font-family: 'JetBrains Mono'; font-size: 11px; color: #8b949e; }
+.post-tag { font-family: 'JetBrains Mono'; font-size: 10px; color: var(--accent); font-weight: bold; }
 
-.post-date { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--text-muted); }
-.post-tag { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
+.post-content { flex-grow: 1; }
+.post-title { font-size: 1.25rem; color: #fff; margin: 0 0 5px 0; font-weight: 700; }
+.post-excerpt { color: #8b949e; font-size: 0.9rem; margin: 0; line-height: 1.4; }
 
-.post-title { flex-grow: 1; margin: 0; font-size: 1.1rem; color: #e6edf3; font-weight: 500; }
-
-.post-arrow {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: var(--text-muted);
-    font-family: 'JetBrains Mono', monospace;
-    font-size: 0.8rem;
-    transition: color 0.3s;
-}
-
+.post-arrow { display: flex; align-items: center; gap: 10px; color: #8b949e; font-family: 'JetBrains Mono'; font-size: 11px; }
 .post-item:hover .post-arrow { color: var(--accent); }
 
-@media (max-width: 600px) {
-    .post-item { flex-direction: column; align-items: flex-start; gap: 1rem; }
-    .post-meta { border-right: none; margin-bottom: 0.5rem; border-bottom: 1px solid var(--border-color); width: 100%; padding-bottom: 0.5rem; }
-    .post-arrow { align-self: flex-end; }
-    .prompt { font-size: 0.8rem; }
+.error-msg { text-align: center; color: #8b949e; margin-top: 3rem; font-family: 'JetBrains Mono'; }
+
+.status-badge { display: inline-block; background: rgba(0, 242, 255, 0.1); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: bold; text-transform: uppercase; letter-spacing: 1px; }
+
+@media (max-width: 768px) {
+    .post-item { flex-direction: column; align-items: flex-start; }
+    .post-meta { border-right: none; border-bottom: 1px solid var(--border); width: 100%; margin: 0 0 15px 0; padding: 0 0 10px 0; }
+    .post-arrow { align-self: flex-end; margin-top: 10px; }
 }
 </style>
