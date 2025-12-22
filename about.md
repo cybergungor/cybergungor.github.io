@@ -18,12 +18,12 @@ permalink: /about/
 </div>
 
 <div class="about-main-wrapper">
-    <header class="about-static-header">
-        <div class="about-tags">
+    <header class="about-static-header-clean">
+        <div class="about-tags-simple">
             <span class="cyan-accent">OPERATOR_IDENTITY</span> // STATUS: ACTIVE
         </div>
-        <h1 class="about-white-title">About / Emirhan Gungoroglu</h1>
-        <div class="about-path-line">
+        <h1 class="about-pure-white-title">About / Emirhan Gungoroglu</h1>
+        <div class="about-path-simple">
             <span class="green-prompt">guest@cyberlab:~$</span> whoami --roles --status
         </div>
     </header>
@@ -97,28 +97,6 @@ permalink: /about/
                 </div>
             </div>
 
-            <div class="lang-tr" style="display: none;">
-                <h2 class="section-heading">whoami</h2>
-                <p class="intro-text">
-                    Merhaba, ben <strong>Emirhan Güngöroğlu</strong>. <strong>Blue Team</strong> operasyonlarına odaklanmış 
-                    bir siber güvenlik öğrencisiyim. Yolculuğum; sistemlerin nasıl çalıştığını, nasıl saldırıya 
-                    uğradığını ve en önemlisi <span style="color: var(--cyber-cyan);">onları nasıl savunacağımı</span> anlama merakıyla şekilleniyor.
-                </p>
-                <p>Teorik bilgi ile gerçek dünya uygulamaları arasındaki boşluğu doldurmaya odaklanıyorum.</p>
-
-                <div class="tactical-hr"></div>
-
-                <h3>// Teknik Yetkinlikler</h3>
-                <div class="badge-container">
-                    <span class="tech-badge">SIEM (Splunk / ELK)</span>
-                    <span class="tech-badge">Ağ Trafiği Analizi</span>
-                    <span class="tech-badge">Log Korelasyonu</span>
-                    <span class="tech-badge">MITRE ATT&CK Framework</span>
-                    <span class="tech-badge">Uç Birim Tespiti (EDR)</span>
-                    <span class="tech-badge">Zafiyet Değerlendirmesi</span>
-                </div>
-            </div>
-
             <br>
             <h3>// Connect</h3>
             <p><a href="https://linkedin.com/in/emirhangungoroglu" class="linkedin-btn">Connect on LinkedIn &rarr;</a></p>
@@ -127,7 +105,7 @@ permalink: /about/
 </div>
 
 <style>
-/* --- CORE STYLES --- */
+/* --- CORE INTEGRATION --- */
 :root {
     --cyber-bg: #08090a;
     --cyber-cyan: #00f2ff;
@@ -140,74 +118,59 @@ body { background-color: var(--cyber-bg) !important; color: #c9d1d9 !important; 
 .about-main-wrapper {
     max-width: 1000px;
     margin: 0 auto !important;
-    padding: 140px 20px 60px 20px !important;
+    padding: 150px 20px 60px 20px !important; /* Devasa üst boşluk ile çakışma biter */
     position: relative;
     z-index: 5;
 }
 
-/* BAŞLIK: STICKY DEĞİL, SADE BEYAZ */
-.about-static-header {
+/* BAŞLIK: KUTUSUZ, ŞEFFAF VE STATİK (HATA BURADAYDI) */
+.about-static-header-clean {
     margin-bottom: 3rem;
     border-bottom: 1px solid var(--border-soft);
     padding-bottom: 1.5rem;
-    position: static !important;
+    position: static !important; /* Kaymayı durdurur */
+    background: transparent !important; /* Kutuyu yok eder */
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
 }
 
-.about-white-title {
-    color: #ffffff !important;
+.about-pure-white-title {
+    color: #ffffff !important; /* Saf Beyaz */
     font-size: clamp(2rem, 5vw, 3rem) !important;
     font-weight: 800 !important;
     margin: 10px 0 !important;
     letter-spacing: -1.5px;
 }
 
-.about-tags { font-family: 'JetBrains Mono'; font-size: 11px; color: #8b949e; }
+.about-tags-simple { font-family: 'JetBrains Mono'; font-size: 11px; color: #8b949e; }
 .cyan-accent { color: var(--cyber-cyan); font-weight: bold; }
-.about-path-line { font-family: 'JetBrains Mono'; font-size: 0.9rem; color: #8b949e; opacity: 0.8; }
+.about-path-simple { font-family: 'JetBrains Mono'; font-size: 0.9rem; color: #8b949e; opacity: 0.8; }
 .green-prompt { color: #3fb950; }
 
-/* LAYOUT STRUCTURE */
+/* DİĞER STİLLER (DOKUNULMADI) */
 .about-flex-container { display: flex; gap: 3rem; align-items: flex-start; }
 .profile-section { flex: 0 0 280px; }
 .bio-section { flex: 1; }
-
-/* PROFILE CARD */
-.profile-card-tactical { 
-    background: rgba(17, 18, 20, 0.9); 
-    border: 1px solid var(--border-soft); 
-    padding: 10px; border-radius: 12px; 
-    backdrop-filter: blur(10px);
-}
+.profile-card-tactical { background: rgba(17, 18, 20, 0.9); border: 1px solid var(--border-soft); padding: 10px; border-radius: 12px; backdrop-filter: blur(10px); }
 .image-wrapper { position: relative; overflow: hidden; border-radius: 8px; border: 1px solid var(--cyber-cyan); }
 .profile-img { width: 100%; height: auto; display: block; filter: grayscale(100%); transition: 0.5s; }
 .profile-card-tactical:hover .profile-img { filter: grayscale(0%); transform: scale(1.05); }
 .scan-line { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--cyber-cyan); box-shadow: 0 0 10px var(--cyber-cyan); animation: scan 3s linear infinite; opacity: 0.5; }
 @keyframes scan { 0% { top: 0%; } 100% { top: 100%; } }
-
 .profile-stats { margin-top: 1rem; font-family: 'JetBrains Mono'; font-size: 0.85rem; }
 .stat-row { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-soft); padding: 8px 0; }
-
-/* BIO & TYPOGRAPHY */
 .intro-text { font-size: 1.1rem; line-height: 1.8; color: #fff; }
-.section-heading { color: #fff; margin-bottom: 1rem; }
 .tactical-hr { border-top: 1px solid var(--border-soft); margin: 2rem 0; }
-
-.badge-container { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1rem; }
+.badge-container { display: flex; flex-wrap: wrap; gap: 8px; }
 .tech-badge { background: rgba(0, 242, 255, 0.05); color: var(--cyber-cyan); border: 1px solid rgba(0, 242, 255, 0.2); padding: 5px 12px; border-radius: 4px; font-size: 0.8rem; font-family: 'JetBrains Mono'; }
-
 .focus-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem; }
 .focus-item { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-soft); padding: 1.5rem; border-radius: 8px; }
-.focus-item h4 { color: var(--cyber-cyan); margin: 0 0 10px 0; font-size: 1rem; }
-.focus-item p { font-size: 0.85rem; color: #8b949e; margin: 0; }
-.linkedin-btn { color: var(--cyber-cyan); text-decoration: none; font-weight: bold; border-bottom: 1px solid transparent; }
-.linkedin-btn:hover { border-bottom-color: var(--cyber-cyan); }
+.focus-item h4 { color: var(--cyber-cyan); margin: 0 0 10px 0; }
+.linkedin-btn { color: var(--cyber-cyan); text-decoration: none; font-weight: bold; }
 
 /* BACKGROUND LOGS */
-.post-static-bg {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    display: flex; justify-content: space-around; opacity: 0.04;
-    z-index: -1; pointer-events: none;
-}
+.post-static-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: space-around; opacity: 0.04; z-index: -1; pointer-events: none; }
 .flow-stream { display: flex; flex-direction: column; animation: scrollLog 50s linear infinite; }
 .flow-stream span { padding: 15px 0; font-family: 'JetBrains Mono'; font-size: 10px; color: var(--cyber-cyan); }
 @keyframes scrollLog { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
@@ -215,5 +178,6 @@ body { background-color: var(--cyber-bg) !important; color: #c9d1d9 !important; 
 @media (max-width: 850px) {
     .about-flex-container { flex-direction: column; }
     .profile-section { width: 100%; max-width: 320px; margin: 0 auto; }
+    .about-main-wrapper { padding-top: 110px !important; }
 }
 </style>
