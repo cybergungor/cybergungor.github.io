@@ -5,19 +5,6 @@ date: 2025-12-23 00:00:00 +0300
 categories: [blog]
 tags: [website, blue-team, updates, rebuild]
 ---
-Haklısın Emirhan, önceki taslak görsel olarak çok yoğun ve karışık duruyordu. Bir siber güvenlik portfolyosunda "Log" veya "Changelog" (Değişim Günlüğü) mantığı, bilginin temiz, okunabilir ve profesyonel bir hiyerarşide sunulmasını gerektirir.
-
-Yazıyı tamamen baştan, bir "Sistem Güncelleme Raporu" ciddiyetinde, teknik detayları ezmeden ama profesyonelliği ön plana çıkaracak şekilde düzenledim. Bu sürümde her şey daha geniş, ferah ve "premium" duracak.
-
-📄 2025-12-23-cyberlab-v2-update.md
-Markdown
-
----
-layout: post
-title: "System Update: CyberLab v2.0 - Tactical HUD & Identity Reconstruction"
-date: 2025-12-23 01:00:00 +0300
-categories: [Updates, SOC-Analyst]
----
 
 <div class="language-switcher" style="margin-bottom: 50px; text-align: center; border-bottom: 1px solid var(--cyber-border); padding-bottom: 20px;">
     <button onclick="switchLang('tr')" id="btn-tr" class="tactical-btn" style="padding: 8px 25px; cursor: pointer; border: 1px solid var(--cyber-cyan); font-family: 'JetBrains Mono';">TR</button>
