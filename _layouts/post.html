@@ -2,117 +2,120 @@
 layout: default
 ---
 
-<div class="post-log-bg">
-    <div class="log-col"><div class="moving-stream s1">
-        <span>[SYSTEM] Opening incident_report_{{ page.date | date: "%Y%m%d" }}.log</span>
-        <span>[INFO] Decrypting content using tactical_key_01...</span>
-        <span>[STATUS] Rendering data blocks: OK</span>
-    </div></div>
-    <div class="log-col hide-mobile"><div class="moving-stream s2">
-        <span>0x52 0x45 0x50 0x4F 0x52 0x54_FILE_ACTIVE</span>
-        <span>INTEGRITY_CHECK: 100% SUCCESS</span>
+<div class="post-static-bg">
+    <div class="log-column"><div class="flow-stream s1">
+        <span>[SYSTEM] LOADING_REPORT_ID: {{ page.date | date: "%Y%m%d" }}</span>
+        <span>[STATUS] STABILIZING_DOM_ELEMENTS... SUCCESS</span>
+        <span>[SYSTEM] LOADING_REPORT_ID: {{ page.date | date: "%Y%m%d" }}</span>
     </div></div>
 </div>
 
-<div class="tactical-post-container">
-    
-    <header class="report-header-transparent">
-        <div class="report-meta">
-            <span class="meta-tag">{{ page.categories | first | upcase }}</span> // {{ page.date | date: "%d %B %Y" }}
+<div class="main-content-stable">
+    <header class="static-header-plain">
+        <div class="report-tags">
+            <span class="cyan-text">{{ page.categories | first | upcase }}</span> // {{ page.date | date: "%d %b %Y" }}
         </div>
-        <h1 class="report-main-title">{{ page.title }}</h1>
-        <div class="report-path">
-            <span class="path-prompt">root@cyberlab:~$</span> cat /reports/{{ page.title | slugify }}.txt
+        <h1 class="static-white-title">{{ page.title }}</h1>
+        <div class="terminal-path-line">
+            <span class="green-prompt">root@cyberlab:~$</span> cat /home/emirhan/{{ page.title | slugify }}.txt
         </div>
     </header>
 
-    <article class="report-article-body">
+    <article class="report-body-text">
         {{ content }}
     </article>
 
-    <footer class="report-footer-simple">
-        <div class="divider-line">/* --- END OF REPORT --- */</div>
-        <a href="/blog/" class="return-btn">/ BACK_TO_DATABASE /</a>
+    <footer class="report-footer-static">
+        <div class="end-line">/* --- END OF DATA STREAM --- */</div>
+        <a href="/blog/" class="back-link-simple">/ RETURN_TO_DATABASE /</a>
     </footer>
 </div>
 
 <style>
 /* --- CORE INTEGRATION --- */
 :root {
-    --bg-deep: #08090a;
-    --accent-blue: #00f2ff;
-    --border-dim: rgba(255, 255, 255, 0.08);
+    --bg-color: #08090a;
+    --accent-cyan: #00f2ff;
+    --border-soft: rgba(255, 255, 255, 0.08);
 }
 
-/* Arka planı zorla siyah yap ve kutuları sil */
+/* Arka planı ve genel yapıyı zorla sabitliyoruz */
 body { 
-    background-color: var(--bg-deep) !important; 
-    color: #c9d1d9; 
-    margin: 0; 
+    background-color: var(--bg-color) !important; 
+    color: #c9d1d9 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-/* ANA KONTEYNER: NAVBARIN ALTINDAN BAŞLAR */
-.tactical-post-container {
+/* --- ANA KONTEYNER: ÜSTTEKİ NAVBARDAN ZORLA UZAKLAŞTIRIR --- */
+.main-content-stable {
     max-width: 850px;
-    margin: 0 auto;
-    padding: 140px 20px 60px 20px !important; /* Navbar çakışmasını önler */
+    margin: 0 auto !important;
+    /* Navbar'ın (root@portfolio barı) altında kalmaması için devasa üst boşluk */
+    padding-top: 150px !important; 
+    padding-bottom: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+    z-index: 5;
 }
 
-/* --- BAŞLIK ALANI (KESİN ŞEFFAFLIK) --- */
-.report-header-transparent {
-    background: transparent !important; /* Arka planı tamamen sildik */
-    border: none !important; /* Kenarlıkları sildik */
-    border-bottom: 1px solid var(--border-dim) !important; /* Sadece ince bir alt çizgi */
-    margin-bottom: 3rem;
-    padding-bottom: 1.5rem;
-    box-shadow: none !important; /* Eğer varsa gölgeyi sildik */
+/* --- BAŞLIK ALANI: STICKY/FIXED TAMAMEN KALDIRILDI --- */
+.static-header-plain {
+    display: block !important;
+    position: static !important; /* Bu komut başlığın yapışmasını engeller */
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--border-soft);
+    padding-bottom: 20px;
+    background: transparent !important;
 }
 
-.report-main-title {
-    color: #ffffff !important;
-    font-size: clamp(2rem, 6vw, 3.2rem);
-    font-weight: 800;
-    margin: 15px 0 !important;
+.static-white-title {
+    color: #ffffff !important; /* Saf Beyaz */
+    font-size: clamp(2rem, 5vw, 3.2rem) !important;
+    font-weight: 800 !important;
+    margin: 10px 0 !important;
     letter-spacing: -1.5px;
     line-height: 1.1;
-    /* Yazının arka planda kaybolmaması için hafif parıltı */
-    text-shadow: 0 0 15px rgba(0, 242, 255, 0.1);
+    text-transform: none;
+    text-align: left;
 }
 
-.report-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8b949e; }
-.meta-tag { color: var(--accent-blue); font-weight: bold; }
-.report-path { font-family: 'JetBrains Mono'; font-size: 13px; color: #3fb950; opacity: 0.8; }
-.path-prompt { font-weight: bold; }
+.report-tags { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: #8b949e; margin-bottom: 5px; }
+.cyan-text { color: var(--accent-cyan); font-weight: bold; }
+.terminal-path-line { font-family: 'JetBrains Mono'; font-size: 13px; color: #8b949e; opacity: 0.8; }
+.green-prompt { color: #3fb950; }
 
-/* --- İÇERİK ALANI --- */
-.report-article-body {
-    background: rgba(17, 18, 20, 0.5); /* Sadece yazının arkasında çok hafif bir belirginlik */
-    backdrop-filter: blur(5px);
-    border-radius: 12px;
-    padding: 20px 0; /* İçerik yanlara sıfır, dikeyde nefes alır */
+/* --- İÇERİK GÖVDESİ --- */
+.report-body-text {
     line-height: 1.8;
-    font-size: 1.05rem;
+    font-size: 1.1rem;
+    color: #c9d1d9;
 }
 
-/* Markdown Başlıkları */
-.report-article-body h2 { color: #fff; border-bottom: 1px solid var(--border-dim); padding-bottom: 10px; margin-top: 3rem; }
-.report-article-body pre { background: #0d1117 !important; border: 1px solid var(--border-dim); padding: 20px; border-radius: 8px; }
-.report-article-body code { color: var(--accent-blue); }
+/* Markdown başlık ve kod düzenleri */
+.report-body-text h2 { color: #fff; margin-top: 35px; border-bottom: 1px solid var(--border-soft); padding-bottom: 8px; }
+.report-body-text pre { background: #0d1117 !important; padding: 20px; border-radius: 8px; border: 1px solid var(--border-soft); margin: 25px 0; overflow-x: auto; }
+.report-body-text code { color: var(--accent-cyan); background: rgba(0, 242, 255, 0.05); padding: 2px 4px; border-radius: 4px; }
 
 /* --- ARKA PLAN LOGLARI --- */
-.post-log-bg {
+.post-static-bg {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    display: flex; justify-content: space-around; opacity: 0.05;
-    z-index: -1; pointer-events: none; font-family: 'JetBrains Mono'; font-size: 10px;
+    display: flex; justify-content: space-around; opacity: 0.04;
+    z-index: -1; pointer-events: none;
 }
-.moving-stream { display: flex; flex-direction: column; animation: scrollLog 45s linear infinite; }
-.moving-stream span { padding: 15px 0; color: var(--accent-blue); }
-@keyframes scrollLog { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
+.flow-stream { display: flex; flex-direction: column; animation: scrollDown 50s linear infinite; }
+.flow-stream span { padding: 15px 0; font-family: 'JetBrains Mono'; font-size: 10px; color: var(--accent-cyan); }
+@keyframes scrollDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
 
-.report-footer-simple { margin-top: 4rem; text-align: center; }
-.divider-line { font-family: 'JetBrains Mono'; color: #8b949e; opacity: 0.3; margin-bottom: 1.5rem; }
-.return-btn { color: #8b949e; text-decoration: none; font-family: 'JetBrains Mono'; font-weight: bold; }
-.return-btn:hover { color: var(--accent-blue); }
+/* --- FOOTER --- */
+.report-footer-static { margin-top: 50px; text-align: center; }
+.end-line { font-family: 'JetBrains Mono'; color: #8b949e; opacity: 0.3; margin-bottom: 20px; font-size: 12px; }
+.back-link-simple { color: #8b949e; text-decoration: none; font-family: 'JetBrains Mono'; font-weight: bold; border: 1px solid #8b949e; padding: 8px 16px; border-radius: 4px; }
+.back-link-simple:hover { color: var(--accent-cyan); border-color: var(--accent-cyan); }
 
-@media (max-width: 768px) { .tactical-post-container { padding-top: 110px !important; } }
+@media (max-width: 768px) {
+    .main-content-stable { padding-top: 100px !important; }
+    .static-white-title { font-size: 2.2rem !important; }
+}
 </style>
