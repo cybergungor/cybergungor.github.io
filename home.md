@@ -49,17 +49,19 @@ permalink: /home/
 </div>
 
 <style>
+    /* Fresh Typography */
     .fresh-hero { padding: 2rem 0; }
     .status-badge { background: rgba(63, 185, 80, 0.1); color: var(--success); border: 1px solid rgba(63, 185, 80, 0.3); padding: 5px 12px; border-radius: 20px; font-size: 11px; font-weight: bold; }
     .main-title { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 800; color: var(--text-bright); margin: 1rem 0; letter-spacing: -2px; line-height: 1.1; }
     .main-subtitle { font-size: 1.2rem; color: var(--text-muted); max-width: 600px; }
 
-    .bento-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; margin-top: 3rem; }
-    .bento-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 24px; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.4s; min-height: 180px; }
-    .bento-item:hover { border-color: var(--accent); transform: translateY(-5px); background: #1c2128; }
+    /* Bento Grid */
+    .bento-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 20px; margin-top: 2rem; }
+    .bento-item { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 24px; padding: 30px; display: flex; flex-direction: column; justify-content: space-between; transition: 0.4s; min-height: 180px; text-decoration: none !important; }
+    .bento-item:hover { border-color: var(--accent); transform: translateY(-5px); background: #1c2128; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     .blog-card { grid-row: span 2; }
     .category { font-size: 10px; text-transform: uppercase; color: var(--accent); letter-spacing: 2px; font-weight: bold; }
-    .bento-item h2 { margin: 10px 0; font-size: 1.8rem; border: none; padding: 0; }
+    .bento-item h2 { margin: 10px 0; font-size: 1.8rem; border: none; padding: 0; color: var(--text-bright); }
     .bento-item p { font-size: 0.95rem; color: var(--text-muted); margin: 0; }
     .bento-footer { font-size: 13px; font-weight: bold; margin-top: 20px; color: var(--accent); }
 
