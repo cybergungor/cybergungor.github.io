@@ -2,7 +2,6 @@
 layout: default
 hide_nav: true
 title: Welcome
-permalink: /
 ---
 
 <div class="master-gateway-fixed">
@@ -21,7 +20,7 @@ permalink: /
         </div></div>
     </div>
 
-    <div class="horizon-glow"></div> <div class="grid-floor-3d-boosted"></div>
+    <div class="horizon-glow-pulse"></div> <div class="grid-floor-3d-boosted"></div>
     <div class="vignette-soft"></div>
 
     <div class="gateway-core">
@@ -58,34 +57,48 @@ html, body { height: 100% !important; width: 100% !important; margin: 0 !importa
     background: var(--bg-dark); z-index: 9999;
 }
 
-/* --- YENİ GÜÇLÜ 3D IZGARA --- */
+/* --- 3D IZGARA --- */
 .grid-floor-3d-boosted {
     position: absolute; bottom: -20%; left: -10%; right: -10%; width: 120%; height: 80%;
-    background-image: 
-        linear-gradient(var(--neon-cyan) 2px, transparent 2px), /* Çizgiler kalınlaştırıldı */
-        linear-gradient(90deg, var(--neon-cyan) 2px, transparent 2px);
-    background-size: 80px 80px; /* Kareler büyütüldü */
-    transform: perspective(500px) rotateX(60deg); /* Perspektif açısı artırıldı */
-    animation: floorFlowBoost 15s linear infinite;
-    opacity: 0.35; /* Opaklık ciddi oranda artırıldı (Vibe burada!) */
-    z-index: 2;
-    /* Ufukta daha yumuşak kaybolması için maske ayarlandı */
+    background-image: linear-gradient(var(--neon-cyan) 2px, transparent 2px), linear-gradient(90deg, var(--neon-cyan) 2px, transparent 2px);
+    background-size: 80px 80px; transform: perspective(500px) rotateX(60deg);
+    animation: floorFlowBoost 15s linear infinite; opacity: 0.35; z-index: 2;
     mask-image: linear-gradient(to top, rgba(0,0,0,1) 10%, transparent 95%);
 }
 @keyframes floorFlowBoost { 0% { background-position: 0 0; } 100% { background-position: 0 80px; } }
 
-/* --- YENİ UFUK ÇİZGİSİ PARLAMASI --- */
-.horizon-glow {
-    position: absolute; top: 45%; left: 0; width: 100%; height: 2px;
+/* --- YENİ KALP ATIŞI UFUK ÇİZGİSİ --- */
+.horizon-glow-pulse {
+    position: absolute; 
+    top: 45%; left: 0; width: 100%; 
+    height: 2px; /* Başlangıç inceliği */
     background: var(--neon-cyan);
-    box-shadow: 0 0 100px 30px var(--neon-cyan); /* Büyük, yumuşak bir parlama */
-    opacity: 0.15; z-index: 3;
+    /* Başlangıçtaki yumuşak parlama */
+    box-shadow: 0 0 100px 30px var(--neon-cyan); 
+    opacity: 0.2; 
+    z-index: 3;
+    /* Kalp atışı animasyonu eklendi */
+    animation: horizonBeat 4s ease-in-out infinite;
 }
 
-/* --- YUMUŞATILMIŞ VIGNETTE --- */
+/* Nabız Animasyonu Keyframe'leri */
+@keyframes horizonBeat {
+    0%, 100% {
+        opacity: 0.2;
+        height: 2px;
+        box-shadow: 0 0 100px 30px var(--neon-cyan);
+    }
+    50% { /* Atışın zirve noktası */
+        opacity: 0.5; /* Daha parlak */
+        height: 4px; /* Biraz daha kalın */
+        /* Çok daha yoğun ve geniş bir parlama, merkezde beyaz bir ışıkla */
+        box-shadow: 0 0 150px 50px var(--neon-cyan), 0 0 20px #fff; 
+    }
+}
+
+/* --- VIGNETTE --- */
 .vignette-soft {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    /* Merkez daha geniş, kenarlar daha yumuşak karanlık */
     background: radial-gradient(circle, transparent 40%, var(--bg-dark) 100%);
     z-index: 4; pointer-events: none;
 }
@@ -113,8 +126,7 @@ html, body { height: 100% !important; width: 100% !important; margin: 0 !importa
     border: 2px solid var(--neon-cyan); color: var(--neon-cyan);
     font-family: 'JetBrains Mono'; font-weight: 800; letter-spacing: 4px;
     text-decoration: none; transition: 0.3s;
-    background: rgba(0, 242, 255, 0.08);
-    box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
+    background: rgba(0, 242, 255, 0.08); box-shadow: 0 0 20px rgba(0, 242, 255, 0.1);
     backdrop-filter: blur(5px);
 }
 .access-btn-glow:hover { background: var(--neon-cyan); color: #000; box-shadow: 0 0 60px rgba(0, 242, 255, 0.6); }
