@@ -4,9 +4,25 @@ hide_nav: true
 title: Welcome
 ---
 
+<div class="infinite-log-bg">
+    <div class="log-col"><div class="moving-stream s1">
+        <span>[BOOT] Initializing CyberGungor Kernel...</span>
+        <span>[LOAD] Loading Tactical UI Modules...</span>
+        <span>[SYSTEM] Secure Connection Established</span>
+        <span>[AUTH] Verification Mode: BIOMETRIC</span>
+        <span>[BOOT] Initializing CyberGungor Kernel...</span>
+    </div></div>
+    <div class="log-col hide-mobile"><div class="moving-stream s2">
+        <span>0x41 0x43 0x43 0x45 0x53 0x53 0x5F 0x4B 0x45 0x59</span>
+        <span>GATEWAY_STATUS: READY_FOR_INITIATION</span>
+        <span>DECRYPTING_ASSETS... 100% SUCCESS</span>
+        <span>0x41 0x43 0x43 0x45 0x53 0x53 0x5F 0x4B 0x45 0x59</span>
+    </div></div>
+</div>
+
 <div class="landing-gateway">
     <div class="cyber-grid"></div>
-    <div class="radar-circle"></div>
+    <div class="radar-pulse"></div>
 
     <div class="content-box">
         <div class="logo-wrapper">
@@ -20,126 +36,97 @@ title: Welcome
             <p class="status-msg">>> SYSTEM_STATUS: <span class="blink-green">READY</span></p>
             <p class="auth-msg">Welcome — Learning. Detecting. Improving.</p>
             
-            <a href="/home/" class="enter-btn">
+            <a href="/home/" class="initiate-btn">
+                <span class="btn-glitch-effect"></span>
                 <span class="btn-text">INITIATE ACCESS</span>
-                <span class="btn-glitch"></span>
             </a>
         </div>
     </div>
 </div>
 
 <style>
-/* ===== LANDING GATEWAY BASE ===== */
+/* --- CORE INTEGRATION --- */
+:root {
+    --bg-deep: #08090a;
+    --accent-cyan: #00f2ff;
+    --border-dim: rgba(255, 255, 255, 0.08);
+}
+
+body { background-color: var(--bg-deep) !important; margin: 0; overflow: hidden; }
+
+/* --- UNIFIED LOG BACKGROUND (Diğer sayfalarla aynı) --- */
+.infinite-log-bg {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    display: flex; justify-content: space-around; opacity: 0.08;
+    z-index: 1; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+}
+.moving-stream { display: flex; flex-direction: column; animation: scrollLog infinite linear; }
+.moving-stream span { padding: 15px 0; color: var(--accent-cyan); white-space: nowrap; }
+@keyframes scrollLog { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
+.s1 { animation-duration: 35s; } .s2 { animation-duration: 50s; }
+
+/* --- LANDING GATEWAY CONTAINER --- */
 .landing-gateway {
     min-height: 100vh;
-    background-color: #050608;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    font-family: 'JetBrains Mono', monospace;
+    display: flex; align-items: center; justify-content: center;
+    position: relative; overflow: hidden; z-index: 5;
 }
 
-/* ===== CYBER GRID BACKGROUND ===== */
+/* 3D Grid Floor */
 .cyber-grid {
-    position: absolute;
-    width: 200%; height: 200%;
+    position: absolute; bottom: -10%; width: 200%; height: 100%;
     background-image: 
-        linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
-    background-size: 50px 50px;
-    transform: perspective(500px) rotateX(60deg);
-    animation: gridMove 20s linear infinite;
-    z-index: 1;
-    bottom: -50%;
+        linear-gradient(rgba(0, 242, 255, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 242, 255, 0.1) 1px, transparent 1px);
+    background-size: 60px 60px;
+    transform: perspective(600px) rotateX(65deg);
+    animation: gridFlow 25s linear infinite;
+    opacity: 0.15;
 }
+@keyframes gridFlow { 0% { transform: perspective(600px) rotateX(65deg) translateY(0); } 100% { transform: perspective(600px) rotateX(65deg) translateY(60px); } }
 
-@keyframes gridMove {
-    0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
-    100% { transform: perspective(500px) rotateX(60deg) translateY(50px); }
+/* Radar Pulse */
+.radar-pulse {
+    position: absolute; width: 500px; height: 500px;
+    border: 1px solid rgba(0, 242, 255, 0.2); border-radius: 50%;
+    animation: radarPulse 4s infinite ease-out;
 }
+@keyframes radarPulse { 0% { transform: scale(0.5); opacity: 0.5; } 100% { transform: scale(1.5); opacity: 0; } }
 
-.radar-circle {
-    position: absolute;
-    width: 600px; height: 600px;
-    border: 1px solid rgba(0, 242, 255, 0.1);
-    border-radius: 50%;
-    z-index: 1;
-    animation: pulse 4s ease-in-out infinite;
-}
+/* --- LOGO & CONTENT --- */
+.content-box { text-align: center; z-index: 20; }
+.logo-wrapper { position: relative; margin-bottom: 30px; }
+.glitch-logo { max-width: 320px; width: 85%; filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.2)); }
 
-/* ===== CONTENT BOX ===== */
-.content-box {
-    position: relative;
-    z-index: 10;
-    text-align: center;
-}
-
-.logo-wrapper {
-    position: relative;
-    margin-bottom: 2rem;
-}
-
-.glitch-logo {
-    max-width: 320px;
-    width: 85%;
-    filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.3));
-    transition: 0.5s;
-}
-
-/* LAZER TARAMA EFEKTİ */
 .laser-scanner {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 2px;
-    background: var(--accent);
-    box-shadow: 0 0 15px var(--accent), 0 0 30px var(--accent);
-    animation: scanMove 4s ease-in-out infinite;
-    opacity: 0.7;
+    position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+    background: var(--accent-cyan); box-shadow: 0 0 20px var(--accent-cyan);
+    animation: scanLine 3.5s ease-in-out infinite; opacity: 0.6;
 }
+@keyframes scanLine { 0%, 100% { top: 0%; opacity: 0; } 50% { top: 100%; opacity: 1; } }
 
-@keyframes scanMove {
-    0%, 100% { top: 0%; opacity: 0; }
-    50% { top: 100%; opacity: 1; }
-}
-
-/* ===== TEXT & BUTTONS ===== */
-.status-msg { color: #8b949e; font-size: 0.8rem; letter-spacing: 2px; }
+/* TEXT & BUTTON */
+.status-msg { font-family: 'JetBrains Mono'; color: #8b949e; font-size: 0.8rem; letter-spacing: 2px; }
 .blink-green { color: #3fb950; text-shadow: 0 0 10px #3fb950; animation: blink 1s step-end infinite; }
 @keyframes blink { 50% { opacity: 0; } }
 
-.auth-msg { color: #fff; opacity: 0.6; margin: 10px 0 30px; font-size: 0.9rem; }
+.auth-msg { color: #fff; opacity: 0.5; margin: 15px 0 35px; font-size: 0.9rem; font-family: 'JetBrains Mono'; }
 
-.enter-btn {
-    display: inline-block;
-    padding: 12px 40px;
-    background: transparent;
-    border: 1px solid var(--accent);
-    color: var(--accent);
-    text-decoration: none;
-    font-weight: bold;
-    letter-spacing: 3px;
-    position: relative;
-    transition: 0.3s;
-    overflow: hidden;
+.initiate-btn {
+    display: inline-block; padding: 14px 45px;
+    background: transparent; border: 1px solid var(--accent-cyan);
+    color: var(--accent-cyan); text-decoration: none;
+    font-family: 'JetBrains Mono'; font-weight: bold; letter-spacing: 3px;
+    position: relative; transition: 0.4s; overflow: hidden;
+    backdrop-filter: blur(5px);
+}
+.initiate-btn:hover {
+    background: var(--accent-cyan); color: #000;
+    box-shadow: 0 0 35px rgba(0, 242, 255, 0.4);
 }
 
-.enter-btn:hover {
-    background: var(--accent);
-    color: #000;
-    box-shadow: 0 0 30px var(--accent);
-}
-
-@keyframes pulse {
-    0% { transform: scale(0.8); opacity: 0.1; }
-    50% { transform: scale(1.1); opacity: 0.3; }
-    100% { transform: scale(0.8); opacity: 0.1; }
-}
-
-/* RESPONSIVE */
 @media (max-width: 768px) {
-    .glitch-logo { max-width: 240px; }
-    .radar-circle { width: 300px; height: 300px; }
+    .glitch-logo { max-width: 260px; }
+    .radar-pulse { width: 300px; height: 300px; }
 }
 </style>
