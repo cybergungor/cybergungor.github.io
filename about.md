@@ -18,14 +18,16 @@ permalink: /about/
 </div>
 
 <div class="about-main-wrapper">
-    <header class="about-static-header-clean">
-        <div class="about-tags-simple">
-            <span class="cyan-accent">OPERATOR_IDENTITY</span> // STATUS: ACTIVE
+    
+    <header class="cyber-signature-header">
+        <div class="identity-tag-line">
+            <span class="blinking-cursor">>_</span> OPERATOR_IDENTITY <span class="separator">//</span> STATUS: <span class="cyan-glow">ACTIVE</span>
         </div>
-        <h1 class="about-pure-white-title">About / Emirhan Gungoroglu</h1>
-        <div class="about-path-simple">
-            <span class="green-prompt">guest@cyberlab:~$</span> whoami --roles --status
-        </div>
+        
+        <h1 class="cyber-main-title">
+            <span class="title-prefix">About / </span>
+            <span class="neon-signature" data-text="Emirhan Gungoroglu">Emirhan Gungoroglu</span>
+        </h1>
     </header>
 
     <div class="about-flex-container">
@@ -66,9 +68,7 @@ permalink: /about/
                     real-world simulated cyber attacks and practicing <strong>Incident Response</strong> 
                     in a realistic SOC environment.
                 </p>
-
                 <div class="tactical-hr"></div>
-
                 <h3>// Technical Proficiency</h3>
                 <div class="badge-container">
                     <span class="tech-badge">SIEM (Splunk / ELK)</span>
@@ -78,7 +78,6 @@ permalink: /about/
                     <span class="tech-badge">Endpoint Detection (EDR)</span>
                     <span class="tech-badge">Vulnerability Assessment</span>
                 </div>
-
                 <br>
                 <h3>// Professional Focus Areas</h3>
                 <div class="focus-grid">
@@ -96,7 +95,6 @@ permalink: /about/
                     </div>
                 </div>
             </div>
-
             <br>
             <h3>// Connect</h3>
             <p><a href="https://linkedin.com/in/emirhangungoroglu" class="linkedin-btn">Connect on LinkedIn &rarr;</a></p>
@@ -105,50 +103,90 @@ permalink: /about/
 </div>
 
 <style>
-/* --- CORE INTEGRATION --- */
+/* --- CORE STYLES --- */
 :root {
     --cyber-bg: #08090a;
     --cyber-cyan: #00f2ff;
     --border-soft: rgba(255, 255, 255, 0.08);
 }
-
 body { background-color: var(--cyber-bg) !important; color: #c9d1d9 !important; margin: 0; }
 
-/* NAVBAR ÇAKIŞMASINI ÖNLEYEN ANA KONTEYNER */
+/* ANA KONTEYNER (Navbar Çakışması Önlemi Devam Ediyor) */
 .about-main-wrapper {
     max-width: 1000px;
     margin: 0 auto !important;
-    padding: 150px 20px 60px 20px !important; /* Devasa üst boşluk ile çakışma biter */
+    padding: 150px 20px 60px 20px !important;
+    position: relative; z-index: 5;
+}
+
+/* --- YENİ CYBER İMZA BAŞLIK STİLİ --- */
+.cyber-signature-header {
+    margin-bottom: 4rem; /* Alttaki içerikle mesafeyi açtık */
+    border-bottom: 1px solid rgba(0, 242, 255, 0.2); /* Alt çizgiyi hafif cyan yaptık */
+    padding-bottom: 2rem;
+    position: static !important;
+    background: transparent !important;
+    text-align: left;
+}
+
+/* Üstteki küçük bilgi satırı */
+.identity-tag-line {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    color: #8b949e;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+}
+.blinking-cursor { color: var(--cyber-cyan); animation: blink 1s step-end infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.separator { color: rgba(255,255,255,0.3); margin: 0 5px; }
+.cyan-glow { color: var(--cyber-cyan); text-shadow: 0 0 10px rgba(0, 242, 255, 0.3); }
+
+/* Ana Başlık Tipografisi */
+.cyber-main-title {
+    margin: 0;
+    line-height: 1;
+}
+
+/* "About /" kısmı daha sönük */
+.title-prefix {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 300;
+    display: block; /* Mobilde üstte görünsün */
+    margin-bottom: 5px;
+}
+
+/* İSİM KISMI: NEON VE HAVALI */
+.neon-signature {
+    display: inline-block;
+    font-size: clamp(2.5rem, 7vw, 4.5rem); /* İsmi çok daha büyük yaptık */
+    font-weight: 900;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: -1px;
     position: relative;
-    z-index: 5;
+    /* Güçlü bir neon gölge efekti */
+    text-shadow: 
+        0 0 10px rgba(0, 242, 255, 0.2),
+        0 0 20px rgba(0, 242, 255, 0.2),
+        0 0 40px rgba(0, 242, 255, 0.2);
 }
 
-/* BAŞLIK: KUTUSUZ, ŞEFFAF VE STATİK (HATA BURADAYDI) */
-.about-static-header-clean {
-    margin-bottom: 3rem;
-    border-bottom: 1px solid var(--border-soft);
-    padding-bottom: 1.5rem;
-    position: static !important; /* Kaymayı durdurur */
-    background: transparent !important; /* Kutuyu yok eder */
-    border-top: none !important;
-    border-left: none !important;
-    border-right: none !important;
+/* İsmin altına teknolojik bir çizgi ekleyelim */
+.neon-signature::after {
+    content: '';
+    display: block;
+    width: 60%; /* İsmin yarısı kadar çizgi */
+    height: 4px;
+    background: var(--cyber-cyan);
+    margin-top: 15px;
+    box-shadow: 0 0 20px rgba(0, 242, 255, 0.5);
+    border-radius: 2px;
 }
 
-.about-pure-white-title {
-    color: #ffffff !important; /* Saf Beyaz */
-    font-size: clamp(2rem, 5vw, 3rem) !important;
-    font-weight: 800 !important;
-    margin: 10px 0 !important;
-    letter-spacing: -1.5px;
-}
 
-.about-tags-simple { font-family: 'JetBrains Mono'; font-size: 11px; color: #8b949e; }
-.cyan-accent { color: var(--cyber-cyan); font-weight: bold; }
-.about-path-simple { font-family: 'JetBrains Mono'; font-size: 0.9rem; color: #8b949e; opacity: 0.8; }
-.green-prompt { color: #3fb950; }
-
-/* DİĞER STİLLER (DOKUNULMADI) */
+/* --- DİĞER MEVCUT STİLLER (DEĞİŞMEDİ) --- */
 .about-flex-container { display: flex; gap: 3rem; align-items: flex-start; }
 .profile-section { flex: 0 0 280px; }
 .bio-section { flex: 1; }
@@ -161,6 +199,7 @@ body { background-color: var(--cyber-bg) !important; color: #c9d1d9 !important; 
 .profile-stats { margin-top: 1rem; font-family: 'JetBrains Mono'; font-size: 0.85rem; }
 .stat-row { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border-soft); padding: 8px 0; }
 .intro-text { font-size: 1.1rem; line-height: 1.8; color: #fff; }
+.section-heading { color: #fff; margin-bottom: 1rem; }
 .tactical-hr { border-top: 1px solid var(--border-soft); margin: 2rem 0; }
 .badge-container { display: flex; flex-wrap: wrap; gap: 8px; }
 .tech-badge { background: rgba(0, 242, 255, 0.05); color: var(--cyber-cyan); border: 1px solid rgba(0, 242, 255, 0.2); padding: 5px 12px; border-radius: 4px; font-size: 0.8rem; font-family: 'JetBrains Mono'; }
@@ -168,8 +207,6 @@ body { background-color: var(--cyber-bg) !important; color: #c9d1d9 !important; 
 .focus-item { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-soft); padding: 1.5rem; border-radius: 8px; }
 .focus-item h4 { color: var(--cyber-cyan); margin: 0 0 10px 0; }
 .linkedin-btn { color: var(--cyber-cyan); text-decoration: none; font-weight: bold; }
-
-/* BACKGROUND LOGS */
 .post-static-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; display: flex; justify-content: space-around; opacity: 0.04; z-index: -1; pointer-events: none; }
 .flow-stream { display: flex; flex-direction: column; animation: scrollLog 50s linear infinite; }
 .flow-stream span { padding: 15px 0; font-family: 'JetBrains Mono'; font-size: 10px; color: var(--cyber-cyan); }
@@ -179,5 +216,8 @@ body { background-color: var(--cyber-bg) !important; color: #c9d1d9 !important; 
     .about-flex-container { flex-direction: column; }
     .profile-section { width: 100%; max-width: 320px; margin: 0 auto; }
     .about-main-wrapper { padding-top: 110px !important; }
+    /* Mobilde başlık ayarı */
+    .neon-signature { font-size: 3rem; }
+    .neon-signature::after { width: 100%; }
 }
 </style>
