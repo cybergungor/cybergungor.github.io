@@ -2,39 +2,121 @@
 layout: default
 ---
 
-<article>
+<div class="post-log-bg">
+    <div class="log-col"><div class="moving-stream s1">
+        <span>[READING_MODE] Loading entry ID: {{ page.date | date: "%Y%m%d" }}_X7</span>
+        <span>[DECRYPT] Content decrypted successfully using AES-256</span>
+        <span>[SYSTEM] Displaying data block...</span>
+        <span>[READING_MODE] Loading entry ID: {{ page.date | date: "%Y%m%d" }}_X7</span>
+        <span>[DECRYPT] Content decrypted successfully using AES-256</span>
+    </div></div>
+    <div class="log-col hide-mobile"><div class="moving-stream s2">
+        <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x56 0x49 0x45 0x57</span>
+        <span>ACCESS_LOG: User IP recorded</span>
+        <span>SESSION_STATUS: ACTIVE | MODE: READ_ONLY</span>
+        <span>0x52 0x45 0x50 0x4F 0x52 0x54 0x5F 0x56 0x49 0x45 0x57</span>
+    </div></div>
+</div>
 
-  <h1>{{ page.title }}</h1>
+<div class="tactical-post-wrapper">
+    <header class="post-header">
+        <div class="header-meta">
+            <span class="status-badge">INCIDENT REPORT // {{ page.categories | first | upcase }}</span>
+            <span class="meta-date">{{ page.date | date: "%d %b %Y" }}</span>
+        </div>
+        <h1 class="post-main-title">{{ page.title }}</h1>
+        <div class="command-line-small">
+            <span class="prompt">root@cyberlab:~/reports$</span> cat {{ page.title | downcase | replace: ' ', '_' }}.log
+        </div>
+    </header>
 
-  <p>
-    <small>
-      {{ page.date | date: "%d %B %Y" }}
-      {% if page.tags %}
-        • Tags:
-        {% for tag in page.tags %}
-          {{ tag }}{% unless forloop.last %}, {% endunless %}
-        {% endfor %}
-      {% endif %}
-    </small>
-  </p>
+    <article class="post-content-body">
+        {{ content }}
+    </article>
 
-  <hr>
+    <footer class="post-footer">
+        <div class="terminal-separator">--- END OF REPORT ---</div>
+        <a href="/blog/" class="back-btn">&larr; RETURN_TO_DATABASE</a>
+    </footer>
+</div>
 
-  {{ content }}
+<style>
+/* --- TEMEL AYARLAR --- */
+:root {
+    --bg: #08090a;
+    --card-bg: rgba(17, 18, 20, 0.95);
+    --accent: #00f2ff;
+    --text-main: #c9d1d9;
+    --text-muted: #8b949e;
+    --border: rgba(255, 255, 255, 0.08);
+}
 
-</article>
-<script src="https://giscus.app/client.js"
-        data-repo="emirhangungoroglu/emirhangungoroglu.github.io"
-        data-repo-id="R_kgDOQqTcNA"
-        data-category="General"
-        data-category-id="DIC_kwDOQqTcNM4Cz6cT"
-        data-mapping="pathname"
-        data-strict="0"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-input-position="bottom"
-        data-theme="dark"
-        data-lang="tr"
-        crossorigin="anonymous"
-        async>
-</script>
+body { background-color: var(--bg) !important; color: var(--text-main); font-family: 'Inter', sans-serif; }
+
+/* --- LOG ARKA PLANI --- */
+.post-log-bg {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    display: flex; justify-content: space-around; opacity: 0.05;
+    z-index: -1; pointer-events: none; font-family: 'JetBrains Mono', monospace; font-size: 10px;
+}
+.moving-stream { display: flex; flex-direction: column; animation: scrollDown infinite linear; }
+.moving-stream span { padding: 12px 0; color: var(--accent); white-space: nowrap; }
+@keyframes scrollDown { 0% { transform: translateY(-50%); } 100% { transform: translateY(0); } }
+.s1 { animation-duration: 40s; } .s2 { animation-duration: 60s; }
+
+/* --- POST ANA KAPLAYICI --- */
+.tactical-post-wrapper {
+    max-width: 900px; margin: 4rem auto; padding: 0 20px;
+}
+
+/* --- BAŞLIK ALANI --- */
+.post-header { margin-bottom: 3rem; border-bottom: 1px solid var(--border); padding-bottom: 2rem; }
+.header-meta { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; }
+.status-badge { background: rgba(0, 242, 255, 0.1); color: var(--accent); padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: bold; letter-spacing: 1px; }
+.meta-date { font-family: 'JetBrains Mono'; font-size: 11px; color: var(--text-muted); }
+
+.post-main-title { 
+    font-size: 3rem; font-weight: 800; color: #fff; margin: 0 0 15px 0; line-height: 1.2;
+    text-shadow: 0 0 15px rgba(0, 242, 255, 0.15);
+}
+.command-line-small { font-family: 'JetBrains Mono'; font-size: 0.9rem; color: var(--text-muted); }
+.prompt { color: #3fb950; margin-right: 10px; }
+
+/* --- İÇERİK GÖVDESİ (MAKALE) --- */
+.post-content-body {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+/* Makale İçi Tipografi Düzenlemeleri */
+.post-content-body h2, .post-content-body h3 { color: #fff; margin-top: 2.5rem; }
+.post-content-body h2 { font-size: 1.8rem; border-bottom: 1px solid var(--border); padding-bottom: 10px; }
+.post-content-body a { color: var(--accent); text-decoration: none; border-bottom: 1px dotted var(--accent); }
+.post-content-body code { background: rgba(0, 242, 255, 0.1); color: var(--accent); padding: 2px 6px; border-radius: 4px; font-family: 'JetBrains Mono'; font-size: 0.9em; }
+.post-content-body pre { background: #0d1117 !important; border: 1px solid var(--border); border-radius: 8px; padding: 15px; overflow-x: auto; }
+.post-content-body img { max-width: 100%; border-radius: 8px; border: 1px solid var(--border); margin: 20px 0; }
+.post-content-body ul, .post-content-body ol { padding-left: 20px; color: var(--text-muted); }
+.post-content-body li { margin-bottom: 10px; }
+
+/* --- ALT BİLGİ --- */
+.post-footer { margin-top: 3rem; text-align: center; }
+.terminal-separator { font-family: 'JetBrains Mono'; color: var(--text-muted); opacity: 0.5; margin-bottom: 1.5rem; font-size: 0.9rem; }
+.back-btn {
+    display: inline-block; padding: 10px 20px; border: 1px solid var(--accent);
+    border-radius: 8px; color: var(--accent); text-decoration: none;
+    font-family: 'JetBrains Mono'; font-weight: bold; font-size: 0.9rem; transition: 0.3s;
+}
+.back-btn:hover { background: rgba(0, 242, 255, 0.1); box-shadow: 0 0 15px rgba(0, 242, 255, 0.2); }
+
+@media (max-width: 768px) {
+    .post-main-title { font-size: 2.2rem; }
+    .post-content-body { padding: 25px; }
+    .hide-mobile { display: none; }
+}
+</style>
