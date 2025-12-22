@@ -7,8 +7,8 @@ tags: [website, blue-team, updates, rebuild]
 ---
 
 <div class="lang-switch-box" style="margin-bottom: 50px; text-align: center;">
-    <button onclick="switchLang('tr')" id="btn-tr" style="background: none; border: 1px solid #00f2ff; color: #00f2ff; padding: 10px 20px; cursor: pointer; font-family: 'JetBrains Mono';">TÜRKÇE</button>
-    <button onclick="switchLang('en')" id="btn-en" style="background: none; border: 1px solid #00f2ff; color: #00f2ff; padding: 10px 20px; cursor: pointer; font-family: 'JetBrains Mono'; opacity: 0.5;">ENGLISH</button>
+    <button onclick="switchLang('tr')" id="btn-tr" style="background: none; border: 1px solid #00f2ff; color: #00f2ff; padding: 10px 20px; cursor: pointer; font-family: 'JetBrains Mono';">Turkish</button>
+    <button onclick="switchLang('en')" id="btn-en" style="background: none; border: 1px solid #00f2ff; color: #00f2ff; padding: 10px 20px; cursor: pointer; font-family: 'JetBrains Mono'; opacity: 0.5;">English</button>
 </div>
 
 <div id="content-tr">
