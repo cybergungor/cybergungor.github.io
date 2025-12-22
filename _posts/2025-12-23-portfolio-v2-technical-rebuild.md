@@ -20,8 +20,8 @@ categories: [Updates, SOC-Analyst]
 ---
 
 <div class="language-switcher" style="margin-bottom: 50px; text-align: center; border-bottom: 1px solid var(--cyber-border); padding-bottom: 20px;">
-    <button onclick="switchLang('tr')" id="btn-tr" class="tactical-btn" style="padding: 8px 25px; cursor: pointer; border: 1px solid var(--cyber-cyan); font-family: 'JetBrains Mono';">TÜRKÇE</button>
-    <button onclick="switchLang('en')" id="btn-en" class="tactical-btn" style="padding: 8px 25px; cursor: pointer; border: 1px solid var(--cyber-cyan); opacity: 0.5; font-family: 'JetBrains Mono';">ENGLISH</button>
+    <button onclick="switchLang('tr')" id="btn-tr" class="tactical-btn" style="padding: 8px 25px; cursor: pointer; border: 1px solid var(--cyber-cyan); font-family: 'JetBrains Mono';">TR</button>
+    <button onclick="switchLang('en')" id="btn-en" class="tactical-btn" style="padding: 8px 25px; cursor: pointer; border: 1px solid var(--cyber-cyan); opacity: 0.5; font-family: 'JetBrains Mono';">EN</button>
 </div>
 
 <div id="content-tr" class="lang-content">
