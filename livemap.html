@@ -1,8 +1,13 @@
+---
+layout: default
+title: "Live Threat Map"
+permalink: /livemap/
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Live Threat Map (Simulated)</title>
 
 <style>
 body {
@@ -12,12 +17,12 @@ body {
     color: #c9d1d9;
 }
 
+/* HEADER */
 .header {
-    padding: 15px 25px;
+    padding: 14px 24px;
     border-bottom: 1px solid #30363d;
     display: flex;
     justify-content: space-between;
-    align-items: center;
 }
 
 .status {
@@ -25,38 +30,68 @@ body {
     font-size: 12px;
 }
 
+/* MAP */
 .map-container {
     position: relative;
-    height: 75vh;
-    background: #000;
+    height: 70vh;
+    background-image: url("https://raw.githubusercontent.com/datasets/geo-boundaries-world-110m/master/img/world-110m.png");
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
 }
 
+/* DARK GRID */
+.map-container::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+}
+
+/* SVG */
 svg {
+    position: absolute;
     width: 100%;
     height: 100%;
 }
 
-.attack-line {
-    stroke: #ff5555;
-    stroke-width: 1.5;
-    stroke-dasharray: 5;
-    animation: dash 1s linear infinite;
+/* ATTACK EFFECTS */
+.beam {
+    stroke: url(#beamGradient);
+    stroke-width: 2;
+    stroke-dasharray: 8;
+    animation: beamMove 0.8s linear infinite;
 }
 
-@keyframes dash {
-    to { stroke-dashoffset: -10; }
+@keyframes beamMove {
+    to { stroke-dashoffset: -16; }
 }
 
-.dot {
+.origin {
     fill: #58a6ff;
+    filter: drop-shadow(0 0 8px #58a6ff);
 }
 
+.impact {
+    fill: #ff5555;
+    animation: pulse 0.8s ease-out infinite;
+}
+
+@keyframes pulse {
+    0% { r: 2; opacity: 1; }
+    100% { r: 12; opacity: 0; }
+}
+
+/* LOG */
 .log-panel {
-    height: 25vh;
-    border-top: 1px solid #30363d;
-    padding: 15px;
-    overflow: hidden;
+    height: 30vh;
+    padding: 16px;
     font-size: 12px;
+    overflow: hidden;
 }
 
 .log {
@@ -75,9 +110,12 @@ svg {
 
 <div class="map-container">
 <svg viewBox="0 0 1000 500" id="map">
-    <!-- Simple world map outline -->
-    <image href="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg"
-           x="0" y="0" width="1000" height="500" opacity="0.15"/>
+<defs>
+<linearGradient id="beamGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+<stop offset="0%" stop-color="#ff5555"/>
+<stop offset="100%" stop-color="#ffa657"/>
+</linearGradient>
+</defs>
 </svg>
 </div>
 
@@ -85,69 +123,60 @@ svg {
 
 <script>
 const locations = [
-    { name: "USA", x: 180, y: 220 },
-    { name: "Germany", x: 520, y: 180 },
-    { name: "Turkey", x: 560, y: 230 },
-    { name: "Russia", x: 650, y: 160 },
-    { name: "China", x: 750, y: 230 },
-    { name: "Brazil", x: 350, y: 330 },
-    { name: "India", x: 700, y: 270 }
+    {n:"USA",x:220,y:240},{n:"Canada",x:210,y:190},
+    {n:"Brazil",x:360,y:330},{n:"UK",x:480,y:190},
+    {n:"Germany",x:520,y:200},{n:"France",x:505,y:210},
+    {n:"Turkey",x:570,y:245},{n:"Russia",x:650,y:180},
+    {n:"India",x:720,y:290},{n:"China",x:760,y:260},
+    {n:"Japan",x:820,y:230},{n:"South Korea",x:805,y:240},
+    {n:"Australia",x:860,y:360},{n:"South Africa",x:550,y:350},
+    {n:"Nigeria",x:520,y:320},{n:"UAE",x:600,y:260},
+    {n:"Israel",x:565,y:255},{n:"Argentina",x:350,y:360}
 ];
 
-const attackTypes = [
-    "DDoS",
-    "Credential_Stuffing",
-    "SQL_Injection",
-    "Ransomware",
-    "Brute_Force"
+const attacks = [
+    "DDoS","Credential_Stuffing","Brute_Force","SQL_Injection",
+    "Ransomware","Phishing","C2_Beaconing",
+    "Data_Exfiltration","Port_Scanning","Malware_Dropper"
 ];
 
 const map = document.getElementById("map");
 const log = document.getElementById("log");
 
-function randomItem(arr) {
-    return arr[Math.floor(Math.random() * arr.length)];
+function rand(a){return a[Math.floor(Math.random()*a.length)];}
+
+function attack(){
+    let from = rand(locations), to;
+    do { to = rand(locations); } while (to === from);
+
+    const beam = document.createElementNS("http://www.w3.org/2000/svg","line");
+    beam.setAttribute("x1",from.x);
+    beam.setAttribute("y1",from.y);
+    beam.setAttribute("x2",to.x);
+    beam.setAttribute("y2",to.y);
+    beam.setAttribute("class","beam");
+
+    const o = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    o.setAttribute("cx",from.x); o.setAttribute("cy",from.y);
+    o.setAttribute("r",3); o.setAttribute("class","origin");
+
+    const i = document.createElementNS("http://www.w3.org/2000/svg","circle");
+    i.setAttribute("cx",to.x); i.setAttribute("cy",to.y);
+    i.setAttribute("r",2); i.setAttribute("class","impact");
+
+    map.append(beam,o,i);
+
+    const e=document.createElement("div");
+    e.className="log";
+    e.textContent=`[${new Date().toLocaleTimeString()}] ${rand(attacks)} | ${from.n} → ${to.n}`;
+    log.prepend(e);
+
+    setTimeout(()=>{beam.remove();o.remove();i.remove();
+        if(log.children.length>25)log.removeChild(log.lastChild);
+    },2500);
 }
 
-function launchAttack() {
-    const from = randomItem(locations);
-    let to;
-    do { to = randomItem(locations); } while (to === from);
-
-    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-    line.setAttribute("x1", from.x);
-    line.setAttribute("y1", from.y);
-    line.setAttribute("x2", to.x);
-    line.setAttribute("y2", to.y);
-    line.setAttribute("class", "attack-line");
-
-    const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-    dot.setAttribute("cx", to.x);
-    dot.setAttribute("cy", to.y);
-    dot.setAttribute("r", 3);
-    dot.setAttribute("class", "dot");
-
-    map.appendChild(line);
-    map.appendChild(dot);
-
-    const type = randomItem(attackTypes);
-    const time = new Date().toLocaleTimeString();
-
-    const entry = document.createElement("div");
-    entry.className = "log";
-    entry.textContent = `[${time}] ${type} | ${from.name} → ${to.name}`;
-    log.prepend(entry);
-
-    setTimeout(() => {
-        line.remove();
-        dot.remove();
-        if (log.children.length > 20) {
-            log.removeChild(log.lastChild);
-        }
-    }, 3000);
-}
-
-setInterval(launchAttack, 1200);
+setInterval(attack,900);
 </script>
 
 </body>
