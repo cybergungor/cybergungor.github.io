@@ -7,7 +7,10 @@ permalink: /news/
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Multi-Source Intel Center | Live Feed</title>
+    <title>[INTEL_CENTER] // Tactical Intelligence</title>
+    
+    <link rel="icon" type="image/png" href="https://img.icons8.com/flat-round/64/shield.png">
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -18,7 +21,6 @@ permalink: /news/
 
         body, html { margin: 0; padding: 0; background-color: var(--bg); color: var(--text-main); font-family: 'Inter', sans-serif; }
         
-        /* Arka Plan Grid Dokusu */
         body::before {
             content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
@@ -27,7 +29,6 @@ permalink: /news/
         }
 
         .news-container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
-        
         .nav-back a { color: var(--accent); text-decoration: none; font-family: 'JetBrains Mono'; font-size: 0.8rem; }
 
         .news-header { border-bottom: 1px solid var(--border); padding-bottom: 30px; margin-bottom: 50px; display: flex; justify-content: space-between; align-items: flex-end; }
@@ -36,7 +37,6 @@ permalink: /news/
         .live-indicator { color: #3fb950; font-family: 'JetBrains Mono'; font-size: 0.75rem; display: flex; align-items: center; gap: 8px; }
         .pulse { width: 8px; height: 8px; background: #3fb950; border-radius: 50%; box-shadow: 0 0 8px #3fb950; animation: blink 2s infinite; }
 
-        /* Haber Kartları */
         .news-card { background: var(--surface); border: 1px solid var(--border); padding: 25px; margin-bottom: 20px; border-radius: 4px; transition: 0.3s; text-decoration: none; display: block; color: inherit; }
         .news-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
 
@@ -49,7 +49,6 @@ permalink: /news/
         .meta { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted); }
 
         #loading { text-align: center; font-family: 'JetBrains Mono'; color: var(--accent); padding: 50px; }
-
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
     </style>
 </head>
@@ -60,18 +59,18 @@ permalink: /news/
 
     <header class="news-header">
         <div>
-            <h1>[MULTI_SOURCE_INTEL]</h1>
-            <p style="color:var(--text-muted); font-size:0.8rem; margin:5px 0 0;">Hibrit Siber Tehdit İstihbarat Portalı</p>
+            <h1>[INTEL_CENTER]</h1>
+            <p style="color:var(--text-muted); font-size:0.8rem; margin:5px 0 0;">Anlık Siber Tehdit Analiz Portalı</p>
         </div>
-        <div class="live-indicator"><span class="pulse"></span> CTI_UPLINK: ACTIVE</div>
+        <div class="live-indicator"><span class="pulse"></span> CTI_STREAM: OK</div>
     </header>
 
-    <div id="loading">AGGREGATING_THREAT_FEEDS...</div>
+    <div id="loading">SYNCING_WITH_EXTERNAL_NODES...</div>
     <div id="news-feed"></div>
 
     <footer style="margin-top:80px; text-align:center; color:#484f58; font-family:'JetBrains Mono'; font-size:0.7rem; border-top:1px solid var(--border); padding-top:30px;">
-        > SOURCES: BleepingComputer, The Hacker News, CISA Gov <br>
-        > Integrated CTI (Cyber Threat Intelligence) for Blue Team Analysis.
+        > AGGREGATED FROM: BleepingComputer, The Hacker News, CISA Gov <br>
+        > Integrated Threat Intelligence for Cyber Operations.
     </footer>
 </div>
 
@@ -79,7 +78,7 @@ permalink: /news/
     const sources = [
         { name: "BLEEPING_COMPUTER", url: "https://www.bleepingcomputer.com/feed/", tagClass: "tag-bleeping" },
         { name: "THE_HACKER_NEWS", url: "https://feeds.feedburner.com/TheHackersNews", tagClass: "tag-hacker" },
-        { name: "CISA_GOV_ALERTS", url: "https://www.cisa.gov/cybersecurity-advisories/all.xml", tagClass: "tag-cisa" }
+        { name: "CISA_GOV", url: "https://www.cisa.gov/cybersecurity-advisories/all.xml", tagClass: "tag-cisa" }
     ];
 
     async function fetchAllNews() {
@@ -88,7 +87,6 @@ permalink: /news/
         let allArticles = [];
 
         try {
-            // Tüm kaynaklardan verileri eşzamanlı çek
             const requests = sources.map(source => 
                 fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(source.url)}`)
                 .then(res => res.json())
@@ -104,27 +102,19 @@ permalink: /news/
             allArticles = results.flat().sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
 
             loader.style.display = 'none';
-            allArticles.slice(0, 15).forEach(item => { // En güncel 15 haberi göster
+            allArticles.slice(0, 12).forEach(item => {
                 const card = document.createElement('a');
-                card.href = item.link;
-                card.target = "_blank";
-                card.className = 'news-card';
-                
-                const date = new Date(item.pubDate).toLocaleDateString('tr-TR', { day:'numeric', month:'short', year:'numeric' });
-                
+                card.href = item.link; card.target = "_blank"; card.className = 'news-card';
+                const date = new Date(item.pubDate).toLocaleDateString('tr-TR', { day:'numeric', month:'short' });
                 card.innerHTML = `
                     <span class="tag ${item.tagClass}">${item.sourceName}</span>
                     <h2>${item.title}</h2>
-                    <div class="meta"><b>TIMESTAMP:</b> ${date} | <b>STATUS:</b> VERIFIED_INTEL</div>
+                    <div class="meta"><b>TIMESTAMP:</b> ${date} | <b>STATUS:</b> ANALYZED</div>
                 `;
                 feedContainer.appendChild(card);
             });
-
-        } catch (error) {
-            loader.innerText = "CRITICAL_CONNECTION_ERROR: Failed to sync with intelligence nodes.";
-        }
+        } catch (error) { loader.innerText = "ERROR: Failed to establish intelligence uplink."; }
     }
-
     window.onload = fetchAllNews;
 </script>
 
