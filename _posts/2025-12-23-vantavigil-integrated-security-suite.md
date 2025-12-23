@@ -9,7 +9,7 @@ categories: [blog]
 <div class="post-content">
 
 <div style="text-align: center; margin-bottom: 50px;">
-    <button onclick="toggleVanta('tr')" id="btn-tr" style="background: #00ffcc; color: #000; border: none; padding: 12px 30px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-weight: 800; border-radius: 4px; transition: 0.3s;">TÜRKÇE_VERİ</button>
+    <button onclick="toggleVanta('tr')" id="btn-tr" style="background: #00ffcc; color: #000; border: none; padding: 12px 30px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-weight: 800; border-radius: 4px; transition: 0.3s;">TR_VERİ</button>
     <button onclick="toggleVanta('en')" id="btn-en" style="background: transparent; color: #00ffcc; border: 1px solid #00ffcc; padding: 12px 30px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-weight: 800; border-radius: 4px; transition: 0.3s;">EN_VERSION</button>
 </div>
 
