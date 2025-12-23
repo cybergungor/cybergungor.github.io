@@ -1,0 +1,134 @@
+---
+layout: null
+permalink: /cve/
+---
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[CVE_INTEL] // Critical Vulnerability Feed</title>
+    
+    <link rel="icon" type="image/png" href="/assets/images/CYBER.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050608; --surface: #0d1117; --border: #30363d;
+            --accent: #58a6ff; --alert: #f85149; --tr: #3fb950;
+            --text-main: #c9d1d9; --text-muted: #8b949e;
+        }
+
+        body, html { margin: 0; padding: 0; background-color: var(--bg); color: var(--text-main); font-family: 'Inter', sans-serif; }
+        
+        /* Arka Plan Grid Dokusu */
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 40px 40px; z-index: -1;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
+        .nav-back a { color: var(--accent); text-decoration: none; font-family: 'JetBrains Mono'; font-size: 0.8rem; border: 1px solid var(--border); padding: 5px 12px; border-radius: 4px; }
+
+        .header { border-bottom: 1px solid var(--border); padding-bottom: 30px; margin-bottom: 50px; display: flex; justify-content: space-between; align-items: flex-end; }
+        .header h1 { font-family: 'JetBrains Mono'; font-size: 1.8rem; color: #ffffff; margin: 0; letter-spacing: -1px; }
+        
+        .live-status { color: var(--alert); font-family: 'JetBrains Mono'; font-size: 0.75rem; display: flex; align-items: center; gap: 8px; font-weight: bold; }
+        .pulse { width: 8px; height: 8px; background: var(--alert); border-radius: 50%; box-shadow: 0 0 8px var(--alert); animation: blink 2s infinite; }
+
+        /* CVE KARTLARI */
+        .cve-card { background: var(--surface); border: 1px solid var(--border); padding: 25px; margin-bottom: 25px; border-radius: 4px; transition: 0.3s; position: relative; display: block; text-decoration: none; color: inherit; }
+        .cve-card:hover { border-color: var(--alert); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(248, 81, 73, 0.1); }
+
+        .badge { font-family: 'JetBrains Mono'; font-size: 9px; font-weight: bold; padding: 3px 8px; border-radius: 2px; margin-bottom: 15px; display: inline-block; text-transform: uppercase; }
+        .badge-global { border: 1px solid var(--accent); color: var(--accent); }
+        .badge-usom { border: 1px solid var(--tr); color: var(--tr); }
+
+        .severity-rank { position: absolute; top: 25px; right: 25px; font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--alert); border: 1px solid var(--alert); padding: 2px 6px; border-radius: 2px; }
+
+        .cve-card h2 { font-size: 1.3rem; color: #fff; margin: 0 0 12px 0; line-height: 1.4; padding-right: 60px; }
+        .cve-desc { font-size: 0.9rem; line-height: 1.6; color: var(--text-muted); margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+        .meta { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted); display: flex; gap: 20px; }
+        .meta b { color: var(--accent); }
+
+        #loading { text-align: center; font-family: 'JetBrains Mono'; color: var(--accent); padding: 50px; }
+
+        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <nav class="nav-back"><a href="/">← cd .. /root_dir</a></nav>
+
+    <header class="header">
+        <div>
+            <h1>[CVE_INTEL_CENTER]</h1>
+            <p style="color:var(--text-muted); font-size:0.8rem; margin:5px 0 0;">Kritik Güvenlik Açıkları & CVE Takip Merkezi</p>
+        </div>
+        <div class="live-status"><span class="pulse"></span> THREAT_LEVEL: CRITICAL</div>
+    </header>
+
+    <div id="loading">CONNECTING_TO_GLOBAL_CVE_NODES...</div>
+    <div id="cve-feed"></div>
+
+    <footer style="margin-top:80px; text-align:center; color:#484f58; font-family:'JetBrains Mono'; font-size:0.7rem; border-top:1px solid var(--border); padding-top:30px;">
+        > DATA_FEEDS: MITRE, NIST, USOM (Ulusal Siber Olaylara Müdahale Merkezi) <br>
+        > Automated Monitoring System for Aspiring Blue Team Analysts.
+    </footer>
+</div>
+
+<script>
+    // RSS Kaynakları (Global ve Yerel)
+    const feeds = [
+        { name: "GLOBAL_CRITICAL", url: "https://cvefeed.io/rssfeed/high-and-critical-severity.rss", badge: "badge-global" },
+        { name: "USOM_TR_ADVISORY", url: "https://www.usom.gov.tr/rss/bildirimler", badge: "badge-usom" }
+    ];
+
+    async function fetchCVEs() {
+        const feedContainer = document.getElementById('cve-feed');
+        const loader = document.getElementById('loading');
+        let allItems = [];
+
+        try {
+            const requests = feeds.map(f => 
+                fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f.url)}`)
+                .then(res => res.json())
+                .then(data => {
+                    if(data.status === 'ok') {
+                        return data.items.map(i => ({ ...i, source: f.name, badge: f.badge }));
+                    }
+                    return [];
+                })
+            );
+
+            const results = await Promise.all(requests);
+            allItems = results.flat().sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+
+            loader.style.display = 'none';
+            allItems.slice(0, 12).forEach(item => {
+                const card = document.createElement('a');
+                card.href = item.link; card.target = "_blank"; card.className = 'cve-card';
+                
+                const date = new Date(item.pubDate).toLocaleDateString('tr-TR', { day:'numeric', month:'short', year:'numeric' });
+                const description = item.description.replace(/<[^>]*>?/gm, '').substring(0, 200) + "...";
+
+                card.innerHTML = `
+                    <span class="badge ${item.badge}">${item.source}</span>
+                    <span class="severity-rank">CRITICAL</span>
+                    <h2>${item.title}</h2>
+                    <p class="cve-desc">${description}</p>
+                    <div class="meta"><b>TIMESTAMP:</b> ${date} | <b>STATUS:</b> LIVE_ALERT</div>
+                `;
+                feedContainer.appendChild(card);
+            });
+        } catch (error) { loader.innerText = "CRITICAL_ERROR: Uplink to CVE databases failed."; }
+    }
+    window.onload = fetchCVEs;
+</script>
+
+</body>
+</html>
