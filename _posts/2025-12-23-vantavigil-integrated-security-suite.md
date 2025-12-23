@@ -6,59 +6,73 @@ author: Emirhan Gungoroglu
 categories: [blog]
 ---
 
-<div class="lang-switcher" style="display: flex; justify-content: center; gap: 15px; margin: 40px 0; border-bottom: 1px solid #1a1a1e; padding-bottom: 20px;">
-    <button onclick="toggleLang('tr')" id="btn-tr" style="background: #00ffcc; color: #020202; border: none; padding: 12px 30px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-weight: 800; letter-spacing: 2px; transition: 0.3s;">TR</button>
-    <button onclick="toggleLang('en')" id="btn-en" style="background: transparent; color: #00ffcc; border: 1px solid #00ffcc; padding: 12px 30px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-weight: 800; letter-spacing: 2px; transition: 0.3s;">EN</button>
+<div class="lang-selector" style="text-align: center; margin-bottom: 50px; padding-bottom: 20px; border-bottom: 1px solid #1a1a1e;">
+    <button onclick="toggleLang('tr')" id="btn-tr" style="background: #00ffcc; color: #000; border: none; padding: 12px 30px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-weight: 800; border-radius: 4px; transition: 0.3s; margin: 5px;">TÜRKÇE</button>
+    <button onclick="toggleLang('en')" id="btn-en" style="background: transparent; color: #00ffcc; border: 1px solid #00ffcc; padding: 12px 30px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-weight: 800; border-radius: 4px; transition: 0.3s; margin: 5px;">ENGLISH</button>
 </div>
 
-<div id="content-tr" style="font-family: 'JetBrains Mono', monospace; color: #e0e0e0; line-height: 2;">
+<div id="content-tr" style="font-family: 'JetBrains Mono', monospace; line-height: 1.8;">
 
-# VANTAVIGIL // Kurumsal Vizyon ve Stratejik Yol Haritası
+# VANTAVIGIL // Entegre Güvenlik Ekosistemi
 
-### 0x01 // Misyon ve Tanımlama
-**Vantavigil**, siber güvenlik operasyonlarını modernize etmek ve analiz süreçlerini tek bir profesyonel ekosistemde birleştirmek amacıyla başlatılmış bir **Integrated Security Suite** girişimidir. Vantablack’in mutlak derinliği ile "Vigil" (Bekçi) kavramının proaktifliğini temsil eden marka, siber dünyadaki sessiz ve keskin gözlemciliği simgeler.
+> **MİSYON BİLDİRİSİ:** Siber güvenlik operasyonlarını modernize etmek ve analiz süreçlerini tek bir profesyonel çatıda birleştirmek.
 
-### 0x02 // Mevcut Durum: Modül 01 (Encoder Engine)
-Şu an sistemin kalbinde yer alan **Cyber Encoder Suite**, verinin dönüştürülme ve analiz sürecini hızlandırmak için tasarlanmıştır. 
-* **İstemci Taraflı İşleme:** Tüm veri işlemleri kullanıcının yerel tarayıcısında gerçekleşir; hiçbir veri dış sunuculara iletilmez.
-* **Çoklu Algoritma Desteği:** Base64, Hex, ROT13 ve SHA-256 gibi kritik standartlar tek bir arayüzde toplanmıştır.
+---
 
-### 0x03 // Stratejik Genişleme: Gelecek Sistemler
-Vantavigil, sadece bir araç değil, kapsamlı bir operasyon merkezi olma yolunda ilerlemektedir:
-* **Domain & OSINT Reconnaissance:** Pasif istihbarat toplama süreçlerini otomatize eden derin DNS ve ağ keşif modülleri.
-* **Defansif Güvenlik (Blue Team):** Splunk ve QRadar gibi SIEM sistemleriyle entegre çalışabilen log analizörleri ve olay müdahale (Incident Response) yardımcıları.
-* **Zafiyet İstihbaratı:** CVE kodları ve güncel tehdit kütüphaneleri üzerinden anlık zafiyet sorgulama motoru.
+### 🛡️ 01_ MİSYON VE TANIMLAMA
+**Vantavigil**, siber dünyadaki karmaşık veri akışlarını yönetmek ve analiz etmek amacıyla tasarlanmış bir **Integrated Security Suite** (Entegre Güvenlik Paketi) projesidir. Marka ismimiz, Vantablack’in mutlak derinliği ile "Vigilance" (Uyanıklık) kavramının proaktifliğini birleştirerek, dijital varlıklar için sessiz ama keskin bir bekçi olmayı simgeler.
 
-### 0x04 // Neden Vantavigil?
-Siber güvenlik dünyasında hız, doğruluk ve gizlilik vazgeçilmezdir. Vantavigil, karmaşık komut satırı işlemlerini ve güvensiz online araçları, tamamen kontrol edilebilir ve güvenli bir arayüzle ikame etmek için geliştirilmektedir.
+### ⚙️ 02_ MEVCUT SİSTEM: ENCODER ENGINE
+Vantavigil'in ilk yapı taşı olan **Encoder Engine**, siber analiz süreçlerinde hız ve güvenliği odağa alır.
+* **Veri Egemenliği:** Tüm veri işlemleri yerel tarayıcıda (Client-side) gerçekleşir; hiçbir veri dış dünyaya sızdırılmaz.
+* **Standart Uyumluluk:** Base64, Hex, SHA-256 ve ROT13 gibi endüstri standartlarını tek bir yüksek performanslı arayüzde birleştirir.
 
-</div>
+### 🗺️ 03_ STRATEJİK YOL HARİTASI (ROADMAP)
+Vantavigil, sadece bir araç değil, bir **Komuta Merkezi** olma vizyonuyla geliştirilmektedir:
 
-<div id="content-en" style="display: none; font-family: 'JetBrains Mono', monospace; color: #e0e0e0; line-height: 2;">
+| Faz | Modül | Kapsam |
+|:--- |:--- |:--- |
+| **FAZ-1** | **Encoder Suite** | Çoklu algoritma desteği ve veri dönüştürme motoru (Aktif). |
+| **FAZ-2** | **Domain Recon** | Gelişmiş OSINT, DNS istihbaratı ve ağ keşif modülleri (Geliştiriliyor). |
+| **FAZ-3** | **Blue Team Kit** | SIEM entegrasyonu (Splunk/QRadar), log analizi ve olay müdahale araçları. |
 
-# VANTAVIGIL // Corporate Vision & Strategic Roadmap
-
-### 0x01 // Mission & Definition
-**Vantavigil** is an **Integrated Security Suite** initiative launched to modernize cybersecurity operations and unify analytical processes within a professional ecosystem. Representing the absolute depth of Vantablack and the proactivity of "Vigilance," the brand symbolizes a silent yet sharp guardian in the digital realm.
-
-### 0x02 // Current State: Module 01 (Encoder Engine)
-The **Cyber Encoder Suite**, currently at the core of the platform, is designed to accelerate the transformation and analysis of data.
-* **Client-Side Processing:** All data operations occur within the user's local browser; no data is transmitted to external servers.
-* **Multi-Algorithm Support:** Critical standards such as Base64, Hex, ROT13, and SHA-256 are unified in a single interface.
-
-### 0x03 // Strategic Expansion: Future Systems
-Vantavigil is evolving from a single tool into a comprehensive operations center:
-* **Domain & OSINT Reconnaissance:** Deep DNS and network discovery modules to automate passive intelligence gathering.
-* **Defensive Security (Blue Team):** Log analyzers and Incident Response aids integrated with SIEM systems like Splunk and QRadar.
-* **Vulnerability Intelligence:** Real-time vulnerability assessment engines powered by CVE databases and threat libraries.
-
-### 0x04 // Why Vantavigil?
-In cybersecurity, speed, accuracy, and privacy are non-negotiable. Vantavigil is being developed to replace complex command-line operations and insecure online tools with a fully controllable, secure, and professional interface.
+### 🚀 04_ GELECEĞE BAKIŞ
+Vantavigil, bir öğrenci projesinden profesyonel bir siber güvenlik standardına dönüşmek üzere tasarlanmıştır. Hedefimiz, karmaşık terminal komutlarını ve güvensiz web araçlarını; güvenli, hızlı ve kurumsal bir siber panelle ikame etmektir.
 
 </div>
 
-<div style="text-align: center; margin-top: 100px; padding-bottom: 60px;">
-    <a href="https://emirhangungoroglu.github.io/vantavigil/" style="display: inline-block; padding: 25px 80px; font-size: 1.6rem; font-weight: 900; color: #020202; background: #00ffcc; text-decoration: none; letter-spacing: 12px; border: 2px solid #00ffcc; transition: 0.4s; box-shadow: 0 0 40px rgba(0, 255, 204, 0.2);">VANTAVIGIL</a>
+<div id="content-en" style="display: none; font-family: 'JetBrains Mono', monospace; line-height: 1.8;">
+
+# VANTAVIGIL // Integrated Security Ecosystem
+
+> **MISSION STATEMENT:** Modernizing cybersecurity operations and unifying analytical processes under a single professional framework.
+
+---
+
+### 🛡️ 01_ MISSION & DEFINITION
+**Vantavigil** is an **Integrated Security Suite** designed to manage and analyze complex data flows in the cyber realm. Our brand name merges the absolute depth of Vantablack with the proactivity of "Vigilance," symbolizing a silent yet sharp guardian for digital assets.
+
+### ⚙️ 02_ CURRENT MODULE: ENCODER ENGINE
+The foundational pillar of Vantavigil, the **Encoder Engine**, prioritizes speed and security during the cyber analysis process.
+* **Data Sovereignty:** All operations are executed client-side; no sensitive data is transmitted to external servers.
+* **Industry Compliance:** Unifies standards like Base64, Hex, SHA-256, and ROT13 within a single high-performance interface.
+
+### 🗺️ 03_ STRATEGIC ROADMAP
+Vantavigil is evolving from a utility into a comprehensive **Command Center**:
+
+| Phase | Module | Scope |
+|:--- |:--- |:--- |
+| **PHASE-1** | **Encoder Suite** | Multi-algorithm support and data transformation engine (Active). |
+| **PHASE-2** | **Domain Recon** | Advanced OSINT, DNS intelligence, and network discovery modules (In Dev). |
+| **PHASE-3** | **Blue Team Kit** | SIEM integration (Splunk/QRadar), log analysis, and incident response aids. |
+
+### 🚀 04_ FUTURE OUTLOOK
+Vantavigil is engineered to transcend from a student project into a professional cybersecurity standard. Our objective is to replace fragmented terminal commands and insecure web tools with a secure, fast, and corporate-grade cyber dashboard.
+
+</div>
+
+<div style="text-align: center; margin: 80px 0; padding-top: 40px; border-top: 1px solid #1a1a1e;">
+    <a href="https://emirhangungoroglu.github.io/vantavigil/" style="display: inline-block; padding: 25px 80px; font-size: 1.8rem; font-weight: 900; color: #020202; background: #00ffcc; text-decoration: none; letter-spacing: 12px; border-radius: 2px; transition: 0.4s; box-shadow: 0 0 40px rgba(0, 255, 204, 0.2);">VANTAVIGIL</a>
 </div>
 
 <script>
