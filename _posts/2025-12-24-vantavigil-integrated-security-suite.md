@@ -7,8 +7,8 @@ categories: [blog]
 ---
 
 <div class="lang-switcher" style="display: flex; justify-content: center; gap: 15px; margin: 40px 0; border-bottom: 1px solid #1a1a1e; padding-bottom: 20px;">
-    <button onclick="toggleLang('tr')" id="btn-tr" style="background: #00ffcc; color: #020202; border: none; padding: 12px 30px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-weight: 800; letter-spacing: 2px; transition: 0.3s;">TÜRKÇE</button>
-    <button onclick="toggleLang('en')" id="btn-en" style="background: transparent; color: #00ffcc; border: 1px solid #00ffcc; padding: 12px 30px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-weight: 800; letter-spacing: 2px; transition: 0.3s;">ENGLISH</button>
+    <button onclick="toggleLang('tr')" id="btn-tr" style="background: #00ffcc; color: #020202; border: none; padding: 12px 30px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-weight: 800; letter-spacing: 2px; transition: 0.3s;">TR</button>
+    <button onclick="toggleLang('en')" id="btn-en" style="background: transparent; color: #00ffcc; border: 1px solid #00ffcc; padding: 12px 30px; cursor: pointer; font-family: 'JetBrains Mono', monospace; font-weight: 800; letter-spacing: 2px; transition: 0.3s;">EN</button>
 </div>
 
 <div id="content-tr" style="font-family: 'JetBrains Mono', monospace; color: #e0e0e0; line-height: 2;">
