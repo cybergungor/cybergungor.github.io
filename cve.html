@@ -7,71 +7,106 @@ permalink: /cve/
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[CVE_INTEL] // Live Feed</title>
+    <title>[CVE_INTEL] // Tactical Feed</title>
+    
     <link rel="icon" type="image/png" href="/assets/images/CYBER.png">
+    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root { --bg: #050608; --surface: #0d1117; --border: #30363d; --accent: #58a6ff; --alert: #f85149; --tr: #3fb950; --text-main: #c9d1d9; --text-muted: #8b949e; }
+        :root {
+            --bg: #050608; --surface: #0d1117; --border: #30363d;
+            --accent: #58a6ff; --alert: #f85149; --text-main: #c9d1d9; --text-muted: #8b949e;
+        }
+
         body, html { margin: 0; padding: 0; background-color: var(--bg); color: var(--text-main); font-family: 'Inter', sans-serif; min-height: 100vh; }
-        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 40px 40px; z-index: -1; }
+        
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 40px 40px; z-index: -1;
+        }
+
         .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
-        .nav-back a { color: var(--accent); text-decoration: none; font-family: 'JetBrains Mono'; font-size: 0.8rem; border: 1px solid var(--border); padding: 5px 12px; border-radius: 4px; }
+        .nav-back a { color: var(--accent); text-decoration: none; font-family: 'JetBrains Mono'; font-size: 0.8rem; border: 1px solid var(--border); padding: 5px 12px; border-radius: 4px; transition: 0.3s; }
+        .nav-back a:hover { background: var(--accent); color: var(--bg); }
+
         .header { border-bottom: 1px solid var(--border); padding-bottom: 30px; margin-bottom: 50px; display: flex; justify-content: space-between; align-items: flex-end; }
-        .header h1 { font-family: 'JetBrains Mono'; font-size: 1.8rem; color: #ffffff; margin: 0; }
-        .live-status { color: var(--alert); font-family: 'JetBrains Mono'; font-size: 0.75rem; display: flex; align-items: center; gap: 8px; }
+        .header h1 { font-family: 'JetBrains Mono'; font-size: 1.8rem; color: #ffffff; margin: 0; letter-spacing: -1px; }
+        
+        .live-status { color: var(--alert); font-family: 'JetBrains Mono'; font-size: 0.75rem; display: flex; align-items: center; gap: 8px; font-weight: bold; }
         .pulse { width: 8px; height: 8px; background: var(--alert); border-radius: 50%; box-shadow: 0 0 8px var(--alert); animation: blink 2s infinite; }
+
         .cve-card { background: var(--surface); border: 1px solid var(--border); padding: 25px; margin-bottom: 25px; border-radius: 4px; transition: 0.3s; display: block; text-decoration: none; color: inherit; }
-        .cve-card:hover { border-color: var(--alert); transform: translateY(-3px); }
+        .cve-card:hover { border-color: var(--alert); transform: translateY(-3px); box-shadow: 0 10px 30px rgba(248, 81, 73, 0.1); }
+
         .tag { font-family: 'JetBrains Mono'; font-size: 9px; font-weight: bold; padding: 3px 8px; border-radius: 2px; margin-bottom: 15px; display: inline-block; border: 1px solid var(--accent); color: var(--accent); }
-        .cve-card h2 { font-size: 1.2rem; color: #fff; margin: 0 0 10px 0; }
-        .meta { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted); }
-        #loading { text-align: center; color: var(--accent); padding: 50px; font-family: 'JetBrains Mono'; }
+        .cve-card h2 { font-size: 1.25rem; color: #fff; margin: 0 0 10px 0; line-height: 1.4; }
+        .meta { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted); display: flex; gap: 20px; }
+
+        #loading-text { text-align: center; font-family: 'JetBrains Mono'; color: var(--accent); padding: 50px; }
+        #error-log { color: var(--alert); font-family: 'JetBrains Mono'; font-size: 0.8rem; display: none; margin-top: 20px; }
+
         @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
     </style>
 </head>
 <body>
+
 <div class="container">
     <nav class="nav-back"><a href="/">← cd .. /root_dir</a></nav>
+
     <header class="header">
-        <div><h1>[CVE_INTEL_CENTER]</h1><p style="color:var(--text-muted); font-size:0.8rem; margin:5px 0 0;">Kritik Güvenlik Açıkları Takip Merkezi</p></div>
-        <div class="live-indicator"><span class="pulse"></span> THREAT_LEVEL: CRITICAL</div>
+        <div>
+            <h1>[CVE_INTEL_CENTER]</h1>
+            <p style="color:var(--text-muted); font-size:0.8rem; margin:5px 0 0;">Kritik Güvenlik Açıkları Takip Merkezi</p>
+        </div>
+        <div class="live-status"><span class="pulse"></span> THREAT_LEVEL: CRITICAL</div>
     </header>
-    <div id="loading">FETCHING_LIVE_THREAT_FEEDS...</div>
+
+    <div id="loading-text">INITIALIZING_UPLINK...</div>
+    <div id="error-log"></div>
     <div id="cve-feed"></div>
 </div>
-<script>
-    const feeds = [
-        { name: "GLOBAL_CVE", url: "https://cvefeed.io/rssfeed/high-and-critical-severity.rss" },
-        { name: "USOM_TR", url: "https://www.usom.gov.tr/rss/bildirimler" }
-    ];
 
+<script>
     async function fetchCVEs() {
         const feedContainer = document.getElementById('cve-feed');
-        const loader = document.getElementById('loading');
+        const loader = document.getElementById('loading-text');
+        const errorLog = document.getElementById('error-log');
         
-        try {
-            const results = await Promise.all(feeds.map(f => 
-                fetch(`https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(f.url)}&api_key=your_optional_key`) // Burayı daha temiz hale getirdik
-                .then(res => res.json())
-            ));
+        // Çok daha stabil olan ve CORS engellerini aşabilen ücretsiz API servisi
+        const feedUrl = "https://cvefeed.io/rssfeed/high-and-critical-severity.rss";
+        const proxyUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(feedUrl)}`;
 
-            loader.style.display = 'none';
-            results.forEach((data, index) => {
-                if (data.status === 'ok') {
-                    data.items.slice(0, 5).forEach(item => {
-                        const card = document.createElement('a');
-                        card.href = item.link; card.target = "_blank"; card.className = 'cve-card';
-                        const date = new Date(item.pubDate).toLocaleDateString('tr-TR');
-                        card.innerHTML = `<span class="tag">${feeds[index].name}</span><h2>${item.title}</h2><div class="meta"><b>DATE:</b> ${date} | <b>RISK:</b> CRITICAL</div>`;
-                        feedContainer.appendChild(card);
-                    });
-                }
-            });
-        } catch (e) {
-            loader.innerText = "CRITICAL_CONNECTION_ERROR: Please check your firewall or browser extensions.";
+        try {
+            const response = await fetch(proxyUrl);
+            const data = await response.json();
+
+            if (data.status === 'ok') {
+                loader.style.display = 'none';
+                data.items.slice(0, 10).forEach(item => {
+                    const card = document.createElement('a');
+                    card.href = item.link; card.target = "_blank"; card.className = 'cve-card';
+                    const date = new Date(item.pubDate).toLocaleDateString('tr-TR');
+                    card.innerHTML = `
+                        <span class="tag">GLOBAL_CVE_ADVISORY</span>
+                        <h2>${item.title}</h2>
+                        <div class="meta"><b>DATE:</b> ${date} | <b>RISK:</b> CRITICAL</div>
+                    `;
+                    feedContainer.appendChild(card);
+                });
+            } else {
+                throw new Error("API_STATUS_NOT_OK");
+            }
+        } catch (error) {
+            loader.innerText = "CRITICAL_UPLINK_FAILURE";
+            errorLog.style.display = "block";
+            errorLog.innerText = `> LOG_ERROR: ${error.message} - Lütfen AdBlock eklentinizi sitemiz için devre dışı bırakın.`;
         }
     }
+
     window.onload = fetchCVEs;
 </script>
+
 </body>
 </html>
