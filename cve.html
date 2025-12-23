@@ -11,41 +11,25 @@ permalink: /cve/
     <link rel="icon" type="image/png" href="/assets/images/CYBER.png">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #050608; --surface: #0d1117; --border: #30363d;
-            --accent: #58a6ff; --alert: #f85149; --text-main: #c9d1d9; --text-muted: #8b949e;
-        }
-
-        body, html { margin: 0; padding: 0; background-color: var(--bg); color: var(--text-main); font-family: 'Inter', sans-serif; min-height: 100vh; }
-        
-        body::before {
-            content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 40px 40px; z-index: -1;
-        }
-
-        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
+        :root { --bg: #050608; --surface: #0d1117; --border: #30363d; --accent: #58a6ff; --alert: #f85149; --text-main: #c9d1d9; --text-muted: #8b949e; }
+        body, html { margin: 0; padding: 0; background-color: var(--bg); color: var(--text-main); font-family: 'Inter', sans-serif; min-height: 100vh; overflow-x: hidden; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 40px 40px; z-index: -1; }
+        .container { max-width: 900px; margin: 0 auto; padding: 60px 20px; }
         .nav-back a { color: var(--accent); text-decoration: none; font-family: 'JetBrains Mono'; font-size: 0.8rem; border: 1px solid var(--border); padding: 5px 12px; border-radius: 4px; transition: 0.3s; }
         .nav-back a:hover { background: var(--accent); color: var(--bg); }
-
         .header { border-bottom: 1px solid var(--border); padding-bottom: 30px; margin-bottom: 50px; display: flex; justify-content: space-between; align-items: flex-end; }
         .header h1 { font-family: 'JetBrains Mono'; font-size: 1.8rem; color: #ffffff; margin: 0; letter-spacing: -1px; }
-        
-        .live-status { color: var(--alert); font-family: 'JetBrains Mono'; font-size: 0.75rem; display: flex; align-items: center; gap: 8px; font-weight: bold; }
+        .live-status { color: var(--alert); font-family: 'JetBrains Mono'; font-size: 0.75rem; display: flex; align-items: center; gap: 8px; }
         .pulse { width: 8px; height: 8px; background: var(--alert); border-radius: 50%; box-shadow: 0 0 8px var(--alert); animation: blink 2s infinite; }
-
-        .cve-card { background: var(--surface); border: 1px solid var(--border); padding: 25px; margin-bottom: 25px; border-radius: 4px; transition: 0.3s; display: block; text-decoration: none; color: inherit; border-left: 4px solid var(--alert); }
-        .cve-card:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(248, 81, 73, 0.1); border-color: var(--alert); }
-
-        .tag { font-family: 'JetBrains Mono'; font-size: 9px; font-weight: bold; padding: 3px 8px; border-radius: 2px; margin-bottom: 15px; display: inline-block; background: rgba(248, 81, 73, 0.1); color: var(--alert); }
-        .cve-card h2 { font-size: 1.25rem; color: #fff; margin: 0 0 10px 0; line-height: 1.4; }
-        .meta { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted); display: flex; gap: 20px; }
-
-        #loading-screen { text-align: center; font-family: 'JetBrains Mono'; color: var(--accent); padding: 50px; }
-        #error-display { display: none; color: var(--alert); font-family: 'JetBrains Mono'; font-size: 0.8rem; text-align: center; margin-top: 20px; border: 1px dashed var(--alert); padding: 20px; }
-
-        @keyframes blink { 0% { opacity: 1; } 50% { opacity: 0.3; } 100% { opacity: 1; } }
+        .cve-card { background: var(--surface); border: 1px solid var(--border); padding: 25px; margin-bottom: 20px; border-radius: 4px; transition: 0.3s; display: block; text-decoration: none; color: inherit; border-left: 4px solid var(--alert); }
+        .cve-card:hover { transform: translateY(-3px); border-color: var(--alert); box-shadow: 0 10px 30px rgba(248, 81, 73, 0.15); }
+        .tag { font-family: 'JetBrains Mono'; font-size: 9px; font-weight: bold; padding: 3px 8px; border-radius: 2px; margin-bottom: 12px; display: inline-block; background: rgba(248, 81, 73, 0.1); color: var(--alert); border: 1px solid rgba(248, 81, 73, 0.2); }
+        .cve-card h2 { font-size: 1.2rem; color: #fff; margin: 0 0 10px 0; line-height: 1.4; }
+        .meta { font-family: 'JetBrains Mono'; font-size: 0.7rem; color: var(--text-muted); }
+        #loading-text { text-align: center; font-family: 'JetBrains Mono'; color: var(--accent); padding: 50px; }
+        #error-msg { display: none; text-align: center; border: 1px dashed var(--alert); padding: 30px; margin-top: 20px; }
+        .retry-btn { background: var(--alert); color: #fff; border: none; padding: 10px 20px; font-family: 'JetBrains Mono'; cursor: pointer; margin-top: 15px; border-radius: 4px; }
+        @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
     </style>
 </head>
 <body>
@@ -61,38 +45,45 @@ permalink: /cve/
         <div class="live-status"><span class="pulse"></span> THREAT_LEVEL: CRITICAL</div>
     </header>
 
-    <div id="loading-screen">DEPLOYING_INTEL_UPLINK...</div>
-    <div id="error-display"></div>
+    <div id="loading-text">DEPLOYING_INTEL_UPLINK...</div>
+
+    <div id="error-msg">
+        <p style="color: var(--alert); margin:0;">> CRITICAL_UPLINK_FAILURE: Connection Interrupted</p>
+        <button class="retry-btn" onclick="fetchCVEs()">RETRY_CONNECTION</button>
+    </div>
+
     <div id="cve-feed"></div>
 </div>
 
 <script>
     async function fetchCVEs() {
         const feedContainer = document.getElementById('cve-feed');
-        const loader = document.getElementById('loading-screen');
-        const errorBox = document.getElementById('error-display');
+        const loader = document.getElementById('loading-text');
+        const errorMsg = document.getElementById('error-msg');
         
-        // Daha dayanıklı bir CVE RSS kaynağı
-        const rssFeed = "https://cvefeed.io/rssfeed/high-and-critical-severity.rss";
-        // CORS engellerini aşmak için kullanılan profesyonel proxy servisi
-        const apiUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(rssFeed)}`;
+        loader.style.display = 'block';
+        loader.innerText = "ESTABLISHING_SECURE_CONNECTION...";
+        errorMsg.style.display = 'none';
+        feedContainer.innerHTML = '';
+
+        const rssUrl = "https://cvefeed.io/rssfeed/high-and-critical-severity.rss";
+        // CORS proxy - AllOrigins (Daha stabil)
+        const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(rssUrl)}&disableCache=true`;
 
         try {
-            const response = await fetch(apiUrl);
-            if (!response.ok) throw new Error("NETWORK_RESPONSE_FAILED");
-            
-            const outerData = await response.json();
-            // RSS XML'i JSON'a çevirmek için tarayıcıyı kullanıyoruz
+            const response = await fetch(proxyUrl);
+            if (!response.ok) throw new Error("PROXY_UNREACHABLE");
+
+            const data = await response.json();
             const parser = new DOMParser();
-            const xmlDoc = parser.parseFromString(outerData.contents, "text/xml");
+            const xmlDoc = parser.parseFromString(data.contents, "text/xml");
             const items = xmlDoc.querySelectorAll("item");
 
-            if (items.length === 0) throw new Error("NO_DATA_RECEIVED");
+            if (items.length === 0) throw new Error("EMPTY_FEED_DATA");
 
             loader.style.display = 'none';
             items.forEach((item, index) => {
-                if(index > 9) return; // Son 10 haberi göster
-                
+                if(index > 9) return;
                 const title = item.querySelector("title").textContent;
                 const link = item.querySelector("link").textContent;
                 const pubDate = new Date(item.querySelector("pubDate").textContent).toLocaleDateString('tr-TR');
@@ -100,19 +91,18 @@ permalink: /cve/
                 const card = document.createElement('a');
                 card.href = link; card.target = "_blank"; card.className = 'cve-card';
                 card.innerHTML = `
-                    <span class="tag">CRITICAL_ADVISORY</span>
+                    <span class="tag">CRITICAL_VULN</span>
                     <h2>${title}</h2>
-                    <div class="meta"><b>DATE:</b> ${date} | <b>SOURCE:</b> CVE_FEED_GLOBAL</div>
+                    <div class="meta"><b>DATE:</b> ${pubDate} | <b>STATUS:</b> ANALYZED</div>
                 `;
                 feedContainer.appendChild(card);
             });
-        } catch (error) {
+        } catch (err) {
+            console.error("Uplink Error:", err);
             loader.style.display = 'none';
-            errorBox.style.display = 'block';
-            errorBox.innerText = `> CRITICAL_UPLINK_FAILURE: ${error.message}\n> Lütfen sayfayı CTRL+F5 ile yenileyin veya tarayıcı izleme korumasını kontrol edin.`;
+            errorMsg.style.display = 'block';
         }
     }
-
     window.onload = fetchCVEs;
 </script>
 
