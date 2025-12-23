@@ -1,190 +1,154 @@
----
-layout: default
-title: "Live Global Threat Map"
-permalink: /livemap/
----
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <style>
-        /* --- TACTICAL UI DESIGN --- */
-        :root {
-            --bg-dark: #050608;
-            --surface: #0d1117;
-            --border: #30363d;
-            --accent-blue: #58a6ff;
-            --accent-green: #3fb950;
-            --text-muted: #8b949e;
-        }
+<meta charset="UTF-8">
+<title>Live Threat Map (Simulated)</title>
 
-        .dashboard-wrapper {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-            font-family: 'JetBrains Mono', 'Inter', monospace;
-            background: var(--bg-dark);
-            color: #c9d1d9;
-        }
+<style>
+body {
+    margin: 0;
+    background: #050608;
+    font-family: "JetBrains Mono", monospace;
+    color: #c9d1d9;
+}
 
-        /* Header Section */
-        .ops-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 25px;
-            margin-bottom: 30px;
-        }
+.header {
+    padding: 15px 25px;
+    border-bottom: 1px solid #30363d;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .ops-title h1 {
-            font-size: 1.4rem;
-            color: #ffffff;
-            margin: 0;
-            letter-spacing: 1px;
-        }
+.status {
+    color: #3fb950;
+    font-size: 12px;
+}
 
-        .ops-title p {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin: 5px 0 0;
-            text-transform: uppercase;
-        }
+.map-container {
+    position: relative;
+    height: 75vh;
+    background: #000;
+}
 
-        .status-badge {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.7rem;
-            color: var(--accent-green);
-        }
+svg {
+    width: 100%;
+    height: 100%;
+}
 
-        /* Map Container */
-        .map-frame {
-            background: #000;
-            border: 1px solid var(--border);
-            border-radius: 4px;
-            overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
-            height: 700px;
-            position: relative;
-        }
+.attack-line {
+    stroke: #ff5555;
+    stroke-width: 1.5;
+    stroke-dasharray: 5;
+    animation: dash 1s linear infinite;
+}
 
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-            display: block;
-        }
+@keyframes dash {
+    to { stroke-dashoffset: -10; }
+}
 
-        /* Language & Info Section */
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-top: 40px;
-        }
+.dot {
+    fill: #58a6ff;
+}
 
-        .content-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 25px;
-            border-radius: 4px;
-        }
+.log-panel {
+    height: 25vh;
+    border-top: 1px solid #30363d;
+    padding: 15px;
+    overflow: hidden;
+    font-size: 12px;
+}
 
-        .content-box h3 {
-            font-size: 0.9rem;
-            color: var(--accent-blue);
-            margin-top: 0;
-            margin-bottom: 15px;
-            text-transform: uppercase;
-        }
-
-        .content-box p {
-            font-size: 0.85rem;
-            line-height: 1.7;
-            color: var(--text-muted);
-            margin: 0;
-        }
-
-        /* Privacy & Ethics Note */
-        .privacy-label {
-            grid-column: span 2;
-            font-size: 0.7rem;
-            color: #484f58;
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid var(--border);
-            margin-top: 10px;
-        }
-
-        /* Animation */
-        .pulse-dot {
-            width: 8px; height: 8px; background: var(--accent-green); border-radius: 50%;
-            box-shadow: 0 0 10px var(--accent-green);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.3; }
-            100% { opacity: 1; }
-        }
-
-        @media (max-width: 768px) {
-            .info-grid { grid-template-columns: 1fr; }
-            .map-frame { height: 500px; }
-        }
-    </style>
+.log {
+    color: #ff7b72;
+    margin-bottom: 6px;
+}
+</style>
 </head>
+
 <body>
 
-<div class="dashboard-wrapper">
-    <header class="ops-header">
-        <div class="ops-title">
-            <h1>[CTI_DASHBOARD_v4.0]</h1>
-            <p>Global Cyberthreat Intelligence Feed</p>
-        </div>
-        <div class="status-badge">
-            <div class="pulse-dot"></div>
-            SYSTEM_UP_LINK: STABLE
-        </div>
-    </header>
-
-    <div class="map-frame">
-        <iframe 
-            src="https://threatmap.checkpoint.com/" 
-            title="Cyber Threat Map"
-            loading="lazy">
-        </iframe>
-    </div>
-
-    <div class="info-grid">
-        <div class="content-box">
-            <h3>[ANALİZ_NOTU]</h3>
-            <p>
-                Bu dashboard, dünya genelindeki siber saldırı trendlerini görselleştirmek için kurulmuştur. 
-                Sektörel bazda yoğunlaşan tehditlerin (Finans, Sağlık, Kamu) anlık değişimlerini izlemek ve 
-                Mavi Takım (Blue Team) stratejilerini bu verilere göre şekillendirmek amacıyla sitemizde yer almaktadır.
-            </p>
-        </div>
-
-        <div class="content-box">
-            <h3>[ANALYSIS_NOTE]</h3>
-            <p>
-                This dashboard is established to visualize global cyberattack trends. It is integrated into 
-                this portal to monitor real-time shifts in sector-specific threats and to shape 
-                Blue Team strategies based on live telemetry data.
-            </p>
-        </div>
-
-        <div class="privacy-label">
-            > [ETHICS_STMT]: Bu bir eğitim simülasyonudur. Ziyaretçi IP adresleri veya telemetri verileri kesinlikle kayıt altına alınmamaktadır.
-            <br>
-            > [NOTICE]: If map is not loading, please disable Ad-Blockers or Ghostery extensions.
-        </div>
-    </div>
+<div class="header">
+    <div>[LIVE_THREAT_MAP_SIM]</div>
+    <div class="status">● ACTIVE_FEED</div>
 </div>
+
+<div class="map-container">
+<svg viewBox="0 0 1000 500" id="map">
+    <!-- Simple world map outline -->
+    <image href="https://upload.wikimedia.org/wikipedia/commons/8/80/World_map_-_low_resolution.svg"
+           x="0" y="0" width="1000" height="500" opacity="0.15"/>
+</svg>
+</div>
+
+<div class="log-panel" id="log"></div>
+
+<script>
+const locations = [
+    { name: "USA", x: 180, y: 220 },
+    { name: "Germany", x: 520, y: 180 },
+    { name: "Turkey", x: 560, y: 230 },
+    { name: "Russia", x: 650, y: 160 },
+    { name: "China", x: 750, y: 230 },
+    { name: "Brazil", x: 350, y: 330 },
+    { name: "India", x: 700, y: 270 }
+];
+
+const attackTypes = [
+    "DDoS",
+    "Credential_Stuffing",
+    "SQL_Injection",
+    "Ransomware",
+    "Brute_Force"
+];
+
+const map = document.getElementById("map");
+const log = document.getElementById("log");
+
+function randomItem(arr) {
+    return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function launchAttack() {
+    const from = randomItem(locations);
+    let to;
+    do { to = randomItem(locations); } while (to === from);
+
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", from.x);
+    line.setAttribute("y1", from.y);
+    line.setAttribute("x2", to.x);
+    line.setAttribute("y2", to.y);
+    line.setAttribute("class", "attack-line");
+
+    const dot = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+    dot.setAttribute("cx", to.x);
+    dot.setAttribute("cy", to.y);
+    dot.setAttribute("r", 3);
+    dot.setAttribute("class", "dot");
+
+    map.appendChild(line);
+    map.appendChild(dot);
+
+    const type = randomItem(attackTypes);
+    const time = new Date().toLocaleTimeString();
+
+    const entry = document.createElement("div");
+    entry.className = "log";
+    entry.textContent = `[${time}] ${type} | ${from.name} → ${to.name}`;
+    log.prepend(entry);
+
+    setTimeout(() => {
+        line.remove();
+        dot.remove();
+        if (log.children.length > 20) {
+            log.removeChild(log.lastChild);
+        }
+    }, 3000);
+}
+
+setInterval(launchAttack, 1200);
+</script>
 
 </body>
 </html>
