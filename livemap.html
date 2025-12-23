@@ -7,102 +7,99 @@
 
 <style>
 :root {
-  --bg: #050608;
-  --grid: rgba(255,255,255,0.03);
-  --green: #3fb950;
-  --red: #ff4d4d;
-  --orange: #ff9f43;
-  --blue: #58a6ff;
-  --text: #c9d1d9;
-  --muted: #8b949e;
+  --bg:#050608;
+  --grid:rgba(255,255,255,.04);
+  --green:#3fb950;
+  --red:#ff4d4d;
+  --blue:#58a6ff;
+  --text:#c9d1d9;
 }
 
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font-family: "JetBrains Mono", monospace;
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:JetBrains Mono, monospace;
 }
 
 /* HEADER */
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 24px;
-  border-bottom: 1px solid #30363d;
+.header{
+  display:flex;
+  justify-content:space-between;
+  padding:16px 24px;
+  border-bottom:1px solid #30363d;
 }
-
-.header span {
-  color: var(--green);
-  font-size: 12px;
-}
+.header span{color:var(--green);font-size:12px}
 
 /* MAP */
-.map-container {
-  position: relative;
-  height: 70vh;
-  background-image: url("/assets/world.svg");
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: contain;
-  overflow: hidden;
+.map-wrap{
+  position:relative;
+  height:70vh;
+  overflow:hidden;
+}
+
+/* WORLD SVG */
+.map-wrap img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  opacity:.9;
+  z-index:1;
 }
 
 /* GRID OVERLAY */
-.map-container::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background-image:
+.map-wrap::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
     linear-gradient(var(--grid) 1px, transparent 1px),
     linear-gradient(90deg, var(--grid) 1px, transparent 1px);
-  background-size: 40px 40px;
-  pointer-events: none;
+  background-size:40px 40px;
+  z-index:3;
+  pointer-events:none;
 }
 
-/* ATTACK ELEMENTS */
-.attack {
-  position: absolute;
-  width: 6px;
-  height: 6px;
-  background: var(--blue);
-  border-radius: 50%;
+/* ATTACKS */
+.attack{
+  position:absolute;
+  width:6px;height:6px;
+  background:var(--blue);
+  border-radius:50%;
+  z-index:4;
 }
-
-.beam {
-  position: absolute;
-  height: 2px;
-  background: repeating-linear-gradient(
+.beam{
+  position:absolute;
+  height:2px;
+  background:repeating-linear-gradient(
     90deg,
     var(--red),
     var(--red) 6px,
     transparent 6px,
     transparent 12px
   );
-  transform-origin: left center;
-  animation: beam 1.2s linear forwards;
+  transform-origin:left center;
+  animation:beam 1.2s linear forwards;
+  z-index:4;
 }
 
-@keyframes beam {
-  from { width: 0; opacity: 1; }
-  to { width: 100%; opacity: 0; }
+@keyframes beam{
+  from{width:0;opacity:1}
+  to{width:100%;opacity:0}
 }
 
-/* LOG PANEL */
-.log-panel {
-  height: 200px;
-  overflow-y: auto;
-  padding: 15px 20px;
-  border-top: 1px solid #30363d;
-  background: #020203;
-  font-size: 12px;
+/* LOG */
+.log-panel{
+  height:200px;
+  background:#020203;
+  border-top:1px solid #30363d;
+  padding:14px 20px;
+  overflow-y:auto;
+  font-size:12px;
 }
-
-.log {
-  color: var(--red);
-  margin-bottom: 4px;
-}
+.log{color:var(--red);margin-bottom:4px}
 </style>
 </head>
 
@@ -113,71 +110,65 @@ body {
   <span>● ACTIVE_FEED</span>
 </div>
 
-<div class="map-container" id="map"></div>
+<div class="map-wrap" id="map">
+  <!-- ⚠️ SVG BURADA -->
+  <img src="assets/world.svg" alt="world map">
+</div>
 
 <div class="log-panel" id="logs"></div>
 
 <script>
-const map = document.getElementById("map");
-const logs = document.getElementById("logs");
+const map=document.getElementById("map");
+const logs=document.getElementById("logs");
 
-const countries = [
-  "USA","Russia","China","Turkey","Germany","France",
-  "Brazil","India","UK","Japan","Iran","Ukraine","Poland","Israel"
+const countries=[
+ "USA","Russia","China","Turkey","Germany","France",
+ "Brazil","India","UK","Japan","Iran","Ukraine","Poland","Israel"
 ];
 
-const attacks = [
-  "DDoS","Brute Force","Ransomware",
-  "SQL Injection","Credential Stuffing",
-  "Port Scanning","Data Exfiltration"
+const attacks=[
+ "DDoS","Ransomware","Brute Force",
+ "SQL Injection","Port Scan","Data Exfiltration"
 ];
 
-function rand(min,max){ return Math.random()*(max-min)+min; }
+const rand=(a,b)=>Math.random()*(b-a)+a;
 
-function attack() {
-  const x1 = rand(10,90);
-  const y1 = rand(15,85);
-  const x2 = rand(10,90);
-  const y2 = rand(15,85);
+function spawn(){
+  const x1=rand(10,90), y1=rand(15,85);
+  const x2=rand(10,90), y2=rand(15,85);
 
-  const a = document.createElement("div");
-  a.className = "attack";
-  a.style.left = x1 + "%";
-  a.style.top = y1 + "%";
+  const a=document.createElement("div");
+  const b=document.createElement("div");
+  const beam=document.createElement("div");
 
-  const b = document.createElement("div");
-  b.className = "attack";
-  b.style.left = x2 + "%";
-  b.style.top = y2 + "%";
-  b.style.background = "var(--red)";
+  a.className=b.className="attack";
+  b.style.background="var(--red)";
+  beam.className="beam";
 
-  const beam = document.createElement("div");
-  beam.className = "beam";
+  a.style.left=x1+"%"; a.style.top=y1+"%";
+  b.style.left=x2+"%"; b.style.top=y2+"%";
 
-  const dx = x2 - x1;
-  const dy = y2 - y1;
-  const length = Math.sqrt(dx*dx + dy*dy);
-
-  beam.style.left = x1 + "%";
-  beam.style.top = y1 + "%";
-  beam.style.width = length + "%";
-  beam.style.transform = `rotate(${Math.atan2(dy,dx)}rad)`;
+  const dx=x2-x1, dy=y2-y1;
+  beam.style.left=x1+"%";
+  beam.style.top=y1+"%";
+  beam.style.transform=`rotate(${Math.atan2(dy,dx)}rad)`;
+  beam.style.width=Math.sqrt(dx*dx+dy*dy)+"%";
 
   map.append(a,b,beam);
 
-  const log = document.createElement("div");
-  log.className = "log";
-  log.textContent =
-    `[${new Date().toLocaleTimeString()}] ` +
-    `${attacks[Math.floor(Math.random()*attacks.length)]} | ` +
-    `${countries[Math.floor(Math.random()*countries.length)]} → ` +
-    `${countries[Math.floor(Math.random()*countries.length)]}`;
+  const log=document.createElement("div");
+  log.className="log";
+  log.textContent=
+   `[${new Date().toLocaleTimeString()}] `+
+   `${attacks[Math.random()*attacks.length|0]} | `+
+   `${countries[Math.random()*countries.length|0]} → `+
+   `${countries[Math.random()*countries.length|0]}`;
   logs.prepend(log);
 
-  setTimeout(()=>{ a.remove(); b.remove(); beam.remove(); },1300);
+  setTimeout(()=>{a.remove();b.remove();beam.remove()},1300);
 }
 
-setInterval(attack, 900);
+setInterval(spawn,900);
 </script>
 
 </body>
