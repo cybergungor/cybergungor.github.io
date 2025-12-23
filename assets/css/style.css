@@ -1,0 +1,20 @@
+/* BLOG POST STİLLERİ - OKUNAKLILIK VE SİBER TEMA */
+.post-content { color: #d0d0d0; line-height: 1.8; font-size: 1rem; }
+.post-content h1, .post-content h2, .post-content h3 { 
+    color: var(--cyber-neon); border-bottom: 1px dashed #1a1a1e; 
+    padding-bottom: 10px; margin-top: 40px; letter-spacing: 2px;
+}
+.post-content blockquote {
+    background: #080808; border-left: 4px solid var(--cyber-neon);
+    padding: 20px; margin: 30px 0; color: #fff; font-style: italic;
+}
+.post-content table {
+    width: 100%; border-collapse: collapse; margin: 30px 0; background: #050505;
+}
+.post-content th, .post-content td {
+    border: 1px solid #1a1a1e; padding: 15px; text-align: left;
+}
+.post-content th { background: #0a0a0c; color: var(--cyber-neon); text-transform: uppercase; font-size: 0.8rem; }
+.post-content ul { list-style: none; padding-left: 0; }
+.post-content li { padding-left: 25px; position: relative; margin-bottom: 10px; }
+.post-content li::before { content: '>'; position: absolute; left: 0; color: var(--cyber-neon); }
