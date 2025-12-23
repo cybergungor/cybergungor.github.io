@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "VANTAVIGIL: The Future of Integrated Cyber Reconnaissance"
-date: 2025-12-24
+date: 2025-12-23
 author: Emirhan Gungoroglu
 categories: [blog]
 ---
